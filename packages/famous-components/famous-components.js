@@ -1,11 +1,9 @@
+var mainCtx = null;
+
 var Engine = null,
     Modifier = null,
     Surface = null,
     Transform = null;
-
-var mainCtx = null;
-
-
 
 FamousCmp = {};
 FamousCmp.views = {};
@@ -24,6 +22,9 @@ Meteor.startup(function() {
 
   FamousCmp.views['Scrollview'] = require('famous/views/Scrollview');
 
+  // Move to transitioner
+  FamousCmp.views['SequentialLayout'] = require('famous/views/SequentialLayout');
+
   if (FamousCmp.mainCtx)
     mainCtx = FamousCmp.mainCtx;
   else {
@@ -40,9 +41,8 @@ Meteor.startup(function() {
 });
 
 function famousSize(size) {
-  console.log(size);
   size = size.split(',');
-  var x = parseInt(size[0]), y = parseInt(size[1]);
+  var x = parseFloat(size[0]), y = parseFloat(size[1]);
   return [
     _.isNaN(x) ? undefined : x,
     _.isNaN(y) ? undefined : y
@@ -50,12 +50,16 @@ function famousSize(size) {
 }
 
 function famousParent(component) {
+  // skipping the immediate parent is intentional (it's where our own famous is set)
   var parent = component;
-  component.famous = {};
-
   while ((parent = parent.parent) && !parent.famous);
+  // for (parent = component; parent && !parent.famous; parent = parent.parent);
+
+  component.famous = {};
   component.famous.parent = (parent && parent.famous.node) || mainCtx;
 
+  console.log('famousParent on guid ' + component.guid + ' found '
+    + (parent && parent.guid));
   return parent;
 }
 
@@ -63,76 +67,100 @@ function famousParent(component) {
 
 
 Template.famousEach.created = function() {
+  //console.log('\nStarting render for "' + this.data.template + '" in '
+  //  + 'famous.created instance with guid ' + this.__component__.guid);
 
   var self = this;
-  console.log(self);
-  Meteor.defer(function() {
-    var component = self.__component__, parent = famousParent(component);
-    var data = self.data.data;
-    var size = famousSize(self.data.size);
+  var component = self.__component__, parent = famousParent(component);
+  var data = self.data.data;
+  var size = famousSize(self.data.size);
 
-    if (_.isArray(data)) {
-      console.log(data);
-      component.famous.sequence = _.map(data, function(row) {
-        var div = document.createElement('div');
-        var newComponent = UI.renderWithData(Template[self.data.template], row);
-        newComponent.parent = component; UI.insert(newComponent, div);
-        console.log(div);
-        return new Surface({
-          size: size,
-          content: div
-        });
+  // todo, store sequence in parent, store startIndex here (to allow surfaces
+  // before, after, inbetween two eaches, etc)
+
+  if (_.isArray(data)) {
+    component.famous.sequence = _.map(data, function(row) {
+      var div = document.createElement('div');
+      var newComponent = UI.renderWithData(Template[self.data.template], row, component);
+      UI.insert(newComponent, div);
+      return new Surface({
+        size: size,
+        content: div
       });
-    }
+    });
+  }
 
-    component.famous.parent.sequenceFrom(component.famous.sequence); 
-  });
+  component.famous.parent.sequenceFrom(component.famous.sequence); 
 }
 
 Template.famous.created = function() {
-  console.log(this.data.template);
-  console.log(this);
+  console.log('\nStarting render for "' + this.data.template + '" in '
+    + 'famous.created instance with guid ' + this.__component__.guid);
 
   var self = this;
-  // Defer necessary since inner templates created after outer template
-  // created hook called, so famousSurface etc won't be set yet.
-  Meteor.defer(function() {
+  var newComponent, div, view, node;
+  var component = self.__component__, parent = famousParent(component);
 
-    var newComponent, div, view, node;
-    var component = self.__component__, parent = famousParent(component);
+  // TODO move surface stuff elsewhere
+  var options = {};
+  if (self.data.size)
+    options.size = famousSize(self.data.size);
+  if (self.data.origin)
+    options.origin = famousSize(self.data.origin);
+  if (_.keys(options).length && !self.data.modifier)
+    self.data.modifier = 'identity';
 
-    newComponent = self.data.data
-      ? UI.renderWithData(Template[self.data.template], self.data.data)
-      : UI.render(Template[self.data.template]);
-    newComponent.parent = component;
+  view = self.data.view
+    ? (FamousCmp.views[self.data.view] || (Famous && Famous[self.data.view]))
+    : Surface;
+  // need to create and set before children templates are created
+  component.famous.node = node = new view(options);
+  console.log(options);
 
-    div = document.createElement('div');
-    UI.insert(newComponent, div);
+  newComponent = self.data.data
+    ? UI.renderWithData(Template[self.data.template], self.data.data, component)
+    : UI.render(Template[self.data.template], component);
+  console.log('Rendered Component of kind "' + this.data.template
+    + '" with gid ' + newComponent.guid);
 
-    view = self.data.view
-      ? (FamousCmp.views[self.data.view] || (Famous && Famous[self.data.view]))
-      : Surface;
-    component.famous.node = node = new view({
-      content: div
-    });
+  div = document.createElement('div');
+  UI.insert(newComponent, div);
 
-    if (self.data.modifier) {
-      var modifier = new FamousCmp.modifiers[self.data.modifier](component);
-      component.famous.parent
-        .add(modifier.famous)
-        .add(node);
+  // todo, which if any content
+  console.log('want to setcontent', div);
+  if (node.setContent && 1 || div.innerHTML != "")
+    node.setContent(div);
+  else
+    console.log('skipped', !!node.setContent, !!div.innerHTML, div);
+
+  if (self.data.modifier) {
+    var modifier = new FamousCmp.modifiers[self.data.modifier](component, options);
+    component.famous.parent
+      .add(modifier.famous)
+      .add(node);
+    if (modifier.postRender)
       modifier.postRender();
-    } else
-      component.famous.parent.add(node);
+  } else
+    component.famous.parent.add(node);
 
-    if (self.data.view == 'Scrollview')
-      Engine.pipe(node);
-
-  });
+  if (self.data.view == 'Scrollview')
+    Engine.pipe(node);
 }
 
 
-FamousCmp.modifiers.pageTransition = function(component) {
+FamousCmp.modifiers.identity = function(component, options) {
+  this.component = component;
+
+  console.log(_.extend({
+    transform : Transform.identity,
+  }, options));
+
+  this.famous = new Modifier(_.extend({
+    transform : Transform.identity
+  }, options));  
+}
+
+FamousCmp.modifiers.pageTransition = function(component, options) {
   this.component = component;
   this.famous = new Modifier({
     transform : Transform.identity,

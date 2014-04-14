@@ -7,16 +7,53 @@
 
 <!-- Template.famousInit auto added to body when helpers are ready -->
 <template name="famousInit">
-	{{>famous template='list' view='Scrollview'}}
 	{{>famous template='incoming' modifier='pageTransition'}}
+	{{>famous template='list' view='Scrollview'}}
 </template>
 
+<!-- we want each yield to be on a different surface -->
 <template name="layout">
-	{{> famous template='ironYield'}}
+	{{>famous template='defaultYield'}}
+	{{>famous template='headerYield'}}
+</template>
+<template name="defaultYield">
+	<div id="main" class="container" role="main">{{> yield}}</div>
+</template>
+<template name="headerYield">
+	<div id="header">{{> yield region="header"}}</div>
+</template>
+<template name="newPage">{{> yield region="newPage"}}</template>
+
+
+<template name="header">
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">MeteorFamousComponents</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/">Scrolling</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 </template>
 
-<template name="ironYield">
-	{{> yield}}
+<template name="home">
+	<h1>Famous Component + Iron Transitioner Demo</h1>
+</template>
+
+<template name="scroll">
+	{{>famous template='list' view='Scrollview'}}
 </template>
 
 <!-- will be loaded as a Scrollview -->
@@ -41,9 +78,4 @@ adasd
 
 <template name="incoming">
 	<div style="width: 100px; height: 100px; background: #aaf; margin: 200px"></div>
-</template>
-
-
-<template name="home">
-	<h1>Famous Component + Iron Transitioner Demo</h1>
 </template>

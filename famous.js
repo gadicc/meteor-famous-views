@@ -3,8 +3,10 @@ Items = new Meteor.Collection('items');
 
 if (Meteor.isClient) {
   Router.configure({
-    LayoutTemplate: 'layout'
-    // autoRender: false
+    layoutTemplate: 'layout',
+    yieldTemplates: {
+      'header': {to: 'header'}
+    }
   });
 
   Router.map(function() {

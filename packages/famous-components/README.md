@@ -10,10 +10,19 @@ covers just a few cases, with the intention of creating a base to work upon.
 
 ## Design Goals
 
-A core principle is that "templates are surfaces".  Don't use `{{> foo}}` to include
-other templates anymore, use `{{famous template='foo'}}`.  I also believe that for
-regular web development, "Meteor-style" (i.e. clean, easy and quick with powerful results), developers shouldn't need to touch the Famous Javascript for most cases.
-So famous-components abstracts this away, allowing you to use just templates.
+I believe that for regular web development, "Meteor-style" (i.e. clean, easy and
+quick with powerful results), developers shouldn't need to touch the Famous
+Javascript for basic work.  So famous-components abstracts this away, allowing you to
+use just templates.  A core principle is "templates are famous nodes", and should
+contain either:
+
+1. *Only* HTML (e.g. a Surface), *or*
+2. Including (many) other node(s).
+
+Don't use `{{> foo}}` to include other templates anymore, use
+`{{famous template='foo'}}`.  By default, this creates a new Surface, which
+may include HTML.  But you can also pass, e.g. `view='Scrollview'`, and that
+template can then include other surfaces/templates/nodes.
 
 When necessary, we provide access to the relevant Famous instances via a `.famous`
 property in each relevant Blaze component instance.  This will contain a `node`
@@ -31,8 +40,8 @@ component instances.
 available here.
 
 `FamousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
-default, but you can add other views like this... they'll also be looked for under
-a `Famous` global variable).
+default for Scrollview, but you can add other views like this... they'll also
+be looked for under a `Famous` global variable).
 
 ## Template API
 

@@ -1,1 +1,9 @@
 /* CSS declarations go here */
+
+#header {
+	background: black;
+	color: white;
+	padding: 5px;
+}
+
+#main { margin-top: 100px; }
