@@ -1,0 +1,49 @@
+<head>
+  <title>famous</title>
+</head>
+
+<body>
+</body>
+
+<!-- Template.famousInit auto added to body when helpers are ready -->
+<template name="famousInit">
+	{{>famous template='list' view='Scrollview'}}
+	{{>famous template='incoming' modifier='pageTransition'}}
+</template>
+
+<template name="layout">
+	{{> famous template='ironYield'}}
+</template>
+
+<template name="ironYield">
+	{{> yield}}
+</template>
+
+<!-- will be loaded as a Scrollview -->
+<template name="list" view="Scrollview (requires PR)">
+	{{>famousEach data=items template='listItem' size='undefined,100'}}
+</template>
+
+<!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
+<template name="listItem">
+	<div>{{name}}</div>
+</template>
+
+<template name="hello">
+  <h1>Hello World!</h1>
+  {{greeting}}
+  <input type="button" value="Click" />
+</template>
+
+<template name="blah" type="blah" data-moo="moo2">
+adasd
+</template>
+
+<template name="incoming">
+	<div style="width: 100px; height: 100px; background: #aaf; margin: 200px"></div>
+</template>
+
+
+<template name="home">
+	<h1>Famous Component + Iron Transitioner Demo</h1>
+</template>

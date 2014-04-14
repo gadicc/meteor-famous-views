@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "famono": {
+		"_git": "https://github.com/raix/Meteor-famono.git"
+	},
+    "iron-router": {}
+  }
+}
