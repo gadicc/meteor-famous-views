@@ -7,3 +7,11 @@
 }
 
 #main { margin-top: 100px; }
+
+.listItem {
+	padding: 10px;
+	border: 1px solid #888;
+	background: #efefef;
+}
+
+.navbar-fixed-top { z-index: 100; }

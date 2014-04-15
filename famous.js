@@ -2,7 +2,21 @@ Items = new Meteor.Collection('items');
 //Items.insert({name: Random.id()});
 
 if (Meteor.isClient) {
+
+  navbar = null;
+  Template.header.rendered = function() {
+    navbar = this.$('.navbar-nav');
+    navbarActive(Router.current().path);
+  }
+  var navbarActive = function(path) {
+    if (!navbar) return;
+    if (this.path) path = this.path;
+    navbar.find('li.active').removeClass('active');
+    navbar.find('a[href="'+path+'"]').parent().addClass('active');
+  }
+
   Router.configure({
+    onAfterAction: navbarActive,
     layoutTemplate: 'layout',
     yieldTemplates: {
       'header': {to: 'header'}
@@ -13,22 +27,12 @@ if (Meteor.isClient) {
     this.route('home', {
       path: '/'
     });
-  });
 
-  Template.hello.greeting = function () {
-    return "Welcome to famous.";
-  };
-
-  Template.hello.events({
-    'click input': function () {
-      // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
-    }
+    this.route('Scrollview');
   });
 
   Template.list.items = [
-    {_id:1, name:'A'}, {_id:2, name:'B'}
+    {_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'},
   ];
   /*
   Template.list.data = function() {

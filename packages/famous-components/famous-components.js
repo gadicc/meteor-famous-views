@@ -49,10 +49,11 @@ function famousSize(size) {
   ];
 }
 
-function famousParent(component) {
+function famousParent(component, addable) {
   // skipping the immediate parent is intentional (it's where our own famous is set)
   var parent = component;
-  while ((parent = parent.parent) && !parent.famous);
+  while ((parent = parent.parent)
+    && !(parent.famous && (parent.famous.node.add || parent.famous.node.sequenceFrom)));
   // for (parent = component; parent && !parent.famous; parent = parent.parent);
 
   component.famous = {};
@@ -63,35 +64,6 @@ function famousParent(component) {
   return parent;
 }
 
-
-
-
-Template.famousEach.created = function() {
-  //console.log('\nStarting render for "' + this.data.template + '" in '
-  //  + 'famous.created instance with guid ' + this.__component__.guid);
-
-  var self = this;
-  var component = self.__component__, parent = famousParent(component);
-  var data = self.data.data;
-  var size = famousSize(self.data.size);
-
-  // todo, store sequence in parent, store startIndex here (to allow surfaces
-  // before, after, inbetween two eaches, etc)
-
-  if (_.isArray(data)) {
-    component.famous.sequence = _.map(data, function(row) {
-      var div = document.createElement('div');
-      var newComponent = UI.renderWithData(Template[self.data.template], row, component);
-      UI.insert(newComponent, div);
-      return new Surface({
-        size: size,
-        content: div
-      });
-    });
-  }
-
-  component.famous.parent.sequenceFrom(component.famous.sequence); 
-}
 
 Template.famous.created = function() {
   console.log('\nStarting render for "' + this.data.template + '" in '
@@ -123,6 +95,16 @@ Template.famous.created = function() {
   console.log('Rendered Component of kind "' + this.data.template
     + '" with gid ' + newComponent.guid);
 
+  if (newComponent.destroyed)
+    newComponent.origDestroyed = newComponent.destroyed;
+  newComponent.destroyed = famousDestroyed; 
+
+  console.log('newcomp');
+  console.log(newComponent);
+  if (!FamousCmp.cmps)
+    FamousCmp.cmps = [];
+  FamousCmp.cmps.push(newComponent);
+
   div = document.createElement('div');
   UI.insert(newComponent, div);
 
@@ -138,14 +120,59 @@ Template.famous.created = function() {
     component.famous.parent
       .add(modifier.famous)
       .add(node);
+    component.famous.modifierCmp = modifier;
+    component.famous.modifier = modifier.famous;
     if (modifier.postRender)
       modifier.postRender();
   } else
     component.famous.parent.add(node);
 
+  // could do pipe=1 in template helper?
   if (self.data.view == 'Scrollview')
     Engine.pipe(node);
 }
+
+Template.famous.destroyed = function() {
+  console.log('destroyed');
+  console.log(this);
+  FamousCmp.cmp = this;
+}
+
+var famousDestroyed = function() {
+  console.log('famousDestroyed');
+  console.log(this);
+  if (this.famous)
+  if (this.origDestroyed)
+    this.origDestroyed.apply(this, arguments);
+}
+
+Template.famousEach.created = function() {
+  //console.log('\nStarting render for "' + this.data.template + '" in '
+  //  + 'famous.created instance with guid ' + this.__component__.guid);
+
+  var self = this;
+  var component = self.__component__, parent = famousParent(component);
+  var data = self.data.data;
+  var size = famousSize(self.data.size);
+
+  // todo, store sequence in parent, store startIndex here (to allow surfaces
+  // before, after, inbetween two eaches, etc)
+
+  if (_.isArray(data)) {
+    component.famous.sequence = _.map(data, function(row) {
+      var div = document.createElement('div');
+      var newComponent = UI.renderWithData(Template[self.data.template], row, component);
+      UI.insert(newComponent, div);
+      return new Surface({
+        size: size,
+        content: div
+      });
+    });
+  }
+
+  component.famous.parent.sequenceFrom(component.famous.sequence); 
+}
+
 
 
 FamousCmp.modifiers.identity = function(component, options) {
@@ -158,6 +185,13 @@ FamousCmp.modifiers.identity = function(component, options) {
   this.famous = new Modifier(_.extend({
     transform : Transform.identity
   }, options));  
+}
+
+FamousCmp.modifiers.inFront = function(component, options) {
+  this.component = component;
+  this.famous = new Modifier({
+    transform : Transform.inFront
+  });
 }
 
 FamousCmp.modifiers.pageTransition = function(component, options) {

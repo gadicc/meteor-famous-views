@@ -7,22 +7,27 @@
 
 <!-- Template.famousInit auto added to body when helpers are ready -->
 <template name="famousInit">
-	{{>famous template='incoming' modifier='pageTransition'}}
-	{{>famous template='list' view='Scrollview'}}
+	{{! >famous template='incoming' modifier='pageTransition'}}
+	{{! >famous template='list' view='Scrollview'}}
 </template>
 
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
 	{{>famous template='defaultYield'}}
-	{{>famous template='headerYield'}}
+	{{>famous template='headerYield' modifier='inFront'}}
 </template>
+
 <template name="defaultYield">
 	<div id="main" class="container" role="main">{{> yield}}</div>
 </template>
+
 <template name="headerYield">
 	<div id="header">{{> yield region="header"}}</div>
 </template>
-<template name="newPage">{{> yield region="newPage"}}</template>
+
+<template name="newPage">
+	{{> yield region="newPage"}}
+</template>
 
 
 <template name="header">
@@ -40,8 +45,8 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/">Scrolling</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/Scrollview">Scrollview</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -52,8 +57,8 @@
 	<h1>Famous Component + Iron Transitioner Demo</h1>
 </template>
 
-<template name="scroll">
-	{{>famous template='list' view='Scrollview'}}
+<template name="Scrollview">
+	{{>famous template='list' view='Scrollview' origin='0.2,0.2'}}
 </template>
 
 <!-- will be loaded as a Scrollview -->
@@ -63,13 +68,7 @@
 
 <!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
 <template name="listItem">
-	<div>{{name}}</div>
-</template>
-
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+	<div class="listItem">{{name}}</div>
 </template>
 
 <template name="blah" type="blah" data-moo="moo2">
