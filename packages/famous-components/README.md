@@ -131,3 +131,16 @@ Creation and destruction of renderables:
 	{{/if}}
 </template>
 ```
+
+## Behind the scenes
+
+1. When a template instance is created, a compView wrapper is added
+to the render tree, which wraps the template's renderable so it can
+be removed when the template instance is destroyed.
+
+1. Unless otherwise specified, a template, by default, will form a
+SequentialLayout, since this is "natural" to how templates usually
+work.
+
+1. If a template generates any HTML, it will be placed in a surface
+and added to the parent's sequence.

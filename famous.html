@@ -7,14 +7,19 @@
 
 <!-- Template.famousInit auto added to body when helpers are ready -->
 <template name="famousInit">
+	{{> famous template='test'}}
 	{{! >famous template='incoming' modifier='pageTransition'}}
 	{{! >famous template='list' view='Scrollview'}}
 </template>
 
+<template name="test">
+hello
+</template>
+
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
-	{{>famous template='yieldMain'}}
-	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
+	{{! >famous template='yieldMain'}}
+	{{! >famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
 </template>
 
 <template name="yieldMain">

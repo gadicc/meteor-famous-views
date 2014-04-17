@@ -3,7 +3,8 @@ var mainCtx = null;
 var Engine = null,
     Modifier = null,
     Surface = null,
-    Transform = null;
+    Transform = null,
+    SequentialLayout = null;
 
 famousCmp = {};
 famousCmp.views = {};
@@ -18,10 +19,12 @@ Meteor.startup(function() {
   Modifier         = require("famous/core/Modifier");
   Surface          = require("famous/core/Surface");
   Transform        = require("famous/core/Transform");
+  RenderNode       = require("famous/core/RenderNode");
+  SequentialLayout = require('famous/views/SequentialLayout');
 //  RenderController = require("famous/views/RenderController");
 
   famousCmp.views['Scrollview'] = require('famous/views/Scrollview');
-  famousCmp.views['SequentialLayout'] = require('famous/views/SequentialLayout');
+  famousCmp.views['SequentialLayout'] = SequentialLayout;
 
   if (famousCmp.mainCtx)
     mainCtx = famousCmp.mainCtx;
@@ -60,14 +63,16 @@ function famousSize(size) {
  */
 
 function CompView(component) {
-  this.component = component;
+//  for (var cmp = component; cmp; cmp = cmp.parent)
 
   var parent = component;
-  while ((parent=parent.parent) && !parent.famous);
-  parent = parent ? parent.famous : mainCtx;
+  while ((parent=parent.parent) && !parent.famousView);
+  parent = parent ? parent.famousView : { node: mainCtx };
 
-
+  this.component = component;
   this.parent = parent;
+
+  parent.node.add(this);
 }
 CompView.prototype.render = function() {
   if (this.isDestroyed)
@@ -77,14 +82,17 @@ CompView.prototype.render = function() {
   console.log('render called before anything set');
   return [];
 }
-CompView.prototype.setNode = function(renderable) {
-  // surface or modifier
-  this.node = renderable;
+CompView.prototype.setNode = function(node) {
+  // surface or modifier/view
+  console.log('set node to', node);
+  this.node = new RenderNode(node);
 }
 CompView.prototype.destroy = function() {
   this.isDestroyed = true;
   this.node = null;
 }
+//CompView.prototype.add = function() {
+//}
 
 Template.famous.created = function() {
   console.log('\nStarting render for "' + this.data.template + '" in '
@@ -107,10 +115,33 @@ Template.famous.created = function() {
 
   view = self.data.view
     ? (famousCmp.views[self.data.view] || (Famous && Famous[self.data.view]))
-    : Surface;
-  // need to create and set before children templates are created
+    : SequentialLayout;
   node = new view(options);
-  compView.setNode(node);
+
+  if (node.sequenceFrom) {
+    compView.sequence = [];
+    node.sequenceFrom(compView.sequence);
+  }
+
+  // TODO, if parent has sequenceFrom and not add, add to array etc
+  if (self.data.modifier) {
+    var modifier = famousCmp.modifiers[self.data.modifier];
+    modifier = typeof modifier == 'function'
+      ? new modifier(component, options)
+      : { famous: modifier };
+
+    console.log(modifier);
+    compView.setNode(modifier.famous).add(node);
+    compView.modifierCmp = modifier;
+    compView.modifier = modifier.famous;
+    if (modifier.postRender)
+      modifier.postRender();
+  } else
+    compView.setNode(node);
+
+  // could do pipe=1 in template helper?
+  if (self.data.view == 'Scrollview')
+    Engine.pipe(node);
 
   newComponent = self.data.data
     ? UI.renderWithData(Template[self.data.template], self.data.data, component)
@@ -121,33 +152,19 @@ Template.famous.created = function() {
   div = document.createElement('div');
   UI.insert(newComponent, div);
 
+
   // todo, which if any content
   console.log('want to setcontent', div);
-  if (node.setContent && (1 || div.innerHTML != ""))
-    node.setContent(div);
-  else
-    console.log('skipped', !!node.setContent, !!div.innerHTML, div);
+  if (div.innerHTML.length) {
 
-  // TODO, if parent has sequenceFrom and not add, add to array etc
-  if (self.data.modifier) {
-    var modifier = famousCmp.modifiers[self.data.modifier];
-    modifier = typeof modifier == 'function'
-      ? new modifier(component, options)
-      : { famous: modifier };
+    console.log('ok');
+    famousCmp.x = compView;
+    // TODO, use size var if it exists and no modifier specified
+    compView.surface = new Surface({ content: div });
 
-    compView.parent
-      .add(modifier.famous)
-      .add(node);
-    compView.modifierCmp = modifier;
-    compView.modifier = modifier.famous;
-    if (modifier.postRender)
-      modifier.postRender();
-  } else
-    compView.parent.add(node);
-
-  // could do pipe=1 in template helper?
-  if (self.data.view == 'Scrollview')
-    Engine.pipe(node);
+    //node.add(compView.surface);
+    compView.sequence.push(compView.surface);
+  };
 }
 
 Template.famous.destroyed = function() {
