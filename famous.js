@@ -60,6 +60,10 @@ if (Meteor.isClient) {
     famousCmp.modifiers.springParticle = particle;
   });
 
+  Template.test.surfaceOne = function() {
+    return Session.get('surfaceOne');
+  }
+
   x = null;
   Template.blockSpring.events({
     'click': function(event, tpl) {

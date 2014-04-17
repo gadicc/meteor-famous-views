@@ -7,9 +7,9 @@
 
 <!-- Template.famousInit auto added to body when helpers are ready -->
 <template name="famousInit">
-	{{> famous template='test'}}
-	{{! >famous template='incoming' modifier='pageTransition'}}
-	{{! >famous template='list' view='Scrollview'}}
+	{{! > famous template='test'}}
+	{{>famous template='incoming' modifier='pageTransition'}}
+	{{>famous template='list' view='Scrollview'}}
 </template>
 
 <!-- we want each yield to be on a different surface -->
@@ -64,6 +64,15 @@
 </template>
 
 <template name="test">
+	{{> famous template='ifblock'}}
+	{{> famous template='hello'}}
+</template>
+
+<template name="hello">
+	Hello World
+</template>
+
+<template name="ifblock">
 	{{#if surfaceOne}}
 		{{>famous template='surfaceOne'}}
 	{{else}}
@@ -75,11 +84,6 @@
 surfaceOne
 </template>
 <template name="surfaceTwo">
-	{{#if surfaceOne}}
-		{{>famous template='surfaceOne'}}
-	{{else}}
-		{{>famous template='surfaceTwo'}}
-	{{/if}}	
 surfaceTwo
 </template>
 

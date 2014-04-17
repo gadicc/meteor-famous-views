@@ -72,7 +72,13 @@ function CompView(component) {
   this.component = component;
   this.parent = parent;
 
-  parent.node.add(this);
+  if (parent.sequence) {
+    parent.sequence.push(this);
+    console.log('added to sequence', parent.sequence);
+  }
+  else {
+    parent.node.add(this);
+  }
 }
 CompView.prototype.render = function() {
   if (this.isDestroyed)
@@ -90,13 +96,25 @@ CompView.prototype.setNode = function(node) {
 CompView.prototype.destroy = function() {
   this.isDestroyed = true;
   this.node = null;
+  this.parent.sequencePurge();
+}
+CompView.prototype.sequencePurge = function() {
+  var sequence = this.sequence,
+    length = this.sequence.length;
+
+  for (var i=0; i < length; i++)
+    if (sequence[i].isDestroyed) {
+      this.sequence.splice(i--, 1);
+      length--;
+    }
 }
 //CompView.prototype.add = function() {
 //}
 
 Template.famous.created = function() {
-  console.log('\nStarting render for "' + this.data.template + '" in '
-    + 'famous.created instance with guid ' + this.__component__.guid);
+  console.log('\n[famous] Famous component '
+    + this.__component__.guid + ' instantiated to render template "'
+    + this.data.template + '"');
 
   var component = this.__component__;
   var compView = component.famousView = new CompView(component);
@@ -143,24 +161,26 @@ Template.famous.created = function() {
   if (self.data.view == 'Scrollview')
     Engine.pipe(node);
 
+  // Render the given Template (will render children too)
   newComponent = self.data.data
     ? UI.renderWithData(Template[self.data.template], self.data.data, component)
     : UI.render(Template[self.data.template], component);
-  console.log('Rendered Component of kind "' + this.data.template
-    + '" with gid ' + newComponent.guid);
+  console.log('[famous]   Completed render of "' + this.data.template
+    + '" to component instance ' + newComponent.guid);
 
+  // If any HTML was generated, create a surface for it
   div = document.createElement('div');
   UI.insert(newComponent, div);
 
-
   // todo, which if any content
   console.log('want to setcontent', div);
-  if (div.innerHTML.length) {
+  if (div.innerHTML.trim().length) {
 
-    console.log('ok');
+    console.log(div.innerHTML.trim().length, 'ok');
     famousCmp.x = compView;
     // TODO, use size var if it exists and no modifier specified
-    compView.surface = new Surface({ content: div });
+    // TODO, default to dimensions of container
+    compView.surface = new Surface({ content: div, size: [500,undefined] });
 
     //node.add(compView.surface);
     compView.sequence.push(compView.surface);
@@ -171,17 +191,13 @@ Template.famous.destroyed = function() {
   console.log('famous destroyed (guid ' + this.__component__.guid + ')',
     this.__component__);
   famousCmp.cmp = this.__component__;
-}
 
-var famousDestroyed = function() {
-  console.log('famousDestroyed');
-  console.log(this);
-//  if (this.famous)
-  if (this.origDestroyed)
-    this.origDestroyed.apply(this, arguments);
+  var component = this.__component__;
+  component.famousView.destroy();
 }
 
 Template.famousEach.created = function() {
+  alert('famousEach called');
   //console.log('\nStarting render for "' + this.data.template + '" in '
   //  + 'famous.created instance with guid ' + this.__component__.guid);
 
@@ -208,6 +224,23 @@ Template.famousEach.created = function() {
   }
 
   component.famous.parent.sequenceFrom(component.famous.sequence); 
+}
+
+famousCmp.showTreeGet = function(renderNode) {
+  var obj = renderNode._node._child._object;
+    if (obj.node)
+      obj.node = this.showTreeGet(obj.node);
+  return obj;
+}
+famousCmp.showTreeChildren = function(renderNode) {
+  var out = {}, i=0;
+  if (renderNode._node)
+    out['child'+(i++)] = this.showTreeGet(renderNode)
+  return out;
+}
+famousCmp.showTree = function() {
+  console.log(this.showTreeChildren(mainCtx));
+
 }
 
 famousCmp.dataFromCmp = function(component) {
