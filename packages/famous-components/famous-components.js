@@ -5,9 +5,9 @@ var Engine = null,
     Surface = null,
     Transform = null;
 
-FamousCmp = {};
-FamousCmp.views = {};
-FamousCmp.modifiers = {};
+famousCmp = {};
+famousCmp.views = {};
+famousCmp.modifiers = {};
 
 Meteor.startup(function() {
   require("famous-polyfills"); // Add polyfills
@@ -20,25 +20,63 @@ Meteor.startup(function() {
   Transform        = require("famous/core/Transform");
 //  RenderController = require("famous/views/RenderController");
 
-  FamousCmp.views['Scrollview'] = require('famous/views/Scrollview');
+  famousCmp.views['Scrollview'] = require('famous/views/Scrollview');
 
   // Move to transitioner
-  FamousCmp.views['SequentialLayout'] = require('famous/views/SequentialLayout');
+  famousCmp.views['SequentialLayout'] = require('famous/views/SequentialLayout');
 
-  if (FamousCmp.mainCtx)
-    mainCtx = FamousCmp.mainCtx;
+  if (famousCmp.mainCtx)
+    mainCtx = famousCmp.mainCtx;
   else {
-    if (FamousCmp.mainCtx !== false)
+    if (famousCmp.mainCtx !== false)
       console.log('[famousCmp] Creating a new main context.  If you already have '
         + 'your own, set famousCmp.mainCtx = yourMainContext (or to false to get '
         + 'rid of this warning)');
-    FamousCmp.mainCtx = mainCtx = Engine.createContext();
+    famousCmp.mainCtx = mainCtx = Engine.createContext();
   }
 
   if (Template.famousInit)
     UI.insert(UI.render(Template.famousInit), document.body);
 
 });
+
+/*
+ * Templates are always added to a cmpView, in turn is added to it's parent
+ * cmpView or a context.  This allows us to handle situations where a
+ * template is later removed (since nodes cannot ever be manually removed
+ * from the render tree).
+ * 
+ * TODO, recreated templates should recycle a previously used cmpView?
+ * need more info on the famous memory management (which does exist)
+ * http://stackoverflow.com/questions/23087980/how-to-remove-nodes-from-the-render-tree
+ *
+ */
+
+function cmpView(component) {
+  this.component = component;
+
+  var parent = component;
+  while ((parent=component.parent) && !parent.famous);
+  parent = parent ? parent.famous : mainCtx;
+
+  this.parent = parent;
+}
+cmpView.prototype.render = function() {
+  if (this.isDestroyed)
+    return [];
+  if (this.node)
+    return this.node.render();
+  console.log('render called before anything set');
+  return [];
+}
+cmpView.prototype.set = function(renderable) {
+  // surface or modifier
+  this.node = renderable;
+}
+cmpView.prototype.destroy = function() {
+  this.isDestroyed = true;
+}
+
 
 function famousSize(size) {
   size = size.split(',');
@@ -83,11 +121,10 @@ Template.famous.created = function() {
     self.data.modifier = 'identity';
 
   view = self.data.view
-    ? (FamousCmp.views[self.data.view] || (Famous && Famous[self.data.view]))
+    ? (famousCmp.views[self.data.view] || (Famous && Famous[self.data.view]))
     : Surface;
   // need to create and set before children templates are created
   component.famous.node = node = new view(options);
-  console.log(options);
 
   newComponent = self.data.data
     ? UI.renderWithData(Template[self.data.template], self.data.data, component)
@@ -101,22 +138,27 @@ Template.famous.created = function() {
 
   console.log('newcomp');
   console.log(newComponent);
-  if (!FamousCmp.cmps)
-    FamousCmp.cmps = [];
-  FamousCmp.cmps.push(newComponent);
+  if (!famousCmp.cmps)
+    famousCmp.cmps = [];
+  famousCmp.cmps.push(newComponent);
 
   div = document.createElement('div');
   UI.insert(newComponent, div);
 
   // todo, which if any content
   console.log('want to setcontent', div);
-  if (node.setContent && 1 || div.innerHTML != "")
+  if (node.setContent && (1 || div.innerHTML != ""))
     node.setContent(div);
   else
     console.log('skipped', !!node.setContent, !!div.innerHTML, div);
 
+  // TODO, if parent has sequenceFrom and not add, add to array etc
   if (self.data.modifier) {
-    var modifier = new FamousCmp.modifiers[self.data.modifier](component, options);
+    var modifier = famousCmp.modifiers[self.data.modifier];
+    modifier = typeof modifier == 'function'
+      ? new modifier(component, options)
+      : { famous: modifier };
+
     component.famous.parent
       .add(modifier.famous)
       .add(node);
@@ -133,15 +175,15 @@ Template.famous.created = function() {
 }
 
 Template.famous.destroyed = function() {
-  console.log('destroyed');
-  console.log(this);
-  FamousCmp.cmp = this;
+  console.log('famous destroyed (guid ' + this.__component__.guid + ')',
+    this.__component__);
+  famousCmp.cmp = this.__component__;
 }
 
 var famousDestroyed = function() {
   console.log('famousDestroyed');
   console.log(this);
-  if (this.famous)
+//  if (this.famous)
   if (this.origDestroyed)
     this.origDestroyed.apply(this, arguments);
 }
@@ -168,33 +210,36 @@ Template.famousEach.created = function() {
         content: div
       });
     });
+  } else {
+    typeof(data);
   }
 
   component.famous.parent.sequenceFrom(component.famous.sequence); 
 }
 
+famousCmp.dataFromCmp = function(component) {
+  while ((component=component.parent) && !component.famous);
+  return component ? component.famous : undefined;
+}
+famousCmp.dataFromTpl = function(tplInstance) {
+  return this.dataFromCmp(tplInstance.__component__);
+}
 
-
-FamousCmp.modifiers.identity = function(component, options) {
+famousCmp.modifiers.identity = function(component, options) {
   this.component = component;
-
-  console.log(_.extend({
-    transform : Transform.identity,
-  }, options));
-
   this.famous = new Modifier(_.extend({
     transform : Transform.identity
   }, options));  
 }
 
-FamousCmp.modifiers.inFront = function(component, options) {
+famousCmp.modifiers.inFront = function(component, options) {
   this.component = component;
-  this.famous = new Modifier({
+  this.famous = new Modifier(_.extend({
     transform : Transform.inFront
-  });
+  }, options));
 }
 
-FamousCmp.modifiers.pageTransition = function(component, options) {
+famousCmp.modifiers.pageTransition = function(component, options) {
   this.component = component;
   this.famous = new Modifier({
     transform : Transform.identity,
@@ -204,6 +249,6 @@ FamousCmp.modifiers.pageTransition = function(component, options) {
   });
 }
 
-FamousCmp.modifiers.pageTransition.prototype.postRender = function() {
+famousCmp.modifiers.pageTransition.prototype.postRender = function() {
   this.famous.setOrigin([0,0], {duration : 5000});
 }

@@ -24,11 +24,9 @@ if (Meteor.isClient) {
   });
 
   Router.map(function() {
-    this.route('home', {
-      path: '/'
-    });
-
+    this.route('home', { path: '/' });
     this.route('Scrollview');
+    this.route('Events');
   });
 
   Template.list.items = [
@@ -39,6 +37,53 @@ if (Meteor.isClient) {
     return Items.find();
   }
   */
+
+  //var
+  PhysicsEngine=null, Spring=null, Particle=null, Body=null;
+  Meteor.startup(function() {
+    PhysicsEngine = require('famous/physics/PhysicsEngine');
+    Spring = require('famous/physics/forces/Spring');
+    Particle = require('famous/physics/bodies/Particle');
+    Body = require('famous/physics/bodies/Body');
+
+    // adapted (updated?) from
+    // http://blog.percolatestudio.com/engineering/the-future-of-javascript-animation-with-famous/
+    var PE = new PhysicsEngine();
+    var spring = new Spring({anchor:[0,0,0]});
+
+    //var particle = PE.addBody({m:1, p:[0,0,0], v:[0,0,0]});
+    //var particle = new Particle();
+    //PE.addBody(particle);
+    var particle = PE.addBody(new Body());
+
+    PE.attach(spring, particle);
+    famousCmp.modifiers.springParticle = particle;
+  });
+
+  x = null;
+  Template.blockSpring.events({
+    'click': function(event, tpl) {
+      var particle = famousCmp.dataFromTpl(tpl).modifier;
+      x = particle;
+      console.log(particle);
+      var Force = require('famous/physics/forces/Force');
+      var force = new Force({ x: 0, y: 0, z: 0 -0.005 * 100});
+      force.isZero = function() { return false; };
+      particle.applyForce(force);
+
+    }
+  });
+
+  Template.Scrollview.destroyed = function() {
+    console.log('Scrollview destroyed', this);
+  }
+  list = null;
+  Template.list.created = function() {
+    list = this.__component__;
+  }
+  Template.list.destroyed = function() {
+    console.log('list destroyed', this);
+  }
 }
 
 if (Meteor.isServer) {

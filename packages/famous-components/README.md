@@ -36,12 +36,16 @@ component instances.
 
 ## JS API
 
-`famousCmp.mainCtx = yourMainContext`, else one will be generated for you and made
+* `famousCmp.mainCtx = yourMainContext`, else one will be generated for you and made
 available here.
 
-`FamousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
+* `FamousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
 default for Scrollview, but you can add other views like this... they'll also
 be looked for under a `Famous` global variable).
+
+* dataFromTpl, dataFromCmp
+
+* set modifiers
 
 ## Template API
 
@@ -79,3 +83,51 @@ Note, for "famousEach", we could very easily allow a more Meteor style call, lik
 and still run everything through Famous.  But it creates a lot of unnecessary
 work for Meteor (to generate data and run functions that won't ever actually be
 used), so I stuck with the `famousEach` call above, which is more performant.
+
+## TODO
+
+Allow mixing of sequences:
+
+```html
+<template name="list" view="Scrollview (TODO, requires PR)">
+	{{>famous template="surface"}}
+
+	{{! the below is reactive, of course; maps to a sequenceFrom }}
+	{{>famousEach data=items template='listItem' size='undefined,100'}}
+
+	{{>famous template="surface"}}
+</template>
+```
+
+Add surfaces as part of a sequence depending on parent:
+
+```html
+<template name="page" view="SequentialLayout (TODO, requires PR)">
+	{{>famous template="surface"}}
+	{{>famous template="surface"}}
+	{{>famous template="surface"}}
+</template>
+```
+
+Inline surfaces:
+
+```html
+<template name="page" view="SequentialLayout (TODO, requires PR)">
+	{{#surface}}
+		<div>Once upon a time...</div>
+	{{/surface}}
+	{{>famous template="surface"}}	
+</template>
+```
+
+Creation and destruction of renderables:
+
+```html
+<template name="page" view="SequentialLayout (TODO, requires PR)">
+	{{#if something}}
+		{{>famous template="surface1"}}
+	{{else}}
+		{{>famous template="surface1"}}
+	{{/if}}
+</template>
+```

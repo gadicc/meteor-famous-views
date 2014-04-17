@@ -15,3 +15,7 @@
 }
 
 .navbar-fixed-top { z-index: 100; }
+
+#block {
+	width: 100px; height: 100px; background: #aaf;
+}

@@ -13,15 +13,15 @@
 
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
-	{{>famous template='defaultYield'}}
-	{{>famous template='headerYield' modifier='inFront'}}
+	{{>famous template='yieldMain'}}
+	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
 </template>
 
-<template name="defaultYield">
+<template name="yieldMain">
 	<div id="main" class="container" role="main">{{> yield}}</div>
 </template>
 
-<template name="headerYield">
+<template name="yieldHeader">
 	<div id="header">{{> yield region="header"}}</div>
 </template>
 
@@ -47,6 +47,11 @@
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
           <li><a href="/Scrollview">Scrollview</a></li>
+          <li><a href="/Events">Events</a></li>
+          <li><span style="position: relative; top: 5px; left: 10px; color: #ccc">
+          	&lt;--  Routing code isn't finished yet<br>
+          	&lt;-- Please refresh page as necessary
+        	</span></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -61,8 +66,17 @@
 	{{>famous template='list' view='Scrollview' origin='0.2,0.2'}}
 </template>
 
+<template name="Events">
+	{{>famous template='blockSpring' modifier='springParticle'}}
+</template>
+
+<template name="blockSpring">
+	<div id="block"></div>
+</template>
+
 <!-- will be loaded as a Scrollview -->
 <template name="list" view="Scrollview (requires PR)">
+	<div></div>
 	{{>famousEach data=items template='listItem' size='undefined,100'}}
 </template>
 
