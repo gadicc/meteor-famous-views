@@ -72,13 +72,10 @@ function CompView(component) {
   this.component = component;
   this.parent = parent;
 
-  if (parent.sequence) {
+  if (parent.sequence)
     parent.sequence.push(this);
-    console.log('added to sequence', parent.sequence);
-  }
-  else {
+  else
     parent.node.add(this);
-  }
 }
 CompView.prototype.render = function() {
   if (this.isDestroyed)
@@ -90,8 +87,8 @@ CompView.prototype.render = function() {
 }
 CompView.prototype.setNode = function(node) {
   // surface or modifier/view
-  console.log('set node to', node);
   this.node = new RenderNode(node);
+  return this.node;
 }
 CompView.prototype.destroy = function() {
   this.isDestroyed = true;
@@ -148,7 +145,6 @@ Template.famous.created = function() {
       ? new modifier(component, options)
       : { famous: modifier };
 
-    console.log(modifier);
     compView.setNode(modifier.famous).add(node);
     compView.modifierCmp = modifier;
     compView.modifier = modifier.famous;
@@ -171,33 +167,28 @@ Template.famous.created = function() {
   // If any HTML was generated, create a surface for it
   div = document.createElement('div');
   UI.insert(newComponent, div);
-
-  // todo, which if any content
-  console.log('want to setcontent', div);
   if (div.innerHTML.trim().length) {
-
-    console.log(div.innerHTML.trim().length, 'ok');
-    famousCmp.x = compView;
     // TODO, use size var if it exists and no modifier specified
-    // TODO, default to dimensions of container
-    compView.surface = new Surface({ content: div, size: [500,undefined] });
+    // TODO, default to dimensions of container?
+    // TODO, proper function to recalculate on resize, etc
+    compView.surface = new Surface({
+      content: div,
+      size: [window.innerWidth,undefined]
+    });
 
-    //node.add(compView.surface);
     compView.sequence.push(compView.surface);
   };
 }
 
 Template.famous.destroyed = function() {
-  console.log('famous destroyed (guid ' + this.__component__.guid + ')',
-    this.__component__);
-  famousCmp.cmp = this.__component__;
-
   var component = this.__component__;
+  console.log('[famous] Famous component ' + this.__component__.guid + ' destroyed');
   component.famousView.destroy();
 }
 
 Template.famousEach.created = function() {
   alert('famousEach called');
+  return;
   //console.log('\nStarting render for "' + this.data.template + '" in '
   //  + 'famous.created instance with guid ' + this.__component__.guid);
 
