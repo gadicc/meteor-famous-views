@@ -21,8 +21,6 @@ Meteor.startup(function() {
 //  RenderController = require("famous/views/RenderController");
 
   famousCmp.views['Scrollview'] = require('famous/views/Scrollview');
-
-  // Move to transitioner
   famousCmp.views['SequentialLayout'] = require('famous/views/SequentialLayout');
 
   if (famousCmp.mainCtx)
@@ -40,44 +38,6 @@ Meteor.startup(function() {
 
 });
 
-/*
- * Templates are always added to a cmpView, in turn is added to it's parent
- * cmpView or a context.  This allows us to handle situations where a
- * template is later removed (since nodes cannot ever be manually removed
- * from the render tree).
- * 
- * TODO, recreated templates should recycle a previously used cmpView?
- * need more info on the famous memory management (which does exist)
- * http://stackoverflow.com/questions/23087980/how-to-remove-nodes-from-the-render-tree
- *
- */
-
-function cmpView(component) {
-  this.component = component;
-
-  var parent = component;
-  while ((parent=component.parent) && !parent.famous);
-  parent = parent ? parent.famous : mainCtx;
-
-  this.parent = parent;
-}
-cmpView.prototype.render = function() {
-  if (this.isDestroyed)
-    return [];
-  if (this.node)
-    return this.node.render();
-  console.log('render called before anything set');
-  return [];
-}
-cmpView.prototype.set = function(renderable) {
-  // surface or modifier
-  this.node = renderable;
-}
-cmpView.prototype.destroy = function() {
-  this.isDestroyed = true;
-}
-
-
 function famousSize(size) {
   size = size.split(',');
   var x = parseFloat(size[0]), y = parseFloat(size[1]);
@@ -87,29 +47,54 @@ function famousSize(size) {
   ];
 }
 
-function famousParent(component, addable) {
-  // skipping the immediate parent is intentional (it's where our own famous is set)
+/*
+ * Templates are always added to a cmpView, in turn is added to it's parent
+ * cmpView or a context.  This allows us to handle situations where a
+ * template is later removed (since nodes cannot ever be manually removed
+ * from the render tree).
+ * 
+ * TODO, recreated templates should recycle a previously used cmpView?
+ * need more info on the famous memory management (which does exist)
+ * http://stackoverflow.com/questions/23087980/how-to-remove-nodes-from-the-ren
+ *
+ */
+
+function CompView(component) {
+  this.component = component;
+
   var parent = component;
-  while ((parent = parent.parent)
-    && !(parent.famous && (parent.famous.node.add || parent.famous.node.sequenceFrom)));
-  // for (parent = component; parent && !parent.famous; parent = parent.parent);
+  while ((parent=parent.parent) && !parent.famous);
+  parent = parent ? parent.famous : mainCtx;
 
-  component.famous = {};
-  component.famous.parent = (parent && parent.famous.node) || mainCtx;
 
-  console.log('famousParent on guid ' + component.guid + ' found '
-    + (parent && parent.guid));
-  return parent;
+  this.parent = parent;
 }
-
+CompView.prototype.render = function() {
+  if (this.isDestroyed)
+    return [];
+  if (this.node)
+    return this.node.render();
+  console.log('render called before anything set');
+  return [];
+}
+CompView.prototype.setNode = function(renderable) {
+  // surface or modifier
+  this.node = renderable;
+}
+CompView.prototype.destroy = function() {
+  this.isDestroyed = true;
+  this.node = null;
+}
 
 Template.famous.created = function() {
   console.log('\nStarting render for "' + this.data.template + '" in '
     + 'famous.created instance with guid ' + this.__component__.guid);
 
+  var component = this.__component__;
+  var compView = component.famousView = new CompView(component);
+
   var self = this;
   var newComponent, div, view, node;
-  var component = self.__component__, parent = famousParent(component);
 
   // TODO move surface stuff elsewhere
   var options = {};
@@ -124,23 +109,14 @@ Template.famous.created = function() {
     ? (famousCmp.views[self.data.view] || (Famous && Famous[self.data.view]))
     : Surface;
   // need to create and set before children templates are created
-  component.famous.node = node = new view(options);
+  node = new view(options);
+  compView.setNode(node);
 
   newComponent = self.data.data
     ? UI.renderWithData(Template[self.data.template], self.data.data, component)
     : UI.render(Template[self.data.template], component);
   console.log('Rendered Component of kind "' + this.data.template
     + '" with gid ' + newComponent.guid);
-
-  if (newComponent.destroyed)
-    newComponent.origDestroyed = newComponent.destroyed;
-  newComponent.destroyed = famousDestroyed; 
-
-  console.log('newcomp');
-  console.log(newComponent);
-  if (!famousCmp.cmps)
-    famousCmp.cmps = [];
-  famousCmp.cmps.push(newComponent);
 
   div = document.createElement('div');
   UI.insert(newComponent, div);
@@ -159,15 +135,15 @@ Template.famous.created = function() {
       ? new modifier(component, options)
       : { famous: modifier };
 
-    component.famous.parent
+    compView.parent
       .add(modifier.famous)
       .add(node);
-    component.famous.modifierCmp = modifier;
-    component.famous.modifier = modifier.famous;
+    compView.modifierCmp = modifier;
+    compView.modifier = modifier.famous;
     if (modifier.postRender)
       modifier.postRender();
   } else
-    component.famous.parent.add(node);
+    compView.parent.add(node);
 
   // could do pipe=1 in template helper?
   if (self.data.view == 'Scrollview')

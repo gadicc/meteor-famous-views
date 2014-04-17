@@ -60,6 +60,15 @@
 
 <template name="home">
 	<h1>Famous Component + Iron Transitioner Demo</h1>
+
+</template>
+
+<template name="surfaceOne">
+	{{#if surfaceOne}}
+		{{>famous template='surfaceOne'}}
+	{{else}}
+		{{>famous template='surfaceTwo'}}
+	{{/if}}
 </template>
 
 <template name="Scrollview">
