@@ -142,5 +142,8 @@ be removed when the template instance is destroyed.
 SequentialLayout, since this is "natural" to how templates usually
 work.
 
+1. Children templates will be added 
+
 1. If a template generates any HTML, it will be placed in a surface
-and added to the parent's sequence.
+and added to the template's sequence.  If they template contains
+child templates, they'll be added to the sequence too.

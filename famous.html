@@ -12,10 +12,6 @@
 	{{! >famous template='list' view='Scrollview'}}
 </template>
 
-<template name="test">
-hello
-</template>
-
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
 	{{! >famous template='yieldMain'}}
@@ -65,15 +61,26 @@ hello
 
 <template name="home">
 	<h1>Famous Component + Iron Transitioner Demo</h1>
-
 </template>
 
-<template name="surfaceOne">
+<template name="test">
 	{{#if surfaceOne}}
 		{{>famous template='surfaceOne'}}
 	{{else}}
 		{{>famous template='surfaceTwo'}}
-	{{/if}}
+	{{/if}}	
+</template>
+
+<template name="surfaceOne">
+surfaceOne
+</template>
+<template name="surfaceTwo">
+	{{#if surfaceOne}}
+		{{>famous template='surfaceOne'}}
+	{{else}}
+		{{>famous template='surfaceTwo'}}
+	{{/if}}	
+surfaceTwo
 </template>
 
 <template name="Scrollview">
