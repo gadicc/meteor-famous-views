@@ -147,3 +147,24 @@ work.
 1. If a template generates any HTML, it will be placed in a surface
 and added to the template's sequence.  If they template contains
 child templates, they'll be added to the sequence too.
+
+## Sample Render Tree
+
+```
+                                  Context
+                   +-----------------|-----------------+
+               compView                            compView
+               ("page")                          ("scroller")
+                   |                                   |
+            sequentialView                        scrollView
+      +------------|-----------+                     |
+      |            |           |             +---+---+---+---+
+   surface     compView     surface          |   |   |   |   |
+  (inline)    ("endtext")  (HTML from     cmpView    |
+ {{#famous}}       |           "page")  ("scrlHead") |
+            sequentialView                   |    cmpView
+                   |                      surface
+                surface                 (HTML from
+              (HTML from                 "scrlHead")
+               "endtext")
+```

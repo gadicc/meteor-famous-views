@@ -4,7 +4,8 @@ var Engine = null,
     Modifier = null,
     Surface = null,
     Transform = null,
-    SequentialLayout = null;
+    SequentialLayout = null,
+    StateModifier = null;
 
 famousCmp = {};
 famousCmp.views = {};
@@ -20,8 +21,10 @@ Meteor.startup(function() {
   Surface          = require("famous/core/Surface");
   Transform        = require("famous/core/Transform");
   RenderNode       = require("famous/core/RenderNode");
-  SequentialLayout = require('famous/views/SequentialLayout');
+  SequentialLayout = require("famous/views/SequentialLayout");
 //  RenderController = require("famous/views/RenderController");
+
+  StateModifier    = require("famous/modifiers/StateModifier");
 
   famousCmp.views['Scrollview'] = require('famous/views/Scrollview');
   famousCmp.views['SequentialLayout'] = SequentialLayout;
@@ -62,15 +65,18 @@ function famousSize(size) {
  *
  */
 
-function CompView(component) {
-//  for (var cmp = component; cmp; cmp = cmp.parent)
-
+function CompView(component, options) {
   var parent = component;
   while ((parent=parent.parent) && !parent.famousView);
   parent = parent ? parent.famousView : { node: mainCtx };
 
   this.component = component;
   this.parent = parent;
+
+  if (options) {
+    if (options.size)
+      this.size = options.size;
+  }
 
   if (parent.sequence)
     parent.sequence.push(this);
@@ -87,6 +93,7 @@ CompView.prototype.render = function() {
 }
 CompView.prototype.setNode = function(node) {
   // surface or modifier/view
+  console.log('setNode', node);
   this.node = new RenderNode(node);
   return this.node;
 }
@@ -105,33 +112,66 @@ CompView.prototype.sequencePurge = function() {
       length--;
     }
 }
+CompView.prototype.getSize = function() {
+  return this.size || [undefined, 200];
+}
 //CompView.prototype.add = function() {
 //}
 
+
+function templateSurface(compView, renderedTemplate) {
+  var div = document.createElement('div');
+  UI.insert(renderedTemplate, div);
+
+  // If any HTML was generated, create a surface for it
+  if (div.innerHTML.trim().length) {
+    compView.surface = new Surface({
+      content: div,
+      size: [window.innerWidth,undefined]
+    });
+    compView.sequence.push(compView.surface);
+  }  
+}
+
 Template.famous.created = function() {
+  this.data = this.data || {};
   console.log('\n[famous] Famous component '
     + this.__component__.guid + ' instantiated to render template "'
     + this.data.template + '"');
 
-  var component = this.__component__;
-  var compView = component.famousView = new CompView(component);
+  var options = {};
 
-  var self = this;
+  if (this.data.size)
+    options.size = famousSize(this.data.size);
+  if (this.data.origin)
+    options.origin = famousSize(this.data.origin);
+  if (this.data.opacity)
+    options.opacity = parseFloat(this.data.opacity);
+
+  if (!this.data.modifier && (this.data.origin || this.data.size))
+    this.data.modifier = 'StateModifier';
+
+  var component = this.__component__;
+  var compView = component.famousView = new CompView(component, options);
+
   var newComponent, div, view, node;
 
-  // TODO move surface stuff elsewhere
-  var options = {};
-  if (self.data.size)
-    options.size = famousSize(self.data.size);
-  if (self.data.origin)
-    options.origin = famousSize(self.data.origin);
-  if (_.keys(options).length && !self.data.modifier)
-    self.data.modifier = 'identity';
+  console.log(component);
 
-  view = self.data.view
-    ? (famousCmp.views[self.data.view] || (Famous && Famous[self.data.view]))
-    : SequentialLayout;
+
+  if (this.data.view) {
+    view = famousCmp.views[this.data.view] || (Famous && Famous[this.data.view]);
+    if (!view)
+      throw new Error('Wanted view "' + this.data.view + '" but it doesn\'t exists.'
+        + "Try famousCmp.views."+this.data.view+" = require(...)");
+  } else
+    view = SequentialLayout;
+
   node = new view(options);
+
+  if (this.data.view == 'Scrollview') {
+    console.log('Scrollview', compView);
+  }
 
   if (node.sequenceFrom) {
     compView.sequence = [];
@@ -139,8 +179,8 @@ Template.famous.created = function() {
   }
 
   // TODO, if parent has sequenceFrom and not add, add to array etc
-  if (self.data.modifier) {
-    var modifier = famousCmp.modifiers[self.data.modifier];
+  if (this.data.modifier) {
+    var modifier = famousCmp.modifiers[this.data.modifier];
     modifier = typeof modifier == 'function'
       ? new modifier(component, options)
       : { famous: modifier };
@@ -154,31 +194,40 @@ Template.famous.created = function() {
     compView.setNode(node);
 
   // could do pipe=1 in template helper?
-  if (self.data.view == 'Scrollview')
+  if (this.data.view == 'Scrollview')
     Engine.pipe(node);
 
-  // Render the given Template (will render children too)
-  newComponent = self.data.data
-    ? UI.renderWithData(Template[self.data.template], self.data.data, component)
-    : UI.render(Template[self.data.template], component);
-  console.log('[famous]   Completed render of "' + this.data.template
-    + '" to component instance ' + newComponent.guid);
+  if (this.data.template) {
+    // Render the given Template (will render children too)
+    newComponent = this.data.data
+      ? UI.renderWithData(Template[this.data.template], this.data.data, component)
+      : UI.render(Template[this.data.template], component);
+    console.log('[famous]   Completed render of "' + this.data.template
+      + '" to component instance ' + newComponent.guid);
 
-  // If any HTML was generated, create a surface for it
-  div = document.createElement('div');
-  UI.insert(newComponent, div);
-  if (div.innerHTML.trim().length) {
-    // TODO, use size var if it exists and no modifier specified
-    // TODO, default to dimensions of container?
-    // TODO, proper function to recalculate on resize, etc
-    compView.surface = new Surface({
-      content: div,
-      size: [window.innerWidth,undefined]
-    });
-
-    compView.sequence.push(compView.surface);
-  };
+    templateSurface(compView, newComponent);
+  }
 }
+
+// Used for {{#famous}}content{{/famous}}
+Template.famous.rendered = function() {
+  var component = this.__component__;
+  if (component.__content)
+    templateSurface(component.famousView, this.data
+      ? UI.renderWithData(component.__content, this.data, component)
+      : UI.render(component.__content, component));
+}
+
+/*
+    // maybe: throw error in this case.  and if there are no child templates,
+    // drop sequentialview and make us a plain surface  OPTIMIZATION
+    if (compView.sequence.length) {
+      console.log('[famous] WARNING!  Template "' + this.data.template
+        + '" mixes HTML and famous components.  Adding as last surface in '
+        + 'sequence, but rather explicitly declare it as a surface using '
+        + '{{famous}} or {{#famous}}');
+    }
+*/
 
 Template.famous.destroyed = function() {
   var component = this.__component__;
@@ -187,23 +236,41 @@ Template.famous.destroyed = function() {
 }
 
 Template.famousEach.created = function() {
-  alert('famousEach called');
-  return;
-  //console.log('\nStarting render for "' + this.data.template + '" in '
-  //  + 'famous.created instance with guid ' + this.__component__.guid);
+  console.log('\n[famous] FamousEach component '
+    + this.__component__.guid + ' instantiated to render template "'
+    + this.data.template + '"');
 
-  var self = this;
-  var component = self.__component__, parent = famousParent(component);
-  var data = self.data.data;
-  var size = famousSize(self.data.size);
+  var component = this.__component__;
+
+  // famousEach specific
+  var parent = component;
+  while ((parent=parent.parent) && !parent.famousView);
+  parent = parent ? parent.famousView : { node: mainCtx };
+  console.log(parent);
+
+  var data = this.data.data;
+  var size = famousSize(this.data.size);
 
   // todo, store sequence in parent, store startIndex here (to allow surfaces
   // before, after, inbetween two eaches, etc)
 
   if (_.isArray(data)) {
-    component.famous.sequence = _.map(data, function(row) {
+    console.log(data);
+    var self = this;
+    _.each(data, function(row) {
       var div = document.createElement('div');
       var newComponent = UI.renderWithData(Template[self.data.template], row, component);
+      UI.insert(newComponent, div);
+      var surface = new Surface({
+        size: size,
+        content: div
+      });
+      parent.sequence.push(surface);
+    });
+    return;
+    parent.sequence = _.map(data, function(row) {
+      var div = document.createElement('div');
+      var newComponent = UI.renderWithData(Template[this.data.template], row, component);
       UI.insert(newComponent, div);
       return new Surface({
         size: size,
@@ -214,7 +281,7 @@ Template.famousEach.created = function() {
     typeof(data);
   }
 
-  component.famous.parent.sequenceFrom(component.famous.sequence); 
+//  component.famous.parent.sequenceFrom(component.famous.sequence); 
 }
 
 famousCmp.showTreeGet = function(renderNode) {
@@ -241,6 +308,8 @@ famousCmp.dataFromCmp = function(component) {
 famousCmp.dataFromTpl = function(tplInstance) {
   return this.dataFromCmp(tplInstance.__component__);
 }
+
+famousCmp.modifiers.StateModifier = StateModifier;
 
 famousCmp.modifiers.identity = function(component, options) {
   this.component = component;

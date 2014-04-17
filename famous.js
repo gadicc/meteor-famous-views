@@ -60,7 +60,7 @@ if (Meteor.isClient) {
     famousCmp.modifiers.springParticle = particle;
   });
 
-  Template.test.surfaceOne = function() {
+  Template.ifBlock.surfaceOne = function() {
     return Session.get('surfaceOne');
   }
 

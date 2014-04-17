@@ -14,8 +14,8 @@
 
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
-	{{>famous template='yieldMain'}}
 	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
+	{{>famous template='yieldMain' size="undefined,undefined" origin="0.5,0.5"}}
 </template>
 
 <template name="yieldMain">
@@ -49,10 +49,6 @@
           <li><a href="/">Home</a></li>
           <li><a href="/Scrollview">Scrollview</a></li>
           <li><a href="/Events">Events</a></li>
-          <li><span style="position: relative; top: 5px; left: 10px; color: #ccc">
-          	&lt;--  Routing code isn't finished yet<br>
-          	&lt;-- Please refresh page as necessary
-        	</span></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -60,19 +56,24 @@
 </template>
 
 <template name="home">
+	{{#famous mything=1}}
 	<h1>Famous Component + Iron Transitioner Demo</h1>
+	{{/famous}}
 </template>
 
 <template name="test">
-	{{> famous template='ifblock'}}
+	{{> famous template='ifBlock'}}
 	{{> famous template='hello'}}
+	hello
 </template>
 
 <template name="hello">
 	Hello World
 </template>
 
-<template name="ifblock">
+<!-- #if block example -->
+
+<template name="ifBlock">
 	{{#if surfaceOne}}
 		{{>famous template='surfaceOne'}}
 	{{else}}
@@ -81,15 +82,32 @@
 </template>
 
 <template name="surfaceOne">
-surfaceOne
+	surfaceOne
 </template>
 <template name="surfaceTwo">
-surfaceTwo
+	surfaceTwo
 </template>
 
+<!-- scroll view -->
+
+<!-- router page -->
 <template name="Scrollview">
-	{{>famous template='list' view='Scrollview' origin='0.2,0.2'}}
+	{{>famous template='list' view='Scrollview' size="undefined,undefined"}}
 </template>
+
+<!-- will be loaded as a Scrollview -->
+<template name="list" view="Scrollview (requires PR)">
+	{{>famousEach data=items template='listItem' size='undefined,100'}}
+</template>
+
+<!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
+<template name="listItem">
+	<div class="listItem">{{name}}</div>
+</template>
+
+
+<!-- other router pages -->
+
 
 <template name="Events">
 	{{>famous template='blockSpring' modifier='springParticle'}}
@@ -97,17 +115,6 @@ surfaceTwo
 
 <template name="blockSpring">
 	<div id="block"></div>
-</template>
-
-<!-- will be loaded as a Scrollview -->
-<template name="list" view="Scrollview (requires PR)">
-	<div></div>
-	{{>famousEach data=items template='listItem' size='undefined,100'}}
-</template>
-
-<!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
-<template name="listItem">
-	<div class="listItem">{{name}}</div>
 </template>
 
 <template name="blah" type="blah" data-moo="moo2">
