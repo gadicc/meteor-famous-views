@@ -45,7 +45,7 @@ be looked for under a `Famous` global variable).
 
 * dataFromTpl, dataFromCmp
 
-* set modifiers
+* set modifiers (3 ways)
 
 ## Template API
 
@@ -53,8 +53,12 @@ Note: I believe a lot of the arguments to the `{{famous}}` helper would be bette
 served as constants to the template itself, via attributes (see the examples below).
 If people share this belief, I'll submit a PR to Meteor to allow this in the future.
 
+In general, there are new two components.  `famous` and `famousEach`.  Both can
+be used as either a block helper `{{#famous}}content{{/famous}}` or an inclusion
+function `{{>famous template='name'}}`.
+
 ```html
-<!-- Template.famousInit auto added to body when helpers are ready -->
+<!-- Template.famousInit is auto added to body/mainCtx when helpers are ready -->
 <template name="famousInit">
 	{{>famous template='list' view='Scrollview'}}
 </template>
@@ -132,6 +136,12 @@ Creation and destruction of renderables:
 </template>
 ```
 
+## TODO
+
+* Allow update of StateModifiers from template attributes / data, e.g.
+`{{>famous template='name' rotateX=rotateX}}` and enclosing template's
+`rotateX` function is reactive.
+
 ## Behind the scenes
 
 1. When a template instance is created, a compView wrapper is added
@@ -157,14 +167,14 @@ child templates, they'll be added to the sequence too.
                ("page")                          ("scroller")
                    |                                   |
             sequentialView                        scrollView
-      +------------|-----------+                     |
-      |            |           |             +---+---+---+---+
-   surface     compView     surface          |   |   |   |   |
-  (inline)    ("endtext")  (HTML from     cmpView    |
- {{#famous}}       |           "page")  ("scrlHead") |
-            sequentialView                   |    cmpView
-                   |                      surface
-                surface                 (HTML from
-              (HTML from                 "scrlHead")
+      +------------|-----------+                       |
+      |            |           |               +---+---+---+---+---+-----+
+   surface     compView     surface            |       |   |   |   |     |
+  (inline)    ("endtext")  (HTML from       cmpView     S2.......S4   cmpView
+ {{#famous}}       |           "page")    ("scrlHead")  (famousEach)  ("sFoot")
+            sequentialView                     |                         |
+                   |                        surface                   surface
+                surface                   (HTML from                 (HTML from
+              (HTML from                   "scrlHead")                 "sFoot")
                "endtext")
 ```

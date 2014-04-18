@@ -44,13 +44,16 @@ Meteor.startup(function() {
 
 });
 
-function famousSize(size) {
-  size = size.split(',');
-  var x = parseFloat(size[0]), y = parseFloat(size[1]);
-  return [
-    _.isNaN(x) ? undefined : x,
-    _.isNaN(y) ? undefined : y
-  ];
+function floatArray(string) {
+  var out = [];
+  var args = string.split(',');
+  var length = args.length;
+  for (var i=0; i < length; i++) {
+    out[i] = parseFloat(args[i]);
+    if (isNaN(out[i]))
+      out[i] = undefined;
+  }
+  return out;
 }
 
 /*
@@ -59,10 +62,7 @@ function famousSize(size) {
  * template is later removed (since nodes cannot ever be manually removed
  * from the render tree).
  * 
- * TODO, recreated templates should recycle a previously used cmpView?
- * need more info on the famous memory management (which does exist)
  * http://stackoverflow.com/questions/23087980/how-to-remove-nodes-from-the-ren
- *
  */
 
 function CompView(component, options) {
@@ -142,13 +142,19 @@ Template.famous.created = function() {
   var options = {};
 
   if (this.data.size)
-    options.size = famousSize(this.data.size);
+    options.size = floatArray(this.data.size);
   if (this.data.origin)
-    options.origin = famousSize(this.data.origin);
+    options.origin = floatArray(this.data.origin);
   if (this.data.opacity)
     options.opacity = parseFloat(this.data.opacity);
+  if (this.data.translate) {
+    options.transform = Transform.translate(floatArray(this.data.translate));
+    delete options.translate;
+  }
+  // any other transforms added here later must act on existing transform matrix
+  console.log(options);
 
-  if (!this.data.modifier && (this.data.origin || this.data.size))
+  if (!this.data.modifier && (this.data.origin || this.data.size || this.data.translate))
     this.data.modifier = 'StateModifier';
 
   var component = this.__component__;
@@ -249,7 +255,7 @@ Template.famousEach.created = function() {
   console.log(parent);
 
   var data = this.data.data;
-  var size = famousSize(this.data.size);
+  var size = floatArray(this.data.size);
 
   // todo, store sequence in parent, store startIndex here (to allow surfaces
   // before, after, inbetween two eaches, etc)
@@ -309,7 +315,10 @@ famousCmp.dataFromTpl = function(tplInstance) {
   return this.dataFromCmp(tplInstance.__component__);
 }
 
-famousCmp.modifiers.StateModifier = StateModifier;
+famousCmp.modifiers.StateModifier = function(component, options) {
+  this.component = component;
+  this.famous = new StateModifier(options);
+}
 
 famousCmp.modifiers.identity = function(component, options) {
   this.component = component;
