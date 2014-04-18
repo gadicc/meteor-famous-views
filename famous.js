@@ -34,49 +34,38 @@ if (Meteor.isClient) {
   });
 
   Template.Scrollview.items = Template.list.items = function() {
-    return [{_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'}];
-    //return Items.find();
+    //return [{_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'}];
+    return Items.find();
   }
-
-  //var
-  PhysicsEngine=null, Spring=null, Particle=null, Body=null;
-  Meteor.startup(function() {
-    PhysicsEngine = require('famous/physics/PhysicsEngine');
-    Spring = require('famous/physics/forces/Spring');
-    Particle = require('famous/physics/bodies/Particle');
-    Body = require('famous/physics/bodies/Body');
-
-    // adapted (updated?) from
-    // http://blog.percolatestudio.com/engineering/the-future-of-javascript-animation-with-famous/
-    var PE = new PhysicsEngine();
-    var spring = new Spring({anchor:[0,0,0]});
-
-    //var particle = PE.addBody({m:1, p:[0,0,0], v:[0,0,0]});
-    //var particle = new Particle();
-    //PE.addBody(particle);
-    var particle = PE.addBody(new Body());
-
-    PE.attach(spring, particle);
-    famousCmp.modifiers.springParticle = particle;
-  });
 
   Template.ifBlock.surfaceOne = function() {
     return Session.get('surfaceOne');
   }
 
-  x = null;
+  var springTransition = {
+    method: "spring",
+    period: 100,
+    dampingRatio: .1,
+    velocity: 0.01
+  }
+
   Template.blockSpring.events({
     'click': function(event, tpl) {
-      var famousData = famousCmp.dataFromTpl(tpl);
-      var particle = famousData.modifier;
-      x = particle;
-      console.log(particle);
-      var Force = require('famous/physics/forces/Force');
-      var force = new Force({ x: 0, y: 0, z: 0 -0.005 * 100});
-      force.isZero = function() { return false; };
-      particle.applyForce(force);
-
+      var famousComp = famousCmp.dataFromTpl(tpl);
+      famousComp.modifier.setTransform(
+        Transform.translate(Math.random()*100-25,Math.random()*100-25,0),
+        springTransition
+      );
     }
+  });
+
+  var Transform, Transitionable, SpringTransition;
+  Meteor.startup(function() {
+    Transform        = require('famous/core/Transform');
+    Transitionable   = require("famous/transitions/Transitionable");
+    SpringTransition = require("famous/transitions/SpringTransition");
+
+    Transitionable.registerMethod('spring', SpringTransition);
   });
 
 }

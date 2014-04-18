@@ -36,6 +36,11 @@ from e.g. **Template.events, Template.rendered, helpers, etc**.
 `famousCmp.dataFromTpl` or `famousCmp.dataFromCmp` will help you retrieve the
 compView from descendent template instances.
 
+Don't forget, components are fully coupled to the render tree.  If you have
+a template with `translate="100,100"`, that has a child template with
+`translate="50,50"`, the final template's surfcace will be translated to
+`[150,150]` which of course is very useful.
+
 Final note, there is currently no final/published API for Components.  The internals
 of this code will definitely change, but the API we expose should remain the same.
 Internally, we are doing some things in a less-than-ideal way to get access to
