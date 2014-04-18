@@ -8,6 +8,15 @@ the API is not finalized, and will change without notice.
 Likewise, this is a very early attempt at creating Blaze Components for Famous.  This
 covers just a few cases, with the intention of creating a base to work upon.
 
+Massive props to Morten Henriksen aka raix, firstly for his awesome
+[famono](https://atmosphere.meteor.com/package/famono) package which
+is used to `require` Famous (and anything else for that matter; a super big
+deal for us Meteorites), but more so, for his stellar efforts at super quick
+enhancements to the package for things I needed for this package.  Thank
+you raix!
+
+Copyright (c) 2014 by Gadi Cohen, released under the LGPL v3.
+
 ## Design Goals
 
 I believe that for regular "Meteor-style" web development (i.e. clean, easy and

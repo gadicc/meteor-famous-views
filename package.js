@@ -3,7 +3,15 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-	api.use(['ui', 'templating', 'famono', 'underscore'], 'client');
-  api.add_files(['famous-components.html', 'famous-components.js'], 'client');
+	api.use(['underscore', 'ui'], 'client');
+	api.use(['famono'], 'client');
+
+  api.add_files(
+  	[
+  		'lib/famous-components.js'
+  	],
+  	'client'
+  );
+
   api.export('famousCmp', 'client');
 });
