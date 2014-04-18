@@ -10,24 +10,29 @@ covers just a few cases, with the intention of creating a base to work upon.
 
 ## Design Goals
 
-I believe that for regular web development, "Meteor-style" (i.e. clean, easy and
+I believe that for regular "Meteor-style" web development (i.e. clean, easy and
 quick with powerful results), developers shouldn't need to touch the Famous
-Javascript for basic work.  So famous-components abstracts this away, allowing you to
-use just templates.  A core principle is "templates are famous nodes", and should
-contain either:
+Javascript for basic work.  So, famous-components abstracts all this away,
+allowing you to use just templates for basic app setup.  A core principle is
+"templates are famous nodes", and should either:
 
-1. *Only* HTML (e.g. a Surface), *or*
-2. Including (many) other node(s).
+1. Consist of *only* HTML (e.g. a Surface), *or*
+2. Include (many) other node(s) with child {{famous}} calls
 
-Don't use `{{> foo}}` to include other templates anymore, use
-`{{famous template='foo'}}`.  By default, this creates a new Surface, which
-may include HTML.  But you can also pass, e.g. `view='Scrollview'`, and that
-template can then include other surfaces/templates/nodes.
+If you want to include another template as a *seperate famous node*, use
+`{{>famous template='foo'}}` instead of `{{> foo}}`, or specify inline
+(see below).  By default, this creates a new SequentialView, and any HTML
+is rendered to a Surface and added to it.  You could also pass
+`view='Surface'`; or `view='Scrollview'` and include other
+surfaces/templates/nodes.  See the **Sample Render Tree* at the
+bottom of this doc.
 
-When necessary, we provide access to the relevant Famous instances via a `.famous`
-property in each relevant Blaze component instance.  This will contain a `node`
-(usually a surface) and `parent` (context, scrollview, etc), a long with any other 
-properties specific to that instance (e.g. `sequence` for a Scrollview).
+The template component instance gets given a `.famous` property which references
+the compView instance (see Render Tree below), and in turn references the `node`
+(SequentialView, Surface, etc) and `parent` (parent compView or an object with
+`node: context`), along with any special properties for that instance
+(e.g. `sequence`).  This allows you to interact directly with Famous objects
+from e.g. Template.events, Template.rendered, helpers, etc.
 
 Final note, there is currently no final/published API for Components.  The internals
 of this code will definitely change, but the API we expose should remain the same.
@@ -43,24 +48,56 @@ available here.
 default for Scrollview, but you can add other views like this... they'll also
 be looked for under a `Famous` global variable).
 
-* dataFromTpl, dataFromCmp
+* `dataFromTpl`, `dataFromCmp` -- use these functions in Template created,
+rendered, events, helpers, to get the compView object, which contains a `node`
+property to the actual Famous node (view, surface, etc).  Feel free to use
+these functions in descendent templates, they'll climb the component tree
+until they find the enclosing compView.
 
 * set modifiers (3 ways)
 
 ## Template API
 
-Note: I believe a lot of the arguments to the `{{famous}}` helper would be better
-served as constants to the template itself, via attributes (see the examples below).
-If people share this belief, I'll submit a PR to Meteor to allow this in the future.
-
 In general, there are new two components.  `famous` and `famousEach`.  Both can
 be used as either a block helper `{{#famous}}content{{/famous}}` or an inclusion
 function `{{>famous template='name'}}`.
 
+Every time you call `{{famous}}`, you're creating a new Famous node, which can
+be manipulated independantly.  If any HTML is specified, it will ultimately
+land up in it's own Surface, and of course, remains reactive.
+
+Note: I believe a lot of the arguments to the `{{famous}}` helper would be better
+served as constants to the template itself, via attributes (see the examples below).
+If people share this belief, I'll submit a PR to Meteor to allow this in the future.
+
+Note: The examples below are a bit excessive, you probably wouldn't want all
+these things as seperate surfaces, but just demonstrating what's possible.
+
 ```html
 <!-- Template.famousInit is auto added to body/mainCtx when helpers are ready -->
 <template name="famousInit">
-	{{>famous template='list' view='Scrollview'}}
+	{{>famous template='test'}}
+</template>
+
+<!-- "inclusion", inline, ifBlocks -->
+<template name="test">
+  {{>famous template='welcome'}}
+
+  {{#famous}}
+  	<p>hello there</p>
+  {{/famous}}
+
+  {{#if loggedIn}}
+  	{{>famous template='userBar'}}
+  {{else}}
+  	{{>famous template='pleaseLogIn'}}
+  {{/if}}
+</template>
+```
+
+```html
+<template name="famousInit">
+	{{>famous template='list' view="Scrollview"}}
 </template>
 
 <!-- will be loaded as a Scrollview -->
@@ -88,9 +125,9 @@ and still run everything through Famous.  But it creates a lot of unnecessary
 work for Meteor (to generate data and run functions that won't ever actually be
 used), so I stuck with the `famousEach` call above, which is more performant.
 
-## TODO
+## More Examples
 
-Allow mixing of sequences:
+Mixing of sequences (coming soon):
 
 ```html
 <template name="list" view="Scrollview (TODO, requires PR)">
@@ -103,44 +140,14 @@ Allow mixing of sequences:
 </template>
 ```
 
-Add surfaces as part of a sequence depending on parent:
-
-```html
-<template name="page" view="SequentialLayout (TODO, requires PR)">
-	{{>famous template="surface"}}
-	{{>famous template="surface"}}
-	{{>famous template="surface"}}
-</template>
-```
-
-Inline surfaces:
-
-```html
-<template name="page" view="SequentialLayout (TODO, requires PR)">
-	{{#surface}}
-		<div>Once upon a time...</div>
-	{{/surface}}
-	{{>famous template="surface"}}	
-</template>
-```
-
-Creation and destruction of renderables:
-
-```html
-<template name="page" view="SequentialLayout (TODO, requires PR)">
-	{{#if something}}
-		{{>famous template="surface1"}}
-	{{else}}
-		{{>famous template="surface1"}}
-	{{/if}}
-</template>
-```
-
 ## TODO
 
 * Allow update of StateModifiers from template attributes / data, e.g.
 `{{>famous template='name' rotateX=rotateX}}` and enclosing template's
-`rotateX` function is reactive.
+`rotateX` helper is reactive.
+
+* Help for things like
+[responsive grid layout](http://stackoverflow.com/questions/23140046/what-is-the-best-pattern-for-responsive-apps-in-famo-us)
 
 ## Behind the scenes
 
@@ -160,21 +167,36 @@ child templates, they'll be added to the sequence too.
 
 ## Sample Render Tree
 
+As explained above, every template instance is wrapped in a compView before
+being added to the render tree.  When the template is destroyed, the `node`
+property of the compview is set to null, and all children will no longer
+be rendered, and will be garbaged collected.
+
+By default, a compView creates a SequentialLayout node, since this feels
+natural to use coming from a template world.  It can be changed on the
+{{famous}} call.  Likewise, a modifier can be specified.  And optional
+arguments for the modifier.  If arguments are given, but no modifier
+specific, the default is a StateModifier.
+
+`{{> famous template="scroller" view="Scrollview" modifier="inFront" size="undefined,500"}}`
+
 ```
                                   Context
                    +-----------------|-----------------+
                compView                            compView
                ("page")                          ("scroller")
                    |                                   |
-            sequentialView                        scrollView
+           SequentialLayout                        scrollView
       +------------|-----------+                       |
       |            |           |               +---+---+---+---+---+-----+
    surface     compView     surface            |       |   |   |   |     |
   (inline)    ("endtext")  (HTML from       cmpView     S2.......S4   cmpView
  {{#famous}}       |           "page")    ("scrlHead")  (famousEach)  ("sFoot")
-            sequentialView                     |                         |
+                modifier                       |                         |
                    |                        surface                   surface
-                surface                   (HTML from                 (HTML from
-              (HTML from                   "scrlHead")                 "sFoot")
+           SequentialLayout               (HTML from                 (HTML from
+                   |                      "scrlHead")                 "sFoot")
+                surface
+              (HTML from)
                "endtext")
 ```

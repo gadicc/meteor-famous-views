@@ -45,6 +45,9 @@ Meteor.startup(function() {
 });
 
 function floatArray(string) {
+  if (_.isArray(string))
+    return string;
+
   var out = [];
   var args = string.split(',');
   var length = args.length;
@@ -241,12 +244,26 @@ Template.famous.destroyed = function() {
   component.famousView.destroy();
 }
 
+// similar to templateSurface() above, but always creates a surface without
+// checking if it contains anything, and returns the surface without adding
+// it to the compView sequence.  creates the rendered template itself.
+function templateSurfaceRaw(template, data, parent, size) {
+  var div = document.createElement('div');
+  var newComponent = UI.renderWithData(template, data, parent);
+  UI.insert(newComponent, div);
+  return new Surface({
+    size: size,
+    content: div
+  });
+}
+
 Template.famousEach.created = function() {
   console.log('\n[famous] FamousEach component '
     + this.__component__.guid + ' instantiated to render template "'
     + this.data.template + '"');
 
   var component = this.__component__;
+  var famousData = component.famousData = {};
 
   // famousEach specific
   var parent = component;
@@ -260,34 +277,54 @@ Template.famousEach.created = function() {
   // todo, store sequence in parent, store startIndex here (to allow surfaces
   // before, after, inbetween two eaches, etc)
 
-  if (_.isArray(data)) {
-    console.log(data);
-    var self = this;
-    _.each(data, function(row) {
-      var div = document.createElement('div');
-      var newComponent = UI.renderWithData(Template[self.data.template], row, component);
-      UI.insert(newComponent, div);
-      var surface = new Surface({
-        size: size,
-        content: div
-      });
-      parent.sequence.push(surface);
-    });
-    return;
-    parent.sequence = _.map(data, function(row) {
-      var div = document.createElement('div');
-      var newComponent = UI.renderWithData(Template[this.data.template], row, component);
-      UI.insert(newComponent, div);
-      return new Surface({
-        size: size,
-        content: div
-      });
-    });
-  } else {
-    typeof(data);
-  }
+  var template = Template[this.data.template];
 
-//  component.famous.parent.sequenceFrom(component.famous.sequence); 
+  if (_.isArray(data)) {
+
+    _.each(data, function(row) {
+      parent.sequence.push(
+        templateSurfaceRaw(template, row, component, size)
+      );
+    });
+
+  } else if (typeof(data) == 'object') {
+
+    // "data" is a MiniMongo cursor.  TODO, instanceof cursor check.
+
+    // Thanks to Zoltan Olah from Perculate Studios
+    // https://github.com/percolatestudio/meteor-famous-demos/blob/master/basics-step6/client/cursor-to-array.js
+    famousData.observeHandle = data.observe({
+      addedAt: function(document, atIndex, before) {
+        parent.sequence.splice(atIndex, 0,
+          templateSurfaceRaw(template, document, component, size));
+      },
+      changedAt: function(newDocument, oldDocument, atIndex) {
+        // ensure the fragment createFn returns is re-active
+      },
+      removedAt: function(oldDocument, atIndex) {
+        parent.sequence.splice(atIndex, 1);
+      },
+      movedTo: function(document, fromIndex, toIndex, before) {
+        var item = parent.sequence.splice(fromIndex, 1)[0];
+        parent.sequence.splice(toIndex, 0, item);
+      }
+    });
+
+  } else {
+    
+    throw new Error('famousEach data argument must be array or cursor');
+  }
+}
+
+Template.famousEach.destroyed = function() {
+  var component = this.__component__;
+  console.log('[famous] FamousEach component ' + this.__component__.guid + ' destroyed');
+
+  var data = component.famousData
+  if (data) {
+    if (data.observeHandle)
+      observeHandle.stop();
+  }
 }
 
 famousCmp.showTreeGet = function(renderNode) {
@@ -317,6 +354,7 @@ famousCmp.dataFromTpl = function(tplInstance) {
 
 famousCmp.modifiers.StateModifier = function(component, options) {
   this.component = component;
+  console.log(options);
   this.famous = new StateModifier(options);
 }
 

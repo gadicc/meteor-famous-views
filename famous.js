@@ -1,5 +1,9 @@
 Items = new Meteor.Collection('items');
-//Items.insert({name: Random.id()});
+if (Meteor.isServer) {
+  if (Items.find().count() == 0)
+    for (var i=0; i < 20; i++)
+      Items.insert({name: Random.id()});
+}
 
 if (Meteor.isClient) {
 
@@ -29,14 +33,10 @@ if (Meteor.isClient) {
     this.route('Events');
   });
 
-  Template.list.items = [
-    {_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'},
-  ];
-  /*
-  Template.list.data = function() {
-    return Items.find();
+  Template.list.items = function() {
+    return [{_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'}];
+    //return Items.find();
   }
-  */
 
   //var
   PhysicsEngine=null, Spring=null, Particle=null, Body=null;

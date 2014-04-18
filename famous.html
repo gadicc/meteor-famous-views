@@ -15,7 +15,7 @@
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
 	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
-	{{>famous template='yieldMain' size="undefined,undefined"}}
+	{{>famous template='yieldMain' size="undefined,undefined" disabled_translate="0,50"}}
 </template>
 
 <template name="yieldMain">
@@ -108,7 +108,7 @@
 
 
 <template name="Events">
-	{{>famous template='blockSpring' modifier='springParticle'}}
+	{{>famous template='blockSpring' origin="0.5,0" surfaceSize="500,500"}}
 </template>
 
 <template name="blockSpring">
