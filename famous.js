@@ -67,7 +67,8 @@ if (Meteor.isClient) {
   x = null;
   Template.blockSpring.events({
     'click': function(event, tpl) {
-      var particle = famousCmp.dataFromTpl(tpl).modifier;
+      var famousData = famousCmp.dataFromTpl(tpl);
+      var particle = famousData.modifier;
       x = particle;
       console.log(particle);
       var Force = require('famous/physics/forces/Force');
@@ -78,16 +79,6 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.Scrollview.destroyed = function() {
-    console.log('Scrollview destroyed', this);
-  }
-  list = null;
-  Template.list.created = function() {
-    list = this.__component__;
-  }
-  Template.list.destroyed = function() {
-    console.log('list destroyed', this);
-  }
 }
 
 if (Meteor.isServer) {

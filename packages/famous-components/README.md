@@ -131,21 +131,27 @@ We could also declare everything inline:
 Template.famousInit.items = function() { return Items.find() };
 ```
 
-Note, for "famousEach", we could very easily allow a more Meteor style call, like:
+## More Examples
+
+Typical iron-router layout:
 
 ```html
-<template name="list">
-  {{#each items}}}
-  	{{>famous template='listItem'}}
-  {{/each}}
+<!-- we want each yield to be on a different surface -->
+<template name="layout">
+	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
+	{{>famous template='yieldMain' size="undefined,undefined" translate="0,50"}}
+</template>
+
+<template name="yieldMain">
+	<div id="main" class="container" role="main">{{> yield}}</div>
+</template>
+
+<template name="yieldHeader">
+	<div id="header">{{> yield region="header"}}</div>
 </template>
 ```
 
-and still run everything through Famous.  But it creates a lot of unnecessary
-work for Meteor (to generate data and run functions that won't ever actually be
-used), so I stuck with the `famousEach` call above, which is more performant.
-
-## More Examples
+(set as `layoutTemplate` and let iron-router autoRender as usual, it all works.)
 
 Mixing of sequences (coming soon):
 
@@ -170,7 +176,10 @@ Mixing of sequences (coming soon):
 [responsive grid layout](http://stackoverflow.com/questions/23140046/what-is-the-best-pattern-for-responsive-apps-in-famo-us)
 
 * Allow e.g. size="50%,100%" and create necessary functions to calculate this
-on each tick from window size or containing compView.
+on each tick from window size or containing compView.  [ref](http://stackoverflow.com/questions/23021796/is-it-possible-to-set-surface-sizes-based-on-percentages-in-famo-us)
+
+* Optimizations, e.g. if a template consists of only HTML and doesn't include
+any child templates, this should be a surface, not a surface in a SequentialLayout.
 
 ## Behind the scenes
 

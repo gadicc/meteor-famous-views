@@ -77,8 +77,9 @@ function CompView(component, options) {
   this.parent = parent;
 
   if (options) {
-    if (options.size)
+    if (options.size) {
       this.size = options.size;
+    }
   }
 
   if (parent.sequence)
@@ -96,7 +97,6 @@ CompView.prototype.render = function() {
 }
 CompView.prototype.setNode = function(node) {
   // surface or modifier/view
-  console.log('setNode', node);
   this.node = new RenderNode(node);
   return this.node;
 }
@@ -115,17 +115,28 @@ CompView.prototype.sequencePurge = function() {
       length--;
     }
 }
+
+/*
+var moo = _.once(function(compView) {
+  console.log('getSize called for', compView);
+});
+*/
 CompView.prototype.getSize = function() {
+//  moo(this);
   return this.size || [undefined, 200];
 }
 //CompView.prototype.add = function() {
 //}
 
+function getKind(comp) {
+  while (comp = comp.parent)
+    if (comp.kind && comp.kind != 'Component' && comp.kind != 'Template_famous')
+      return comp.kind;
+}
 
 function templateSurface(compView, renderedTemplate, tName) {
   var div = document.createElement('div');
   UI.insert(renderedTemplate, div);
-  console.log('compView', compView);
 
   // If any HTML was generated, create a surface for it
   if (div.innerHTML.trim().length) {
@@ -141,8 +152,10 @@ function templateSurface(compView, renderedTemplate, tName) {
 Template.famous.created = function() {
   this.data = this.data || {};
   console.log('\n[famous] Famous component '
-    + this.__component__.guid + ' instantiated to render template "'
-    + this.data.template + '"');
+    + this.__component__.guid + ' instantiated '
+    + (this.data.template
+      ? 'to render template "' + this.data.template + '"' 
+      : 'inline in template "' + getKind(this.__component__) + '"'));
 
   var options = {};
 
@@ -153,11 +166,11 @@ Template.famous.created = function() {
   if (this.data.opacity)
     options.opacity = parseFloat(this.data.opacity);
   if (this.data.translate) {
-    options.transform = Transform.translate(floatArray(this.data.translate));
+    options.transform =
+      Transform.translate.apply(null, floatArray(this.data.translate));
     delete options.translate;
   }
   // any other transforms added here later must act on existing transform matrix
-  console.log(options);
 
   if (!this.data.modifier && (this.data.origin || this.data.size || this.data.translate))
     this.data.modifier = 'StateModifier';
@@ -166,9 +179,6 @@ Template.famous.created = function() {
   var compView = component.famousView = new CompView(component, options);
 
   var newComponent, div, view, node;
-
-  console.log(component);
-
 
   if (this.data.view) {
     view = famousCmp.views[this.data.view] || (Famous && Famous[this.data.view]);
@@ -179,10 +189,6 @@ Template.famous.created = function() {
     view = SequentialLayout;
 
   node = new view(options);
-
-  if (this.data.view == 'Scrollview') {
-    console.log('Scrollview', compView);
-  }
 
   if (node.sequenceFrom) {
     compView.sequence = [];
@@ -227,7 +233,7 @@ Template.famous.rendered = function() {
   if (component.__content)
     templateSurface(component.famousView, this.data
       ? UI.renderWithData(component.__content, this.data, component)
-      : UI.render(component.__content, component, 'inline'));
+      : UI.render(component.__content, component, component.parent.parent.kind + '_inline'));
 }
 
 /*
@@ -307,8 +313,10 @@ function famousEachRender(component, template, data) {
 
 Template.famousEach.created = function() {
   console.log('\n[famous] FamousEach component '
-    + this.__component__.guid + ' instantiated to render template "'
-    + this.data.template + '"');
+    + this.__component__.guid + ' instantiated '
+    + (this.data.template
+      ? 'to render template "' + this.data.template + '"' 
+      : 'inline in template "' + getKind(this.__component__) + '"'));
 
   var component = this.__component__;
   var famousData = component.famousData = {};
@@ -359,8 +367,8 @@ famousCmp.showTree = function() {
 }
 
 famousCmp.dataFromCmp = function(component) {
-  while ((component=component.parent) && !component.famous);
-  return component ? component.famous : undefined;
+  while ((component=component.parent) && !component.famousView);
+  return component ? component.famousView : undefined;
 }
 famousCmp.dataFromTpl = function(tplInstance) {
   return this.dataFromCmp(tplInstance.__component__);
@@ -368,7 +376,6 @@ famousCmp.dataFromTpl = function(tplInstance) {
 
 famousCmp.modifiers.StateModifier = function(component, options) {
   this.component = component;
-  console.log(options);
   this.famous = new StateModifier(options);
 }
 
