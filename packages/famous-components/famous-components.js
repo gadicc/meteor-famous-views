@@ -122,15 +122,17 @@ CompView.prototype.getSize = function() {
 //}
 
 
-function templateSurface(compView, renderedTemplate) {
+function templateSurface(compView, renderedTemplate, tName) {
   var div = document.createElement('div');
   UI.insert(renderedTemplate, div);
+  console.log('compView', compView);
 
   // If any HTML was generated, create a surface for it
   if (div.innerHTML.trim().length) {
     compView.surface = new Surface({
       content: div,
-      size: [window.innerWidth,undefined]
+      size: [window.innerWidth,undefined],
+      classes: ['t_' + tName]
     });
     compView.sequence.push(compView.surface);
   }  
@@ -214,17 +216,18 @@ Template.famous.created = function() {
     console.log('[famous]   Completed render of "' + this.data.template
       + '" to component instance ' + newComponent.guid);
 
-    templateSurface(compView, newComponent);
+    templateSurface(compView, newComponent, this.data.template);
   }
 }
 
 // Used for {{#famous}}content{{/famous}}
 Template.famous.rendered = function() {
   var component = this.__component__;
+  // TODO, get containing template for "inline"
   if (component.__content)
     templateSurface(component.famousView, this.data
       ? UI.renderWithData(component.__content, this.data, component)
-      : UI.render(component.__content, component));
+      : UI.render(component.__content, component, 'inline'));
 }
 
 /*
@@ -257,32 +260,18 @@ function templateSurfaceRaw(template, data, parent, size) {
   });
 }
 
-Template.famousEach.created = function() {
-  console.log('\n[famous] FamousEach component '
-    + this.__component__.guid + ' instantiated to render template "'
-    + this.data.template + '"');
+// todo, store sequence in parent, store startIndex here (to allow surfaces
+// before, after, inbetween two eaches, etc)
+function famousEachRender(component, template, data) {
 
-  var component = this.__component__;
-  var famousData = component.famousData = {};
-
-  // famousEach specific
-  var parent = component;
-  while ((parent=parent.parent) && !parent.famousView);
-  parent = parent ? parent.famousView : { node: mainCtx };
-  console.log(parent);
-
-  var data = this.data.data;
-  var size = floatArray(this.data.size);
-
-  // todo, store sequence in parent, store startIndex here (to allow surfaces
-  // before, after, inbetween two eaches, etc)
-
-  var template = Template[this.data.template];
+  var famousData = component.famousData;
+  var sequence = famousData.sequence;
+  var size = famousData.size;
 
   if (_.isArray(data)) {
 
     _.each(data, function(row) {
-      parent.sequence.push(
+      famousData.parent.sequence.push(
         templateSurfaceRaw(template, row, component, size)
       );
     });
@@ -295,25 +284,50 @@ Template.famousEach.created = function() {
     // https://github.com/percolatestudio/meteor-famous-demos/blob/master/basics-step6/client/cursor-to-array.js
     famousData.observeHandle = data.observe({
       addedAt: function(document, atIndex, before) {
-        parent.sequence.splice(atIndex, 0,
+        sequence.splice(atIndex, 0,
           templateSurfaceRaw(template, document, component, size));
       },
       changedAt: function(newDocument, oldDocument, atIndex) {
         // ensure the fragment createFn returns is re-active
       },
       removedAt: function(oldDocument, atIndex) {
-        parent.sequence.splice(atIndex, 1);
+        sequence.splice(atIndex, 1);
       },
       movedTo: function(document, fromIndex, toIndex, before) {
-        var item = parent.sequence.splice(fromIndex, 1)[0];
-        parent.sequence.splice(toIndex, 0, item);
+        var item = sequence.splice(fromIndex, 1)[0];
+        sequence.splice(toIndex, 0, item);
       }
     });
 
   } else {
-    
+
     throw new Error('famousEach data argument must be array or cursor');
-  }
+  }  
+}
+
+Template.famousEach.created = function() {
+  console.log('\n[famous] FamousEach component '
+    + this.__component__.guid + ' instantiated to render template "'
+    + this.data.template + '"');
+
+  var component = this.__component__;
+  var famousData = component.famousData = {};
+
+  // famousEach specific: don't create new compView
+  var parent = component;
+  while ((parent=parent.parent) && !parent.famousView);
+
+  famousData.parent = parent ? parent.famousView : { node: mainCtx };
+  famousData.size = floatArray(this.data.size);
+
+  if (this.data.template)
+  famousEachRender(component, Template[this.data.template], this.data.data)
+}
+
+// Used for {{#famous}}content{{/famous}}
+Template.famousEach.rendered = function() {
+  famousEachRender(this.__component__,
+    this.__component__.__content, this.data.data);
 }
 
 Template.famousEach.destroyed = function() {

@@ -89,7 +89,7 @@
 <!-- scroll view -->
 
 <!-- router page -->
-<template name="Scrollview">
+<template name="_Scrollview">
 	{{>famous template='list' view='Scrollview' size="undefined,undefined"}}
 </template>
 
@@ -103,6 +103,13 @@
 	<div class="listItem">{{name}}</div>
 </template>
 
+<template name="Scrollview">
+	{{#famous view='Scrollview' size="undefined,undefined" items=items}}
+		{{#famousEach data=../items size="undefined,100"}}
+			<div class="listItem">{{name}}</div>
+		{{/famousEach}}
+	{{/famous}}
+</template>
 
 <!-- other router pages -->
 

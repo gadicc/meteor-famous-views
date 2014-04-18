@@ -27,12 +27,14 @@ is rendered to a Surface and added to it.  You could also pass
 surfaces/templates/nodes.  See the **Sample Render Tree* at the
 bottom of this doc.
 
-The template component instance gets given a `.famous` property which references
+The template component instance gets given a **`.famous` property** which references
 the compView instance (see Render Tree below), and in turn references the `node`
 (SequentialView, Surface, etc) and `parent` (parent compView or an object with
 `node: context`), along with any special properties for that instance
 (e.g. `sequence`).  This allows you to interact directly with Famous objects
-from e.g. Template.events, Template.rendered, helpers, etc.
+from e.g. **Template.events, Template.rendered, helpers, etc**.
+`famousCmp.dataFromTpl` or `famousCmp.dataFromCmp` will help you retrieve the
+compView from descendent template instances.
 
 Final note, there is currently no final/published API for Components.  The internals
 of this code will definitely change, but the API we expose should remain the same.
@@ -95,6 +97,8 @@ these things as seperate surfaces, but just demonstrating what's possible.
 </template>
 ```
 
+Here's an example of creating a Scrollview:
+
 ```html
 <template name="famousInit">
 	{{>famous template='list' view="Scrollview"}}
@@ -109,6 +113,22 @@ these things as seperate surfaces, but just demonstrating what's possible.
 <template name="listItem" size="undefined,100 (TODO, requires PR)">
 	<div>{{name}}</div>
 </template>
+
+Template.list.items = function() { return Items.find() };
+```
+
+We could also declare everything inline:
+
+```html
+<template name="famousInit">
+	{{#famous view='Scrollview' size="undefined,undefined" items=items}}
+		{{#famousEach data=../items size="undefined,100"}}
+			<div class="listItem">{{name}}</div>
+		{{/famousEach}}
+	{{/famous}}
+</template>
+
+Template.famousInit.items = function() { return Items.find() };
 ```
 
 Note, for "famousEach", we could very easily allow a more Meteor style call, like:
@@ -148,6 +168,9 @@ Mixing of sequences (coming soon):
 
 * Help for things like
 [responsive grid layout](http://stackoverflow.com/questions/23140046/what-is-the-best-pattern-for-responsive-apps-in-famo-us)
+
+* Allow e.g. size="50%,100%" and create necessary functions to calculate this
+on each tick from window size or containing compView.
 
 ## Behind the scenes
 
