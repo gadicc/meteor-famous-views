@@ -46,14 +46,17 @@ if (Meteor.isClient) {
     method: "spring",
     period: 100,
     dampingRatio: .1,
-    velocity: 0.01
+    velocity: 0.005
   }
 
   Template.blockSpring.events({
-    'click': function(event, tpl) {
+    'mouseover': function(event, tpl) {
       var famousComp = famousCmp.dataFromTpl(tpl);
       famousComp.modifier.setTransform(
-        Transform.translate(Math.random()*100-25,Math.random()*100-25,0),
+        Transform.translate(
+          Math.random()*(window.innerWidth/2),
+          Math.random()*(window.innerHeight/2)
+        ),
         springTransition
       );
     }

@@ -12,12 +12,24 @@ Massive props to Morten Henriksen aka raix, firstly for his awesome
 [famono](https://atmosphere.meteor.com/package/famono) package which
 is used to `require` Famous (and anything else for that matter; a super big
 deal for us Meteorites), but more so, for his stellar efforts at super quick
-enhancements to the package for things I needed for this package.  Thank
-you raix!
+enhancements to the package for things I needed for this package.  Thanks raix!
 
 Copyright (c) 2014 by Gadi Cohen, released under the LGPL v3.
 
+## Playing around (not released yet!)
+
+```bash
+$ git clone https://github.com/gadicc/meteor-famous-components
+$ cd meteor-famous-components/demo
+$ mrt update
+$ meteor
+```
+
+First run takes a while to download Famous.
+
 ## Design Goals
+
+(Not essential to get started, but required reading when you can)
 
 I believe that for regular "Meteor-style" web development (i.e. clean, easy and
 quick with powerful results), developers shouldn't need to touch the Famous
@@ -33,7 +45,7 @@ If you want to include another template as a *seperate famous node*, use
 (see below).  By default, this creates a new SequentialView, and any HTML
 is rendered to a Surface and added to it.  You could also pass
 `view='Surface'`; or `view='Scrollview'` and include other
-surfaces/templates/nodes.  See the **Sample Render Tree* at the
+surfaces/templates/nodes.  See the **Sample Render Tree** at the
 bottom of this doc.
 
 The template component instance gets given a **`.famous` property** which references
@@ -54,23 +66,6 @@ Final note, there is currently no final/published API for Components.  The inter
 of this code will definitely change, but the API we expose should remain the same.
 Internally, we are doing some things in a less-than-ideal way to get access to
 component instances.
-
-## JS API
-
-* `famousCmp.mainCtx = yourMainContext`, else one will be generated for you and made
-available here.
-
-* `FamousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
-default for Scrollview, but you can add other views like this... they'll also
-be looked for under a `Famous` global variable).
-
-* `dataFromTpl`, `dataFromCmp` -- use these functions in Template created,
-rendered, events, helpers, to get the compView object, which contains a `node`
-property to the actual Famous node (view, surface, etc).  Feel free to use
-these functions in descendent templates, they'll climb the component tree
-until they find the enclosing compView.
-
-* set modifiers (3 ways)
 
 ## Template API
 
@@ -120,6 +115,7 @@ Here's an example of creating a Scrollview:
 
 <!-- will be loaded as a Scrollview -->
 <template name="list" view="Scrollview (TODO, requires PR)">
+  {{! the below is reactive, of course; maps to a sequenceFrom }}
 	{{>famousEach data=items template='listItem' size='undefined,100'}}
 </template>
 
@@ -144,6 +140,47 @@ We could also declare everything inline:
 
 Template.famousInit.items = function() { return Items.find() };
 ```
+
+## JS API
+
+* `famousCmp.mainCtx = yourMainContext`, else one will be generated for you and made
+available here.
+
+* `dataFromTpl`, `dataFromCmp` -- use these functions in Template created,
+rendered, events, helpers, to get the compView object, which contains a `node`
+property to the actual Famous node (view, surface, etc).  Feel free to use
+these functions in descendent templates, they'll climb the component tree
+until they find the enclosing compView.
+
+  ```js
+    Template.blockSpring.events({
+      'click': function(event, tpl) {
+        var famousData = famousCmp.dataFromTpl(tpl);
+        famousData.modifier.setTransform(
+          Transform.translate(Math.random()*500,Math.random()*300),
+          springTransition
+        );
+      }
+    });
+  ```
+
+* `FamousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
+default for Scrollview, but you can add other views like this... they'll also
+be looked for under a `Famous` global variable).
+
+* Setting modifiers:
+
+  ```js
+  famousCmp.modifiers.pageTransition = function(component, options) {
+    this.component = component;
+    this.famous = new StateModifier({
+      origin    : [-1, 0]
+    });
+  }
+  famousCmp.modifiers.pageTransition.prototype.postRender = function() {
+    this.famous.setOrigin([0,0], {duration : 500});
+  }
+  ```
 
 ## More Examples
 
@@ -172,15 +209,16 @@ Mixing of sequences (coming soon):
 ```html
 <template name="list" view="Scrollview (TODO, requires PR)">
 	{{>famous template="surface"}}
-
-	{{! the below is reactive, of course; maps to a sequenceFrom }}
 	{{>famousEach data=items template='listItem' size='undefined,100'}}
-
 	{{>famous template="surface"}}
 </template>
 ```
 
 ## TODO
+
+* Allow placing of surfaces before and after a `famousEach` (currently
+it overwrites the entire sequence).  This will also allow multiple
+famousEach's in the same template.
 
 * Allow update of StateModifiers from template attributes / data, e.g.
 `{{>famous template='name' rotateX=rotateX}}` and enclosing template's
@@ -197,19 +235,19 @@ any child templates, this should be a surface, not a surface in a SequentialLayo
 
 ## Behind the scenes
 
-1. When a template instance is created, a compView wrapper is added
+1. When a template instance is created, a `compView` wrapper is added
 to the render tree, which wraps the template's renderable so it can
 be removed when the template instance is destroyed.
 
 1. Unless otherwise specified, a template, by default, will form a
 SequentialLayout, since this is "natural" to how templates usually
-work.
+behave.
 
-1. Children templates will be added 
+1. Children templates from `{{famous}}` and `{{#famous}}` are added.
 
-1. If a template generates any HTML, it will be placed in a surface
-and added to the template's sequence.  If they template contains
-child templates, they'll be added to the sequence too.
+1. If a template generates any HTML (from includes/helpes too), it will
+be placed in a surface and added to the template's sequence.  If they
+template contains child templates, they'll be added to the sequence too.
 
 ## Sample Render Tree
 
