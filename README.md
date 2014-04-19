@@ -2,21 +2,28 @@
 
 *Doing Famous the Meteor Way*
 
-This is a work in progress, released for discussion purposes.  It may be useable, but
-the API is not finalized, and will change without notice.
+Famous-components is an attempt at a tight integration between Blaze and Famous. All the other approaches I've seen so far side step most of Blaze, and require writing large amounts of code in JavaScript, which felt very unnatural to me in Meteor. Meteor code should be small, concise and easy with powerful results.
 
-Likewise, this is a very early attempt at creating Blaze Components for Famous.  This
-covers just a few cases, with the intention of creating a base to work upon.
+Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
-Massive props to Morten Henriksen aka raix, firstly for his awesome
-[famono](https://atmosphere.meteor.com/package/famono) package which
-is used to `require` Famous (and anything else for that matter; a super big
-deal for us Meteorites), but more so, for his stellar efforts at super quick
-enhancements to the package for things I needed for this package.  Thanks raix!
+**Features**
 
-Copyright (c) 2014 by Gadi Cohen, released under the LGPL v3.
+* Templates are Famous nodes (Surfaces, Views, etc), with an optional modifier
+* Views, modifiers and modifier options are easily set via component attributes
+* `{{#famous}}content{{/famous}}`, `{{>famous template="name"}}`, `famousEach`
+* Manipulate Famous objects via Template.events, Template.rendered, etc.
 
-## Playing around
+This is a very early release.  More for playing around and discussion purposes.
+But it seems to be useable :)  Feedback is both welcome and appreciated, on
+github.
+
+## Quick Start
+
+`mrt add famous-components`
+
+You are also welcome to clone the github repo and play around in the demo,
+which is still a work in progress (I wanted to get the package out first).
+More cool stuff coming soon.
 
 ```bash
 $ git clone https://github.com/gadicc/meteor-famous-components
@@ -25,9 +32,7 @@ $ mrt update
 $ meteor
 ```
 
-First run takes a while to download Famous.  You can also simply
-`mrt add famous-components`, but it's still early days, it's a super
-early release, things will change, and you should expect this.
+First run takes a while to download Famous.
 
 See also the [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
 example from sayawan.  Big props for getting an app out using famous-components
@@ -275,22 +280,48 @@ specific, the default is a StateModifier.
 `{{> famous template="scroller" view="Scrollview" modifier="inFront" size="undefined,500"}}`
 
 ```
-                                  Context
-                   +-----------------|-----------------+
-               compView                            compView
-               ("page")                          ("scroller")
-                   |                                   |
-           SequentialLayout                        scrollView
-      +------------|-----------+                       |
-      |            |           |               +---+---+---+---+---+-----+
-   surface     compView     surface            |       |   |   |   |     |
-  (inline)    ("endtext")  (HTML from       cmpView     S2.......S4   cmpView
- {{#famous}}       |           "page")    ("scrlHead")  (famousEach)  ("sFoot")
-                modifier                       |                         |
-                   |                        surface                   surface
-           SequentialLayout               (HTML from                 (HTML from
-                   |                      "scrlHead")                 "sFoot")
+                             Context
+                   +------------|-------------+
+               compView                   compView
+               ("page")                   ("header")
+                   |                          |
+           SequentialLayout                Surface
+      +------------|-----------+         (HTML from
+      |            |           |           "header")
+   surface     compView     surface
+  (inline)    ("endtext")  (HTML from
+ {{#famous}}       |         "page")
+                modifier
+                   |    
+           SequentialLayout
+                   |
                 surface
               (HTML from)
                "endtext")
 ```
+
+```
+                Context
+                    | 
+                compView
+              ("scroller")
+                    |
+                scrollView
+                    |
+        +---+---+---+---+---+-----+
+        |       |   |   |   |     |
+    cmpView     S2.......S4   cmpView
+  ("scrlHead")  (famousEach)  ("sFoot")
+        |                         |
+    surface                   surface
+  (HTML from                 (HTML from
+  "scrlHead")                 "sFoot")
+```
+
+## Credits
+
+Massive props to Morten Henriksen aka raix, firstly for his awesome
+[famono](https://atmosphere.meteor.com/package/famono) package which
+is used to `require` Famous (and anything else for that matter; a super big
+deal for us Meteorites), but more so, for his stellar efforts at super quick
+enhancements to the package for things I needed for this package.  Thanks raix!
