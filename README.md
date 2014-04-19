@@ -54,8 +54,7 @@ the compView instance (see Render Tree below), and in turn references the `node`
 `node: context`), along with any special properties for that instance
 (e.g. `sequence`).  This allows you to interact directly with Famous objects
 from e.g. **Template.events, Template.rendered, helpers, etc**.
-`famousCmp.dataFromTpl` or `famousCmp.dataFromCmp` will help you retrieve the
-compView from descendent template instances.
+`famousCmp.dataFromTemplate` or `famousCmp.dataFromComponent` will help you retrieve the compView from descendent template instances.  `famousCmp.dataFromElement` acts on a DOM element (useful for drag & drop, etc).
 
 Don't forget, components are fully coupled to the render tree.  If you have
 a template with `translate="100,100"`, that has a child template with
@@ -146,11 +145,11 @@ Template.famousInit.items = function() { return Items.find() };
 * `famousCmp.mainCtx = yourMainContext`, else one will be generated for you and made
 available here.
 
-* `dataFromTpl`, `dataFromCmp` -- use these functions in Template created,
-rendered, events, helpers, to get the compView object, which contains a `node`
-property to the actual Famous node (view, surface, etc).  Feel free to use
-these functions in descendent templates, they'll climb the component tree
-until they find the enclosing compView.
+* `famousCmp.dataFromTemplate` and `.dataFromComponent` -- use these functions in
+Template created, rendered, events, helpers, to get the compView object, which
+contains a `node` property to the actual Famous node (view, surface, etc).  Feel
+free to use these functions in descendent templates, they'll climb the component
+tree until they find the enclosing compView.
 
   ```js
     Template.blockSpring.events({
@@ -164,7 +163,12 @@ until they find the enclosing compView.
     });
   ```
 
-* `FamousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
+* `famousCmp.dataFromElement` -- as above but for a DOM element.  If you're using
+jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
+element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
+containing view in the case of a sequence (need to think about this). 
+
+* `famousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
 default for Scrollview, but you can add other views like this... they'll also
 be looked for under a `Famous` global variable).
 
