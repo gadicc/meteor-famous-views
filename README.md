@@ -6,12 +6,21 @@ Famous-components is an attempt at a tight integration between Blaze and Famous.
 
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
-**Features**
+### Features & Basics
 
-* Templates are Famous nodes (Surfaces, Views, etc), with an optional modifier
+* The `{{famous}}` component uses templates to create
+Famous Views and Surfaces, without touching any Javascript.
+
+* `{{famousEach}}` helps create a Scrollview using regular Template
+helpers/data like Items.find().  No additional code.  Still 100%
+reactive.
+
 * Views, modifiers and modifier options are easily set via component attributes
-* `{{#famous}}content{{/famous}}`, `{{>famous template="name"}}`, `famousEach`
-* Manipulate Famous objects via Template.events, Template.rendered, etc.
+
+* Need to manipulate Famous objects?  No problem, do it in `Template.events`,
+`Template.rendered`, etc, just like usual.
+
+* Compatible out the box with iron-router (transitions coming soon).
 
 This is a very early release.  More for playing around and discussion purposes.
 But it seems to be useable :)  Feedback is both welcome and appreciated, on
