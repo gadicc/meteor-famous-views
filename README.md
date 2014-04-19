@@ -16,7 +16,7 @@ enhancements to the package for things I needed for this package.  Thanks raix!
 
 Copyright (c) 2014 by Gadi Cohen, released under the LGPL v3.
 
-## Playing around (not released yet!)
+## Playing around
 
 ```bash
 $ git clone https://github.com/gadicc/meteor-famous-components
@@ -25,7 +25,13 @@ $ mrt update
 $ meteor
 ```
 
-First run takes a while to download Famous.
+First run takes a while to download Famous.  You can also simply
+`mrt add famous-components`, but it's still early days, it's a super
+early release, things will change, and you should expect this.
+
+See also the [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
+example from sayawan.  Big props for getting an app out using famous-components
+in under 24 hrs! :)
 
 ## Design Goals
 

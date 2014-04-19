@@ -1,0 +1,11 @@
+{
+	"name": "famous-components",
+	"description": "Blaze Components to use Famous the Meteor way",
+	"homepage": "https://github.com/gadicc/meteor-famous-components",
+	"author": "Morten Henriksen  (http://gi-software.com)",
+	"version": "0.0.1",
+	"git": "https://github.com/gadicc/meteor-famous-components.git",
+	"packages": {
+		"famono": "0.0.28"
+	}
+}
