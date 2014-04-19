@@ -8,7 +8,10 @@ Package.on_use(function (api) {
 
   api.add_files(
   	[
-  		'lib/famous-components.js'
+  		'lib/famous-components.js',
+      'lib/famous.js',
+      'lib/famousEach.js',
+      'lib/modifiers.js'
   	],
   	'client'
   );
