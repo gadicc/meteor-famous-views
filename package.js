@@ -3,7 +3,7 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-	api.use(['underscore', 'ui'], 'client');
+	api.use(['underscore', 'ui', 'minimongo'], 'client');
 	api.use(['famono'], 'client');
 
   api.add_files(
