@@ -47,45 +47,6 @@ See also the [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
 example from sayawan.  Big props for getting an app out using famous-components
 in under 24 hrs! :)
 
-## Design Goals
-
-(Not essential to get started, but required reading when you can)
-
-I believe that for regular "Meteor-style" web development (i.e. clean, easy and
-quick with powerful results), developers shouldn't need to touch the Famous
-Javascript for basic work.  So, famous-components abstracts all this away,
-allowing you to use just templates for basic app setup.  A core principle is
-"templates are famous nodes", and should either:
-
-1. Consist of *only* HTML (e.g. a Surface), *or*
-2. Include (many) other node(s) with child {{famous}} calls
-
-If you want to include another template as a *seperate famous node*, use
-`{{>famous template='foo'}}` instead of `{{> foo}}`, or specify inline
-(see below).  By default, this creates a new SequentialView, and any HTML
-is rendered to a Surface and added to it.  You could also pass
-`view='Surface'`; or `view='Scrollview'` and include other
-surfaces/templates/nodes.  See the **Sample Render Tree** at the
-bottom of this doc.
-
-The template component instance gets given a **`.famous` property** which references
-the compView instance (see Render Tree below), and in turn references the `node`
-(SequentialView, Surface, etc) and `parent` (parent compView or an object with
-`node: context`), along with any special properties for that instance
-(e.g. `sequence`).  This allows you to interact directly with Famous objects
-from e.g. **Template.events, Template.rendered, helpers, etc**.
-`famousCmp.dataFromTemplate` or `famousCmp.dataFromComponent` will help you retrieve the compView from descendent template instances.  `famousCmp.dataFromElement` acts on a DOM element (useful for drag & drop, etc).
-
-Don't forget, components are fully coupled to the render tree.  If you have
-a template with `translate="100,100"`, that has a child template with
-`translate="50,50"`, the final template's surfcace will be translated to
-`[150,150]` which of course is very useful.
-
-Final note, there is currently no final/published API for Components.  The internals
-of this code will definitely change, but the API we expose should remain the same.
-Internally, we are doing some things in a less-than-ideal way to get access to
-component instances.
-
 ## Template API
 
 In general, there are new two components.  `famous` and `famousEach`.  Both can
@@ -93,8 +54,36 @@ be used as either a block helper `{{#famous}}content{{/famous}}` or an inclusion
 function `{{>famous template='name'}}`.
 
 Every time you call `{{famous}}`, you're creating a new Famous node, which can
-be manipulated independantly.  If any HTML is specified, it will ultimately
-land up in it's own Surface, and of course, remains reactive.
+be manipulated independantly.  By default, this creates a new SequentialView.
+but you can also pass `view='Surface'`; or `view='Scrollview'`.  Any HTML
+will be added to the sequence, as will any included {{famous}} calls for
+child or inline templates.
+
+TL;DR; -- skip to examples below.
+
+{{famous}} templates should:
+
+1. Consist of *only* HTML (e.g. a Surface), *or*
+2. Include (many) other node(s) with child {{famous}} calls
+
+If you mix the above, the surface content (HTML) will be the last element
+added to the specified view.
+
+The template component instance gets given a **`.famous` property** which references
+the compView instance (see Render Tree below), and in turn references the `node`
+(SequentialView, Surface, etc) and `parent` (parent compView or an object with
+`node: context`), along with any special properties for that instance
+(e.g. `sequence`).  This allows you to interact directly with Famous objects
+from e.g. **Template.events, Template.rendered, helpers, etc**.
+`famousCmp.dataFromTemplate` or `famousCmp.dataFromComponent` will help you retrieve
+the compView from descendent template instances.  `famousCmp.dataFromElement` acts on
+a DOM element (useful for drag & drop, etc).  See the Sample Render Tree at the 
+bottom of this doc.
+
+Don't forget, components are fully coupled to the render tree.  If you have
+a template with `translate="100,100"`, that has a child template with
+`translate="50,50"`, the final template's surfcace will be translated to
+`[150,150]` which of course is very useful.
 
 Note: I believe a lot of the arguments to the `{{famous}}` helper would be better
 served as constants to the template itself, via attributes (see the examples below).
@@ -273,6 +262,11 @@ behave.
 be placed in a surface and added to the template's sequence.  If they
 template contains child templates, they'll be added to the sequence too.
 
+Note, there is currently no final/published API for Components.  The internals
+of this code will definitely change, but the API we expose should remain the same.
+Internally, we are doing some things in a less-than-ideal way to get access to
+component instances.
+
 ## Sample Render Tree
 
 As explained above, every template instance is wrapped in a compView before
@@ -329,8 +323,15 @@ specific, the default is a StateModifier.
 
 ## Credits
 
-Massive props to Morten Henriksen aka raix, firstly for his awesome
+* Massive props to Morten Henriksen aka raix, firstly for his awesome
 [famono](https://atmosphere.meteor.com/package/famono) package which
 is used to `require` Famous (and anything else for that matter; a super big
 deal for us Meteorites), but more so, for his stellar efforts at super quick
 enhancements to the package for things I needed for this package.  Thanks raix!
+
+* [Zoltan Olah](https://github.com/zol) from
+[Percolate Studios](http://percolatestudio.com/).  His devshop talk with
+David Fetterman from Famo.us,
+[Meteor + Famo.us: Made for each other](https://www.youtube.com/watch?v=bmd-cXSGQAA)
+was the first time I saw Meteor and Famous being used together, and it was
+quite inspiring.
