@@ -1,5 +1,7 @@
 ## vNEXT
 
+* Add support for "direction" attribute, allows for columns
+
 ## v0.0.1
 
 This release is dedicated to sayawan, for creating a

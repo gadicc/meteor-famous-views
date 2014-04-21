@@ -30,7 +30,7 @@ if (Meteor.isClient) {
   Router.map(function() {
     this.route('home', { path: '/' });
     this.route('scrollview');
-    this.route('events');
+    this.route('eventsDemo', { path: '/events'});
     this.route('columns');
   });
 
