@@ -1,6 +1,7 @@
 ## vNEXT
 
 * Add support for "direction" attribute, allows for columns
+* surfaces from {{famous}} should use specified size (fixes #2)
 
 ## v0.0.1
 
