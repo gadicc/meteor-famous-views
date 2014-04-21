@@ -31,6 +31,7 @@ if (Meteor.isClient) {
     this.route('home', { path: '/' });
     this.route('scrollview');
     this.route('events');
+    this.route('columns');
   });
 
   Template.scrollview.items = Template.list.items = function() {
