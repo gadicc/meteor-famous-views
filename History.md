@@ -1,5 +1,6 @@
 ## vNEXT
 
+* Fix template class helper for inline {{#famous}} use
 * Add support for "direction" attribute, allows for columns
 * surfaces from {{famous}} should use specified size (fixes #2)
 
