@@ -47,8 +47,9 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/Scrollview">Scrollview</a></li>
-          <li><a href="/Events">Events</a></li>
+          <li><a href="/scrollview">Scrollview</a></li>
+          <li><a href="/columns">Columns</a></li>
+          <li><a href="/events">Events</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -94,7 +95,7 @@
 <!-- scroll view -->
 
 <!-- router page -->
-<template name="_Scrollview">
+<template name="_scrollview">
 	{{>famous template='list' view='Scrollview' size="undefined,undefined"}}
 </template>
 
@@ -108,7 +109,7 @@
 	<div class="listItem">{{name}}</div>
 </template>
 
-<template name="Scrollview">
+<template name="scrollview">
 	{{#famous view='Scrollview' size="undefined,undefined" items=items}}
 		{{#famousEach data=../items size="undefined,100"}}
 			<div class="listItem">{{name}}</div>
@@ -118,11 +119,14 @@
 
 <!-- other router pages -->
 
-<template name="Events">
+<template name="events">
 	{{#famous size="0,50" translate="25,10"}}
 		Put your mouse on the square
 	{{/famous}}
 	{{>famous template='blockSpring' translate="50,0"}}
+</template>
+
+<template name="columns">
 </template>
 
 <template name="blockSpring">

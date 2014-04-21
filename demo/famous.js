@@ -29,11 +29,11 @@ if (Meteor.isClient) {
 
   Router.map(function() {
     this.route('home', { path: '/' });
-    this.route('Scrollview');
-    this.route('Events');
+    this.route('scrollview');
+    this.route('events');
   });
 
-  Template.Scrollview.items = Template.list.items = function() {
+  Template.scrollview.items = Template.list.items = function() {
     //return [{_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'}];
     return Items.find();
   }
