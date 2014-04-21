@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.0.3
+
 * Support for classes="class1,class2,etc".  Not reactive, so consider
   rather setting classes inline with an extra <div class="x"></div>.
 * Fix template class helper for inline {{#famous}} use
