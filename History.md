@@ -1,5 +1,6 @@
 ## vNEXT
 
+* "Sequencer" implementation; can now have multiple surfaces,famousEaches per seq
 * Arrays should now be specified like cellSize="[150,250]" (note the []'s)
 * Start of restructuring in demo app, see client/views directory (e.g. GridView)
 

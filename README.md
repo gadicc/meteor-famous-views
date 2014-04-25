@@ -229,9 +229,9 @@ Mixing of sequences (coming soon):
 
 ## TODO
 
-* Allow placing of surfaces before and after a `famousEach` (currently
+* ~~Allow placing of surfaces before and after a `famousEach` (currently
 it overwrites the entire sequence).  This will also allow multiple
-famousEach's in the same template.
+famousEach's in the same template.~~
 
 * Allow update of StateModifiers from template attributes / data, e.g.
 `{{>famous template='name' rotateX=rotateX}}` and enclosing template's

@@ -6,6 +6,9 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 
 <template name="Scrollview">
 	{{#famous view='Scrollview' size="undefined,undefined" items=items}}
+		{{#famous view='Surface' size="undefined,50"}}
+			Surface above the list
+		{{/famous}}
 		{{#famousEach data=../items size="undefined,100"}}
 			<div class="listItem">{{name}}</div>
 		{{/famousEach}}
