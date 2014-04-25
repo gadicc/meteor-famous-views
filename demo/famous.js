@@ -53,6 +53,10 @@ if (Meteor.isClient) {
   });
 */
 
+  UI.registerHelper('dstache', function() {
+    return '{{';
+  });
+
   Template.ifBlock.surfaceOne = function() {
     return Session.get('surfaceOne');
   }

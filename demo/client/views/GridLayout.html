@@ -8,7 +8,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 	{{! size, cellSize, etc all seem to be ignored by famous?? }}
 	{{#famous view='GridLayout' items=items size="undefined,undefined"
 			dimensions="[3,3]"}}
-		{{#famousEach data=../items}}
+		{{#famousEach data=../items size="[250,250]"}}
 			<!-- ideally these should also be separate surfaces, TODO -->
 			<div class="GridLayout">
 				<img src="{{picUrl}}" />

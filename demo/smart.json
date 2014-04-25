@@ -3,10 +3,11 @@
     "famono": {
       "_git": "https://github.com/raix/Meteor-famono.git"
     },
-	"famous-components": {
-	  "path": ".."
-	},
+    "famous-components": {
+      "path": ".."
+    },
     "iron-router": {},
-    "bootstrap-3": {}
+    "bootstrap-3": {},
+    "SyntaxHighlighter": {}
   }
 }

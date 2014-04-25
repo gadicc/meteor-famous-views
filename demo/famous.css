@@ -25,3 +25,22 @@
 .green {
 	background: green;
 }
+
+
+.margin10 {
+	margin: 0 10px 0 10px;
+}
+
+div.code {
+	border: 1px solid #aaa;
+	background: #efefef;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 0 10px 0 10px;
+}
+
+div.code > .syntaxhighlighter {
+	border-radius: 5px;
+	padding: 1em;
+	margin: 0 !important;
+}

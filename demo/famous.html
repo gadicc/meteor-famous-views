@@ -16,7 +16,7 @@
 <template name="layout">
 	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
 	{{>famous template='yieldMain' size="undefined,undefined" translate="0,50"}}
-	{{>famous template='yieldCenter' size="500,300" origin="0.5,0.5" translate="0,50"}}
+	{{! >famous template='yieldCenter' size="500,300" origin="0.5,0.5" translate="0,50"}}
 </template>
 
 <template name="yieldMain">
@@ -64,6 +64,7 @@
          	{{/each}}
           <li><a href="/layouts">Layouts</a></li>
           <li><a href="/events">Events</a></li>
+          <li><a href="https://github.com/gadicc/meteor-famous-components">GitHub</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -73,7 +74,8 @@
 <template name="home">
 	<h1>Famous Component Demo</h1>
 	<p>Not much here yet, I'll be working on this next.</p>
-	<p>For the scrollview, try <code>Items.insert({name: Random.id()});</code>
+	<p>For the scrollview, try manipulating the <code>Items</code>
+	collection, e.g. <code>Items.update(Items.findOne({name:'Apple'})._id, {$set: {name:'Capple'}});</code>
 	in the console.  If you're on a desktop, use the mouse scrollwheel
 	to simulate 'flicks'.  Scroll up to see the bounce.</p>
 
