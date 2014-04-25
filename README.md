@@ -30,9 +30,17 @@ github.
 
 `mrt add famous-components`
 
-You are also welcome to clone the github repo and play around in the demo,
+You can also `cd packages/famous-components/demo && meteor` to see the demo.
 which is still a work in progress (I wanted to get the package out first).
 More cool stuff coming soon.
+
+First run takes a while to download Famous.
+
+See also the [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
+example from sayawan.  Big props for getting an app out using famous-components
+in under 24 hrs! :)
+
+To help with development:
 
 ```bash
 $ git clone https://github.com/gadicc/meteor-famous-components
@@ -41,12 +49,6 @@ $ mrt update
 $ meteor
 ```
 
-First run takes a while to download Famous.
-
-See also the [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
-example from sayawan.  Big props for getting an app out using famous-components
-in under 24 hrs! :)
-
 ## Template API
 
 In general, there are new two components.  `famous` and `famousEach`.  Both can
@@ -54,10 +56,11 @@ be used as either a block helper `{{#famous}}content{{/famous}}` or an inclusion
 function `{{>famous template='name'}}`.
 
 Every time you call `{{famous}}`, you're creating a new Famous node, which can
-be manipulated independantly.  By default, this creates a new SequentialView.
-but you can also pass `view='Surface'`; or `view='Scrollview'`.  Any HTML
-will be added to the sequence, as will any included {{famous}} calls for
-child or inline templates.
+be manipulated independantly.  By default, this creates a new SequentialView,
+and any HTML will be added to the sequence, as will any included {{famous}} calls
+for child or inline templates.  You could also pass `view='Scrollview'`, or
+`view='Surface'`.  The latter is useful when you know the template won't contain
+any children, or especially if it might be temporarily empty due to reactivity.
 
 TL;DR; -- skip to examples below.
 
@@ -235,10 +238,11 @@ famousEach's in the same template.~~
 
 * Allow update of StateModifiers from template attributes / data, e.g.
 `{{>famous template='name' rotateX=rotateX}}` and enclosing template's
-`rotateX` helper is reactive.
+`rotateX` helper is reactive.  (Depends on
+[Meteor issue #2010](https://github.com/meteor/meteor/issues/2010))
 
 * Help for things like
-[responsive grid layout](http://stackoverflow.com/questions/23140046/what-is-the-best-pattern-for-responsive-apps-in-famo-us)
+[responsive layouts](http://stackoverflow.com/questions/23140046/what-is-the-best-pattern-for-responsive-apps-in-famo-us)
 
 * Allow e.g. size="50%,100%" and create necessary functions to calculate this
 on each tick from window size or containing compView.  [ref](http://stackoverflow.com/questions/23021796/is-it-possible-to-set-surface-sizes-based-on-percentages-in-famo-us)

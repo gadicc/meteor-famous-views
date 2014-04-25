@@ -1,8 +1,15 @@
 ## vNEXT
 
+## v0.0.4
+
+In the 'demo' app, the database was replaced with something more useful.  If
+you're upgrading from < 0.0.3, please `meteor reset` or `Items.remove()`.
+
 * "Sequencer" implementation; can now have multiple surfaces,famousEaches per seq
 * Arrays should now be specified like cellSize="[150,250]" (note the []'s)
 * Start of restructuring in demo app, see client/views directory (e.g. GridView)
+* Support for class="class1 class2 etc", as per note below.
+* Allow empty templates when `view='Surface'`
 
 ## v0.0.3
 
