@@ -1,0 +1,13 @@
+.GridLayout > div {
+	width: 250px;
+	height: 40px;
+	padding: 5px;
+	color: white;
+	background: rgba(0,0,0,0.6);
+	text-align: center;
+}
+
+.GridLayout > img {
+	padding: 40px;
+	width: 250px; height: 210px;
+}

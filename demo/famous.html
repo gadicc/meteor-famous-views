@@ -16,6 +16,7 @@
 <template name="layout">
 	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
 	{{>famous template='yieldMain' size="undefined,undefined" translate="0,50"}}
+	{{>famous template='yieldCenter' size="500,300" origin="0.5,0.5" translate="0,50"}}
 </template>
 
 <template name="yieldMain">
@@ -24,6 +25,10 @@
 
 <template name="yieldHeader">
 	<div id="header">{{> yield region="header"}}</div>
+</template>
+
+<template name="yieldCenter">
+	<div>{{> yield region="center"}}</div>
 </template>
 
 <template name="newPage">
@@ -47,8 +52,17 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/scrollview">Scrollview</a></li>
-          <li><a href="/columns">Columns</a></li>
+          {{#each menu}}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{cat}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            	{{#each items}}
+	              <li><a href="{{route}}">{{name}}</a></li>
+  	          {{/each}}
+            </ul>
+          </li>
+         	{{/each}}
+          <li><a href="/layouts">Layouts</a></li>
           <li><a href="/events">Events</a></li>
         </ul>
       </div><!--/.nav-collapse -->
@@ -92,31 +106,6 @@
 	surfaceTwo
 </template>
 
-<!-- scroll view -->
-
-<!-- router page -->
-<template name="_scrollview">
-	{{>famous template='list' view='Scrollview' size="undefined,undefined"}}
-</template>
-
-<!-- will be loaded as a Scrollview -->
-<template name="list" view="Scrollview (requires PR)">
-	{{>famousEach data=items template='listItem' size='undefined,100'}}
-</template>
-
-<!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
-<template name="listItem">
-	<div class="listItem">{{name}}</div>
-</template>
-
-<template name="scrollview">
-	{{#famous view='Scrollview' size="undefined,undefined" items=items}}
-		{{#famousEach data=../items size="undefined,100"}}
-			<div class="listItem">{{name}}</div>
-		{{/famousEach}}
-	{{/famous}}
-</template>
-
 <!-- other router pages -->
 
 <template name="eventsDemo">
@@ -126,17 +115,37 @@
 	{{>famous template='blockSpring' translate="50,0"}}
 </template>
 
-<template name="columns">
-	{{#famous direction="X"}}
-		{{#famous size="150,0"}}
-			col1
+<template name="layouts">
+	{{#famous view="Scrollview" size="undefined,undefined"}}
+
+		{{#famous size="undefined,120"}}
+			<h1>Stuff</h1>
+
+			<h2>Columns</h2>
 		{{/famous}}
-		{{#famous size="150,0"}}
-			col2
+
+		{{#famous direction="X" size="undefined,100"}}
+			{{#famous size="150,undefined"}}
+				<div class="colDemo" id="col1">col1</div>
+			{{/famous}}
+			{{#famous size="150,undefined"}}
+				<div class="colDemo" id="col2">col2</div>
+			{{/famous}}
+			{{#famous size="150,undefined"}}
+				<div class="colDemo" id="col3">col3</div>
+			{{/famous}}
 		{{/famous}}
-		{{#famous size="150,0"}}
-			col3
+
+		{{#famous size="undefined,50"}}
+			<h2>Centering</h2>
 		{{/famous}}
+
+		{{#famous size="undefined,150"}}
+			{{#famous size="50,50" origin="0.5,0.5" view="Surface"}}
+				<div id="moo" style="width:50px; height:50px; background:#afa"></div>
+			{{/famous}}
+		{{/famous}}
+
 	{{/famous}}
 </template>
 

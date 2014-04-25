@@ -1,0 +1,30 @@
+<!--
+
+https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/example.js
+
+-->
+
+<template name="Scrollview">
+	{{#famous view='Scrollview' size="undefined,undefined" items=items}}
+		{{#famousEach data=../items size="undefined,100"}}
+			<div class="listItem">{{name}}</div>
+		{{/famousEach}}
+	{{/famous}}
+</template>
+
+<!-- alternatively could be done like below -->
+
+<!-- router page -->
+<template name="_Scrollview">
+	{{>famous template='list' view='Scrollview' size="undefined,undefined"}}
+</template>
+
+<!-- will be loaded as a Scrollview -->
+<template name="list" view="Scrollview (requires PR)">
+	{{>famousEach data=items template='listItem' size='undefined,100'}}
+</template>
+
+<!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
+<template name="listItem">
+	<div class="listItem">{{name}}</div>
+</template>

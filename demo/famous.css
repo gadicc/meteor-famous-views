@@ -8,14 +8,20 @@
 
 #main {  }
 
-.listItem {
-	padding: 10px;
-	border: 1px solid #888;
-	background: #efefef;
-}
-
 .navbar-fixed-top { z-index: 100; }
 
 #block {
 	width: 100px; height: 100px; background: #aaf;
+}
+
+.red {
+	background: red;
+}
+
+.yellow {
+	background: yellow;
+}
+
+.green {
+	background: green;
 }

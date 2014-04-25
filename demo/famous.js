@@ -1,8 +1,22 @@
 Items = new Meteor.Collection('items');
 if (Meteor.isServer) {
+
   if (Items.find().count() == 0)
-    for (var i=0; i < 20; i++)
-      Items.insert({name: Random.id()});
+    _.each([
+      { name: 'Apple', type: 'fruit', picUrl: 'http://metrouk2.files.wordpress.com/2012/08/article-1344003042762-145d45c2000005dc-485035_466x376.jpg' },
+      { name: 'Banana', type: 'fruit', picUrl: 'http://statfaking2.firstpost.in/wp-content/uploads/2014/01/Banana.jpeg' },
+      { name: 'Cupcake', type: 'android', picUrl: 'http://www.sellmymobile.com/blog/wp-content/uploads/2011/03/ANdroid-Cupcake.gif' },
+      { name: 'Donut', type: 'android', picUrl: 'http://img1.wikia.nocookie.net/__cb20130520200422/logopedia/images/c/c5/Android-1_6-donut.jpg'},
+      { name: 'Eclair', type: 'android', picUrl: 'http://www.telecoms.com/files/2009/11/eclair.jpg'},
+      { name: 'Froyo', type: 'android', picUrl: 'http://www.androidcentral.com/sites/androidcentral.com/files/articleimage/684/2010/07/froyo-android.png'},
+      { name: 'Gingerbread', type: 'android', picUrl: 'http://4.bp.blogspot.com/-bEV5FOGSm1A/Unp5OqUrchI/AAAAAAAAAJY/WGa-VRiFjQk/s1600/Gingerbread.png'},
+      { name: 'Honeycomb', type: 'android', picUrl: 'http://mandal.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png'},
+      { name: 'Ice Cream', type: 'android', picUrl: 'http://pic.youmobile.org/img/Android-Ice-Cream-Sandwich-logo-588x394.jpg'},
+      { name: 'Jelly Bean', type: 'android', picUrl: 'http://www.extremetech.com/wp-content/uploads/2012/06/android-jelly-bean-logo1.jpg'},
+      { name: 'Kit Kat', type: 'android', picUrl: 'http://www.android.com/kitkat/images/android.png'},
+    ], function(item) {
+      Items.insert(item);
+    });
 }
 
 if (Meteor.isClient) {
@@ -29,15 +43,15 @@ if (Meteor.isClient) {
 
   Router.map(function() {
     this.route('home', { path: '/' });
-    this.route('scrollview');
     this.route('eventsDemo', { path: '/events'});
-    this.route('columns');
+    this.route('layouts');
   });
 
-  Template.scrollview.items = Template.list.items = function() {
-    //return [{_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'}];
+  /*
+  UI.registerHelper('items', function() {
     return Items.find();
-  }
+  });
+*/
 
   Template.ifBlock.surfaceOne = function() {
     return Session.get('surfaceOne');
@@ -71,6 +85,13 @@ if (Meteor.isClient) {
 
     Transitionable.registerMethod('spring', SpringTransition);
   });
+
+  Template.header.menu = function() {
+    var out = [];
+    for (cat in Menu.list)
+      out.push({ cat: cat, items: Menu.list[cat] });
+    return out;
+  };
 
 }
 

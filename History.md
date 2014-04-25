@@ -1,5 +1,8 @@
 ## vNEXT
 
+* Arrays should now be specified like cellSize="[150,250]" (note the []'s)
+* Start of restructuring in demo app, see client/views directory (e.g. GridView)
+
 ## v0.0.3
 
 * Support for classes="class1,class2,etc".  Not reactive, so consider
