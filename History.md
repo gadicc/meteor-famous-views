@@ -1,7 +1,7 @@
 ## vNEXT
 
-## v0.0.7
-
+* Log via pince.  Default level debug (for now).  Put
+  `Logger.setLevel("famous-components", "info");` in your app to change.
 * Force surfaces' enclosing `<div>` to have `style="width:100%;height:100%"`
 * Make GridLayout look a bit nicer
 

@@ -34,6 +34,11 @@
         "tag": "v3.0.83-9",
         "commit": "5dbcd9180a3ea16055e5ecf795e6b1da2c4be6ce"
       },
+      "pince": {
+        "git": "https://github.com/mad-eye/pince.git",
+        "tag": "v0.0.5",
+        "commit": "4524ecc0bdf043c49dc62e91bbd8a99c661081ed"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",

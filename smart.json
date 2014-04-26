@@ -6,6 +6,7 @@
 	"version": "0.0.6",
 	"git": "https://github.com/gadicc/meteor-famous-components.git",
 	"packages": {
-		"famono": "0.1.4"
+		"famono": "0.1.4",
+		"pince": "0.0.5"
 	}
 }
