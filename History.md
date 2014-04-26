@@ -1,6 +1,6 @@
 ## vNEXT
 
-## v0.0.5
+## v0.0.6
 
 * Better support for all kinds of template attributes "[1,undefined,true]" etc
   (see README).
