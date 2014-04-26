@@ -8,7 +8,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 	{{#famous view='Scrollview' size="[undefined,undefined]"}}
 
 		{{! size, cellSize, etc all seem to be ignored by famous?? }}
-		{{#famous view='GridLayout' items=items size="undefined,undefined"
+		{{#famous view='GridLayout' items=items size="[undefined,undefined]"
 				dimensions="[3,3]" translate="[0,-50]"}}
 			{{#famousEach data=../items}}
 				<!-- ideally these should also be separate surfaces, TODO -->
