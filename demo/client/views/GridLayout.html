@@ -5,15 +5,20 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 -->
 
 <template name="GridLayout">
-	{{! size, cellSize, etc all seem to be ignored by famous?? }}
-	{{#famous view='GridLayout' items=items size="undefined,undefined"
-			dimensions="[3,3]"}}
-		{{#famousEach data=../items size="[250,250]"}}
-			<!-- ideally these should also be separate surfaces, TODO -->
-			<div class="GridLayout">
-				<img src="{{picUrl}}" />
-				<div>{{name}}</div>
-			</div>
-		{{/famousEach}}
+	{{#famous view='Scrollview' size="[undefined,undefined]"}}
+
+		{{! size, cellSize, etc all seem to be ignored by famous?? }}
+		{{#famous view='GridLayout' items=items size="undefined,undefined"
+				dimensions="[3,3]" translate="[0,-50]"}}
+			{{#famousEach data=../items}}
+				<!-- ideally these should also be separate surfaces, TODO -->
+				<div class="GridLayout">
+					<img src="{{picUrl}}" />
+					<div>{{name}}</div>
+				</div>
+			{{/famousEach}}
+		{{/famous}}
+
 	{{/famous}}
+
 </template>

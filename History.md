@@ -1,5 +1,10 @@
 ## vNEXT
 
+## v0.0.7
+
+* Force surfaces' enclosing `<div>` to have `style="width:100%;height:100%"`
+* Make GridLayout look a bit nicer
+
 ## v0.0.6
 
 * Better support for all kinds of template attributes "[1,undefined,true]" etc
