@@ -71,6 +71,7 @@ if (Meteor.isClient) {
   Template.blockSpring.events({
     'mouseover': function(event, tpl) {
       var famousComp = famousCmp.dataFromTpl(tpl);
+      famousComp.modifier.halt();
       famousComp.modifier.setTransform(
         Transform.translate(
           Math.random()*(window.innerWidth/2),

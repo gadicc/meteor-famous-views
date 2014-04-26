@@ -10,8 +10,8 @@
 
 .navbar-fixed-top { z-index: 100; }
 
-#block {
-	width: 100px; height: 100px; background: #aaf;
+#ball {
+	width: 100px; height: 100px; background: #aaf; border-radius: 50%;
 }
 
 .red {
