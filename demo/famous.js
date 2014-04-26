@@ -43,8 +43,6 @@ if (Meteor.isClient) {
 
   Router.map(function() {
     this.route('home', { path: '/' });
-    this.route('eventsDemo', { path: '/events'});
-    this.route('layouts');
   });
 
   /*
@@ -61,33 +59,12 @@ if (Meteor.isClient) {
     return Session.get('surfaceOne');
   }
 
-  var springTransition = {
-    method: "spring",
-    period: 100,
-    dampingRatio: .1,
-    velocity: 0.005
-  }
-
-  Template.blockSpring.events({
-    'mouseover': function(event, tpl) {
-      var famousComp = famousCmp.dataFromTpl(tpl);
-      famousComp.modifier.halt();
-      famousComp.modifier.setTransform(
-        Transform.translate(
-          Math.random()*(window.innerWidth/2),
-          Math.random()*(window.innerHeight/2)
-        ),
-        springTransition
-      );
-    }
-  });
-
-  var Transform, Transitionable, SpringTransition;
+  Transform=null, Transitionable=null;
   Meteor.startup(function() {
     Transform        = require('famous/core/Transform');
     Transitionable   = require("famous/transitions/Transitionable");
-    SpringTransition = require("famous/transitions/SpringTransition");
 
+    var SpringTransition = require("famous/transitions/SpringTransition");
     Transitionable.registerMethod('spring', SpringTransition);
   });
 

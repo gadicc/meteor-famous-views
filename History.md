@@ -1,5 +1,14 @@
 ## vNEXT
 
+## v0.0.5
+
+* Better support for all kinds of template attributes "[1,undefined,true]" etc
+  (see README).
+* Fixed up the demo "Layouts" page for more useful examples, with source code.
+* Made Events demo cuter, added source code to page.
+* Added 'View' as a builtin view (useful for manual position of multiple
+  surfaces).
+
 ## v0.0.4
 
 In the 'demo' app, the database was replaced with something more useful.  If

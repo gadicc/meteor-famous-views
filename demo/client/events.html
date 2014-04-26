@@ -1,0 +1,67 @@
+<template name="eventsDemo">
+	{{#famous view='Scrollview'}}
+		{{#famous size="[undefined,130]" translate="[20,0]"}}
+			<h3>Catch the ball!</h3>
+			<p>Note also the use of <code>{{dstache}}#if}}</code> in the code to render
+			 the appropriate surface reactively.</p>
+			{{> codeButton}}
+		{{/famous}}
+
+		{{#if showCode}}
+			{{>famous template='ballCode' size="[undefined,undefined]"}}
+		{{else}}
+			{{>famous template='springBall' translate="[50,20]" view='Surface'}}
+		{{/if}}
+	{{/famous}}
+</template>
+
+<template name="codeButton">
+		<button>{{#if showCode}}Show Demo{{else}}Show Code{{/if}}</button>
+</template>
+
+<template name="springBall">
+	<div class="ball"></div>
+</template>
+
+<template name="ballCode">
+	{{#sh_highlight lang="html"}}
+		&lt;template name="eventsDemo">
+			{{dstache}}#famous size="[undefined,120]" translate="[10,10]"}}
+				<h3>Catch the ball!</h3>
+				{{dstache}}> codeButton}}
+			{{dstache}}/famous}}
+
+			{{dstache}}#if showCode}}
+				{{dstache}}>famous template='ballCode' size="[undefined,undefined]"}}
+			{{dstache}}else}}
+				{{dstache}}>famous template='springBall' translate="[50,0]" view='Surface'}}
+			{{dstache}}/if}}
+		&lt;/template>
+	{{/sh_highlight}}
+
+	{{#sh_highlight lang="js"}}
+		SpringTransition = require("famous/transitions/SpringTransition");
+		Transitionable.registerMethod('spring', SpringTransition);
+
+		var springTransition = {
+		  method: "spring",
+		  period: 100,
+		  dampingRatio: .1,
+		  velocity: 0.005
+		}
+
+		Template.blockSpring.events({
+		  'mouseover': function(event, tpl) {
+		    var famousComp = famousCmp.dataFromTpl(tpl);
+		    famousComp.modifier.halt();
+		    famousComp.modifier.setTransform(
+		      Transform.translate(
+		        Math.random()*(window.innerWidth/2),
+		        Math.random()*(window.innerHeight/2)
+		      ),
+		      springTransition
+		    );
+		  }
+		});
+	{{/sh_highlight}}
+</template>

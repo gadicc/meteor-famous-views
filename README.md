@@ -4,6 +4,11 @@
 
 Famous-components is an attempt at a tight integration between Blaze and Famous. All the other approaches I've seen so far side step most of Blaze, and require writing large amounts of code in JavaScript, which felt very unnatural to me in Meteor. Meteor code should be small, concise and easy with powerful results.
 
+***Early*** demo available in the source and live at
+[famous-components.meteor.com](https://famous-components.meteor.com/).  The
+package is more interesting than the demo, but the demo includes some
+example code.
+
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
 ### Features & Basics
@@ -51,16 +56,17 @@ $ meteor
 
 ## Template API
 
-In general, there are new two components.  `famous` and `famousEach`.  Both can
+In general, there are new two components.  `famous` and `famousEach`.  Both may
 be used as either a block helper `{{#famous}}content{{/famous}}` or an inclusion
 function `{{>famous template='name'}}`.
 
 Every time you call `{{famous}}`, you're creating a new Famous node, which can
-be manipulated independantly.  By default, this creates a new SequentialView,
+be manipulated independantly.  By default, it creates a new SequentialView,
 and any HTML will be added to the sequence, as will any included {{famous}} calls
-for child or inline templates.  You could also pass `view='Scrollview'`, or
-`view='Surface'`.  The latter is useful when you know the template won't contain
-any children, or especially if it might be temporarily empty due to reactivity.
+for child or inline templates.  You could also pass `view='Scrollview'`,
+`view='View'` or `view='Surface'`.  The latter is useful when you know the
+template won't contain any children, or especially if it might be temporarily
+empty due to reactivity.
 
 TL;DR; -- skip to examples below.
 
@@ -84,9 +90,24 @@ a DOM element (useful for drag & drop, etc).  See the Sample Render Tree at the
 bottom of this doc.
 
 Don't forget, components are fully coupled to the render tree.  If you have
-a template with `translate="100,100"`, that has a child template with
-`translate="50,50"`, the final template's surfcace will be translated to
+a template with `translate="[100,100]"`, that has a child template with
+`translate="[50,50]"`, the final template's surface will be translated to
 `[150,150]` which of course is very useful.
+
+<b>Template Attributes</b>:
+
+Any attributes passed to the template will be passed through to the surface,
+modifier, view, etc.  Using a template helper, you can pass actual JavaScript
+objects.  Alternatively, you can specify e.g. `{{famous attribute="value"}}`.
+The value will be decoded for you, so `"[150,true]"` will become an array
+with number `150` and boolean `true`.
+
+Certain attribute names are handled especially for you, e.g. `direction="X"`
+will map to `Utility.Direction.Y`, the `translate` attribute is instantiated
+into a `Transform.translate` for you, etc.  **TODO**: Since attributes are
+passed to the surface, modifier and view, should you want to specify different
+values for the same key, use the appropriate prefix, e.g. `surfaceSize`,
+`viewSize`, `modifierSize`, etc.
 
 Note: I believe a lot of the arguments to the `{{famous}}` helper would be better
 served as constants to the template itself, via attributes (see the examples below).

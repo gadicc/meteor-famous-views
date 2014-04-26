@@ -1,0 +1,85 @@
+<template name="layouts">
+	{{#famous view="Scrollview" size="undefined,undefined"}}
+
+		{{#famous size="[undefined,60]" view='Surface'}}
+			<h1>Layout Examples</h1>
+		{{/famous}}
+
+		{{#famous size="[undefined,90]" view='Surface'}}	
+			<h2>Horizontal SequentialLayout</h2>
+			<p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow
+			horizontally.</p>
+		{{/famous}}
+
+		{{#famous direction="X" size="[undefined,100]"}}
+			{{#famous size="[150,undefined]" class="red-bg"}}#1{{/famous}}
+			{{#famous size="[150,undefined]" class="green-bg"}}#2{{/famous}}
+			{{#famous size="[150,undefined]" class="blue-bg"}}#3{{/famous}}
+		{{/famous}}
+
+		{{#famous size="[undefined,100]"}}
+			{{#sh_highlight lang="html"}}
+				{{dstache}}#famous direction="X" size="[undefined,100]"}}
+					{{dstache}}#famous size="[150,undefined]" class="red-bg"}}#1{{dstache}}/famous}}
+					{{dstache}}#famous size="[150,undefined]" class="green-bg"}}#2{{dstache}}/famous}}
+					{{dstache}}#famous size="[150,undefined]" class="blue-bg"}}#3{{dstache}}/famous}}
+				{{dstache}}/famous}}
+			{{/sh_highlight}}
+		{{/famous}}
+
+
+		{{#famous size="[undefined,90]"}}		
+			<h2>Columns</h2>
+			<p>Use a <i>GridLayout</i> with <i>dimensions="[x,1]"</i>
+			for columns that fill the container (try resize the window)</p>
+		{{/famous}}
+
+		{{#famous view="GridLayout" dimensions="[3,1]" size="undefined,100"}}
+			{{#famous size="[undefined,undefined]" class="red-bg"}}col1{{/famous}}
+			{{#famous size="[undefined,undefined]" class="green-bg"}}col2{{/famous}}
+			{{#famous size="[undefined,undefined]" class="blue-bg"}}col3{{/famous}}
+		{{/famous}}
+
+		{{#famous size="[undefined,100]"}}
+			{{#sh_highlight lang="html"}}
+				{{dstache}}#famous view="GridLayout" dimensions="[3,1]" size="undefined,100"}}
+					{{dstache}}#famous size="[undefined,undefined]" class="red-bg"}}col1{{dstache}}/famous}}
+					{{dstache}}#famous size="[undefined,undefined]" class="green-bg"}}col2{{dstache}}/famous}}
+					{{dstache}}#famous size="[undefined,undefined]" class="blue-bg"}}col3{{dstache}}/famous}}
+				{{dstache}}/famous}}
+			{{/sh_highlight}}
+		{{/famous}}
+
+
+		{{#famous size="[undefined,90]" view='Surface'}}	
+			<h2>Centering / Fine-Tuning Layout</h2>
+			<p>Use <i>view="View"</i> to manually position child surfaces with
+				<i>origin</i>, <i>size</i> and <i>translate</i>.</p>
+		{{/famous}}
+
+		{{#famous size="[undefined,160]" view='View'}}
+			{{#famous size="[undefined,undefined]" view="Surface" class="green-bg"}}
+				background
+			{{/famous}}
+
+			{{#famous size="[75,75]" origin="[0.5,0.5]" translate='[0,0,1]' view="Surface" class="red-bg"}}
+				block
+			{{/famous}}
+		{{/famous}}
+
+		{{#famous size="[undefined,200]"}}
+			{{#sh_highlight lang="html"}}
+				{{dstache}}#famous size="[undefined,160]" view='View'}}
+					{{dstache}}#famous size="[undefined,undefined]" view="Surface" class="green-bg"}}
+						background
+					{{dstache}}/famous}}
+
+					{{dstache}}#famous size="[50,50]" origin="[0.5,0.5]" translate='[0,0,1]' view="Surface" class='red-bg'}}
+						block
+					{{dstache}}/famous}}
+				{{dstache}}/famous}}
+			{{/sh_highlight}}
+		{{/famous}}
+
+	{{/famous}}
+</template>

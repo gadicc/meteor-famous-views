@@ -10,22 +10,21 @@
 
 .navbar-fixed-top { z-index: 100; }
 
-#ball {
-	width: 100px; height: 100px; background: #aaf; border-radius: 50%;
-}
-
-.red {
+.red-bg {
 	background: red;
 }
 
-.yellow {
+.yellow-bg {
 	background: yellow;
 }
 
-.green {
+.green-bg {
 	background: green;
 }
 
+.blue-bg {
+	background: blue;
+}
 
 .margin10 {
 	margin: 0 10px 0 10px;

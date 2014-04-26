@@ -17,27 +17,35 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 			<div class="listItem">{{name}}</div>
 		{{/famousEach}}
 
-		{{>famous template='Scrollview_source' size="undefined,280"}}
+		{{>famous template='Scrollview_source' size="undefined,410"}}
 	{{/famous}}		
 </template>
 
 <template name="Scrollview_source">
 	<div class="code">
-	{{#sh_highlight lang="html"}}
-		{{dstache}}#famous view='Scrollview' size="undefined,undefined" items=items}}
+		{{#sh_highlight lang="html"}}
+			{{dstache}}#famous view='Scrollview' size="undefined,undefined" items=items}}
 
-			{{dstache}}famous view='Surface' size="undefined,50"}}
-				Surface above the list (source code at bottom)
+				{{dstache}}famous view='Surface' size="undefined,50"}}
+					Surface above the list (source code at bottom)
+				{{dstache}}/famous}}
+
+				{{dstache}}#famousEach data=../items size="undefined,100"}}
+					<div class="listItem">{{name}}</div>
+				{{dstache}}/famousEach}}
+
+				{{dstache}}>famous template='Scrollview_source'}}
+
 			{{dstache}}/famous}}
+		{{/sh_highlight}}
+	</div>
 
-			{{dstache}}#famousEach data=../items size="undefined,100"}}
-				<div class="listItem">{{name}}</div>
-			{{dstache}}/famousEach}}
-
-			{{dstache}}>famous template='Scrollview_source'}}
-
-		{{dstache}}/famous}}
-	{{/sh_highlight}}
+	<div class="code" style="margin-top: 10px">
+		{{#sh_highlight lang="js"}}
+			Template.Scrollview.items = Template.list.items = function() {
+			  return Items.find();
+			}
+		{{/sh_highlight}}
 	</div>
 </template>
 

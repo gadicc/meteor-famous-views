@@ -14,9 +14,9 @@
 
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
-	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
-	{{>famous template='yieldMain' size="undefined,undefined" translate="0,50"}}
-	{{! >famous template='yieldCenter' size="500,300" origin="0.5,0.5" translate="0,50"}}
+	{{>famous template='yieldHeader' modifier='inFront' size='[undefined,50]'}}
+	{{>famous template='yieldMain' size="[undefined,undefined]" translate="[0,50]"}}
+	{{! >famous template='yieldCenter' size="[500,300]" origin="[0.5,0.5]" translate="0,50"}}
 </template>
 
 <template name="yieldMain">
@@ -108,51 +108,6 @@
 </template>
 
 <!-- other router pages -->
-
-<template name="eventsDemo">
-	{{#famous size="undefined,50" translate="25,10"}}
-		Catch the ball!
-	{{/famous}}
-	{{>famous template='blockSpring' translate="50,0"}}
-</template>
-
-<template name="layouts">
-	{{#famous view="Scrollview" size="undefined,undefined"}}
-
-		{{#famous size="undefined,120"}}
-			<h1>Stuff</h1>
-
-			<h2>Columns</h2>
-		{{/famous}}
-
-		{{#famous direction="X" size="undefined,100"}}
-			{{#famous size="150,undefined"}}
-				<div class="colDemo" id="col1">col1</div>
-			{{/famous}}
-			{{#famous size="150,undefined"}}
-				<div class="colDemo" id="col2">col2</div>
-			{{/famous}}
-			{{#famous size="150,undefined"}}
-				<div class="colDemo" id="col3">col3</div>
-			{{/famous}}
-		{{/famous}}
-
-		{{#famous size="undefined,50"}}
-			<h2>Centering</h2>
-		{{/famous}}
-
-		{{#famous size="undefined,150"}}
-			{{#famous size="50,50" origin="0.5,0.5" view="Surface"}}
-				<div id="moo" style="width:50px; height:50px; background:#afa"></div>
-			{{/famous}}
-		{{/famous}}
-
-	{{/famous}}
-</template>
-
-<template name="blockSpring">
-	<div id="ball"></div>
-</template>
 
 <template name="blah" type="blah" data-moo="moo2">
 adasd
