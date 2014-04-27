@@ -7,19 +7,23 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="Scrollview">
 	{{#famous view='Scrollview' size="[undefined,undefined]" items=items}}
 
-		{{#famous view='Surface' size="[undefined,80]" class="margin10"}}
+		{{#famous view='Surface' size="[undefined,80]" class="margin10" data=this}}
 			<h3>Scrollview Demo</h3>
-
+			<!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
 			<p>Scroll to bottom to see source</p>
 		{{/famous}}
 
 		{{#famousEach items}}
-			{{#famous data=this size='[undefined,50]' class="listItem"}}{{name}}{{/famous}}
+			{{#famous data=this size='[undefined,50]'}}
+				<div class="listItem">{{name}}</div>
+			{{/famous}}
 		{{/famousEach}}
 
-		{{>famous template='Scrollview_source' size="[undefined,410]"}}
+		{{>famous template='Scrollview_source' size="[undefined,430]"}}
 	{{/famous}}
 </template>
+
+<template name="moo">{{> UI.contentBlock}}</template>
 
 <template name="Scrollview_source">
 	<div class="code">
@@ -30,8 +34,10 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 					Surface above the list (source code at bottom)
 				{{dstache}}/famous}}
 
-				{{dstache}}#famousEach data=../items size="[undefined,100]"}}
-					<div class="listItem">{{name}}</div>
+				{{dstache}}#famousEach items}}
+					{{dstache}}#famous data=this size='[undefined,50]'}}
+						<div class="listItem">{{dstache}}name}}</div>
+					{{dstache}}/famous}}
 				{{dstache}}/famousEach}}
 
 				{{dstache}}>famous template='Scrollview_source'}}

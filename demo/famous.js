@@ -17,6 +17,9 @@ if (Meteor.isServer) {
     ], function(item) {
       Items.insert(item);
     });
+
+  var x = Items.findOne({picUrl: 'http://www.telecoms.com/files/2009/11/eclair.jpg'});
+  if (x) Items.update(x._id, { $set: { picUrl: 'http://www.teleread.com/wp-content/uploads/2012/10/Android-Eclair.png' }});
 }
 
 if (Meteor.isClient) {

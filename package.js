@@ -3,14 +3,16 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-	api.use(['underscore', 'ui', 'minimongo'], 'client');
+	api.use(['underscore', 'ui', 'minimongo', 'templating'], 'client');
 	api.use(['pince', 'famono'], 'client');
 
   api.add_files(
   	[
   		'lib/famous-components.js',
+      'lib/famous.html',
       'lib/famous.js',
       'lib/famousEach.js',
+      'lib/famousEachSurface.js',
       'lib/modifiers.js'
   	],
   	'client'

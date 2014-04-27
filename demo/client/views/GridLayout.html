@@ -23,17 +23,22 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 </template>
 
 <template name="GridLayout">
-	{{#famous view='Scrollview' size="[undefined,undefined]"}}
+	{{#famous view='Scrollview' size="[undefined,undefined]" items=items}}
 
 		{{! size, cellSize, etc all seem to be ignored by famous?? }}
 		{{#famous view="GridLayout" items=items size="[undefined,undefined]"
 				dimensions="[3,3]" translate="[0,-50]"}}
 
-			{{#famous view="View" size="[undefined,undefined]"}}
+			{{#famous view="ContainerSurface" size="[undefined,undefined]"}}
 				{{#famous data=this view="Surface"
 						size="[undefined,undefined]"}}
-						<br><br><br>
-						Scroll down for source.
+					<div style="margin-top: 50px; padding: 20px">
+						Demo of a <code>[3,3]</code> GridLayout (try resize
+						the window).
+						Any <code>{{dstache}}#famous}}</code> node can be placed
+						in a GridLayout, including data from <code>famousEach</code>.
+						Scroll down to see the source.
+					</div>
 				{{/famous}}
 				{{#famous data=this view='Surface' class='gridLabel gridLabelHeading'
 						size="[undefined,38]" origin="[0,1]"}}
@@ -42,10 +47,13 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 			{{/famous}}
 
 			{{#famousEach items}}
-				{{>famous data=this template='gridItem' view='View'
+				{{>famous data=this template='gridItem' view='ContainerSurface'
 					size='[undefined,undefined]'}}
 			{{/famousEach}}
-		{{/famous}}
+
+		{{/famous}}{{! GridLayout }}
+
+		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,650]'}}
 
 	{{/famous}}
 </template>
@@ -56,7 +64,52 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 		<img src="{{picUrl}}" />
 	{{/famous}}
 	{{#famous data=this view='Surface' class='gridLabel'
-			size="[undefined,38]" origin="[0,1]"}}
+			size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
 		{{name}}
 	{{/famous}}
+</template>
+
+<template name="gridLayoutSource">
+	{{#sh_highlight lang="html"}}
+		&lt;template name="GridLayout">
+			{{dstache}}#famous view="ContainerSurface" size="[undefined,undefined]"}}
+				{{dstache}}#famousEach items}}
+					{{dstache}}>famous data=this template='gridItem' view='View'
+						size='[undefined,undefined]'}}
+				{{dstache}}/famousEach}}
+			{{dstache}}/famous}}
+		&lt;/template>
+
+		&lt;template name="gridItem">
+			{{dstache}}#famous data=this view='Surface' class='gridImg'
+					size='[undefined,undefined]'}}
+				<img src="{{dstache}}picUrl}}" />
+			{{dstache}}/famous}}
+			{{dstache}}#famous data=this view='Surface' class='gridLabel'
+					size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
+				{{dstache}}name}}
+			{{dstache}}/famous}}
+		&lt;/template>				
+	{{/sh_highlight}}
+
+	{{#sh_highlight lang="js"}}
+		var queue = [];
+		Template.gridItem.rendered = function() {
+			var modifier = famousCmp.dataFromTemplate(this).modifier;
+
+			modifier.setTransform(Transform.translate(500,500));
+
+			queue.push(function() {
+				modifier.setTransform(
+					Transform.translate(0,0),
+					{ duration : 1000, curve: 'easeInOut' }
+			  );
+			});
+		}
+
+		Meteor.setInterval(function() {
+			if (queue.length)
+				queue.shift()();
+		}, 100);
+	{{/sh_highlight}}
 </template>

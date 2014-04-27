@@ -12,6 +12,12 @@ sequence.
    {{/famousEach}}
    ```
 
+  Unforuntately fine-grained reactivity isn't working with the new method.
+  If data changes, currently the template is rerendered.  This can be fixed
+  once [Meteor issue #2010](https://github.com/meteor/meteor/issues/2010) is
+  closed.  Consequentally, the old ``#famousEach`` behaviour is still
+  available (for now) as ``#famousEachSurface``.
+
 * Log via pince.  Default level debug (for now).  Put
   `Logger.setLevel("famous-components", "info");` in your app to change.
 * Force surfaces' enclosing `<div>` to have `style="width:100%;height:100%"`

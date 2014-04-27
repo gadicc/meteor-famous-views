@@ -8,5 +8,9 @@ Router.map(function() {
 
 Template.Scrollview.items = Template.list.items = function() {
   //return [{_id:1, name:'A'}, {_id:2, name:'B'}, {_id:1, name:'C'}, {_id:2, name:'D'}];
-  return Items.find();
+  //return Items.find();
+  return Items.find({}, { sort: { name: 1 }});
 }
+
+Template.moo.created = function() { console.log('created'); }
+Template.moo.destroyed = function() { console.log('destroyed'); }
