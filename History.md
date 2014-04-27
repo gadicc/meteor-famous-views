@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.0.7
+
 * Big breaking change for ``#famousEach``.  It's now a lot more like Meteor's
 `#each`, and also no longer creates surfaces for you, instead you should use
 `{{#famous}}` inside a famousEach block.  This may seem like a little more
