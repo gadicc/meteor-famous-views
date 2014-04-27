@@ -1,5 +1,17 @@
 ## vNEXT
 
+* Big breaking change for ``#famousEach``.  It's now a lot more like Meteor's
+`#each`, and also no longer creates surfaces for you, instead you should use
+`{{#famous}}` inside a famousEach block.  This may seem like a little more
+work, but gives you a lot more flexibility for what you can put inside a
+sequence.
+
+   ```
+   {{#famousEach items}}
+     {{>famous data=this template='listItem' view='SomethingCool'}}
+   {{/famousEach}}
+   ```
+
 * Log via pince.  Default level debug (for now).  Put
   `Logger.setLevel("famous-components", "info");` in your app to change.
 * Force surfaces' enclosing `<div>` to have `style="width:100%;height:100%"`

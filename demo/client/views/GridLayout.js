@@ -9,5 +9,5 @@ Router.map(function() {
 famousCmp.views.GridLayout = require('famous/views/GridLayout');
 
 Template.GridLayout.items = function() {
-  return Items.find();
+  return Items.find({}, {sort: {name: 1}});
 }

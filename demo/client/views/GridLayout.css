@@ -21,3 +21,18 @@
 	font-size: 1.1em;
 }
 
+.gridImg img {
+	width: 100%;
+}
+.gridLabel {
+	padding: 7px;
+	color: white;
+	background: rgba(0,0,0,0.6);
+	text-align: center;
+	font-size: 1.1em;
+	text-shadow: 1px 1px 5px black;
+}
+.gridLabelHeading {
+	font-weight: bold;
+	color: #ffffaa;
+}

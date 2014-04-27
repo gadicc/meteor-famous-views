@@ -13,12 +13,12 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 			<p>Scroll to bottom to see source</p>
 		{{/famous}}
 
-		{{#famousEach data=../items size="[undefined,50]"}}
-			<div class="listItem">{{name}}</div>
+		{{#famousEach items}}
+			{{#famous data=this size='[undefined,50]' class="listItem"}}{{name}}{{/famous}}
 		{{/famousEach}}
 
 		{{>famous template='Scrollview_source' size="[undefined,410]"}}
-	{{/famous}}		
+	{{/famous}}
 </template>
 
 <template name="Scrollview_source">

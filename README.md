@@ -7,7 +7,7 @@ Famous-components is an attempt at a tight integration between Blaze and Famous.
 ***Early*** demo available in the source and live at
 [famous-components.meteor.com](https://famous-components.meteor.com/).  The
 package is more interesting than the demo, but the demo includes some
-example code.
+example code.  **PLEASE FOLLOW [History.md](History.md) IN THESE EARLY DAYS**.
 
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
@@ -56,9 +56,9 @@ $ meteor
 
 ## Template API
 
-In general, there are new two components.  `famous` and `famousEach`.  Both may
-be used as either a block helper `{{#famous}}content{{/famous}}` or an inclusion
-function `{{>famous template='name'}}`.
+Inline: `{{#famous}}content{{/content}}`
+
+Inclusion: `{{>famous template='name'}}`
 
 Every time you call `{{famous}}`, you're creating a new Famous node, which can
 be manipulated independantly.  By default, it creates a new SequentialView,
@@ -67,6 +67,14 @@ for child or inline templates.  You could also pass `view='Scrollview'`,
 `view='View'` or `view='Surface'`.  The latter is useful when you know the
 template won't contain any children, or especially if it might be temporarily
 empty due to reactivity.
+
+```
+{{#famousEach items}}
+  {{#famous}}
+    {{name}}
+  {{/famous}}
+{{/famousEach}}
+```
 
 TL;DR; -- skip to examples below.
 
@@ -96,6 +104,13 @@ a template with `translate="[100,100]"`, that has a child template with
 
 <b>Template Attributes</b>:
 
+`data` is a special attribute name.  It specifies the data context for
+rendered children.  Basically, you'll need this if you specify any other
+attributes.  e.g. `{{#famous}}` gets the same data context as
+`{{#famous data=this attr1='one'}}`.  Without `data`, the data context
+would be just `{ attr1: 'one' }` without any parent data.  Particularly
+useful inside a `{{#famousEach}}`.
+
 Any attributes passed to the template will be passed through to the surface,
 modifier, view, etc.  Using a template helper, you can pass actual JavaScript
 objects.  Alternatively, you can specify e.g. `{{famous attribute="value"}}`.
@@ -119,7 +134,7 @@ these things as seperate surfaces, but just demonstrating what's possible.
 ```html
 <!-- Template.famousInit is auto added to body/mainCtx when helpers are ready -->
 <template name="famousInit">
-	{{>famous template='test'}}
+  {{>famous template='test'}}
 </template>
 
 <!-- "inclusion", inline, ifBlocks -->
@@ -127,13 +142,13 @@ these things as seperate surfaces, but just demonstrating what's possible.
   {{>famous template='welcome'}}
 
   {{#famous}}
-  	<p>hello there</p>
+    <p>hello there</p>
   {{/famous}}
 
   {{#if loggedIn}}
-  	{{>famous template='userBar'}}
+    {{>famous template='userBar'}}
   {{else}}
-  	{{>famous template='pleaseLogIn'}}
+    {{>famous template='pleaseLogIn'}}
   {{/if}}
 </template>
 ```
@@ -142,18 +157,20 @@ Here's an example of creating a Scrollview:
 
 ```html
 <template name="famousInit">
-	{{>famous template='list' view="Scrollview"}}
+  {{>famous template='list' view="Scrollview"}}
 </template>
 
 <!-- will be loaded as a Scrollview -->
 <template name="list" view="Scrollview (TODO, requires PR)">
   {{! the below is reactive, of course; maps to a sequenceFrom }}
-	{{>famousEach data=items template='listItem' size='undefined,100'}}
+  {{#famousEach items}}
+    {{>famous data=this template='listItem' size='undefined,100'}}
+  {{/famousEach}}
 </template>
 
 <!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
 <template name="listItem" size="undefined,100 (TODO, requires PR)">
-	<div>{{name}}</div>
+  <div>{{name}}</div>
 </template>
 
 Template.list.items = function() { return Items.find() };
@@ -163,11 +180,13 @@ We could also declare everything inline:
 
 ```html
 <template name="famousInit">
-	{{#famous view='Scrollview' size="undefined,undefined" items=items}}
-		{{#famousEach data=../items size="undefined,100"}}
-			<div class="listItem">{{name}}</div>
-		{{/famousEach}}
-	{{/famous}}
+  {{#famous view='Scrollview' size="undefined,undefined" items=items}}
+    {{#famousEach items}}
+      {{#famous}}
+        <div class="listItem">{{name}}</div>
+      {{/famous}}
+    {{/famousEach}}
+  {{/famous}}
 </template>
 
 Template.famousInit.items = function() { return Items.find() };
@@ -226,16 +245,16 @@ Typical iron-router layout:
 ```html
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
-	{{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
-	{{>famous template='yieldMain' size="undefined,undefined" translate="0,50"}}
+  {{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
+  {{>famous template='yieldMain' size="undefined,undefined" translate="0,50"}}
 </template>
 
 <template name="yieldMain">
-	<div id="main" class="container" role="main">{{> yield}}</div>
+  <div id="main" class="container" role="main">{{> yield}}</div>
 </template>
 
 <template name="yieldHeader">
-	<div id="header">{{> yield region="header"}}</div>
+  <div id="header">{{> yield region="header"}}</div>
 </template>
 ```
 
@@ -245,9 +264,9 @@ Mixing of sequences (coming soon):
 
 ```html
 <template name="list" view="Scrollview (TODO, requires PR)">
-	{{>famous template="surface"}}
-	{{>famousEach data=items template='listItem' size='undefined,100'}}
-	{{>famous template="surface"}}
+  {{>famous template="surface"}}
+  {{>famousEach data=items template='listItem' size='undefined,100'}}
+  {{>famous template="surface"}}
 </template>
 ```
 

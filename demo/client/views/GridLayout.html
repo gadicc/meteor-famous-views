@@ -4,7 +4,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 
 -->
 
-<template name="GridLayout">
+<template name="_GridLayout">
 	{{#famous view='Scrollview' size="[undefined,undefined]"}}
 
 		{{! size, cellSize, etc all seem to be ignored by famous?? }}
@@ -20,5 +20,43 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 		{{/famous}}
 
 	{{/famous}}
+</template>
 
+<template name="GridLayout">
+	{{#famous view='Scrollview' size="[undefined,undefined]"}}
+
+		{{! size, cellSize, etc all seem to be ignored by famous?? }}
+		{{#famous view="GridLayout" items=items size="[undefined,undefined]"
+				dimensions="[3,3]" translate="[0,-50]"}}
+
+			{{#famous view="View" size="[undefined,undefined]"}}
+				{{#famous data=this view="Surface"
+						size="[undefined,undefined]"}}
+						<br><br><br>
+						Scroll down for source.
+				{{/famous}}
+				{{#famous data=this view='Surface' class='gridLabel gridLabelHeading'
+						size="[undefined,38]" origin="[0,1]"}}
+					GridLayout Example
+				{{/famous}}
+			{{/famous}}
+
+			{{#famousEach items}}
+				{{>famous data=this template='gridItem' view='View'
+					size='[undefined,undefined]'}}
+			{{/famousEach}}
+		{{/famous}}
+
+	{{/famous}}
+</template>
+
+<template name="gridItem">
+	{{#famous data=this view='Surface' class='gridImg'
+			size='[undefined,undefined]'}}
+		<img src="{{picUrl}}" />
+	{{/famous}}
+	{{#famous data=this view='Surface' class='gridLabel'
+			size="[undefined,38]" origin="[0,1]"}}
+		{{name}}
+	{{/famous}}
 </template>
