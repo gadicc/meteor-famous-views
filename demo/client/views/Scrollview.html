@@ -14,8 +14,8 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 		{{/famous}}
 
 		{{#famousEach items}}
-			{{#famous data=this size='[undefined,50]'}}
-				<div class="listItem">{{name}}</div>
+			{{#famous size='[undefined,50]'}}
+				<div class="listItem">{{../../name}}</div>
 			{{/famous}}
 		{{/famousEach}}
 
@@ -35,8 +35,8 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 				{{dstache}}/famous}}
 
 				{{dstache}}#famousEach items}}
-					{{dstache}}#famous data=this size='[undefined,50]'}}
-						<div class="listItem">{{dstache}}name}}</div>
+					{{dstache}}#famous size='[undefined,50]'}}
+						<div class="listItem">{{dstache}}../../name}}</div>
 					{{dstache}}/famous}}
 				{{dstache}}/famousEach}}
 

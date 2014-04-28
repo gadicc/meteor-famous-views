@@ -1,5 +1,9 @@
 ## vNEXT
 
+* Removing passing of entire data context with `data=this` and instead
+referencing elements directly like `../../name` resulted in more
+fine-grained reactivity (changes just in HTML)
+
 ## v0.0.7
 
 * Big breaking change for ``#famousEach``.  It's now a lot more like Meteor's
@@ -18,7 +22,9 @@ sequence.
   If data changes, currently the template is rerendered.  This can be fixed
   once [Meteor issue #2010](https://github.com/meteor/meteor/issues/2010) is
   closed.  Consequentally, the old ``#famousEach`` behaviour is still
-  available (for now) as ``#famousEachSurface``.
+  available (for now) as ``#famousEachSurface``.  *(Fixed in v0.0.8; just
+  be careful with which reactive data you pass in the templates (in .html
+  files).*
 
 * Log via pince.  Default level debug (for now).  Put
   `Logger.setLevel("famous-components", "info");` in your app to change.

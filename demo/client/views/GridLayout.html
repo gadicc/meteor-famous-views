@@ -30,8 +30,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 				dimensions="[3,3]" translate="[0,-50]"}}
 
 			{{#famous view="ContainerSurface" size="[undefined,undefined]"}}
-				{{#famous data=this view="Surface"
-						size="[undefined,undefined]"}}
+				{{#famous view="Surface" size="[undefined,undefined]"}}
 					<div style="margin-top: 50px; padding: 20px">
 						Demo of a <code>[3,3]</code> GridLayout (try resize
 						the window).
@@ -40,14 +39,14 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 						Scroll down to see the source.
 					</div>
 				{{/famous}}
-				{{#famous data=this view='Surface' class='gridLabel gridLabelHeading'
+				{{#famous view='Surface' class='gridLabel gridLabelHeading'
 						size="[undefined,38]" origin="[0,1]"}}
 					GridLayout Example
 				{{/famous}}
 			{{/famous}}
 
 			{{#famousEach items}}
-				{{>famous data=this template='gridItem' view='ContainerSurface'
+				{{>famous template='gridItem' view='ContainerSurface'
 					size='[undefined,undefined]'}}
 			{{/famousEach}}
 
@@ -59,13 +58,12 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 </template>
 
 <template name="gridItem">
-	{{#famous data=this view='Surface' class='gridImg'
-			size='[undefined,undefined]'}}
-		<img src="{{picUrl}}" />
+	{{#famous view='Surface' class='gridImg' size='[undefined,undefined]'}}
+		<img src="{{../../../picUrl}}" />
 	{{/famous}}
-	{{#famous data=this view='Surface' class='gridLabel'
+	{{#famous view='Surface' class='gridLabel'
 			size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
-		{{name}}
+		{{../../../name}}
 	{{/famous}}
 </template>
 
@@ -75,20 +73,20 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 			{{dstache}}#famous view="GridLayout" items=items size="[undefined,undefined]"
 					dimensions="[3,3]"}}
 				{{dstache}}#famousEach items}}
-					{{dstache}}>famous data=this template='gridItem' view='View'
+					{{dstache}}>famous template='gridItem' view='View'
 						size='[undefined,undefined]'}}
 				{{dstache}}/famousEach}}
 			{{dstache}}/famous}}
 		&lt;/template>
 
 		&lt;template name="gridItem">
-			{{dstache}}#famous data=this view='Surface' class='gridImg'
+			{{dstache}}#famous view='Surface' class='gridImg'
 					size='[undefined,undefined]'}}
-				<img src="{{dstache}}picUrl}}" />
+				<img src="{{dstache}}../../../picUrl}}" />
 			{{dstache}}/famous}}
-			{{dstache}}#famous data=this view='Surface' class='gridLabel'
+			{{dstache}}#famous view='Surface' class='gridLabel'
 					size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
-				{{dstache}}name}}
+				{{dstache}}../../../name}}
 			{{dstache}}/famous}}
 		&lt;/template>				
 	{{/sh_highlight}}
