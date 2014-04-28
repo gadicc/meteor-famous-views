@@ -7,7 +7,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="Scrollview">
 	{{#famous view='Scrollview' size="[undefined,undefined]" items=items}}
 
-		{{#famous view='Surface' size="[undefined,80]" class="margin10" data=this}}
+		{{#famous view='Surface' size="[undefined,80]" class="margin10" items=items}}
 			<h3>Scrollview Demo</h3>
 			<!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
 			<p>Scroll to bottom to see source</p>
@@ -49,7 +49,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 	<div class="code" style="margin-top: 10px">
 		{{#sh_highlight lang="js"}}
 			Template.Scrollview.items = function() {
-			  return Items.find();
+			  return Items.find({}, {sort: {name: 1}});
 			}
 		{{/sh_highlight}}
 	</div>

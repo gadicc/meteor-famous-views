@@ -53,7 +53,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 
 		{{/famous}}{{! GridLayout }}
 
-		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,650]'}}
+		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,700]'}}
 
 	{{/famous}}
 </template>
@@ -72,7 +72,8 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 <template name="gridLayoutSource">
 	{{#sh_highlight lang="html"}}
 		&lt;template name="GridLayout">
-			{{dstache}}#famous view="ContainerSurface" size="[undefined,undefined]"}}
+			{{dstache}}#famous view="GridLayout" items=items size="[undefined,undefined]"
+					dimensions="[3,3]"}}
 				{{dstache}}#famousEach items}}
 					{{dstache}}>famous data=this template='gridItem' view='View'
 						size='[undefined,undefined]'}}
@@ -93,6 +94,11 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 	{{/sh_highlight}}
 
 	{{#sh_highlight lang="js"}}
+		Template.GridLayout.items = function() {
+		  return Items.find({}, {sort: {name: 1}});
+		}
+
+		/* Entrance animation code follows */
 		var queue = [];
 		Template.gridItem.rendered = function() {
 			var modifier = famousCmp.dataFromTemplate(this).modifier;
