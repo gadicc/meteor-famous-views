@@ -93,7 +93,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 
 	{{#sh_highlight lang="js"}}
 		Template.GridLayout.items = function() {
-		  return Items.find({}, {sort: {name: 1}});
+		  return Items.find({}, {sort: {name: 1}, limit: 8});
 		}
 
 		/* Entrance animation code follows */

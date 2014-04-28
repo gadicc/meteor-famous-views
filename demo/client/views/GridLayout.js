@@ -13,7 +13,7 @@ Meteor.startup(function() {
 });
 
 Template.GridLayout.items = function() {
-  return Items.find({}, {sort: {name: 1}});
+  return Items.find({}, {sort: {name: 1}, limit: 8});
 }
 
 var queue = [];
