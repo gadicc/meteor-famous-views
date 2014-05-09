@@ -1,0 +1,26 @@
+<template name="issue11">
+  {{#famous direction='X' items=items}}
+	  {{> i11_Scrollview}}
+	  {{> i11_Scrollview2}}
+  {{/famous}}
+</template>
+
+<template name="i11_Scrollview">
+  {{#famous view='Scrollview' size="[200,200]" items=items}}
+
+    {{#famousEach items}}
+     {{>famous data=this template='listItem' size=[undefined, 200]}}
+    {{/famousEach}}
+
+  {{/famous}}
+</template>
+
+<template name="i11_Scrollview2">
+  {{#famous view='Scrollview' size="[200,200]" items=items}}
+
+    {{#famousEach items}}
+     {{>famous data=this template='listItem' size=[undefined, 200]}}
+    {{/famousEach}}
+
+  {{/famous}}
+</template>

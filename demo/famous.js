@@ -71,10 +71,12 @@ if (Meteor.isClient) {
     Transitionable.registerMethod('spring', SpringTransition);
   });
 
-  Template.header.menu = function() {
+  Template.header.menu = function(issues) {
     var out = [];
-    for (cat in Menu.list)
+    for (cat in Menu.list) {
+      if (!issues && cat != 'Issues' || issues && cat == 'Issues')
       out.push({ cat: cat, items: Menu.list[cat] });
+    }
     return out;
   };
 
