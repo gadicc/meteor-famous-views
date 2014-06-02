@@ -1,5 +1,5 @@
 <template name="layouts">
-	{{#famous view="Scrollview" size="undefined,undefined"}}
+	{{#Scrollview size="[undefined,undefined]"}}
 
 		{{#famous size="[undefined,60]" view='Surface'}}
 			<h1>Layout Examples</h1>
@@ -11,19 +11,19 @@
 			horizontally.</p>
 		{{/famous}}
 
-		{{#famous direction="X" size="[undefined,100]"}}
-			{{#famous size="[150,undefined]" class="red-bg"}}#1{{/famous}}
-			{{#famous size="[150,undefined]" class="green-bg"}}#2{{/famous}}
-			{{#famous size="[150,undefined]" class="blue-bg"}}#3{{/famous}}
-		{{/famous}}
+		{{#SequentialLayout direction="X" size="[undefined,110]"}}
+			{{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
+			{{#Surface size="[150,100]" class="green-bg"}}#2{{/Surface}}
+			{{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
+		{{/SequentialLayout}}
 
-		{{#famous size="[undefined,100]"}}
+		{{#famous size="[undefined,110]"}}
 			{{#sh_highlight lang="html"}}
-				{{dstache}}#famous direction="X" size="[undefined,100]"}}
-					{{dstache}}#famous size="[150,undefined]" class="red-bg"}}#1{{dstache}}/famous}}
-					{{dstache}}#famous size="[150,undefined]" class="green-bg"}}#2{{dstache}}/famous}}
-					{{dstache}}#famous size="[150,undefined]" class="blue-bg"}}#3{{dstache}}/famous}}
-				{{dstache}}/famous}}
+				{{dstache}}#SequentialLayout direction="X" size="[undefined,160]"}}
+					{{dstache}}#Surface size="[150,100]" class="red-bg"}}#1{{dstache}}/Surface}}
+					{{dstache}}#Surface size="[150,100]" class="green-bg"}}#2{{dstache}}/Surface}}
+					{{dstache}}#Surface size="[150,100]" class="blue-bg"}}#3{{dstache}}/Surface}}
+				{{dstache}}/SequentialLayout}}
 			{{/sh_highlight}}
 		{{/famous}}
 
@@ -34,19 +34,19 @@
 			for columns that fill the container (try resize the window)</p>
 		{{/famous}}
 
-		{{#famous view="GridLayout" dimensions="[3,1]" size="undefined,100"}}
-			{{#famous size="[undefined,undefined]" class="red-bg"}}col1{{/famous}}
-			{{#famous size="[undefined,undefined]" class="green-bg"}}col2{{/famous}}
-			{{#famous size="[undefined,undefined]" class="blue-bg"}}col3{{/famous}}
-		{{/famous}}
+		{{#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
+			{{#Surface size="[undefined,100]" class="red-bg"}}col1{{/Surface}}
+			{{#Surface size="[undefined,100]" class="green-bg"}}col2{{/Surface}}
+			{{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
+		{{/GridLayout}}
 
 		{{#famous size="[undefined,100]"}}
 			{{#sh_highlight lang="html"}}
-				{{dstache}}#famous view="GridLayout" dimensions="[3,1]" size="undefined,100"}}
-					{{dstache}}#famous size="[undefined,undefined]" class="red-bg"}}col1{{dstache}}/famous}}
-					{{dstache}}#famous size="[undefined,undefined]" class="green-bg"}}col2{{dstache}}/famous}}
-					{{dstache}}#famous size="[undefined,undefined]" class="blue-bg"}}col3{{dstache}}/famous}}
-				{{dstache}}/famous}}
+				{{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
+					{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}col1{{dstache}}/Surface}}
+					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}col2{{dstache}}/Surface}}
+					{{dstache}}#Surface size="[undefined,undefined]" class="blue-bg"}}col3{{dstache}}/Surface}}
+				{{dstache}}/GridLayout}}
 			{{/sh_highlight}}
 		{{/famous}}
 
@@ -57,29 +57,30 @@
 				<i>origin</i>, <i>size</i> and <i>translate</i>.</p>
 		{{/famous}}
 
-		{{#famous size="[undefined,160]" view='View'}}
-			{{#famous size="[undefined,undefined]" view="Surface" class="green-bg"}}
+		{{#View size="[undefined,160]"}}
+			{{#Surface size="[undefined,undefined]" class="green-bg"}}
 				background
-			{{/famous}}
+			{{/Surface}}
 
-			{{#famous size="[75,75]" origin="[0.5,0.5]" translate='[0,0,1]' view="Surface" class="red-bg"}}
+			{{#Surface size="[75,75]" origin="[0.5,0.5]" translate='[0,0,1]'
+				class="red-bg"}}
 				block
-			{{/famous}}
-		{{/famous}}
+			{{/Surface}}
+		{{/View}}
 
 		{{#famous size="[undefined,200]"}}
 			{{#sh_highlight lang="html"}}
-				{{dstache}}#famous size="[undefined,160]" view='View'}}
-					{{dstache}}#famous size="[undefined,undefined]" view="Surface" class="green-bg"}}
+				{{dstache}}#View size="[undefined,160]"}}
+					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}
 						background
-					{{dstache}}/famous}}
+					{{dstache}}/Surface}}
 
-					{{dstache}}#famous size="[50,50]" origin="[0.5,0.5]" translate='[0,0,1]' view="Surface" class='red-bg'}}
+					{{dstache}}#Surface size="[50,50]" origin="[0.5,0.5]" translate='[0,0,1]' class='red-bg'}}
 						block
-					{{dstache}}/famous}}
-				{{dstache}}/famous}}
+					{{dstache}}/Surface}}
+				{{dstache}}/View}}
 			{{/sh_highlight}}
 		{{/famous}}
 
-	{{/famous}}
+	{{/Scrollview}}
 </template>

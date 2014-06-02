@@ -1,5 +1,5 @@
 <head>
-  <title>famous</title>
+  <title>MeteorFamousComponents</title>
 </head>
 
 <body>
@@ -14,13 +14,17 @@
 
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
-  {{>famous template='yieldHeader' translate="[0,0,2]" size='[undefined,50]'}}
-  {{>famous template='yieldMain' size="[undefined,undefined]" translate="[0,50]"}}
+  {{#View size='[undefined,undefined]'}}
+    {{>Surface template='yieldHeader'
+      size="[undefined,50]" translate="[0,0,100]"}}
+    {{>View template='yieldMain'
+      size="[undefined,undefined]" translate="[0,50]"}}
+  {{/View}}
   {{! >famous template='yieldCenter' size="[500,300]" origin="[0.5,0.5]" translate="0,50"}}
 </template>
 
 <template name="yieldMain">
-	<div id="main" class="container" role="main">{{> yield}}</div>
+	{{> yield}}
 </template>
 
 <template name="yieldHeader">
@@ -82,12 +86,16 @@
 </template>
 
 <template name="home">
-	<h1>Famous Component Demo</h1>
-	<p>Not much here yet, I'll be working on this next.</p>
-	<p>For the scrollview, try manipulating the <code>Items</code>
-	collection, e.g. <code>Items.update(Items.findOne({name:'Apple'})._id, {$set: {name:'Capple'}});</code>
-	in the console.  If you're on a desktop, use the mouse scrollwheel
-	to simulate 'flicks'.  Scroll up to see the bounce.</p>
+  {{#Surface}}
+    <div id="main" class="container" role="main">
+    	<h1>Famous Component Demo</h1>
+    	<p>Not much here yet, I'll be working on this next.</p>
+    	<p>For the scrollview, try manipulating the <code>Items</code>
+    	collection, e.g. <code>Items.update(Items.findOne({name:'Apple'})._id, {$set: {name:'Capple'}});</code>
+    	in the console.  If you're on a desktop, use the mouse scrollwheel
+    	to simulate 'flicks'.  Scroll up to see the bounce.</p>
+    </div>
+  {{/Surface}}
 </template>
 
 <template name="test">

@@ -13,8 +13,8 @@
     "packages": {
       "famono": {
         "git": "https://github.com/raix/Meteor-famono.git",
-        "tag": "v0.1.4",
-        "commit": "64cb8c779c907facde604d35ecca51963fc13007"
+        "tag": "v0.2.2",
+        "commit": "33439a1a1ba001772a2d2b26db1825875ba64f90"
       },
       "famous-components": {
         "path": ".."

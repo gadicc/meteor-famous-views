@@ -1,8 +1,24 @@
 ## vNEXT
 
+## v0.0.8
+
+See also [Progress Update](https://github.com/gadicc/meteor-famous-components/issues/16).
+
 * Removing passing of entire data context with `data=this` and instead
 referencing elements directly like `../../name` resulted in more
-fine-grained reactivity (changes just in HTML)
+fine-grained reactivity (changes just in HTML).  Need to look at this
+more.  XXX RECHECK FAMOUS VS FAMOUSEACH
+
+* Views should now be registered like
+`famousCmp.registerView('Scrollview', require('famous/views/Scrollview'));`.
+This makes the view available in JS via `famousCmp.views.Scrollview` and
+in templates via `{{#famous view='Scrollview'}}` and since this release,
+just `{{#Scrollview}}`.  Note how all the examples in the demo look a lot
+cleaner/clearer now.  (fixes #9)
+
+* Adjustments to demo layoutTemplate which makes more sense, with clearer
+comments in the HTML.  Also fixed some sizing issues related to Famous
+upgrades past v0.1.1. (fixes #12).
 
 ## v0.0.7
 

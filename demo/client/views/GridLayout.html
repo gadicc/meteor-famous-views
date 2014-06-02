@@ -1,36 +1,16 @@
 <!--
-
 https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
-
 -->
 
-<template name="_GridLayout">
-	{{#famous view='Scrollview' size="[undefined,undefined]"}}
+<template name="views_GridLayout">
+	{{#Scrollview size="[undefined,undefined]" items=items}}
 
 		{{! size, cellSize, etc all seem to be ignored by famous?? }}
-		{{#famous view='GridLayout' items=items size="[undefined,undefined]"
-				dimensions="[3,3]" translate="[0,-50]"}}
-			{{#famousEach data=../items}}
-				<!-- ideally these should also be separate surfaces, TODO -->
-				<div class="GridLayout">
-					<img src="{{picUrl}}" />
-					<div>{{name}}</div>
-				</div>
-			{{/famousEach}}
-		{{/famous}}
-
-	{{/famous}}
-</template>
-
-<template name="GridLayout">
-	{{#famous view='Scrollview' size="[undefined,undefined]" items=items}}
-
-		{{! size, cellSize, etc all seem to be ignored by famous?? }}
-		{{#famous view="GridLayout" items=items size="[undefined,undefined]"
+		{{#GridLayout items=items size="[undefined,undefined]"
 				dimensions="[3,3]" translate="[0,-50]"}}
 
-			{{#famous view="ContainerSurface" size="[undefined,undefined]"}}
-				{{#famous view="Surface" size="[undefined,undefined]"}}
+			{{#ContainerSurface size="[undefined,undefined]"}}
+				{{#Surface size="[undefined,undefined]"}}
 					<div style="margin-top: 50px; padding: 20px">
 						Demo of a <code>[3,3]</code> GridLayout (try resize
 						the window).
@@ -38,56 +18,53 @@ https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 						in a GridLayout, including data from <code>famousEach</code>.
 						Scroll down to see the source.
 					</div>
-				{{/famous}}
-				{{#famous view='Surface' class='gridLabel gridLabelHeading'
+				{{/Surface}}
+				{{#Surface class='gridLabel gridLabelHeading'
 						size="[undefined,38]" origin="[0,1]"}}
 					GridLayout Example
-				{{/famous}}
-			{{/famous}}
+				{{/Surface}}
+			{{/ContainerSurface}}
 
 			{{#famousEach items}}
-				{{>famous template='gridItem' view='ContainerSurface'
+				{{>ContainerSurface template='gridItem'
 					size='[undefined,undefined]'}}
 			{{/famousEach}}
 
-		{{/famous}}{{! GridLayout }}
+		{{/GridLayout}}
 
 		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,700]'}}
 
-	{{/famous}}
+	{{/Scrollview}}
 </template>
 
 <template name="gridItem">
-	{{#famous view='Surface' class='gridImg' size='[undefined,undefined]'}}
+	{{#Surface class='gridImg' size='[undefined,undefined]'}}
 		<img src="{{../../../picUrl}}" />
-	{{/famous}}
-	{{#famous view='Surface' class='gridLabel'
+	{{/Surface}}
+	{{#Surface class='gridLabel'
 			size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
 		{{../../../name}}
-	{{/famous}}
+	{{/Surface}}
 </template>
 
 <template name="gridLayoutSource">
 	{{#sh_highlight lang="html"}}
 		&lt;template name="GridLayout">
-			{{dstache}}#famous view="GridLayout" items=items size="[undefined,undefined]"
-					dimensions="[3,3]"}}
+			{{dstache}}#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]"}}
 				{{dstache}}#famousEach items}}
-					{{dstache}}>famous template='gridItem' view='View'
-						size='[undefined,undefined]'}}
+					{{dstache}}>View template='gridItem' size='[undefined,undefined]'}}
 				{{dstache}}/famousEach}}
-			{{dstache}}/famous}}
+			{{dstache}}/GridLayout}}
 		&lt;/template>
 
 		&lt;template name="gridItem">
-			{{dstache}}#famous view='Surface' class='gridImg'
-					size='[undefined,undefined]'}}
+			{{dstache}}#Surface class='gridImg' size='[undefined,undefined]'}}
 				<img src="{{dstache}}../../../picUrl}}" />
-			{{dstache}}/famous}}
-			{{dstache}}#famous view='Surface' class='gridLabel'
+			{{dstache}}/Surface}}
+			{{dstache}}#Surface class='gridLabel'
 					size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
 				{{dstache}}../../../name}}
-			{{dstache}}/famous}}
+			{{dstache}}/Surface}}
 		&lt;/template>				
 	{{/sh_highlight}}
 

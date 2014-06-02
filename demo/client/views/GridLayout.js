@@ -3,16 +3,15 @@
 Menu.add('GridLayout', 'Views');
 
 Router.map(function() {
-  this.route('GridLayout');
+  this.route('views_GridLayout', {
+  	path: '/GridLayout'
+  });
 });
 
-famousCmp.views.GridLayout = require('famous/views/GridLayout');
-Meteor.startup(function() {
-	// Depends on document.body
-	famousCmp.views.ContainerSurface = require('famous/surfaces/ContainerSurface');
-});
+famousCmp.registerView('GridLayout', require('famous/views/GridLayout'));
+famousCmp.registerView('ContainerSurface', require('famous/surfaces/ContainerSurface'));
 
-Template.GridLayout.items = function() {
+Template.views_GridLayout.items = function() {
   return Items.find({}, {sort: {name: 1}, limit: 8});
 }
 

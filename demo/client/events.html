@@ -1,16 +1,16 @@
 <template name="eventsDemo">
 	{{#famous view='Scrollview'}}
-		{{#famous size="[undefined,130]" translate="[20,0]"}}
+		{{#Surface size="[undefined,130]" translate="[20,0]"}}
 			<h3>Catch the ball!</h3>
 			<p>Note also the use of <code>{{dstache}}#if}}</code> in the code to render
 			 the appropriate surface reactively.</p>
 			{{> codeButton}}
-		{{/famous}}
+		{{/Surface}}
 
 		{{#if showCode}}
-			{{>famous template='ballCode' size="[undefined,undefined]"}}
+			{{>Surface template='ballCode' size="[undefined,undefined]"}}
 		{{else}}
-			{{>famous template='springBall' translate="[50,20]" view='Surface'}}
+			{{>Surface template='springBall' translate="[50,20]"}}
 		{{/if}}
 	{{/famous}}
 </template>
@@ -26,15 +26,15 @@
 <template name="ballCode">
 	{{#sh_highlight lang="html"}}
 		&lt;template name="eventsDemo">
-			{{dstache}}#famous size="[undefined,120]" translate="[10,10]"}}
+			{{dstache}}#Surface size="[undefined,120]" translate="[10,10]"}}
 				<h3>Catch the ball!</h3>
 				{{dstache}}> codeButton}}
-			{{dstache}}/famous}}
+			{{dstache}}/Surface}}
 
 			{{dstache}}#if showCode}}
-				{{dstache}}>famous template='ballCode' size="[undefined,undefined]"}}
+				{{dstache}}>Surface template='ballCode' size="[undefined,undefined]"}}
 			{{dstache}}else}}
-				{{dstache}}>famous template='springBall' translate="[50,0]" view='Surface'}}
+				{{dstache}}>Surface template='springBall' translate="[50,0]"}}
 			{{dstache}}/if}}
 		&lt;/template>
 	{{/sh_highlight}}

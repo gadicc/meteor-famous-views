@@ -4,23 +4,23 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 
 -->
 
-<template name="Scrollview">
-	{{#famous view='Scrollview' size="[undefined,undefined]" items=items}}
+<template name="views_Scrollview">
+	{{#Scrollview size="[undefined,undefined]" items=items}}
 
-		{{#famous view='Surface' size="[undefined,80]" class="margin10" items=items}}
+		{{#Surface size="[undefined,80]" class="margin10" items=items}}
 			<h3>Scrollview Demo</h3>
 			<!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
 			<p>Scroll to bottom to see source</p>
-		{{/famous}}
+		{{/Surface}}
 
 		{{#famousEach items}}
-			{{#famous size='[undefined,50]'}}
+			{{#Surface size='[undefined,50]'}}
 				<div class="listItem">{{../../name}}</div>
-			{{/famous}}
+			{{/Surface}}
 		{{/famousEach}}
 
-		{{>famous template='Scrollview_source' size="[undefined,430]"}}
-	{{/famous}}
+		{{>Surface template='Scrollview_source' size="[undefined,430]"}}
+	{{/Scrollview}}
 </template>
 
 <template name="moo">{{> UI.contentBlock}}</template>
@@ -28,21 +28,21 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="Scrollview_source">
 	<div class="code">
 		{{#sh_highlight lang="html"}}
-			{{dstache}}#famous view='Scrollview' size="[undefined,undefined]" items=items}}
+			{{dstache}}#Scrollview size="[undefined,undefined]" items=items}}
 
-				{{dstache}}famous view='Surface' size="[undefined,50]"}}
+				{{dstache}}Surface size="[undefined,50]"}}
 					Surface above the list (source code at bottom)
-				{{dstache}}/famous}}
+				{{dstache}}/Surface}}
 
 				{{dstache}}#famousEach items}}
-					{{dstache}}#famous size='[undefined,50]'}}
+					{{dstache}}#Surface size='[undefined,50]'}}
 						<div class="listItem">{{dstache}}../../name}}</div>
-					{{dstache}}/famous}}
+					{{dstache}}/Surface}}
 				{{dstache}}/famousEach}}
 
-				{{dstache}}>famous template='Scrollview_source'}}
+				{{dstache}}>Surface template='Scrollview_source'}}
 
-			{{dstache}}/famous}}
+			{{dstache}}/Scrollview}}
 		{{/sh_highlight}}
 	</div>
 
