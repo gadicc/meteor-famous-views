@@ -6,8 +6,8 @@ Famous-components is an attempt at a tight integration between Blaze and Famous.
 
 ***Early*** demo available in the source and live at
 [famous-components.meteor.com](https://famous-components.meteor.com/).
-The demo includes example code, which **supercedes** the syntax/examples
-given in this README!  **PLEASE FOLLOW [History.md](History.md) IN THESE
+The demo includes example code, ***which supercedes the syntax/examples
+given in this README***!  **PLEASE FOLLOW [History.md](History.md) IN THESE
 EARLY DAYS**.
 
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
