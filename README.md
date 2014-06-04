@@ -15,11 +15,12 @@ Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 ### Features & Basics
 
 * The `{{famous}}` component uses templates to create
-Famous Views and Surfaces, without touching any Javascript.
+Famous Views and Surfaces, without touching any Javascript.  Registered
+Views are aliased as their own block helpers for ease and clarity.
 
-* `{{famousEach}}` helps create a Scrollview using regular Template
-helpers/data like Items.find().  No additional code.  Still 100%
-reactive.
+* `{{famousEach}}` helps creates Sequences (for e.g. Scrollview) using
+regular Template helpers/data like Items.find().  No additional code.
+Still 100% reactive.
 
 * Views, modifiers and modifier options are easily set via component attributes
 
@@ -42,10 +43,6 @@ More cool stuff coming soon.
 
 First run takes a while to download Famous.
 
-See also the [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
-example from sayawan.  Big props for getting an app out using famous-components
-in under 24 hrs! :)
-
 To help with development:
 
 ```bash
@@ -57,80 +54,81 @@ $ meteor
 
 ## Template API
 
+All components may be used either inline or to include another template:
+
 Inline: `{{#famous}}content{{/content}}`
 
 Inclusion: `{{>famous template='name'}}`
 
-Every time you call `{{famous}}`, you're creating a new Famous node, which can
-be manipulated independantly.  By default, it creates a new SequentialView,
-and any HTML will be added to the sequence, as will any included {{famous}} calls
-for child or inline templates.  You could also pass `view='Scrollview'`,
-`view='View'` or `view='Surface'`.  The latter is useful when you know the
-template won't contain any children, or especially if it might be temporarily
-empty due to reactivity.
+Since v0.0.8, each View gets it's own helper, which results in shorter,
+clearer code.  Like this:
 
 ```
-{{#famousEach items}}
-  {{#famous}}
-    {{name}}
-  {{/famous}}
-{{/famousEach}}
+  {{#Scrollview}}
+    {{#famousEach items}}
+      {{>Surface template='item'}}
+    {{/famousEach}}
+  {{/Scrollview}}
 ```
 
-TL;DR; -- skip to examples below.
+Commonly used Views like `SequentialLayout`, `View` and the explicit
+`Surface` are all built in.  Anything else you need should be explicitly
+registered, to avoid unnecessary code being send down to the client:
 
-{{famous}} templates should:
+`famousCmp.registerView('View', require("famous/core/View"));`
 
-1. Consist of *only* HTML (e.g. a Surface), *or*
-2. Include (many) other node(s) with child {{famous}} calls
+For more examples see the live demo at
+[famous-components.meteor.com](https://famous-components.meteor.com/).
 
-If you mix the above, the surface content (HTML) will be the last element
-added to the specified view.
+**Template Attributes:**
+
+Any attributes passed to the template will be passed through to the surface,
+modifier, view, etc.  Using a template helper, you can pass actual JavaScript
+objects.  Alternatively, you can specify e.g. `{{famous attribute="value"}}`.
+The value will be decoded for you, so `"[150,true]"` will become an array
+with number `150` and boolean `true`.  (Helpers currently only provide
+an initial value, but will be fully reactive in a future release).
+
+Certain attribute names are handled especially for you, e.g. `direction="X"`
+will map to `Utility.Direction.Y`, the `translate` attribute is instantiated
+into a `Transform.translate` for you, etc.  [**TODO**: Since attributes are
+passed to the surface, modifier and view, should you want to specify different
+values for the same key, use the appropriate prefix, e.g. `surfaceSize`,
+`viewSize`, `modifierSize`, etc.]
+
+Don't forget, components are fully coupled to the render tree.  If you have
+a template with `translate="[100,100]"`, that has a child template with
+`translate="[50,50]"`, the final template's surface will be translated to
+`[150,150]`, which of course is very useful.
+
+Available but not recommended (yet): `data` is a special attribute name.  It specifies the data context for
+rendered children.  Basically, you'll need this if you specify any other
+attributes.  e.g. `{{#famous}}` gets the same data context as
+`{{#famous data=this attr1='one'}}`.  Without `data`, the data context
+would be just `{ attr1: 'one' }` without any parent data.  Particularly
+useful inside a `{{#famousEach}}`.  However, this can break the fine
+grained reactivity... we suggest passing just the data you need or
+referencing the parent data directly.  See the examples in the demo.
+
+Note: I believe a lot of the arguments to the `{{famous}}` helper would be better
+served as constants to the template itself, via attributes).
+If people share this belief, I'll submit a PR to Meteor to allow this in the future.  e.g. `<template name="myBlock" size="[300,300]">`
+
+**Template Properties:**
 
 The template component instance gets given a **`.famous` property** which references
 the compView instance (see Render Tree below), and in turn references the `node`
 (SequentialView, Surface, etc) and `parent` (parent compView or an object with
 `node: context`), along with any special properties for that instance
-(e.g. `sequence`).  This allows you to interact directly with Famous objects
+(e.g. `sequence`).
+
+This allows you to interact directly with Famous objects
 from e.g. **Template.events, Template.rendered, helpers, etc**.
 `famousCmp.dataFromTemplate` or `famousCmp.dataFromComponent` will help you retrieve
 the compView from descendent template instances.  `famousCmp.dataFromElement` acts on
 a DOM element (useful for drag & drop, etc).  See the Sample Render Tree at the 
 bottom of this doc.
 
-Don't forget, components are fully coupled to the render tree.  If you have
-a template with `translate="[100,100]"`, that has a child template with
-`translate="[50,50]"`, the final template's surface will be translated to
-`[150,150]` which of course is very useful.
-
-<b>Template Attributes</b>:
-
-`data` is a special attribute name.  It specifies the data context for
-rendered children.  Basically, you'll need this if you specify any other
-attributes.  e.g. `{{#famous}}` gets the same data context as
-`{{#famous data=this attr1='one'}}`.  Without `data`, the data context
-would be just `{ attr1: 'one' }` without any parent data.  Particularly
-useful inside a `{{#famousEach}}`.
-
-Any attributes passed to the template will be passed through to the surface,
-modifier, view, etc.  Using a template helper, you can pass actual JavaScript
-objects.  Alternatively, you can specify e.g. `{{famous attribute="value"}}`.
-The value will be decoded for you, so `"[150,true]"` will become an array
-with number `150` and boolean `true`.
-
-Certain attribute names are handled especially for you, e.g. `direction="X"`
-will map to `Utility.Direction.Y`, the `translate` attribute is instantiated
-into a `Transform.translate` for you, etc.  **TODO**: Since attributes are
-passed to the surface, modifier and view, should you want to specify different
-values for the same key, use the appropriate prefix, e.g. `surfaceSize`,
-`viewSize`, `modifierSize`, etc.
-
-Note: I believe a lot of the arguments to the `{{famous}}` helper would be better
-served as constants to the template itself, via attributes (see the examples below).
-If people share this belief, I'll submit a PR to Meteor to allow this in the future.
-
-Note: The examples below are a bit excessive, you probably wouldn't want all
-these things as seperate surfaces, but just demonstrating what's possible.
 
 ```html
 <!-- Template.famousInit is auto added to body/mainCtx when helpers are ready -->
@@ -138,65 +136,20 @@ these things as seperate surfaces, but just demonstrating what's possible.
   {{>famous template='test'}}
 </template>
 
-<!-- "inclusion", inline, ifBlocks -->
-<template name="test">
-  {{>famous template='welcome'}}
-
-  {{#famous}}
-    <p>hello there</p>
-  {{/famous}}
-
-  {{#if loggedIn}}
-    {{>famous template='userBar'}}
-  {{else}}
-    {{>famous template='pleaseLogIn'}}
-  {{/if}}
-</template>
 ```
 
-Here's an example of creating a Scrollview:
-
-```html
-<template name="famousInit">
-  {{>famous template='list' view="Scrollview"}}
-</template>
-
-<!-- will be loaded as a Scrollview -->
-<template name="list" view="Scrollview (TODO, requires PR)">
-  {{! the below is reactive, of course; maps to a sequenceFrom }}
-  {{#famousEach items}}
-    {{>famous data=this template='listItem' size='undefined,100'}}
-  {{/famousEach}}
-</template>
-
-<!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
-<template name="listItem" size="undefined,100 (TODO, requires PR)">
-  <div>{{name}}</div>
-</template>
-
-Template.list.items = function() { return Items.find() };
-```
-
-We could also declare everything inline:
-
-```html
-<template name="famousInit">
-  {{#famous view='Scrollview' size="undefined,undefined" items=items}}
-    {{#famousEach items}}
-      {{#famous}}
-        <div class="listItem">{{name}}</div>
-      {{/famous}}
-    {{/famousEach}}
-  {{/famous}}
-</template>
-
-Template.famousInit.items = function() { return Items.find() };
-```
+For more examples see the live demo at
+[famous-components.meteor.com](https://famous-components.meteor.com/).
 
 ## JS API
 
-* `famousCmp.mainCtx = yourMainContext`, else one will be generated for you and made
-available here.
+* `famousCmp.mainCtx = yourMainContext` else one will be generated for you and made available here.
+
+* `famousCmp.registerView('View', require("famous/core/View"));` allows you
+to use a `{{#View}}` inline and `{{>View template='name'}}` inclusion
+component.  The raw famous View is available as `famousCmp.views.View`.
+You can also manually specify `{{#famous view='View'}}`.  In the future,
+an optional 3rd argument will allow for View specific code & options.
 
 * `famousCmp.dataFromTemplate` and `.dataFromComponent` -- use these functions in
 Template created, rendered, events, helpers, to get the compView object, which
@@ -225,7 +178,7 @@ containing view in the case of a sequence (need to think about this).
 default for Scrollview, but you can add other views like this... they'll also
 be looked for under a `Famous` global variable).
 
-* Setting modifiers:
+* Setting modifiers (may still change):
 
   ```js
   famousCmp.modifiers.pageTransition = function(component, options) {
@@ -239,37 +192,8 @@ be looked for under a `Famous` global variable).
   }
   ```
 
-## More Examples
-
-Typical iron-router layout:
-
-```html
-<!-- we want each yield to be on a different surface -->
-<template name="layout">
-  {{>famous template='yieldHeader' modifier='inFront' size='undefined,50'}}
-  {{>famous template='yieldMain' size="undefined,undefined" translate="0,50"}}
-</template>
-
-<template name="yieldMain">
-  <div id="main" class="container" role="main">{{> yield}}</div>
-</template>
-
-<template name="yieldHeader">
-  <div id="header">{{> yield region="header"}}</div>
-</template>
-```
-
-(set as `layoutTemplate` and let iron-router autoRender as usual, it all works.)
-
-Mixing of sequences (coming soon):
-
-```html
-<template name="list" view="Scrollview (TODO, requires PR)">
-  {{>famous template="surface"}}
-  {{>famousEach data=items template='listItem' size='undefined,100'}}
-  {{>famous template="surface"}}
-</template>
-```
+For more examples see the live demo at
+[famous-components.meteor.com](https://famous-components.meteor.com/).
 
 ## TODO
 
@@ -288,24 +212,18 @@ famousEach's in the same template.~~
 * Allow e.g. size="50%,100%" and create necessary functions to calculate this
 on each tick from window size or containing compView.  [ref](http://stackoverflow.com/questions/23021796/is-it-possible-to-set-surface-sizes-based-on-percentages-in-famo-us)
 
-* Optimizations, e.g. if a template consists of only HTML and doesn't include
-any child templates, this should be a surface, not a surface in a SequentialLayout.
-
 ## Behind the scenes
 
-1. When a template instance is created, a `compView` wrapper is added
+1. When a template instance is **created**, a `compView` wrapper is added
 to the render tree, which wraps the template's renderable so it can
 be removed when the template instance is destroyed.
 
-1. Unless otherwise specified, a template, by default, will form a
-SequentialLayout, since this is "natural" to how templates usually
-behave.
+1. Child templates from inside the block helper / named template
+are added.
 
-1. Children templates from `{{famous}}` and `{{#famous}}` are added.
-
-1. If a template generates any HTML (from includes/helpes too), it will
-be placed in a surface and added to the template's sequence.  If they
-template contains child templates, they'll be added to the sequence too.
+1. When the template is **destroyed**, the `node`
+property of the compView is set to null, and all children will no longer
+be rendered, and will be garbaged collected as possible.
 
 Note, there is currently no final/published API for Components.  The internals
 of this code will definitely change, but the API we expose should remain the same.
@@ -315,17 +233,12 @@ component instances.
 ## Sample Render Tree
 
 As explained above, every template instance is wrapped in a compView before
-being added to the render tree.  When the template is destroyed, the `node`
-property of the compview is set to null, and all children will no longer
-be rendered, and will be garbaged collected.
+being added to the render tree.  It will be either a specified View or
+a Surface, and a modifier can be specified, together with optional
+arguments.  If arguments are given, but no modifier specified, the default
+is a StateModifier.
 
-By default, a compView creates a SequentialLayout node, since this feels
-natural to use coming from a template world.  It can be changed on the
-{{famous}} call.  Likewise, a modifier can be specified.  And optional
-arguments for the modifier.  If arguments are given, but no modifier
-specific, the default is a StateModifier.
-
-`{{> famous template="scroller" view="Scrollview" modifier="inFront" size="undefined,500"}}`
+`{{>Scrollview template="scroller" modifier="inFront" size="undefined,500"}}`
 
 ```
                              Context
@@ -373,6 +286,11 @@ specific, the default is a StateModifier.
 is used to `require` Famous (and anything else for that matter; a super big
 deal for us Meteorites), but more so, for his stellar efforts at super quick
 enhancements to the package for things I needed for this package.  Thanks raix!
+
+* Big props also to sayawan, for his 
+[leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
+example.  This was the first app written by someone else famous-components,
+in under 24 hours after it was first made public.
 
 * [Zoltan Olah](https://github.com/zol) from
 [Percolate Studios](http://percolatestudio.com/).  His devshop talk with
