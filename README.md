@@ -169,6 +169,15 @@ tree until they find the enclosing compView.
     });
   ```
 
+  ```js
+  // Lifecycle events (including `created` and `destroyde`
+  Template.example.rendered = function() {
+    var famousData = famousCmp.dataFromTpl(this);
+    // Use this.$() to find DOM elements here
+    // (since the template is rendered before it's added to the document)
+  }
+  ```
+
 * `famousCmp.dataFromElement` -- as above but for a DOM element.  If you're using
 jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
 element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
@@ -191,6 +200,22 @@ be looked for under a `Famous` global variable).
     this.famous.setOrigin([0,0], {duration : 500});
   }
   ```
+
+## Lifecycle callbacks
+
+```js
+Template.example.created = function() {
+  var famousData = famousCmp.dataFromTpl(this);
+}
+
+Template.example.destroyed = function() {
+  var famousData = famousCmp.dataFromTpl(this);
+}
+
+Template.example.rendered = function() {
+  var famousData = famousCmp.dataFromTpl(this);
+  console.log(famousData);
+}
 
 For more examples see the live demo at
 [famous-components.meteor.com](https://famous-components.meteor.com/).
