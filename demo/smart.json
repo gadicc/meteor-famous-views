@@ -1,7 +1,7 @@
 {
   "meteor": {
-    "git": "https://github.com/meteor/meteor.git",
-    "branch": "devel"
+    "_git": "https://github.com/meteor/meteor.git",
+    "_branch": "devel"
   },
   "packages": {
     "famono": {
