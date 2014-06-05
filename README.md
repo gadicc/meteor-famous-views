@@ -158,6 +158,7 @@ free to use these functions in descendent templates, they'll climb the component
 tree until they find the enclosing compView.
 
   ```js
+    // Event callbacks
     Template.blockSpring.events({
       'click': function(event, tpl) {
         var famousData = famousCmp.dataFromTpl(tpl);
@@ -170,12 +171,12 @@ tree until they find the enclosing compView.
   ```
 
   ```js
-  // Lifecycle events (including `created` and `destroyde`
-  Template.example.rendered = function() {
-    var famousData = famousCmp.dataFromTpl(this);
-    // Use this.$() to find DOM elements here
-    // (since the template is rendered before it's added to the document)
-  }
+    // Lifecycle callbacks (including `created` and `destroyed`)
+    Template.example.rendered = function() {
+      var famousData = famousCmp.dataFromTpl(this);
+      // Use this.$() to find DOM elements here
+      // (since the template is rendered before it's added to the document)
+    }
   ```
 
 * `famousCmp.dataFromElement` -- as above but for a DOM element.  If you're using
