@@ -201,22 +201,6 @@ be looked for under a `Famous` global variable).
   }
   ```
 
-## Lifecycle callbacks
-
-```js
-Template.example.created = function() {
-  var famousData = famousCmp.dataFromTpl(this);
-}
-
-Template.example.destroyed = function() {
-  var famousData = famousCmp.dataFromTpl(this);
-}
-
-Template.example.rendered = function() {
-  var famousData = famousCmp.dataFromTpl(this);
-  console.log(famousData);
-}
-
 For more examples see the live demo at
 [famous-components.meteor.com](https://famous-components.meteor.com/).
 
