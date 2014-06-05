@@ -1,5 +1,9 @@
 {
-  "meteor": {},
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "devel",
+    "commit": "7c036de1e4a8c8fdbbdb206b4e8dd156dc1a78fb"
+  },
   "dependencies": {
     "basePackages": {
       "famono": {},

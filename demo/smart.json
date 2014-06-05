@@ -1,4 +1,8 @@
 {
+  "meteor": {
+    "git": "https://github.com/meteor/meteor.git",
+    "branch": "devel"
+  },
   "packages": {
     "famono": {
       "_git": "https://github.com/raix/Meteor-famono.git"
