@@ -12,11 +12,16 @@ famousCmp.registerView('RenderController',
 	require('famous/views/RenderController'),
 	{
 		add: function(childCompView) {
-			var RenderController = this.modifier
-				? this.node._child._object : this.node._object;
+			if (this.currentShow)
+				this.previousShow = this.currentShow;
+			this.currentShow = childCompView;
 
-			RenderController.show(childCompView, null, function() {
-				//	destroyOldShit();
+			childCompView.destroyPrevented = true;
+
+			var self = this;
+			this.viewNode.show(childCompView, null, function() {
+				if (self.previousShow)
+					self.previousShow.destroy();
 			});
 		}
 	}
