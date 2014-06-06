@@ -116,18 +116,22 @@ If people share this belief, I'll submit a PR to Meteor to allow this in the fut
 
 **Template Properties:**
 
-The template component instance gets given a **`.famous` property** which references
-the compView instance (see Render Tree below), and in turn references the `node`
-(SequentialView, Surface, etc) and `parent` (parent compView or an object with
-`node: context`), along with any special properties for that instance
-(e.g. `sequence`).
+The template component instance gets given a **`.famous` property** which
+references the compView instance (see Render Tree below), which the following
+properties:
+
+* `parent` - parent compView or an object with `node: context`
+* `node` - the modifier, if one is specified, otherwise the view/surface
+* `viewNode` - SequentialView, Surface, etc, regardless of modifier
+* `modifier` - the modifier, if one was specified
+* `sequencer` - for any view that uses a sequence
 
 This allows you to interact directly with Famous objects
 from e.g. **Template.events, Template.rendered, helpers, etc**.
-`famousCmp.dataFromTemplate` or `famousCmp.dataFromComponent` will help you retrieve
-the compView from descendent template instances.  `famousCmp.dataFromElement` acts on
-a DOM element (useful for drag & drop, etc).  See the Sample Render Tree at the 
-bottom of this doc.
+`famousCmp.dataFromTemplate` or `famousCmp.dataFromComponent` will help
+you retrieve the compView from descendent template instances.
+`famousCmp.dataFromElement` acts on a DOM element (useful for drag &
+drop, etc).  See the Sample Render Tree at the  bottom of this doc.
 
 
 ```html
@@ -156,7 +160,8 @@ sectoin for available options.
 Template created, rendered, events, helpers, to get the compView object, which
 contains a `node` property to the actual Famous node (view, surface, etc).  Feel
 free to use these functions in descendent templates, they'll climb the component
-tree until they find the enclosing compView.
+tree until they find the enclosing compView.  See *template properties* above
+for what we keep in a compView instance.
 
   ```js
     // Event callbacks
@@ -184,10 +189,6 @@ tree until they find the enclosing compView.
 jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
 element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
 containing view in the case of a sequence (need to think about this). 
-
-* `famousCmp.views['Scrollview'] = require('famous/views/Scrollview')` (done by
-default for Scrollview, but you can add other views like this... they'll also
-be looked for under a `Famous` global variable).
 
 * Setting modifiers (may still change):
 
