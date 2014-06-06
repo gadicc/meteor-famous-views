@@ -1,5 +1,15 @@
 ## vNEXT
 
+## v0.0.9
+
+* Added a RenderController component (transition support)
+* Added ability for a view to register a custom `add` method which will
+  be called with child compViews instead of directly calling `add` on
+  a Famous renderable.
+* a compView now has a `viewNode` property, which will reference the
+  final renderable even if a modifier is chained in before it.
+* added `compView.preventDestroy()` method and `onDestroy` hook
+
 ## v0.0.8
 
 See also [Progress Update](https://github.com/gadicc/meteor-famous-components/issues/16).

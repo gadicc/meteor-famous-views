@@ -145,11 +145,12 @@ For more examples see the live demo at
 
 * `famousCmp.mainCtx = yourMainContext` else one will be generated for you and made available here.
 
-* `famousCmp.registerView('View', require("famous/core/View"));` allows you
+* `famousCmp.registerView('View', require("famous/core/View") [,options]);`
+allows you
 to use a `{{#View}}` inline and `{{>View template='name'}}` inclusion
 component.  The raw famous View is available as `famousCmp.views.View`.
-You can also manually specify `{{#famous view='View'}}`.  In the future,
-an optional 3rd argument will allow for View specific code & options.
+You can also manually specify `{{#famous view='View'}}`.  See the next
+sectoin for available options.
 
 * `famousCmp.dataFromTemplate` and `.dataFromComponent` -- use these functions in
 Template created, rendered, events, helpers, to get the compView object, which
@@ -204,6 +205,23 @@ be looked for under a `Famous` global variable).
 
 For more examples see the live demo at
 [famous-components.meteor.com](https://famous-components.meteor.com/).
+
+### CompView methods
+
+* `preventDestroy()` will prevent a compView from being
+automatically destroyed when it's template is reactively removed.  You
+can then call `destroy()` at a later time (like after a transition;
+we do this in the RenderController helper).
+
+For more examples see the live demo at
+[famous-components.meteor.com](https://famous-components.meteor.com/).
+
+### registerView options
+
+* `add` overrides what happens when children are initialized.  By default,
+they are added to a sequence if one exists, or the renderable's native
+`add` method is called.  See the `RenderController` source for an example
+of where this is useful.
 
 ## TODO
 

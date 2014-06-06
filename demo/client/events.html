@@ -7,11 +7,13 @@
 			{{> codeButton}}
 		{{/Surface}}
 
-		{{#if showCode}}
-			{{>Surface template='ballCode' size="[undefined,undefined]"}}
-		{{else}}
-			{{>Surface template='springBall' translate="[50,20]"}}
-		{{/if}}
+		{{#RenderController size="[undefined,700]"}}
+			{{#if showCode}}
+				{{>Surface template='ballCode' size="[undefined,undefined]"}}
+			{{else}}
+				{{>Surface template='springBall' size="[100,100]" translate="[50,20]"}}
+			{{/if}}
+		{{/RenderController}}
 	{{/famous}}
 </template>
 
@@ -26,16 +28,18 @@
 <template name="ballCode">
 	{{#sh_highlight lang="html"}}
 		&lt;template name="eventsDemo">
-			{{dstache}}#Surface size="[undefined,120]" translate="[10,10]"}}
+			{{dstache}}#Surface size="[undefined,130]" translate="[20,0]"}}
 				<h3>Catch the ball!</h3>
 				{{dstache}}> codeButton}}
 			{{dstache}}/Surface}}
 
-			{{dstache}}#if showCode}}
-				{{dstache}}>Surface template='ballCode' size="[undefined,undefined]"}}
-			{{dstache}}else}}
-				{{dstache}}>Surface template='springBall' translate="[50,0]"}}
-			{{dstache}}/if}}
+			{{dstache}}#RenderController size="[undefined,700]"}}
+				{{dstache}}#if showCode}}
+					{{dstache}}>Surface template='ballCode' size="[undefined,undefined]"}}
+				{{dstache}}else}}
+					{{dstache}}>Surface template='springBall' translate="[50,700]"}}
+				{{dstache}}/if}}
+			{{dstache}}/RenderController}}
 		&lt;/template>
 	{{/sh_highlight}}
 

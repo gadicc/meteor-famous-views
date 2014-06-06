@@ -13,7 +13,8 @@ Package.on_use(function (api) {
       'lib/famous.js',
       'lib/famousEach.js',
       'lib/famousEachSurface.js',
-      'lib/modifiers.js'
+      'lib/modifiers.js',
+      'lib/views/RenderController.js'
   	],
   	'client'
   );

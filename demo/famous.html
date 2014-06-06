@@ -24,7 +24,9 @@
 </template>
 
 <template name="yieldMain">
-	{{> yield}}
+  {{#RenderController size="[undefined,undefined]"}}
+  	{{> yield}}
+  {{/RenderController}}
 </template>
 
 <template name="yieldHeader">
