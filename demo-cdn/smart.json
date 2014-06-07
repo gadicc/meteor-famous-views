@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "famous-components": {
+		"path": ".."
+	},
+    "iron-router": {}
+  }
+}

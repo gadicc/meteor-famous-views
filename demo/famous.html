@@ -24,9 +24,11 @@
 </template>
 
 <template name="yieldMain">
-  {{#RenderController size="[undefined,undefined]"}}
-  	{{> yield}}
-  {{/RenderController}}
+  {{>RenderController size="[undefined,undefined]" template="_yieldMain"}}
+</template>
+
+<template name="_yieldMain">
+  {{>yield}}
 </template>
 
 <template name="yieldHeader">

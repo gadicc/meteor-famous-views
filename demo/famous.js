@@ -80,6 +80,18 @@ if (Meteor.isClient) {
     return out;
   };
 
+  /*
+  Template._yieldMain.rendered = function() {
+    var famousData = famousCmp.dataFromTpl(this);
+    famousData.viewNode.inTransformFrom(function(progress) {
+        return Transform.translate(window.innerWidth * (1.0 - progress), 0, 0);
+    });
+    famousData.viewNode.outTransformFrom(function(progress) {
+        return Transform.translate(window.innerWidth * progress - window.innerWidth, 0, 0);
+    });
+  }
+  */
+
 }
 
 if (Meteor.isServer) {

@@ -1,0 +1,54 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "famous-components": {
+        "path": ".."
+      },
+      "iron-router": {},
+      "mj-famous": {},
+      "bootstrap-3": {},
+      "SyntaxHighlighter": {}
+    },
+    "packages": {
+      "famous-components": {
+        "path": ".."
+      },
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.7.1",
+        "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
+      },
+      "mj-famous": {
+        "git": "https://github.com/mj-networks/mj-famous.git",
+        "tag": "v0.2.0-12",
+        "commit": "64c4f34f2f0ac8f783e278f64d41fad496aed503"
+      },
+      "bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
+        "tag": "v3.1.1-1",
+        "commit": "63dd38968828bb8963636df93e9a1c45e2dfe67e"
+      },
+      "SyntaxHighlighter": {
+        "git": "https://github.com/gadicohen/meteor-SyntaxHighlighter.git",
+        "tag": "v3.0.83-9",
+        "commit": "5dbcd9180a3ea16055e5ecf795e6b1da2c4be6ce"
+      },
+      "pince": {
+        "git": "https://github.com/mad-eye/pince.git",
+        "tag": "v0.0.5",
+        "commit": "4524ecc0bdf043c49dc62e91bbd8a99c661081ed"
+      },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.4",
+        "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      },
+      "sp-marked": {
+        "git": "https://bitbucket.org/parhelium/sp-marked",
+        "tag": "v0.0.2",
+        "commit": "fd044a222eeb4902a62da5839162b3d6dbd477be"
+      }
+    }
+  }
+}

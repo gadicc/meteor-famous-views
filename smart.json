@@ -1,12 +1,15 @@
 {
-	"name": "famous-components",
-	"description": "Blaze Components to use Famous the Meteor way",
-	"homepage": "https://github.com/gadicc/meteor-famous-components",
-	"author": "Gadi Cohen <dragon@wastelands.net>",
-	"version": "0.0.9",
-	"git": "https://github.com/gadicc/meteor-famous-components.git",
-	"packages": {
-		"famono": "0.2.2",
-		"pince": "0.0.5"
-	}
+  "name": "famous-components",
+  "description": "Blaze Components to use Famous the Meteor way",
+  "homepage": "https://github.com/gadicc/meteor-famous-components",
+  "author": "Gadi Cohen <dragon@wastelands.net>",
+  "version": "0.0.9",
+  "git": "https://github.com/gadicc/meteor-famous-components.git",
+  "packages": {
+    "pince": "0.0.5",
+    "mj-famous": {}
+  },
+  "_packages": {
+    "famono": "0.2.2"
+  }
 }
