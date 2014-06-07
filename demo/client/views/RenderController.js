@@ -22,26 +22,39 @@ Template.views_RenderController.currentTemplate = function() {
 	return Session.get('currentTemplate');
 }
 
+Template.rc_buttons.helpers({
+	'buttons': ['rc_surface1', 'rc_surface2', 'rc_surface3'],
+	isSet: function() {
+		return this.valueOf() == Session.get('currentTemplate') ? 'set' : '';
+	}
+});
 Template.rc_buttons.events({
-	'click': function(event, tpl) {
-		var id = $(event.target).data('id');
-		Session.set('currentTemplate', 'rc_surface' + id);
+	'click button': function(event, tpl) {
+		Session.set('currentTemplate', this.valueOf());
 	}
 });
 
 Session.setDefault('currentTransition', 'opacity');
 Template.rc_transitions.helpers({
-	'transitions': [
-		{ name: 'opacity' },
-		{ name: 'slideWindow' },
-		{ name: 'slideWindow2'}
-	],
+	'transitions': ['opacity', 'slideWindow', 'WIP'],
 	isSet: function() {
-		return this.name == Session.get('currentTransition') ? 'set' : '';
+		return this.valueOf() == Session.get('currentTransition') ? 'set' : '';
 	}
 });
 Template.rc_transitions.events({
-	'click': function() {
-		Session.set('currentTransition', this.name);
+	'click button': function() {
+		Session.set('currentTransition', this.valueOf());
 	}
 });
+
+Session.setDefault('transitionPages', false);
+Template.rc_useForPages.events({
+	'change': function() {
+		Session.set('transitionPages', $(event.target).is(':checked'));
+	}
+});
+Template.rc_useForPages.helpers({
+	'checked': function() {
+		return Session.get('transitionPages');
+	}
+})

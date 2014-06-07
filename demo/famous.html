@@ -24,11 +24,9 @@
 </template>
 
 <template name="yieldMain">
-  {{>RenderController size="[undefined,undefined]" template="_yieldMain"}}
-</template>
-
-<template name="_yieldMain">
-  {{>yield}}
+  {{#RenderController size="[undefined,undefined]" transition=getTransition}}
+    {{>yield}}
+  {{/RenderController}}
 </template>
 
 <template name="yieldHeader">
@@ -94,8 +92,12 @@
     <div id="main" class="container" role="main">
     	<h1>Famous Component Demo</h1>
     	<p>Not much here yet, I'll be working on this next.</p>
-    	<p>For the scrollview, try manipulating the <code>Items</code>
-    	collection, e.g. <code>Items.update(Items.findOne({name:'Apple'})._id, {$set: {name:'Capple'}});</code>
+      <p><b>Explore</b> the navbar above to see what's done so far.
+      Particularly the GridLayout and RenderController are pretty
+      cool.</p>
+    	<p>For anything using data (like the GridLayout and Scrollview),
+      try manipulating the <code>Items</code> collection, e.g.
+      <code>Items.update(Items.findOne({name:'Apple'})._id, {$set: {name:'Capple'}});</code>
     	in the console.  If you're on a desktop, use the mouse scrollwheel
     	to simulate 'flicks'.  Scroll up to see the bounce.</p>
     </div>

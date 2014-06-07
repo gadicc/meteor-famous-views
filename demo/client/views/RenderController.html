@@ -19,6 +19,7 @@
 
 				{{>rc_buttons}}
 				{{>rc_transitions}}
+				{{>rc_useForPages}}
 
 				{{#sh_highlight lang="js"}}
 					Template.views_RenderController.helpers({
@@ -33,10 +34,8 @@
 					}
 
 					Template.rc_buttons.events({
-						'click': function(event, tpl) {
-							// <button data-id="1">Session.set(...);</button>
-							var id = $(event.target).data('id');
-							Session.set('currentTemplate', 'rc_surface' + id);
+						'click button': function(event, tpl) {
+							Session.set('currentTemplate', this.valueOf());
 						}
 					});
 				{{/sh_highlight}}
@@ -63,42 +62,51 @@
 </template>
 
 <template name="rc_buttons">
-	<p>
-		<button data-id="1">Session.set('currentTemplate', 'rc_surface1');</button>
-		<br />
-		<button data-id="2">Session.set('currentTemplate', 'rc_surface2');</button>
-		<br />
-		<button data-id="3">Session.set('currentTemplate', 'rc_surface3');</button>
-		<br />
-	</p>
-</template>
-
-<template name="rc_transitions">
 	<style type="text/css">
 		button.set { border: 2px solid black; }
 	</style>
 	<p>
+	{{#each buttons}}
+		<button class="{{isSet}}">
+			Session.set('currentTemplate', '{{this}}');
+		</button>
+		<br />
+	{{/each}}
+	</p>
+</template>
+
+<template name="rc_transitions">
+	<p>
 		Transition:
 		{{#each transitions}}
-			<button class="{{isSet}}">{{name}}</button>
+			<button class="{{isSet}}">{{this}}</button>
 		{{/each}}
 	</p>
 </template>
 
+<template name="rc_useForPages">
+	<p>
+		<label>
+			<input type="checkbox" checked="{{checked}}">
+			Use transition for page changes too
+		</label>
+	</p>
+</template>
+
 <template name="rc_surface1">
-	{{#Surface class="red-bg" origin="[0,0]" size="[150,150]"}}
+	{{#Surface class="red-bg" origin="[0,0]" size="[75,150]"}}
 		<div class="full">#1</div>
 	{{/Surface}}
 </template>
 
 <template name="rc_surface2">
-	{{#Surface class="green-bg" origin="[0.5,0.5]" size="[150,150]"}}
+	{{#Surface class="green-bg" origin="[0.5,0.5]" size="[150,75]"}}
 		<div class="full">#2</div>
 	{{/Surface}}
 </template>
 
 <template name="rc_surface3">
-	{{#Surface class="blue-bg" origin="[1,1]" size="[150,150]"}}
+	{{#Surface class="blue-bg" origin="[1,1]" size="[75,150]"}}
 		<div class="full">#3</div>
 	{{/Surface}}
 </template>

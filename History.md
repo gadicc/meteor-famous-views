@@ -3,6 +3,7 @@
 ## v0.0.10
 
 * In addition to Famono, we now support famous-compiled, mj-famous and CDN
+* Added a windowSlide transition shortcut, ability to use for pages on demo
 
 ## v0.0.9
 
