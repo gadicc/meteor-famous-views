@@ -3,7 +3,7 @@ if (Meteor.isServer) {
 
   if (Items.find().count() == 0)
     _.each([
-      { name: 'Apple', type: 'fruit', picUrl: 'http://metrouk2.files.wordpress.com/2012/08/article-1344003042762-145d45c2000005dc-485035_466x376.jpg' },
+      { name: 'Apple', type: 'fruit', picUrl: 'http://cdn.oxwordsblog.wpfuel.co.uk/wpcms/wp-content/uploads/apple-e1382039006457.jpg' },
       { name: 'Banana', type: 'fruit', picUrl: 'http://statfaking2.firstpost.in/wp-content/uploads/2014/01/Banana.jpeg' },
       { name: 'Cupcake', type: 'android', picUrl: 'http://www.sellmymobile.com/blog/wp-content/uploads/2011/03/ANdroid-Cupcake.gif' },
       { name: 'Donut', type: 'android', picUrl: 'http://img1.wikia.nocookie.net/__cb20130520200422/logopedia/images/c/c5/Android-1_6-donut.jpg'},
