@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v0.0.10
+
+* In addition to Famono, we now support famous-compiled, mj-famous and CDN
+
 ## v0.0.9
 
 * Added a RenderController component (transition support)

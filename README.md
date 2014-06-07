@@ -10,24 +10,34 @@ The demo includes example code, ***which supercedes the syntax/examples
 given in this README***!  **PLEASE FOLLOW [History.md](History.md) IN THESE
 EARLY DAYS**.
 
+Requires Famo.us, using any of:
+[famono](https://atmospherejs.com/package/famono)
+(recommended),
+[mj-famous](https://atmospherejs.com/package/mj-famous),
+[famous-compiled](https://atmospherejs.com/package/famous-compiled),
+or straight from the Famo.us CDN (see
+[demo](https://github.com/gadicc/meteor-famous-components/tree/master/demo-cdn)).
+
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
 ### Features & Basics
 
 * The `{{famous}}` component uses templates to create
 Famous Views and Surfaces, without touching any Javascript.  Registered
-Views are aliased as their own block helpers for ease and clarity.
+Views are aliased as their own block helpers for ease and clarity, e.g.
+`{{#Scrollview}}`, etc.
 
 * `{{famousEach}}` helps creates Sequences (for e.g. Scrollview) using
 regular Template helpers/data like Items.find().  No additional code.
 Still 100% reactive.
 
-* Views, modifiers and modifier options are easily set via component attributes
+* Views, modifiers and modifier options are easily set via component attributes,
+like `size="[undefined,700]"`, `translate="[0,20,1]"`, etc.
 
 * Need to manipulate Famous objects?  No problem, do it in `Template.events`,
 `Template.rendered`, etc, just like usual.
 
-* Compatible out the box with iron-router (transitions coming soon).
+* Compatible out the box with iron-router (with transition support).
 
 This is a very early release.  More for playing around and discussion purposes.
 But it seems to be useable :)  Feedback is both welcome and appreciated, on
