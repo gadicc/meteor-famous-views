@@ -38,11 +38,16 @@ if (Meteor.isClient) {
 
   Router.configure({
     onAfterAction: navbarActive,
-    layoutTemplate: 'layout',
     yieldTemplates: {
       'header': {to: 'header'}
     }
   });
+
+  // haha, for CDN loads :)
+  if (typeof(dontSetLayoutYet) === 'undefined')
+    Router.configure({
+      layoutTemplate: 'layout'
+    });
 
   Router.map(function() {
     this.route('home', { path: '/' });
@@ -63,7 +68,7 @@ if (Meteor.isClient) {
   }
 
   Transform=null, Transitionable=null;
-  Meteor.startup(function() {
+  famousCmp.ready(function(require) {
     Transform        = require('famous/core/Transform');
     Transitionable   = require("famous/transitions/Transitionable");
 
@@ -92,10 +97,4 @@ if (Meteor.isClient) {
   }
   */
 
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
 }

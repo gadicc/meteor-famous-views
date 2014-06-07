@@ -6,7 +6,7 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-	api.use(['underscore', 'ui', 'minimongo', 'templating'], 'client');
+	api.use(['underscore', 'ui', 'minimongo', 'templating', 'jquery', 'deps'], 'client');
 	api.use('pince', 'client');
 
   // https://github.com/meteor/meteor/issues/1358

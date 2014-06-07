@@ -1,0 +1,1 @@
+define(famousCmp.startup);

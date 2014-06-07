@@ -8,8 +8,10 @@ Router.map(function() {
   });
 });
 
-famousCmp.registerView('GridLayout', require('famous/views/GridLayout'));
-famousCmp.registerView('ContainerSurface', require('famous/surfaces/ContainerSurface'));
+famousCmp.ready(function(require) {
+	famousCmp.registerView('GridLayout', require('famous/views/GridLayout'));
+	famousCmp.registerView('ContainerSurface', require('famous/surfaces/ContainerSurface'));
+});
 
 Template.views_GridLayout.items = function() {
   return Items.find({}, {sort: {name: 1}, limit: 8});

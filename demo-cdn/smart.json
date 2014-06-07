@@ -1,8 +1,10 @@
 {
   "packages": {
     "famous-components": {
-		"path": ".."
-	},
-    "iron-router": {}
+      "path": ".."
+    },
+    "iron-router": {},
+    "bootstrap-3": {},
+    "SyntaxHighlighter": {}
   }
 }
