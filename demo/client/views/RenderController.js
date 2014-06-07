@@ -11,6 +11,9 @@ Router.map(function() {
 Template.views_RenderController.helpers({
 	'showTemplate': function() {
 		return Template[this.name];
+	},
+	'getTransition': function() {
+		return Session.get('currentTransition');
 	}
 });
 
@@ -23,5 +26,22 @@ Template.rc_buttons.events({
 	'click': function(event, tpl) {
 		var id = $(event.target).data('id');
 		Session.set('currentTemplate', 'rc_surface' + id);
+	}
+});
+
+Session.setDefault('currentTransition', 'opacity');
+Template.rc_transitions.helpers({
+	'transitions': [
+		{ name: 'opacity' },
+		{ name: 'slideWindow' },
+		{ name: 'slideWindow2'}
+	],
+	isSet: function() {
+		return this.name == Session.get('currentTransition') ? 'set' : '';
+	}
+});
+Template.rc_transitions.events({
+	'click': function() {
+		Session.set('currentTransition', this.name);
 	}
 });
