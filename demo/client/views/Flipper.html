@@ -1,9 +1,10 @@
 <template name="views_Flipper">
 	{{#Scrollview translate="[20,0]"}}
-		{{#Surface size="[undefined,130]"}}
-			<h1>HeaderFooterLayout</h1>
-			<p>A View with 3 surfaces, where the outer surfaces have a fixed size
-				and the interior surface will expand to fill all the remaining space.</p>
+		{{#Surface size="[undefined,150]"}}
+			<h1>Flipper</h1>
+			<p>Links two renderables back to back that can be flipped along the axis.
+			For this to look really good<br> we need to change the perspective a bit,
+			which currently affects the header (which is at z-Index: 100).</p>
 			<p>
 				Famous:
 				<a href="http://www.famo.us/docs/0.2.0/views/Flipper">Docs</a> |
@@ -35,21 +36,21 @@
 				}
 
 				Template.views_Flipper_front.events({
-					'click': function(event, tpl) {
+					"click": function(event, tpl) {
 						var famousData = famousCmp.dataFromTemplate(tpl);
 						famousCmp.mainCtx.setPerspective(500);
 						famousData.parent.viewNode
-							.setAngle(Math.PI, { curve : 'easeOutBounce', duration : 500},
+							.setAngle(Math.PI, { curve : "easeOutBounce", duration : 500},
 								perspectiveZero);
 					}
 				});
 
 				Template.views_Flipper_back.events({
-					'click': function(event, tpl) {
+					"click": function(event, tpl) {
 						var famousData = famousCmp.dataFromTemplate(tpl);
 						famousCmp.mainCtx.setPerspective(500);
 						famousData.parent.viewNode
-							.setAngle(0, { curve : 'easeOutBounce', duration : 500},
+							.setAngle(0, { curve : "easeOutBounce", duration : 500},
 								perspectiveZero);
 					}
 				});
