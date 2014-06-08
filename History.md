@@ -1,5 +1,8 @@
 ## vNEXT
 
+* Make `famousCmp.transitions` public so that it's easier to create custom
+named transitions for RenderController.
+
 ## v0.0.10
 
 * In addition to Famono, we now support famous-compiled, mj-famous and CDN
