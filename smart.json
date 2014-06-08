@@ -3,7 +3,7 @@
 	"description": "Blaze Components to use Famous the Meteor way",
 	"homepage": "https://github.com/gadicc/meteor-famous-components",
 	"author": "Gadi Cohen <dragon@wastelands.net>",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"git": "https://github.com/gadicc/meteor-famous-components.git",
 	"packages": {
 		"pince": "0.0.5"

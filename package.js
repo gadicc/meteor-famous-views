@@ -31,6 +31,7 @@ Package.on_use(function (api) {
 
   api.add_files(
     [
+      'lib/views/EdgeSwapper.js',
       'lib/views/Flipper.js',
       'lib/views/HeaderFooterLayout.js',
       'lib/views/RenderController.js'
