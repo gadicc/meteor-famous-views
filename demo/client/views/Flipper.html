@@ -1,0 +1,63 @@
+<template name="views_Flipper">
+	{{#Scrollview translate="[20,0]"}}
+		{{#Surface size="[undefined,130]"}}
+			<h1>HeaderFooterLayout</h1>
+			<p>A View with 3 surfaces, where the outer surfaces have a fixed size
+				and the interior surface will expand to fill all the remaining space.</p>
+			<p>
+				Famous:
+				<a href="http://www.famo.us/docs/0.2.0/views/Flipper">Docs</a> |
+				<a href="http://www.famo.us/examples/0.2.0/views/flipper/example">Example</a>
+			</p>
+		{{/Surface}}
+
+		{{#Flipper size="[150,150]" translate="[100,0]"}}
+			{{>Surface target="front" template="views_Flipper_front"
+				class="red-bg" size="[150,150]" origin="[.5,.5]"}}
+			{{>Surface target="back" template="views_Flipper_back"
+				class="blue-bg" size="[150,150]" origin="[.5,.5]"}}
+		{{/Flipper}}
+
+		{{#Surface size="[undefined,500]"}}
+			{{#sh_highlight lang="html"}}
+				{{dstache}}#Flipper size="[150,150]" translate="[100,0]"}}
+					{{dstache}}>Surface target="front" template="views_Flipper_front"
+						class="red-bg" size="[150,150]" origin="[.5,.5]"}}
+					{{dstache}}>Surface target="back" template="views_Flipper_back"
+						class="blue-bg" size="[150,150]" origin="[.5,.5]"}}
+				{{dstache}}/Flipper}}
+			{{/sh_highlight}}
+
+			{{#sh_highlight lang="js"}}
+				// TODO, put flipper in it's own context
+				function perspectiveZero() {
+					famousCmp.mainCtx.setPerspective(0);
+				}
+
+				Template.views_Flipper_front.events({
+					'click': function(event, tpl) {
+						var famousData = famousCmp.dataFromTemplate(tpl);
+						famousCmp.mainCtx.setPerspective(500);
+						famousData.parent.viewNode
+							.setAngle(Math.PI, { curve : 'easeOutBounce', duration : 500},
+								perspectiveZero);
+					}
+				});
+
+				Template.views_Flipper_back.events({
+					'click': function(event, tpl) {
+						var famousData = famousCmp.dataFromTemplate(tpl);
+						famousCmp.mainCtx.setPerspective(500);
+						famousData.parent.viewNode
+							.setAngle(0, { curve : 'easeOutBounce', duration : 500},
+								perspectiveZero);
+					}
+				});
+			{{/sh_highlight}}
+		{{/Surface}}
+	{{/Scrollview}}
+</template>
+
+<template name="views_Flipper_front"><div class="full">Front</div></template>
+<template name="views_Flipper_back"><div class="full">Back</div></template>
+

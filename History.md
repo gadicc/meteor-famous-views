@@ -3,6 +3,7 @@
 * Make `famousCmp.transitions` public so that it's easier to create custom
 named transitions for RenderController.
 * Add `HeaderFooterLayout` view (closes #18)
+* Add `Flipper` view (TODO, ability to create new contexts for perspective)
 
 ## v0.0.10
 

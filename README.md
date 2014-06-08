@@ -45,7 +45,9 @@ github.
 
 ## Quick Start
 
-`mrt add famous-components`
+1. `meteor create myFamousProject`
+1. `mrt add famono` (or mj-famous or famous-compiled or setup via CDN)
+1. `mrt add famous-components`
 
 You can also `cd packages/famous-components/demo && meteor` to see the demo.
 which is still a work in progress (I wanted to get the package out first).
@@ -155,6 +157,13 @@ drop, etc).  See the Sample Render Tree at the  bottom of this doc.
 For more examples see the live demo at
 [famous-components.meteor.com](https://famous-components.meteor.com/).
 
+### Surfaces and Events
+
+* A reminder that Meteor events, via the `Template.x.events()` system,
+are DOM events.  As such, you can only setup events on **Surfaces**
+*with at least one element*, so make sure if your template is all text,
+you wrap it in a `<div>` or `<span>`.
+
 ## JS API
 
 * `famousCmp.mainCtx = yourMainContext` else one will be generated for you and made available here.
@@ -194,6 +203,11 @@ for what we keep in a compView instance.
       // (since the template is rendered before it's added to the document)
     }
   ```
+
+  Note for lifecycle callbacks, just like with Meteor, you need to have
+  a real template.  So if you want to use these, don't define your data
+  inline with `{{#View}}`, but rather like `{{>View template="x"}}` and
+  then use `Template.x.rendered`, etc.
 
 * `famousCmp.dataFromElement` -- as above but for a DOM element.  If you're using
 jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
