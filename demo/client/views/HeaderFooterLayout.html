@@ -1,7 +1,9 @@
 <template name="views_HeaderFooterLayout">
 	{{#Scrollview translate="[20,0]"}}
-		{{#Surface size="[undefined,100]"}}
+		{{#Surface size="[undefined,130]"}}
 			<h1>HeaderFooterLayout</h1>
+			<p>A View with 3 surfaces, where the outer surfaces have a fixed size
+				and the interior surface will expand to fill all the remaining space.</p>
 			<p>
 				Famous:
 				<a href="http://www.famo.us/docs/0.2.0/views/HeaderFooterLayout/">Docs</a> |
@@ -21,7 +23,7 @@
 			{{/Surface}}
 		{{/HeaderFooterLayout}}
 
-		{{#Surface size="[undefined,220]"}}
+		{{#Surface size="[undefined,200]"}}
 			{{#sh_highlight lang="html"}}
 				{{dstache}}#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50"}}
 					{{dstache}}#Surface target="header" class="red-bg"}}
@@ -36,5 +38,23 @@
 				{{dstache}}/HeaderFooterLayout}}
 			{{/sh_highlight}}
 		{{/Surface}}
+
+		{{#Surface size="[undefined,30]"}}
+			<p>You can also specify <code>direction="X"</code> for a horizontal
+			setup.</p>
+		{{/Surface}}
+
+		{{#HeaderFooterLayout direction="X" size="[500,200]" headerSize="50" footerSize="50"}}
+			{{#Surface target="header" class="red-bg"}}
+				"Header"
+			{{/Surface}}
+			{{#Surface target="content" class="blue-bg"}}
+				Content
+			{{/Surface}}
+			{{#Surface target="footer" class="green-bg"}}
+				"Footer"
+			{{/Surface}}
+		{{/HeaderFooterLayout}}
+
 	{{/Scrollview}}
 </template>
