@@ -2,6 +2,7 @@
 
 * Make `famousCmp.transitions` public so that it's easier to create custom
 named transitions for RenderController.
+* Add `HeaderFooterLayout` view (closes #18)
 
 ## v0.0.10
 

@@ -24,10 +24,17 @@ Package.on_use(function (api) {
       'lib/famous.js',
       'lib/famousEach.js',
       'lib/famousEachSurface.js',
-      'lib/modifiers.js',
-      'lib/views/RenderController.js'
+      'lib/modifiers.js'
   	],
   	'client'
+  );
+
+  api.add_files(
+    [
+      'lib/views/HeaderFooterLayout.js',
+      'lib/views/RenderController.js'
+    ],
+    'client'
   );
 
   api.export('famousCmp', 'client');
