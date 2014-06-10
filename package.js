@@ -20,6 +20,8 @@ Package.on_use(function (api) {
   api.add_files(
   	[
   		'lib/famous-components.js',
+      'lib/compView.js',
+      'lib/sequencer.js',
       'lib/famous.html',
       'lib/famous.js',
       'lib/famousEach.js',
