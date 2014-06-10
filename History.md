@@ -1,5 +1,10 @@
 ## vNEXT
 
+## v0.0.12
+
+* `Scrollview` now pipes events from child Surfaces rather than from Engine
+  This allows multiple scrollviews per page and finally closes issue #11.
+
 ## v0.0.11
 
 * Make `famousCmp.transitions` public so that it's easier to create custom

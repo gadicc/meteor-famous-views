@@ -6,21 +6,21 @@
 </template>
 
 <template name="i11_Scrollview">
-  {{#famous view='Scrollview' size="[200,200]" items=items}}
+  {{#Scrollview size="[200,200]" items=items}}
 
     {{#famousEach items}}
-     {{>famous data=this template='listItem' size=[undefined, 200]}}
+     {{>Surface data=this template='listItem' size="[undefined,50]"}}
     {{/famousEach}}
 
-  {{/famous}}
+  {{/Scrollview}}
 </template>
 
 <template name="i11_Scrollview2">
-  {{#famous view='Scrollview' size="[200,200]" items=items}}
+  {{#Scrollview size="[200,200]" items=items}}
 
     {{#famousEach items}}
-     {{>famous data=this template='listItem' size=[undefined, 200]}}
+     {{>Surface data=this template='listItem' size="[undefined,50]"}}
     {{/famousEach}}
 
-  {{/famous}}
+  {{/Scrollview}}
 </template>

@@ -36,7 +36,8 @@ Package.on_use(function (api) {
       'lib/views/EdgeSwapper.js',
       'lib/views/Flipper.js',
       'lib/views/HeaderFooterLayout.js',
-      'lib/views/RenderController.js'
+      'lib/views/RenderController.js',
+      'lib/views/Scrollview.js'
     ],
     'client'
   );
