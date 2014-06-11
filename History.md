@@ -1,5 +1,7 @@
 ## vNEXT
 
+* `Scrollview`'s can now be nested (in alternating `directions`'s).  Fixes #24.
+
 ## v0.0.12
 
 * `Scrollview` now pipes events from child Surfaces rather than from Engine
