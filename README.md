@@ -166,6 +166,14 @@ you wrap it in a `<div>` or `<span>`.  This also only works with inclusion,
 e.g. `{{>Surface template='x'}}`, since with inline blocks, there is
 nothing to attach to.
 
+### A note on comments
+
+* Don't forget that HTML comments affect browser rendering only and have
+no effect on Blaze.  Just like `<!-- {{name}} -->` would still translate
+to `<!-- Gadi -->`, "commenting out" famous-components helpers (with
+HTML) will have no effect, and everything will still be rendered.  To
+comment out components, use Blaze's comment syntax `{{! like this}}`.
+
 ## JS API
 
 * `famousCmp.mainCtx = yourMainContext` else one will be generated for you and made available here.
