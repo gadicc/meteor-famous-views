@@ -162,7 +162,9 @@ For more examples see the live demo at
 * A reminder that Meteor events, via the `Template.x.events()` system,
 are DOM events.  As such, you can only setup events on **Surfaces**
 *with at least one element*, so make sure if your template is all text,
-you wrap it in a `<div>` or `<span>`.
+you wrap it in a `<div>` or `<span>`.  This also only works with inclusion,
+e.g. `{{>Surface template='x'}}`, since with inline blocks, there is
+nothing to attach to.
 
 ## JS API
 
