@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.0.13
+
 * `Scrollview`'s can now be nested (in alternating `directions`'s).  Fixes #24.
 
 ## v0.0.12
