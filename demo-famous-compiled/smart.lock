@@ -39,11 +39,6 @@
         "tag": "v0.0.5",
         "commit": "4524ecc0bdf043c49dc62e91bbd8a99c661081ed"
       },
-      "mj-famous": {
-        "git": "https://github.com/mj-networks/mj-famous.git",
-        "tag": "v0.2.0-12",
-        "commit": "64c4f34f2f0ac8f783e278f64d41fad496aed503"
-      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",

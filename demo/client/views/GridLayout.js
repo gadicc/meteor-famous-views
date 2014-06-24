@@ -9,8 +9,8 @@ Router.map(function() {
 });
 
 famousCmp.ready(function(require) {
-	famousCmp.registerView('GridLayout', require('famous/views/GridLayout'));
-	famousCmp.registerView('ContainerSurface', require('famous/surfaces/ContainerSurface'));
+	famousCmp.registerView('GridLayout', famous.views.GridLayout);
+	famousCmp.registerView('ContainerSurface', famous.surfaces.ContainerSurface);
 });
 
 Template.views_GridLayout.items = function() {
@@ -22,10 +22,10 @@ Template.gridItem.rendered = function() {
 	var modifier = famousCmp.dataFromTemplate(this).modifier;
 
 	// not sure about this :>
-	var famous = famousCmp.dataFromTemplate(this);
-	famousCmp.x = famous;
-	var ContainerSurface = famous.parent.node._object.node._child[0]._object;
-	var GridLayout = famous.parent.component.parent.famousData.parent.node._child._object;
+	/*
+	var famousData = famousCmp.dataFromTemplate(this);
+	var ContainerSurface = famousData.parent.node._object.node._child[0]._object;
+	var GridLayout = famousData.parent.component.parent.famousData.parent.node._child._object;
 	modifier._modifier.sizeFrom(function() {
 		var contextSize = GridLayout._contextSizeCache;
 		var dimensions = GridLayout._dimensionsCache;
@@ -33,6 +33,7 @@ Template.gridItem.rendered = function() {
 		var colSize = Math.round(contextSize[0] / dimensions[0]);
 		return [undefined,undefined];
 	});
+	*/
 
   modifier.setTransform(
     Transform.translate(500,500)

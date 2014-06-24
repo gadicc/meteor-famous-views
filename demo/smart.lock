@@ -1,9 +1,5 @@
 {
-  "meteor": {
-    "git": "https://github.com/meteor/meteor.git",
-    "branch": "devel",
-    "commit": "6394261d51e61b85299b83fdf8d74b069619edc7"
-  },
+  "meteor": {},
   "dependencies": {
     "basePackages": {
       "famono": {},
@@ -17,8 +13,8 @@
     "packages": {
       "famono": {
         "git": "https://github.com/raix/Meteor-famono.git",
-        "tag": "v0.2.2",
-        "commit": "33439a1a1ba001772a2d2b26db1825875ba64f90"
+        "tag": "v0.3.8",
+        "commit": "4a1742a37253eef3834e52c97b98570265adc785"
       },
       "famous-components": {
         "path": ".."

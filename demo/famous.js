@@ -67,14 +67,28 @@ if (Meteor.isClient) {
     return Session.get('surfaceOne');
   }
 
-  Transform=null, Transitionable=null;
+  // famous globals for APP code
+  Transform=null;
   famousCmp.ready(function(require) {
-    Transform        = require('famous/core/Transform');
-    Transitionable   = require("famous/transitions/Transitionable");
-
-    var SpringTransition = require("famous/transitions/SpringTransition");
-    Transitionable.registerMethod('spring', SpringTransition);
+    Transform        = famous.core.Transform;
   });
+
+  // within the demo app, but famous-components will use this global too
+  if (Package['famous-compiled']) {
+    famous = {
+      core: Famous.Core,
+      events: Famous.Events,
+      inputs: Famous.Inputs,
+      math: Famous.Math,
+      modifiers: Famous.Modifiers,
+      physics: Famous.Physics,
+      surfaces: Famous.Surfaces,
+      transitions: Famous.Transitions,
+      utilities: Famous.Utilities,
+      views: Famous.Views,
+      widgets: Famous.Widgets
+    }
+  }
 
   Template.header.menu = function(issues) {
     var out = [];
