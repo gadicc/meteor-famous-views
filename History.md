@@ -1,5 +1,11 @@
 ## vNEXT
 
+## v0.0.14
+
+* Upgrade to famono 0.3.x
+* Rely on global famous object instead of require's
+* Rework how we handle famous-compiled and CDN
+
 ## v0.0.13
 
 * `Scrollview`'s can now be nested (in alternating `directions`'s).  Fixes #24.
