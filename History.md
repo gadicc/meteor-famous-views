@@ -1,5 +1,7 @@
 ## vNEXT
 
+* Fix edge case where `destroy` would bail (fixes #27)
+
 ## v0.0.14
 
 * Upgrade to famono 0.3.x
