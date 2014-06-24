@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.0.15
+
 * Fix edge case where `destroy` would bail (fixes #27)
 
 ## v0.0.14
