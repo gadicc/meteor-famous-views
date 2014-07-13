@@ -68,7 +68,7 @@ $ meteor
 
 All components may be used either inline or to include another template:
 
-Inline: `{{#famous}}content{{/content}}`
+Inline: `{{#famous}}content{{/famous}}`
 
 Inclusion: `{{>famous template='name'}}`
 
