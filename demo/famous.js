@@ -1,28 +1,21 @@
-Items = new Meteor.Collection('items');
-if (Meteor.isServer) {
-
-  if (Items.find().count() == 0)
-    _.each([
-      { name: 'Apple', type: 'fruit', picUrl: 'http://cdn.oxwordsblog.wpfuel.co.uk/wpcms/wp-content/uploads/apple-e1382039006457.jpg' },
-      { name: 'Banana', type: 'fruit', picUrl: 'http://statfaking2.firstpost.in/wp-content/uploads/2014/01/Banana.jpeg' },
-      { name: 'Cupcake', type: 'android', picUrl: 'http://www.sellmymobile.com/blog/wp-content/uploads/2011/03/ANdroid-Cupcake.gif' },
-      { name: 'Donut', type: 'android', picUrl: 'http://img1.wikia.nocookie.net/__cb20130520200422/logopedia/images/c/c5/Android-1_6-donut.jpg'},
-      { name: 'Eclair', type: 'android', picUrl: 'http://www.telecoms.com/files/2009/11/eclair.jpg'},
-      { name: 'Froyo', type: 'android', picUrl: 'http://www.androidcentral.com/sites/androidcentral.com/files/articleimage/684/2010/07/froyo-android.png'},
-      { name: 'Gingerbread', type: 'android', picUrl: 'http://4.bp.blogspot.com/-bEV5FOGSm1A/Unp5OqUrchI/AAAAAAAAAJY/WGa-VRiFjQk/s1600/Gingerbread.png'},
-      { name: 'Honeycomb', type: 'android', picUrl: 'http://mandal.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png'},
-      { name: 'Ice Cream', type: 'android', picUrl: 'http://pic.youmobile.org/img/Android-Ice-Cream-Sandwich-logo-588x394.jpg'},
-      { name: 'Jelly Bean', type: 'android', picUrl: 'http://www.extremetech.com/wp-content/uploads/2012/06/android-jelly-bean-logo1.jpg'},
-      { name: 'Kit Kat', type: 'android', picUrl: 'http://www.android.com/kitkat/images/android.png'},
-    ], function(item) {
-      Items.insert(item);
-    });
-
-  var x = Items.findOne({picUrl: 'http://www.telecoms.com/files/2009/11/eclair.jpg'});
-  if (x) Items.update(x._id, { $set: { picUrl: 'http://www.teleread.com/wp-content/uploads/2012/10/Android-Eclair.png' }});
-}
-
 if (Meteor.isClient) {
+  Items = new Meteor.Collection(null);
+
+  _.each([
+    { name: 'Apple', type: 'fruit', picUrl: 'http://cdn.oxwordsblog.wpfuel.co.uk/wpcms/wp-content/uploads/apple-e1382039006457.jpg' },
+    { name: 'Banana', type: 'fruit', picUrl: 'http://statfaking2.firstpost.in/wp-content/uploads/2014/01/Banana.jpeg' },
+    { name: 'Cupcake', type: 'android', picUrl: 'http://www.sellmymobile.com/blog/wp-content/uploads/2011/03/ANdroid-Cupcake.gif' },
+    { name: 'Donut', type: 'android', picUrl: 'http://img1.wikia.nocookie.net/__cb20130520200422/logopedia/images/c/c5/Android-1_6-donut.jpg'},
+    { name: 'Eclair', type: 'android', picUrl: 'http://www.teleread.com/wp-content/uploads/2012/10/Android-Eclair.png'},
+    { name: 'Froyo', type: 'android', picUrl: 'http://www.androidcentral.com/sites/androidcentral.com/files/articleimage/684/2010/07/froyo-android.png'},
+    { name: 'Gingerbread', type: 'android', picUrl: 'http://4.bp.blogspot.com/-bEV5FOGSm1A/Unp5OqUrchI/AAAAAAAAAJY/WGa-VRiFjQk/s1600/Gingerbread.png'},
+    { name: 'Honeycomb', type: 'android', picUrl: 'http://www.intomobile.com/wp-content/uploads/2010/11/Android-Honeycomb-Yellow-660x7591.jpg'},
+    { name: 'Ice Cream', type: 'android', picUrl: 'http://pic.youmobile.org/img/Android-Ice-Cream-Sandwich-logo-588x394.jpg'},
+    { name: 'Jelly Bean', type: 'android', picUrl: 'http://www.extremetech.com/wp-content/uploads/2012/06/android-jelly-bean-logo1.jpg'},
+    { name: 'Kit Kat', type: 'android', picUrl: 'http://www.android.com/kitkat/images/android.png'},
+  ], function(item) {
+    Items.insert(item);
+  });
 
   navbar = null;
   Template.header.rendered = function() {
