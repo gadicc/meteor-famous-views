@@ -35,11 +35,11 @@
 
 <template name="gridItem">
 	{{#Surface class='gridImg' size='[undefined,undefined]'}}
-		<img src="{{../../../picUrl}}" />
+		<img src="{{../../picUrl}}" />
 	{{/Surface}}
 	{{#Surface class='gridLabel'
 			size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
-		{{../../../name}}
+		{{../../name}}
 	{{/Surface}}
 </template>
 
@@ -55,11 +55,11 @@
 
 		&lt;template name="gridItem">
 			{{dstache}}#Surface class='gridImg' size='[undefined,undefined]'}}
-				<img src="{{dstache}}../../../picUrl}}" />
+				<img src="{{dstache}}../../picUrl}}" />
 			{{dstache}}/Surface}}
 			{{dstache}}#Surface class='gridLabel'
 					size="[undefined,38]" origin="[0,1]" translate="[0,0,1]"}}
-				{{dstache}}../../../name}}
+				{{dstache}}../../name}}
 			{{dstache}}/Surface}}
 		&lt;/template>				
 	{{/sh_highlight}}

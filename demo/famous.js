@@ -75,6 +75,7 @@ if (Meteor.isClient) {
 
   // within the demo app, but famous-components will use this global too
   if (Package['famous-compiled']) {
+    // @famono ignore
     famous = {
       core: Famous.Core,
       events: Famous.Events,

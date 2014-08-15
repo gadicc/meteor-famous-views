@@ -5,7 +5,8 @@
   },
   "packages": {
     "famono": {
-      "_git": "https://github.com/raix/Meteor-famono.git"
+      "_git": "https://github.com/raix/Meteor-famono.git",
+      "_tag": "v0.6.0"
     },
     "famous-components": {
       "path": ".."

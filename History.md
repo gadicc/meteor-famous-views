@@ -1,5 +1,10 @@
 ## vNEXT
 
+## v0.0.16
+
+* Change to new Blaze APIs from 0.8.3 (fixes #39)
+  Use v0.0.15 for Meteor versions below 0.8.3
+
 ## v0.0.15
 
 * Fix edge case where `destroy` would bail (fixes #27)

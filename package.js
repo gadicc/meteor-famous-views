@@ -6,7 +6,8 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-	api.use(['underscore', 'ui', 'minimongo', 'templating', 'jquery', 'deps'], 'client');
+	api.use(['underscore', 'jquery'], 'client');
+  api.use(['ui', 'blaze', 'minimongo', 'templating', 'deps', 'observe-sequence'], 'client');
 	api.use('pince', 'client');
 
   // https://github.com/meteor/meteor/issues/1358
@@ -22,7 +23,6 @@ Package.on_use(function (api) {
   		'lib/famous-components.js',
       'lib/compView.js',
       'lib/sequencer.js',
-      'lib/famous.html',
       'lib/famous.js',
       'lib/famousEach.js',
       'lib/famousEachSurface.js',
