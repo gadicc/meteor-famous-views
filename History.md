@@ -1,5 +1,10 @@
 ## vNEXT
 
+* Major data context improvements
+  Each View no longer creates it's own data context, so no longer necessary
+  to do `{{../../name}}` etc.  To scope a particular data context, use
+  `{{#with}}` like usual.
+
 ## v0.0.16
 
 * Change to new Blaze APIs from 0.8.3 (fixes #39)
