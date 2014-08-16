@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.0.17
+
 * Major data context improvements
   Each View no longer creates it's own data context, so no longer necessary
   to do `{{../../name}}` etc.  To scope a particular data context, use
