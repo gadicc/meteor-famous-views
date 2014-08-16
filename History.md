@@ -1,5 +1,8 @@
 ## vNEXT
 
+* famousCmp.views refactor
+* famousCmp.modifiers refactor
+
 ## v0.0.17
 
 * Major data context improvements

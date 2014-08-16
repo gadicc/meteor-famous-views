@@ -1,0 +1,35 @@
+<template name="reactivity">
+	{{#Scrollview}}
+		{{>Surface size="[undefined,100]" template="reactivityIntro"}}
+
+		{{#View size="[500,200]"}}
+			{{>Surface size="[100,100]" origin="[.5,.5]"
+				class="red-bg" template="reactiveBlock"
+				skewX=getSkewX skewY=getSkewY}}
+		{{/View}}
+	{{/Scrollview}}
+</template>
+
+<template name="reactiveBlock">Yo</template>
+
+<template name="reactivityIntro">
+	<div>
+		<h1>Reactivity</h1>
+
+		<p>
+			<span style="vertical-align: middle;">Skew X:</span>
+			<input type="range" name="skewX"
+				min="-1.5" max="1.5" step="0.01" value="{{getSkewX}}"
+				style="width: 400px; display: inline-block; vertical-align: middle;">
+			<input type="text" name="skewX" size="2" value="{{getSkewX}}">
+			<br />
+			<span style="vertical-align: middle;">Skew Y:</span>
+			<input type="range" name="skewY"
+				min="-1.5" max="1.5" step="0.01" value="{{getSkewY}}"
+				style="width: 400px; display: inline-block; vertical-align: middle;">
+			<input type="text" name="skewY" size="2" value="{{getSkewY}}">
+		</p>
+	</div>
+
+</template>
+
