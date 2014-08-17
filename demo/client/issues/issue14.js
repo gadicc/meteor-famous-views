@@ -24,7 +24,7 @@ if (Meteor.isClient) {
 	        e.preventDefault();
 
 	        var famousData = famousCmp.dataFromTpl(tpl);
-	        var data = famousData.component.parent.parent.data();
+	        var data = UI.getElementData(event.target);
 
 	        Clienti.update({_id: data._id}, {$inc: {numar: -1}});
 	        
@@ -43,8 +43,7 @@ if (Meteor.isClient) {
 	    },
 	    'click .btn-increase': function(e, tpl) {
 	        e.preventDefault();
-	        var famousData = famousCmp.dataFromTpl(tpl);
-	        var data = famousData.component.parent.parent.data();
+	        var data = UI.getElementData(event.target);
 	        Clienti.update({_id: data._id}, {$inc: {numar: 1}});
 	    }
 	});	

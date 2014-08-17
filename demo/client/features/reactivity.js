@@ -1,5 +1,7 @@
 Router.map(function() {
-  this.route('reactivity');
+  this.route('reactivity', {
+  	path: '/features/reactivity'
+  });
 });
 
 x = null;

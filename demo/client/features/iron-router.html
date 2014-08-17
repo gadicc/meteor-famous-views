@@ -1,0 +1,85 @@
+<template name="features_ironRouter">
+  {{#Surface}}
+    <div id="main" role="main">
+    	<h1>Iron Router Integration</h1>
+
+    	<p>Famous-views works with iron-router <b>out of the box</b>.</p>
+
+    	<p>There is nothing special you need to do, except plan your
+    	templates and layouts accordingly, i.e., don't wrap a Famous
+    	View with any HTML :)  Example below.</p>
+
+    	<p>
+    		To get a transition effect, simply wrap your yield inclusion thus:
+    		<code>
+    			{{dstache}}#RenderController}}
+    				<b>{{dstache}}>yield}}</b>
+  				{{dstache}}/RenderController}}
+				</code>.  For more information, see the
+				<a href="/views/RenderController">RenderController page</a>.
+  		</p>
+
+  		<h3>Example Layout</h3>
+
+  		<p>The layout below is similar to the one used on this site:</p>
+
+  		<ul>
+	  		<li>A static header, 50px tall, at the top of the page and always in front</li>
+	  		<li>Content in the remainder of the page, from iron-router with transitions</li>
+  		</ul>
+
+  		<p><b>JavaScript:</b></p>
+
+  		{{#sh_highlight lang="js"}}
+  			Router.configure({
+  				layoutTemplate: 'layout'
+  			});
+  		{{/sh_highlight}}
+
+  		<p><b>Templates:</b></p>
+
+  		{{#sh_highlight lang="html"}}
+				&lt;template name="layout">
+				  {{dstache}}#HeaderFooterLayout size="[undefined,undefined]" headerSize="50" footerSize="0"}}
+
+				    {{dstache}}#Surface target="header" size="[undefined,undefined]" translate="[0,0,100]"}}
+				    	<div id="header">{{dstache}}>yield region="header"}}</div>
+				    {{dstache}}/Surface}}
+
+				    {{dstache}}#RenderController target="content" size="[undefined,undefined]"}}
+				    	{{dstache}}>yield}}
+				    {{dstache}}/RenderController}}
+
+				  {{dstache}}/HeaderFooterLayout}}
+				&lt;/template>
+  		{{/sh_highlight}}  		
+
+			<p>Note:</p>
+
+			<ol>
+				<li>The header yield is rendered to a surface inside of a div</li>
+				<li>The main yield is wrapped only in the RenderController, so the
+				template should always include only a famous view</li>
+			</ol>
+
+			<p><b>Example Templates:</b></p>
+
+  		{{#sh_highlight lang="html"}}
+				&lt;template name="exampleHeaderYield">
+					I'm already wrapped inside a div in a surface!
+				&lt;/template>
+
+				&lt;template name="exampleMainYield">
+					{{dstache}}#Scrollview}}
+						{{dstache}}#famousEach items}}
+							{{dstache}}>Surface template="item"}}
+						{{dstache}}/famousEach}}
+					{{dstache}}/Scrollview}}
+				&lt;/template>
+  		{{/sh_highlight}}  		
+
+  		<p>See the <a href="/layouts">Layouts Page</a> for more help
+  		setting out your page.</p>
+   	</div>
+  {{/Surface}}
+</template>

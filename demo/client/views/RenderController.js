@@ -1,10 +1,10 @@
 // http://www.famo.us/examples/0.2.0/views/rendercontroller/example
 
-Menu.add('RenderController', 'Views');
+Menu.add({name:'RenderController',route:'views/RenderController'}, 'Views');
 
 Router.map(function() {
   this.route('views_RenderController', {
-  	path: '/RenderController'
+  	path: '/views/RenderController'
   });
 });
 

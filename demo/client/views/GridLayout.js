@@ -1,10 +1,10 @@
 // https://github.com/Famous/examples/blob/master/src/examples/views/GridLayout/
 
-Menu.add('GridLayout', 'Views');
+Menu.add({name:'GridLayout',route:'views/GridLayout'}, 'Views');
 
 Router.map(function() {
   this.route('views_GridLayout', {
-  	path: '/GridLayout'
+  	path: '/views/GridLayout'
   });
 });
 

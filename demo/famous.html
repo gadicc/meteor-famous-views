@@ -58,7 +58,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
+          <li><a href="/start">QuickStart</a></li>
           {{#each menu}}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{cat}} <b class="caret"></b></a>
@@ -69,7 +69,6 @@
             </ul>
           </li>
          	{{/each}}
-          <li><a href="/reactivity">Reactivity</a></li>
           <li><a href="/layouts">Layouts</a></li>
           <li><a href="/events">Events</a></li>
           {{#each menu true}}
@@ -94,7 +93,11 @@
     <div id="main" role="main">
     	<h1>famous-views (for Meteor)</h1>
 <p>
-Famous-views is an attempt at a tight integration between Blaze and Famous. All the other approaches I've seen so far side step most of Blaze, and require writing large amounts of code in JavaScript, which felt very unnatural to me in Meteor. Meteor code should be small, concise and easy with powerful results.
+Famous-views (formerly famous-components)
+is an attempt at a tight integration between Blaze and Famous. All the other
+approaches I've seen so far side step most of Blaze, and require writing large
+amounts of code in JavaScript, which felt very unnatural to me in Meteor. Meteor
+code should be small, concise and easy with powerful results.
 
 Requires
 <a href="http://www.famo.us/">Famo.us</a>, using one of:
@@ -107,7 +110,8 @@ or straight from the Famo.us CDN (see
 </p>
 
   <p>
-    <b>This site serves as both a demo and live documentation.  Go explore!</b>
+    <b>This site serves as both a demo and live documentation.
+    Explore the navbar above!</b>
   </p>
   <p>
     DoingFAMOUSwithMeteor?
@@ -115,24 +119,28 @@ or straight from the Famo.us CDN (see
       <a href="https://doingthiswith.wastelands.net/apps/search/famo.us">apps</a>
   </p>
 
-  <h3>Build the Famous Render Tree with Blaze Reactive Templates</h3>
+  <h3>Build the Famous Render Tree with Reactive Blaze Views</h3>
 
   {{#sh_highlight lang="html"}}
     {{dstache}}#Scrollview size="200,undefined"}}
       {{dstache}}#Surface}}
         <h1>Scrollview Example</h1>
       {{dstache}}/Surface}}
-      {{dstache}}#famousEach}}
+      {{dstache}}#famousEach items}}
         {{dstache}}>Surface template="item"}}
       {{dstache}}/famousEach}}
     {{dstache}}/Scrollview}}
   {{/sh_highlight}}
 
-  <h3>Other Features</h3>
+  <h3>Features</h3>
 
   <ul>
-    <li>Works with <b>iron-router</b> out of the box!  Not a single line of code required.</li>
-    <li><code>{{dstache}}#RenderController}}<b>{{dstache}}>yield}}</b>{{dstache}}/RenderController}}</code> for transitions - that's it!</li>
+    <li>Works with <a href="/features/iron-router">iron-router</a> out of the
+    box!  Not a single line of code required.</li>
+    <li><code>{{dstache}}#RenderController}}<b>{{dstache}}>yield}}</b>{{dstache}}/RenderController}}</code> for <b>transitions</b> - that's it!</li>
+    <li>Views are <a href="/features/reactivity">fully reactive</a>;
+    use a reactive data source to have views update
+    themsleves automatically with no extra work.</li>
     <li>Typical Meteor: write your code in JavaScript, CoffeeScript, HTML and Jade</li>
   </ul>
 

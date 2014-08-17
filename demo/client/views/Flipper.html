@@ -39,7 +39,7 @@
 					"click": function(event, tpl) {
 						var famousData = famousCmp.dataFromTemplate(tpl);
 						famousCmp.mainCtx.setPerspective(500);
-						famousData.parent.viewNode
+						famousData.parent.view
 							.setAngle(Math.PI, { curve : "easeOutBounce", duration : 500},
 								perspectiveZero);
 					}
@@ -49,7 +49,7 @@
 					"click": function(event, tpl) {
 						var famousData = famousCmp.dataFromTemplate(tpl);
 						famousCmp.mainCtx.setPerspective(500);
-						famousData.parent.viewNode
+						famousData.parent.view
 							.setAngle(0, { curve : "easeOutBounce", duration : 500},
 								perspectiveZero);
 					}

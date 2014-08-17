@@ -1,10 +1,10 @@
 // https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/example.js
 
-Menu.add('Scrollview', 'Views');
+Menu.add({name:'Scrollview',route:'views/Scrollview'}, 'Views');
 
 Router.map(function() {
   this.route('views_Scrollview', {
-  	path: '/Scrollview'
+  	path: '/views/Scrollview'
   });
 });
 

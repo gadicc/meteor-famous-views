@@ -10,7 +10,7 @@ if (Meteor.isServer) {
       { name: 'Eclair', type: 'android', picUrl: 'http://www.telecoms.com/files/2009/11/eclair.jpg'},
       { name: 'Froyo', type: 'android', picUrl: 'http://www.androidcentral.com/sites/androidcentral.com/files/articleimage/684/2010/07/froyo-android.png'},
       { name: 'Gingerbread', type: 'android', picUrl: 'http://4.bp.blogspot.com/-bEV5FOGSm1A/Unp5OqUrchI/AAAAAAAAAJY/WGa-VRiFjQk/s1600/Gingerbread.png'},
-      { name: 'Honeycomb', type: 'android', picUrl: 'http://mandal.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png'},
+      { name: 'Honeycomb', type: 'android', picUrl: 'http://www.androidheadlines.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png'},
       { name: 'Ice Cream', type: 'android', picUrl: 'http://pic.youmobile.org/img/Android-Ice-Cream-Sandwich-logo-588x394.jpg'},
       { name: 'Jelly Bean', type: 'android', picUrl: 'http://www.extremetech.com/wp-content/uploads/2012/06/android-jelly-bean-logo1.jpg'},
       { name: 'Kit Kat', type: 'android', picUrl: 'http://www.android.com/kitkat/images/android.png'},
@@ -20,6 +20,9 @@ if (Meteor.isServer) {
 
   var x = Items.findOne({picUrl: 'http://www.telecoms.com/files/2009/11/eclair.jpg'});
   if (x) Items.update(x._id, { $set: { picUrl: 'http://www.teleread.com/wp-content/uploads/2012/10/Android-Eclair.png' }});
+  x = Items.findOne({picUrl: 'http://mandal.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png'});
+  if (x) Items.update(x._id, { $set: { picUrl: 'http://www.androidheadlines.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png' }});
+  
 }
 
 if (Meteor.isClient) {

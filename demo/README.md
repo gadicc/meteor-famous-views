@@ -1,9 +1,4 @@
-Demo
+# famous-components demo
 
-Live example: ...
-
-See [packages/famous-components/README.md](packages/famous-components/README.md).
-
-and famous-iron-transitioner readme...
-
-
+See [packages/famous-components/README.md](packages/famous-components/README.md)
+for the full docs.

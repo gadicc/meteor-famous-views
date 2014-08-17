@@ -20,6 +20,19 @@ or straight from the Famo.us CDN (see
 
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
+### Build the Famous Render Tree with Reactive Blaze Templates
+
+```html
+{{#Scrollview size="200,undefined"}}
+  {{#Surface}}
+    <h1>Scrollview Example</h1>
+  {{/Surface}}
+  {{#famousEach}}
+    {{>Surface template="item"}}
+  {{/famousEach}}
+{{/Scrollview}}
+```
+
 ### Features & Basics
 
 * The `{{famous}}` component uses templates to create
@@ -43,19 +56,15 @@ This is a very early release.  More for playing around and discussion purposes.
 But it seems to be useable :)  Feedback is both welcome and appreciated, on
 github.
 
-## Quick Start
+## See the Demo and Live Docs
 
-1. `meteor create myFamousProject`
-1. `mrt add famono` (or mj-famous or famous-compiled or setup via CDN)
-1. `mrt add famous-components`
+https://famous-components.meteor.com/
 
-You can also `cd packages/famous-components/demo && meteor` to see the demo.
-which is still a work in progress (I wanted to get the package out first).
-More cool stuff coming soon.
+The most up-to-date information is here, including Quick Start,
+iron-router integration, etc.  Information below this line is less
+up to date, but still an important read until it makes it online :)
 
-First run takes a while to download Famous.
-
-To help with development:
+## Contributing
 
 ```bash
 $ git clone https://github.com/gadicc/meteor-famous-components
@@ -134,8 +143,10 @@ properties:
 
 * `parent` - parent compView or an object with `node: context`
 * `node` - the modifier, if one is specified, otherwise the view/surface
-* `viewNode` - SequentialView, Surface, etc, regardless of modifier
+* `view` - SequentialView, Surface, etc, regardless of modifier
+* `_view` - the registered View info.  name, class, options
 * `modifier` - the modifier, if one was specified
+* `_modifier` - the registered Modifier info.  name, class, options
 * `sequencer` - for any view that uses a sequence
 
 This allows you to interact directly with Famous objects
@@ -224,20 +235,6 @@ jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
 element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
 containing view in the case of a sequence (need to think about this). 
 
-* Setting modifiers (may still change):
-
-  ```js
-  famousCmp.modifiers.pageTransition = function(component, options) {
-    this.component = component;
-    this.famous = new StateModifier({
-      origin    : [-1, 0]
-    });
-  }
-  famousCmp.modifiers.pageTransition.prototype.postRender = function() {
-    this.famous.setOrigin([0,0], {duration : 500});
-  }
-  ```
-
 For more examples see the live demo at
 [famous-components.meteor.com](https://famous-components.meteor.com/).
 
@@ -264,10 +261,10 @@ of where this is useful.
 it overwrites the entire sequence).  This will also allow multiple
 famousEach's in the same template.~~
 
-* Allow update of StateModifiers from template attributes / data, e.g.
+* ~~Allow update of StateModifiers from template attributes / data, e.g.
 `{{>famous template='name' rotateX=rotateX}}` and enclosing template's
 `rotateX` helper is reactive.  (Depends on
-[Meteor issue #2010](https://github.com/meteor/meteor/issues/2010))
+[Meteor issue #2010](https://github.com/meteor/meteor/issues/2010))~~
 
 * Help for things like
 [responsive layouts](http://stackoverflow.com/questions/23140046/what-is-the-best-pattern-for-responsive-apps-in-famo-us)

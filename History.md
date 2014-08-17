@@ -1,7 +1,18 @@
 ## vNEXT
 
-* famousCmp.views refactor
-* famousCmp.modifiers refactor
+* Big improvement of demo site / live docs, i.e. more actual docs :)
+* REACTIVE ARGUMENTS FOR VIEWS!  See Features->Reactivity on the site.
+* Fix regression from v0.0.17 where template.rendered() funcs weren't run
+
+* famousCmp.views refactor, including breaking changes:
+** famousData.viewNode -> famousData.view (the actual Famous view instance)
+** famousData._view is now all the view data from `registerView`
+** famousData.view -> famousData._view.name
+
+* famousCmp.modifiers refactor, including breaking changes:
+** famousData.modifier (same as before)
+** famousData._modifier is now all the mod data from `registerModifier`
+** famousCmp.modifiers[x] is no longer a class, just an object
 
 ## v0.0.17
 
