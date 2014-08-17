@@ -23,12 +23,12 @@ Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 ### Build the Famous Render Tree with Reactive Blaze Templates
 
 ```html
-{{#Scrollview size="200,undefined"}}
-  {{#Surface}}
+{{#Scrollview size="[undefined,undefined]"}}
+  {{#Surface size="[200,undefined]"}}
     <h1>Scrollview Example</h1>
   {{/Surface}}
-  {{#famousEach}}
-    {{>Surface template="item"}}
+  {{#famousEach items}}
+    {{>Surface template="item" size=reactiveSize}}
   {{/famousEach}}
 {{/Scrollview}}
 ```
