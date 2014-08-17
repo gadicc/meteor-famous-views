@@ -29,14 +29,16 @@ if (Meteor.isClient) {
 
   navbar = null;
   Template.header.rendered = function() {
-    navbar = this.$('.navbar-nav');
+    navbar = this.$('.navbar');
     navbarActive(Router.current().path);
   }
   var navbarActive = function(path) {
     if (!navbar) return;
     if (this.path) path = this.path;
     navbar.find('li.active').removeClass('active');
+    navbar.find('a.active').removeClass('active');  // brand-header
     navbar.find('a[href="'+path+'"]').parent().addClass('active');
+    navbar.find('a[href="'+path+'"]').addClass('active');  // brand-header
   }
 
   Router.configure({
