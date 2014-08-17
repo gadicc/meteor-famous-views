@@ -2,34 +2,44 @@
 	{{#Scrollview}}
 		{{>Surface size="[undefined,100]" template="reactivityIntro"}}
 
-		{{#View size="[500,200]"}}
-			{{>Surface size="[100,100]" origin="[.5,.5]"
-				class="red-bg" template="reactiveBlock"
-				skewX=getSkewX skewY=getSkewY}}
-		{{/View}}
+		{{#SequentialLayout direction="X" size="[undefined,200]"}}
+			{{>Surface template="reactivityModState" size="[400,200]"}}
+			{{#View size="[400,200]"}}
+				{{>Surface size=getSize origin="[.5,.5]"
+					class="red-bg" template="reactiveBlock"
+					skewX=sess.skewX skewY=sess.skewY}}
+			{{/View}}
+		{{/SequentialLayout}}
 	{{/Scrollview}}
 </template>
 
-<template name="reactiveBlock">Yo</template>
+<template name="reactiveBlock">
+	<img src="/kitten.jpg" style="width: 100%; height: 100%">
+</template>
+
+<template name="nameSliderValue">
+	<div style="vertical-align: middle; width: 50px; display: inline-block; text-align: right">{{label}}</div>
+	<input type="range" name="{{name}}"
+		min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}"
+		style="width: 200px; display: inline-block; vertical-align: middle;">
+	<input type="text" name="{{name}}" size="2" value="{{value}}">
+	<br />
+</template>
 
 <template name="reactivityIntro">
-	<div>
-		<h1>Reactivity</h1>
+	<h1>Reactivity</h1>
+</template>
 
-		<p>
-			<span style="vertical-align: middle;">Skew X:</span>
-			<input type="range" name="skewX"
-				min="-1.5" max="1.5" step="0.01" value="{{getSkewX}}"
-				style="width: 400px; display: inline-block; vertical-align: middle;">
-			<input type="text" name="skewX" size="2" value="{{getSkewX}}">
-			<br />
-			<span style="vertical-align: middle;">Skew Y:</span>
-			<input type="range" name="skewY"
-				min="-1.5" max="1.5" step="0.01" value="{{getSkewY}}"
-				style="width: 400px; display: inline-block; vertical-align: middle;">
-			<input type="text" name="skewY" size="2" value="{{getSkewY}}">
-		</p>
-	</div>
-
+<template name="reactivityModState">
+	<p>
+		{{>nameSliderValue name="sizeX" value=sess.sizeX label="Size X:"
+			min="0" max="300" step="1"}}
+		{{>nameSliderValue name="sizeY" value=sess.sizeY label="Size Y:"
+			min="0" max="300" step="1"}}
+		{{>nameSliderValue name="skewX" value=sess.skewX label="Skew X:"
+			min="-1.5" max="1.5" step="0.01"}}
+		{{>nameSliderValue name="skewY" value=sess.skewY label="Skew Y:"
+			min="-1.5" max="1.5" step="0.01"}}
+	</p>
 </template>
 

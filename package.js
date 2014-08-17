@@ -38,7 +38,8 @@ Package.on_use(function (api) {
       'lib/views/Flipper.js',
       'lib/views/HeaderFooterLayout.js',
       'lib/views/RenderController.js',
-      'lib/views/Scrollview.js'
+      'lib/views/Scrollview.js',
+      'lib/views/Surface.js'
     ],
     'client'
   );

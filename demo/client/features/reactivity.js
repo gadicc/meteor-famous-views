@@ -10,7 +10,7 @@ Template.reactiveBlock.rendered = function() {
 	x = famousData.modifier;
 };
 
-Template.reactivityIntro.events({
+Template.nameSliderValue.events({
 	'input input': function(event, tpl) {
 		var $target = $(event.target);
 		var name = $target.attr('name');
@@ -19,10 +19,15 @@ Template.reactivityIntro.events({
 	}
 });
 
-
 Session.setDefault('skewX', 0); Session.setDefault('skewY', 0);
-Template.reactivity.getSkewX = function() { return Session.get('skewX'); };
-Template.reactivity.getSkewY = function() { return Session.get('skewY'); };
+Session.setDefault('sizeX', 100); Session.setDefault('sizeY', 100);
 
-Template.reactivityIntro.getSkewX = Template.reactivity.getSkewX;
-Template.reactivityIntro.getSkewY = Template.reactivity.getSkewY;
+Template.reactivity.sess = Template.reactivityModState.sess = {};
+var props = ['skewX', 'sizeX', 'skewY', 'sizeY'];
+_.each(props, function(prop) {
+	Template.reactivity.sess[prop] = function() { return Session.get(prop); }
+});
+
+Template.reactivity.getSize = function() {
+	return [ Session.get('sizeX'), Session.get('sizeY' )];
+}
