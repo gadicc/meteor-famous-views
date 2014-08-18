@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.0.18
+
 * Big improvement of demo site / live docs, i.e. more actual docs :)
 * REACTIVE ARGUMENTS FOR VIEWS!  See Features->Reactivity on the site.
 * Fix regression from v0.0.17 where template.rendered() funcs weren't run
