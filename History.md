@@ -3,6 +3,7 @@
 * Big improvement of demo site / live docs, i.e. more actual docs :)
 * REACTIVE ARGUMENTS FOR VIEWS!  See Features->Reactivity on the site.
 * Fix regression from v0.0.17 where template.rendered() funcs weren't run
+* Each CompView now gets a unique id (see debug log). `famousCmp.byId(id);`
 
 * famousCmp.views refactor, including breaking changes:
 ** famousData.viewNode -> famousData.view (the actual Famous view instance)
