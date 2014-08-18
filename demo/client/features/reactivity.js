@@ -6,18 +6,20 @@ Router.map(function() {
 
 Template.nameSliderValue.events({
 	'input input': function(event, tpl) {
-		if (Session.get('modRender') !== 'instant') return;
 		var $target = $(event.target);
 		var name = $target.attr('name');
 		var value = $target.val();
-		Session.set(name, parseFloat(value));
+
+		if (Session.get('modRender') === 'instant' || name === 'width')
+			Session.set(name, parseFloat(value));
 	},
 	'change input': function(event, tpl) {
-		if (Session.get('modRender') === 'instant') return;
 		var $target = $(event.target);
 		var name = $target.attr('name');
 		var value = $target.val();
-		Session.set(name, parseFloat(value));		
+
+		if (Session.get('modRender') !== 'instant' || name !== 'width')
+			Session.set(name, parseFloat(value));		
 	}
 });
 
