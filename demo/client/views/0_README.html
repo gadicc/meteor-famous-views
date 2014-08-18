@@ -38,25 +38,33 @@
     	<h3>Out of the Box</h3>
 
     	<ul>
-    		<li><p>Child templates will call <code>add()</code>, or be added
-    			to an array for <code>sequenceFrom()</code> if the view provides it.
-    			In the case of the latter, <code>{{dstache}}#famousEach}}</code>
-    			may be used.</p></li>
+    		<li><p>Child templates will be added using the view's
+            <code>add()</code> method.  Alternatively, if the view provides
+            a <code>sequenceFrom()</code> method, children will be added to
+            a managed array, and <code>{{dstache}}#famousEach}}</code> may
+            be used (all reactive, of course).</p></li>
 
-    		<li><p>Arguments will be automatically decoded like all other view
+    		<li><p>Arguments are automatically decoded like in all the view
     		examples; strings like <code>dimensions="[3,3]"</code> are translated
-    		to the appropriate object, or functions (template helpers) may be
-        provided instead.  For reactivity, see the next section below.</p></li>
+    		to an array of 2 numbers; otherwise functions (i.e. reactive 
+            template helpers) may be used instead to provide an exact value.
+            </p></li>
 
-        <li><p>If no modifier is specified, but typical arguments for a 
-        StateModifier are given, e.g.
-        <code>size="[100,100]"</code>, a StateModifier is automatically
-        prepended to the Render Tree as part of the CompView node.</p></li>
+            <li><p>If the view has a <code>setOptions()</code> method,
+            it will be reactively called on any invalidation of any
+            of the above arguments.  For custom methods, see the
+            <code>attrUpdate</code> callback in "Advanced Views", below.
+            </p></li>
+
+            <li><p>If no modifier is specified, but typical arguments for a 
+            StateModifier are given, e.g.
+            <code>size="[100,100]"</code>, a StateModifier is automatically
+            prepended to the Render Tree as part of the CompView node.</p></li>
 
     		<li><p>When called like <code>{{dstache}}>View template="x"}}</code>,
     		of course all the regular Meteor template stuff applies, so you can
     		do things in <code>Template.x.rendered = function() { }</code>, setup
-    		helpers for children, etc.</p></li>
+    		events, etc.</p></li>
     	</ul>
 
     	<h3>Advanced Views</h3>
