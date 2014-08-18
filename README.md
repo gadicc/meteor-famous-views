@@ -20,16 +20,19 @@ or straight from the Famo.us CDN (see
 
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
-### Build the Famous Render Tree with Reactive Blaze Templates
+### Build the Famous Render Tree with Reactive Blaze Views
 
 ```html
 {{#Scrollview size="[undefined,undefined]"}}
+
   {{#Surface size="[200,undefined]"}}
     <h1>Scrollview Example</h1>
   {{/Surface}}
+
   {{#famousEach items}}
     {{>Surface template="item" size=reactiveSize}}
   {{/famousEach}}
+
 {{/Scrollview}}
 ```
 
