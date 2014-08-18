@@ -1,23 +1,23 @@
 <template name="layouts">
 	{{#Scrollview size="[undefined,undefined]"}}
 
-		{{#Surface size="[undefined,60]"}}
+		{{#Surface size="[undefined,60]" translate="[20,0]"}}
 			<h1>Layout Examples</h1>
 		{{/Surface}}
 
-		{{#Surface size="[undefined,90]"}}
+		{{#Surface size="[undefined,90]" translate="[20,0]"}}
 			<h2>Horizontal SequentialLayout</h2>
 			<p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow
 			horizontally.</p>
 		{{/Surface}}
 
-		{{#SequentialLayout direction="X" size="[undefined,110]"}}
+		{{#SequentialLayout direction="X" size="[undefined,110]" translate="[20,0]"}}
 			{{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
 			{{#Surface size="[150,100]" class="green-bg"}}#2{{/Surface}}
 			{{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
 		{{/SequentialLayout}}
 
-		{{#Surface size="[undefined,110]"}}
+		{{#Surface size="[undefined,110]" translate="[20,0]"}}
 			{{#sh_highlight lang="html"}}
 				{{dstache}}#SequentialLayout direction="X" size="[undefined,160]"}}
 					{{dstache}}#Surface size="[150,100]" class="red-bg"}}#1{{dstache}}/Surface}}
@@ -27,7 +27,7 @@
 			{{/sh_highlight}}
 		{{/Surface}}
 
-		{{#Surface size="[undefined,90]"}}		
+		{{#Surface size="[undefined,90]" translate="[20,0]"}}		
 			<h2>Columns</h2>
 			<p>Use a <i>GridLayout</i> with <i>dimensions="[x,1]"</i>
 			for columns that fill the container (try resize the window)</p>
@@ -39,7 +39,7 @@
 			{{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
 		{{/GridLayout}}
 
-		{{#Surface size="[undefined,100]"}}
+		{{#Surface size="[undefined,100]" translate="[20,0]"}}
 			{{#sh_highlight lang="html"}}
 				{{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}col1{{dstache}}/Surface}}
@@ -49,7 +49,7 @@
 			{{/sh_highlight}}
 		{{/Surface}}
 
-		{{#Surface size="[undefined,90]"}}	
+		{{#Surface size="[undefined,90]" translate="[20,0]"}}	
 			<h2>Centering / Fine-Tuning Layout</h2>
 			<p>Use <i>view="View"</i> to manually position child surfaces with
 				<i>origin</i>, <i>size</i> and <i>translate</i>.</p>
@@ -66,7 +66,7 @@
 			{{/Surface}}
 		{{/View}}
 
-		{{#Surface size="[undefined,160]"}}
+		{{#Surface size="[undefined,160]" translate="[20,0]"}}
 			{{#sh_highlight lang="html"}}
 				{{dstache}}#View size="[undefined,160]"}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}
@@ -80,7 +80,7 @@
 			{{/sh_highlight}}
 		{{/Surface}}
 
-		{{#Surface size="[undefined,220"}}
+		{{#Surface size="[undefined,50]" translate="[20,0]"}}
 			<p>For more complicated layouts, you'll probably want to use a <b>View</b>.
 			See the drop-down menu at the top of this page for more info.</p>
 		{{/Surface}}
