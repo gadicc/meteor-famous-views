@@ -3,7 +3,11 @@
 * Big improvement of demo site / live docs, i.e. more actual docs :)
 * REACTIVE ARGUMENTS FOR VIEWS!  See Features->Reactivity on the site.
 * Fix regression from v0.0.17 where template.rendered() funcs weren't run
-* Each CompView now gets a unique id (see debug log). `famousCmp.byId(id);`
+
+* Each CompView now gets a unique id (see debug log).
+* If you commit to a single simultaneous render, you can set id="name"
+* Fetch a CompView directly with `famousCmp.byId(id);`
+
 * Debug: Don't share parent & template if they're the same
 * Keep track of children and destroy them properly
 * Fix famousEach observe computation leak

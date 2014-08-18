@@ -1,16 +1,88 @@
 <template name="reactivity">
 	{{#Scrollview}}
-		{{>Surface size="[undefined,100]" template="reactivityIntro"}}
+		{{#Surface size="[undefined,80]" class="leftPad"}}
+			<h1>Reactivity</h1>
 
-		{{#SequentialLayout direction="X" size="[undefined,200]"}}
-			{{>Surface template="reactivityModState" size="[400,200]"}}
-			{{#View size="[400,200]"}}
-				{{>Surface size=getSize origin="[.5,.5]"
-					class="red-bg" template="reactiveBlock"
-					skewX=sess.skewX skewY=sess.skewY}}
+			<p>Famous-views fully embraces the principle of Meteor reactivity,
+			bringing you all these benefits to Famous for rapid prototyping
+			and generally awesome code.</p>
+		{{/Surface}}
+
+		{{#Surface size="[undefined,130]" class="leftPad"}}
+			<h2>GridView</h2>
+
+			<p>Here's an example changing the number of columns based on
+			the screen size:</p>
+
+			{{>nameSliderValue name="width" value=sess.width label="Width:"
+				min="30" max="700" step="1"}}
+		{{/Surface}}
+
+		{{#View size=gridSize translate="[20,0]"}}
+			{{#GridLayout dimensions=gridDimensions}}
+				{{#Surface size="[undefined,undefined]" class="red-bg"}}{{/Surface}}
+				{{#Surface size="[undefined,undefined]" class="green-bg"}}{{/Surface}}
+				{{#Surface size="[undefined,undefined]" class="blue-bg"}}{{/Surface}}
+			{{/GridLayout}}
+		{{/View}}
+
+		{{>Surface template="reactiveGridLayoutSource"
+			class="leftPad" size="[undefined,340]"}}
+
+		{{#Surface size="[undefined,130]" class="leftPad"}}
+			<h2>StateModifier</h2>
+
+			<p>Most commonly we probably want to change things like size,
+			opacity, transforms, etc, and this is very easily handled with
+			<code>StateModifier</code>, which includes transition support.
+			Here's an example: (change pages and come back and you'll see
+			all the Session variables are preserved)</p>
+		{{/Surface}}
+
+		{{#SequentialLayout direction="X"
+				size="[undefined,230]" translate="[20,0,0]"}}
+			{{>Surface template="reactivityModState" size="[400,undefined]"}}
+			{{#View size="[400,undefined]"}}
+				{{>Surface id="block" template="reactiveBlock"
+					origin="[.5,.5]" class="red-bg" size=getSize
+					skewX=sess.skewX skewY=sess.skewY
+					rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateY}}
 			{{/View}}
 		{{/SequentialLayout}}
+
+		{{>Surface template="reactivityModStateSource"
+			size="[undefined,450]" class="leftPad"}}
 	{{/Scrollview}}
+</template>
+
+<template name="reactiveGridLayoutSource">
+	<br />
+	<p><b>Template:</b></p>
+
+	{{#sh_highlight lang="html"}}
+		{{dstache}}#View size=gridSize}}
+			{{dstache}}#GridLayout dimensions=gridDimensions}}
+				{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}{{dstache}}/Surface}}
+				{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}{{dstache}}/Surface}}
+				{{dstache}}#Surface size="[undefined,undefined]" class="blue-bg"}}{{dstache}}/Surface}}
+			{{dstache}}/GridLayout}}
+		{{dstache}}/View}}
+	{{/sh_highlight}}
+
+	<p>Of course, you could as easily use a <code>{{dstache}}#famousEach}}</code>,
+	with a reactive helper returning a minimongo query, appropriately limited.</p>
+
+	<p><b>JavaScript:</b></p>
+
+	{{#sh_highlight lang="js"}}
+		Session.setDefault('width', 350);
+		Template.reactivity.gridSize = function() {
+			return [ Session.get('width'), 100 ];
+		}
+		Template.reactivity.gridDimensions = function() {
+			return [ Math.ceil(Session.get('width') / 234), 1 ];
+		}
+	{{/sh_highlight}}	
 </template>
 
 <template name="reactiveBlock">
@@ -18,16 +90,12 @@
 </template>
 
 <template name="nameSliderValue">
-	<div style="vertical-align: middle; width: 50px; display: inline-block; text-align: right">{{label}}</div>
+	<div style="vertical-align: middle; width: 60px; display: inline-block; text-align: right">{{label}}</div>
 	<input type="range" name="{{name}}"
 		min="{{min}}" max="{{max}}" step="{{step}}" value="{{value}}"
 		style="width: 200px; display: inline-block; vertical-align: middle;">
 	<input type="text" name="{{name}}" size="2" value="{{value}}">
 	<br />
-</template>
-
-<template name="reactivityIntro">
-	<h1>Reactivity</h1>
 </template>
 
 <template name="reactivityModState">
@@ -40,6 +108,65 @@
 			min="-1.5" max="1.5" step="0.01"}}
 		{{>nameSliderValue name="skewY" value=sess.skewY label="Skew Y:"
 			min="-1.5" max="1.5" step="0.01"}}
+		{{>nameSliderValue name="rotateX" value=sess.rotateX label="Rotate X:"
+			min="-180" max="180" step="1"}}
+		{{>nameSliderValue name="rotateY" value=sess.rotateY label="Rotate Y:"
+			min="-180" max="180" step="1"}}
+		{{>nameSliderValue name="rotateZ" value=sess.rotateZ label="Rotate Z:"
+			min="-180" max="180" step="1"}}
+	</p>
+
+	<p>
+		<label><input type="radio" name="render" value="instant"
+			checked={{renderType 'instant'}}> Instant</label>
+		&nbsp;
+		<label><input type="radio" name="render" value="transition"
+			checked={{renderType 'transition'}}> Transition</label>
+		{{#if renderType 'transition'}}
+			&nbsp;
+			<label><input type="checkbox" name="halt"
+				checked={{sess.modTransHalt}}> Halt?</label>
+		{{/if}}
 	</p>
 </template>
 
+<template name="reactivityModStateSource">
+	<b>Template:</b>
+
+	{{#sh_highlight lang="html"}}
+		{{dstache}}>Surface id="block" template="reactiveBlock"
+			origin="[.5,.5]" class="red-bg" size=getSize
+			skewX=sess.skewX skewY=sess.skewY
+			rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateY}}
+	{{/sh_highlight}}
+
+	<b>Javascript:</b>
+
+	{{#sh_highlight lang="js"}}
+		// Reactive getSize() helper
+		Template.reactivity.getSize = function() {
+			return [ parseInt(Session.get('sizeX')), parseInt(Session.get('sizeY')) ];
+		}
+
+		// Reactively set/unset a default modifier transition
+		Template.reactivityModState.rendered = function() {
+			this.autorun(function() {
+				if (Session.get('modRender') == 'instant') {
+					delete famousCmp.byId('block').modifierTransition;
+				} else {
+					famousCmp.byId('block').modifierTransition
+						= { curve: 'easeIn', duration: 1000 };
+				}
+			});
+		}
+	{{/sh_highlight}}
+
+	<p>Note, setting <code>compView.modifierTransition</code> is not documented
+	anywhere else yet, but you get the idea.  So far this is only used for
+	reactive modifier updates.</p>
+
+	<p>Full source:
+		<a href="https://github.com/gadicc/meteor-famous-components/blob/master/demo/client/features/reactivity.html">reactivity.html</a> |
+		<a href="https://github.com/gadicc/meteor-famous-components/blob/master/demo/client/features/reactivity.js">reactivity.js</a>
+	</p>
+</template>

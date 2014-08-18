@@ -7,6 +7,8 @@
 }
 
 #main { height: 100%; overflow-y: scroll; padding: 0 20px 0 20px; }
+.leftPad { padding-left: 20px; }
+
 
 .navbar-fixed-top { z-index: 100; }
 .navbar-brand.active { color: white; background: black; }
