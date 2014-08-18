@@ -21,6 +21,8 @@
 	font-size: 1.1em;
 }
 
+.gridImg { text-align: center; }
+
 .gridImg img {
 	_width: 100%;
 	height: 100%;
