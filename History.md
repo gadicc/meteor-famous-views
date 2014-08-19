@@ -1,11 +1,14 @@
 ## vNEXT
 
+## v0.0.20
+
 * Renaming / improvements in various internal identifiers
 * compView -> meteorFamousView (aka "fview")
 * blazeView.famousView -> blazeView.fview (a meteorFamousView object);
 * fview.component -> fview.blazeView;
 
 * Debug: Don't show parent & template if they're the same
+* a registeredView's add() method now gets a child_options argument
 
 ## v0.0.19
 

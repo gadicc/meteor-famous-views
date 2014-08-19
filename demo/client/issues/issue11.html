@@ -1,25 +1,35 @@
 <template name="issue11">
-  {{#famous direction='X' items=items}}
-	  {{> i11_Scrollview}}
-	  {{> i11_Scrollview2}}
+  {{#famous direction='X'}}
+
+    {{#Scrollview size="[200,200]"}}
+      {{#famousEach items}}
+       {{>Surface template='listItem' size="[undefined,50]"}}
+      {{/famousEach}}
+    {{/Scrollview}}
+
+
+    {{#Scrollview size="[200,200]"}}
+      {{#famousEach items}}
+       {{>Surface template='listItem' size="[undefined,50]"}}
+      {{/famousEach}}
+    {{/Scrollview}}
+
   {{/famous}}
 </template>
 
 <template name="i11_Scrollview">
-  {{#Scrollview size="[200,200]" items=items}}
-
+  {{#Scrollview size="[200,200]"}}
     {{#famousEach items}}
-     {{>Surface data=this template='listItem' size="[undefined,50]"}}
+     {{>Surface template='listItem' size="[undefined,50]"}}
     {{/famousEach}}
-
   {{/Scrollview}}
 </template>
 
 <template name="i11_Scrollview2">
-  {{#Scrollview size="[200,200]" items=items}}
+  {{#Scrollview size="[200,200]"}}
 
     {{#famousEach items}}
-     {{>Surface data=this template='listItem' size="[undefined,50]"}}
+     {{>Surface template='listItem' size="[undefined,50]"}}
     {{/famousEach}}
 
   {{/Scrollview}}
