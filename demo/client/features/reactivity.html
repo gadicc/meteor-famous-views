@@ -44,8 +44,8 @@
 			{{>Surface template="reactivityModState" size="[400,undefined]"}}
 			{{#View size="[400,undefined]"}}
 				{{>Surface id="block" template="reactiveBlock"
-					origin="[.5,.5]" class="red-bg" size=getSize
-					skewX=sess.skewX skewY=sess.skewY
+					origin="[.5,.5]" class="red-bg"
+					size=getSize skewX=sess.skewX skewY=sess.skewY
 					rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateY}}
 			{{/View}}
 		{{/SequentialLayout}}
@@ -109,11 +109,11 @@
 		{{>nameSliderValue name="skewY" value=sess.skewY label="Skew Y:"
 			min="-1.5" max="1.5" step="0.01"}}
 		{{>nameSliderValue name="rotateX" value=sess.rotateX label="Rotate X:"
-			min="-180" max="180" step="1"}}
+			min="-90" max="90" step="1"}}
 		{{>nameSliderValue name="rotateY" value=sess.rotateY label="Rotate Y:"
-			min="-180" max="180" step="1"}}
+			min="-90" max="90" step="1"}}
 		{{>nameSliderValue name="rotateZ" value=sess.rotateZ label="Rotate Z:"
-			min="-180" max="180" step="1"}}
+			min="-90" max="90" step="1"}}
 	</p>
 
 	<p>
@@ -135,8 +135,8 @@
 
 	{{#sh_highlight lang="html"}}
 		{{dstache}}>Surface id="block" template="reactiveBlock"
-			origin="[.5,.5]" class="red-bg" size=getSize
-			skewX=sess.skewX skewY=sess.skewY
+			origin="[.5,.5]" class="red-bg"
+			size=getSize skewX=sess.skewX skewY=sess.skewY
 			rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateY}}
 	{{/sh_highlight}}
 
@@ -145,16 +145,16 @@
 	{{#sh_highlight lang="js"}}
 		// Reactive getSize() helper
 		Template.reactivity.getSize = function() {
-			return [ parseInt(Session.get('sizeX')), parseInt(Session.get('sizeY')) ];
+			return [ Session.get('sizeX'), Session.get('sizeY') ];
 		}
 
 		// Reactively set/unset a default modifier transition
 		Template.reactivityModState.rendered = function() {
 			this.autorun(function() {
 				if (Session.get('modRender') == 'instant') {
-					delete famousCmp.byId('block').modifierTransition;
+					delete FView.byId('block').modifierTransition;
 				} else {
-					famousCmp.byId('block').modifierTransition
+					FView.byId('block').modifierTransition
 						= { curve: 'easeIn', duration: 1000 };
 				}
 			});

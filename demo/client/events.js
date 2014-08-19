@@ -2,7 +2,7 @@ Router.map(function() {
   this.route('eventsDemo', { path: '/events'});
 });
 
-famousCmp.ready(function(require) {
+FView.ready(function(require) {
   var SpringTransition = famous.transitions.SpringTransition;
   var Transitionable = famous.transitions.Transitionable;
   Transitionable.registerMethod('spring', SpringTransition);
@@ -17,9 +17,9 @@ var springTransition = {
 
 Template.springBall.events({
   'mouseover': function(event, tpl) {
-    var famousData = famousCmp.dataFromTpl(tpl);
-    famousData.modifier.halt();
-    famousData.modifier.setTransform(
+    var fview = FView.fromTemplate(tpl);
+    fview.modifier.halt();
+    fview.modifier.setTransform(
       famous.core.Transform.translate(
         Math.random()*(window.innerWidth/2),
         Math.random()*(window.innerHeight/2)

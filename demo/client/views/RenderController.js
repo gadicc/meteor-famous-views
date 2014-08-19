@@ -36,7 +36,7 @@ Template.rc_buttons.events({
 
 Session.setDefault('currentTransition', 'opacity');
 Template.rc_transitions.helpers({
-	'transitions': _.keys(famousCmp.transitions),
+	'transitions': _.keys(FView.transitions),
 	isSet: function() {
 		return this.valueOf() == Session.get('currentTransition') ? 'set' : '';
 	}

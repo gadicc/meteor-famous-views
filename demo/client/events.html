@@ -60,9 +60,9 @@
 
 		Template.blockSpring.events({
 		  'mouseover': function(event, tpl) {
-		    var famousComp = famousCmp.dataFromTpl(tpl);
-		    famousComp.modifier.halt();
-		    famousComp.modifier.setTransform(
+		    var fview = FView.fromTemplate(tpl);
+		    fview.modifier.halt();
+		    fview.modifier.setTransform(
 		      Transform.translate(
 		        Math.random()*(window.innerWidth/2),
 		        Math.random()*(window.innerHeight/2)

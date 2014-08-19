@@ -99,7 +99,7 @@ Commonly used Views like `SequentialLayout`, `View` and the explicit
 `Surface` are all built in.  Anything else you need should be explicitly
 registered, to avoid unnecessary code being send down to the client:
 
-`famousCmp.registerView('View', require("famous/core/View"));`
+`FView.registerView('View', require("famous/core/View"));`
 
 For more examples see the live demo at
 [famous-components.meteor.com](https://famous-components.meteor.com/).
@@ -154,9 +154,9 @@ properties:
 
 This allows you to interact directly with Famous objects
 from e.g. **Template.events, Template.rendered, helpers, etc**.
-`famousCmp.dataFromTemplate` or `famousCmp.dataFromComponent` will help
+`FView.fromTemplate` or `FView.fromBlazeView` will help
 you retrieve the compView from descendent template instances.
-`famousCmp.dataFromElement` acts on a DOM element (useful for drag &
+`FView.fromElement` acts on a DOM element (useful for drag &
 drop, etc).  See the Sample Render Tree at the  bottom of this doc.
 
 
@@ -190,16 +190,16 @@ comment out components, use Blaze's comment syntax `{{! like this}}`.
 
 ## JS API
 
-* `famousCmp.mainCtx = yourMainContext` else one will be generated for you and made available here.
+* `FView.mainCtx = yourMainContext` else one will be generated for you and made available here.
 
-* `famousCmp.registerView('View', require("famous/core/View") [,options]);`
+* `FView.registerView('View', require("famous/core/View") [,options]);`
 allows you
 to use a `{{#View}}` inline and `{{>View template='name'}}` inclusion
-component.  The raw famous View is available as `famousCmp.views.View`.
+component.  The raw famous View is available as `Fview.views.View`.
 You can also manually specify `{{#famous view='View'}}`.  See the next
 sectoin for available options.
 
-* `famousCmp.dataFromTemplate` and `.dataFromComponent` -- use these functions in
+* `FView.fromTemplate` and `FView.fromBlazeView` -- use these functions in
 Template created, rendered, events, helpers, to get the compView object, which
 contains a `node` property to the actual Famous node (view, surface, etc).  Feel
 free to use these functions in descendent templates, they'll climb the component
@@ -210,8 +210,8 @@ for what we keep in a compView instance.
     // Event callbacks
     Template.blockSpring.events({
       'click': function(event, tpl) {
-        var famousData = famousCmp.dataFromTpl(tpl);
-        famousData.modifier.setTransform(
+        var fview = FView.fromTemplate(tpl);
+        fview.modifier.setTransform(
           Transform.translate(Math.random()*500,Math.random()*300),
           springTransition
         );
@@ -222,7 +222,7 @@ for what we keep in a compView instance.
   ```js
     // Lifecycle callbacks (including `created` and `destroyed`)
     Template.example.rendered = function() {
-      var famousData = famousCmp.dataFromTpl(this);
+      var fview = FView.fromTemplate(this);
       // Use this.$() to find DOM elements here
       // (since the template is rendered before it's added to the document)
     }
@@ -233,7 +233,7 @@ for what we keep in a compView instance.
   inline with `{{#View}}`, but rather like `{{>View template="x"}}` and
   then use `Template.x.rendered`, etc.
 
-* `famousCmp.dataFromElement` -- as above but for a DOM element.  If you're using
+* `FView.fromElement` -- as above but for a DOM element.  If you're using
 jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
 element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
 containing view in the case of a sequence (need to think about this). 

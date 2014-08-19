@@ -72,7 +72,7 @@
 		/* Entrance animation code follows */
 		var queue = [];
 		Template.gridItem.rendered = function() {
-			var modifier = famousCmp.dataFromTemplate(this).modifier;
+			var modifier = FView.fromTemplate(this).modifier;
 
 			modifier.setTransform(Transform.translate(500,500));
 

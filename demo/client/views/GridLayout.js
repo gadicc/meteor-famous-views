@@ -8,9 +8,9 @@ Router.map(function() {
   });
 });
 
-famousCmp.ready(function(require) {
-	famousCmp.registerView('GridLayout', famous.views.GridLayout);
-	famousCmp.registerView('ContainerSurface', famous.surfaces.ContainerSurface);
+FView.ready(function(require) {
+	FView.registerView('GridLayout', famous.views.GridLayout);
+	FView.registerView('ContainerSurface', famous.surfaces.ContainerSurface);
 });
 
 Template.views_GridLayout.items = function() {
@@ -19,13 +19,13 @@ Template.views_GridLayout.items = function() {
 
 var queue = [];
 Template.gridItem.rendered = function() {
-	var modifier = famousCmp.dataFromTemplate(this).modifier;
+	var modifier = FView.fromTemplate(this).modifier;
 
 	// not sure about this :>
 	/*
-	var famousData = famousCmp.dataFromTemplate(this);
-	var ContainerSurface = famousData.parent.node._object.node._child[0]._object;
-	var GridLayout = famousData.parent.component.parent.famousData.parent.node._child._object;
+	var fview = FView.dataFromTemplate(this);
+	var ContainerSurface = fview.parent.node._object.node._child[0]._object;
+	var GridLayout = fview.parent.component.parent.famousData.parent.node._child._object;
 	modifier._modifier.sizeFrom(function() {
 		var contextSize = GridLayout._contextSizeCache;
 		var dimensions = GridLayout._dimensionsCache;

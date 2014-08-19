@@ -23,7 +23,7 @@ if (Meteor.isClient) {
 	    'click .btn-decrease': function(e, tpl) {
 	        e.preventDefault();
 
-	        var famousData = famousCmp.dataFromTpl(tpl);
+	        var fview = FView.fromTemplate(tpl);
 	        var data = UI.getElementData(event.target);
 
 	        Clienti.update({_id: data._id}, {$inc: {numar: -1}});
@@ -36,7 +36,7 @@ if (Meteor.isClient) {
 	            dampingRatio: .5,
 	            velocity: 0.01
 	        }
-	        famousData.modifier.setTransform(
+	        fview.modifier.setTransform(
 	            Transform.translate(0,0),
 	            springTransition
 	        );

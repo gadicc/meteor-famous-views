@@ -18,7 +18,7 @@
     	<h2>Registering a new View</h2>
 
     	{{#sh_highlight lang="js"}}
-    		famousCmp.registerView('Scrollview', famous.views.Scrollview);
+    		FView.registerView('Scrollview', famous.views.Scrollview);
     	{{/sh_highlight}}
 
     	<p>This let's you do:</p>
@@ -70,7 +70,7 @@
     	<h3>Advanced Views</h3>
 
     	{{#sh_highlight lang="js"}}
-				famousCmp.registerView('MyView', myViewClass, {
+				FView.registerView('MyView', myViewClass, {
 
 					// If exists, called instead of the view's own add() method
 					add: function(childCompView) {

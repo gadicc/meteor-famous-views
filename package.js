@@ -44,7 +44,7 @@ Package.on_use(function (api) {
     'client'
   );
 
-  api.export('famousCmp', 'client');
+  api.export(['famousCmp', 'FView'], 'client');
 });
 
 

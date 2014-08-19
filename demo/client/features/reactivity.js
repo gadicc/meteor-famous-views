@@ -71,14 +71,14 @@ Template.reactivityModState.renderType = function(value) {
 Template.reactivityModState.rendered = function() {
 	this.autorun(function() {
 		if (Session.get('modRender') == 'instant') {
-			delete famousCmp.byId('block').modifierTransition;
+			delete FView.byId('block').modifierTransition;
 		} else {
-			famousCmp.byId('block').modifierTransition
+			FView.byId('block').modifierTransition
 				= { curve: 'easeIn', duration: 1000 };
 		}
 	});
 	this.autorun(function() {
-		famousCmp.byId('block')
+		FView.byId('block')
 			.modifierTransitionHalt = Session.get('modTransHalt');
 	});
 }

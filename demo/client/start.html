@@ -12,8 +12,8 @@
     	{{#sh_highlight lang="bash"}}
     		$ meteor create app
     		$ cd app
-    		$ mrt add famono   # or mj-famous or famous-compiled (or use CDN)
-    		$ mrt add famous-components
+    		$ mrt add famono             # or mj-famous or famous-compiled (or use CDN)
+    		$ mrt add famous-components  # will become gadicc:famous-views
     	{{/sh_highlight}}
 
     	<p>
@@ -63,8 +63,8 @@
 
 			{{#sh_highlight lang="js"}}
 				Template.item.rendered = function() {
-					var famousData = famousCmp.dataFromTemplate(this);
-					// Most useful, famousData.modifier and famousData.view objects.
+					var fview = FView.fromTemplate(this);
+                    // fview.modifier, fview.view, and other stuff
 				}
 			{{/sh_highlight}}
 

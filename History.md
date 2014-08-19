@@ -1,5 +1,19 @@
 ## vNEXT
 
+* Renaming / improvements in various internal identifiers
+* compView -> meteorFamousView
+* blazeView.famousView -> blazeView.fview (a meteorFamousView object);
+* fview.view(?) -> fview.blazeView;
+
+## v0.0.19
+
+* Renaming of public API to reflect name change and be more descriptive
+* famousCmp -> FView
+* famousCmp.byId() -> FView.byId()
+* famousCmp.dataFromView() -> FView.fromBlazeView()
+* famousCmp.dataFromTemplate() -> FView.fromTemplate()
+* Change all code in the demo to reflect the above
+
 ## v0.0.18
 
 * Big improvement of demo site / live docs, i.e. more actual docs :)

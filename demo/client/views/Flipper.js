@@ -10,14 +10,14 @@ Router.map(function() {
 
 // TODO, put flipper in it's own context
 function perspectiveZero() {
-	famousCmp.mainCtx.setPerspective(0);
+	FView.mainCtx.setPerspective(0);
 }
 
 Template.views_Flipper_front.events({
 	'click': function(event, tpl) {
-		var famousData = famousCmp.dataFromTemplate(tpl);
-		famousCmp.mainCtx.setPerspective(500);
-		famousData.parent.view
+		var fview = FView.fromTemplate(tpl);
+		FView.mainCtx.setPerspective(500);
+		fview.parent.view
 			.setAngle(Math.PI, { curve : 'easeOutBounce', duration : 500},
 				perspectiveZero);
 	}
@@ -25,9 +25,9 @@ Template.views_Flipper_front.events({
 
 Template.views_Flipper_back.events({
 	'click': function(event, tpl) {
-		var famousData = famousCmp.dataFromTemplate(tpl);
-		famousCmp.mainCtx.setPerspective(500);
-		famousData.parent.view
+		var fview = FView.fromTemplate(tpl);
+		FView.mainCtx.setPerspective(500);
+		fview.parent.view
 			.setAngle(0, { curve : 'easeOutBounce', duration : 500},
 				perspectiveZero);
 	}
