@@ -73,17 +73,17 @@
 				FView.registerView('MyView', myViewClass, {
 
 					// If exists, called instead of the view's own add() method
-					add: function(childCompView) {
-						var target = childCompView.component._templateInstance.data.target;
+					add: function(child_fview, child_options) {
+						var target = child_options.target;
 						if (!target)
 							throw new Error("HeaderFooterLayout must specify target='header/footer/content'");
-						// `this` is the CompView object for this instance
-						this.view[target].add(childCompView);
+						// `this` is the fview for this instance
+						this.view[target].add(child_fview);
 					},
 
 					// If exists, called when an attribute is reactively updated
 					attrUpdate: function(key, value, data, firstTime) {
-						// `this` is the CompView object for this instance
+                        // `this` is the fview for this instance
 					  switch(key) {
 					    case "specialX":
 					    case "specialY":
@@ -94,7 +94,7 @@
 
 					// If exists, called after adding the node to the render tree
 					famousCreatedPost: function() {
-						// `this` is the CompView object for this instance
+                        // `this` is the fview for this instance
 						this.pipeChildrenTo = this.parent.pipeChildrenTo
 							? [ this.view, this.parent.pipeChildrenTo[0] ]
 							: [ this.view ];
