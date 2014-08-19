@@ -1,9 +1,11 @@
 ## vNEXT
 
 * Renaming / improvements in various internal identifiers
-* compView -> meteorFamousView
+* compView -> meteorFamousView (aka "fview")
 * blazeView.famousView -> blazeView.fview (a meteorFamousView object);
 * fview.component -> fview.blazeView;
+
+* Debug: Don't show parent & template if they're the same
 
 ## v0.0.19
 
@@ -24,7 +26,6 @@
 * If you commit to a single simultaneous render, you can set id="name"
 * Fetch a CompView directly with `famousCmp.byId(id);`
 
-* Debug: Don't share parent & template if they're the same
 * Keep track of children and destroy them properly
 * Fix famousEach observe computation leak
 
