@@ -3,7 +3,7 @@
 * Renaming / improvements in various internal identifiers
 * compView -> meteorFamousView
 * blazeView.famousView -> blazeView.fview (a meteorFamousView object);
-* fview.view(?) -> fview.blazeView;
+* fview.component -> fview.blazeView;
 
 ## v0.0.19
 
