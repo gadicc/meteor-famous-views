@@ -25,7 +25,6 @@ Package.on_use(function (api) {
       'lib/sequencer.js',
       'lib/famous.js',
       'lib/famousEach.js',
-      'lib/famousEachSurface.js',
       'lib/modifiers.js',
       'lib/views.js'
   	],
