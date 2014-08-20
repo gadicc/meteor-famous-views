@@ -69,19 +69,6 @@
             </ul>
           </li>
          	{{/each}}
-          <li><a href="/layouts">Layouts</a></li>
-          <li><a href="/events">Events</a></li>
-          {{#each menu true}}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{cat}} <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              {{#each items}}
-                <li><a href="{{route}}">{{name}}</a></li>
-              {{/each}}
-            </ul>
-          </li>
-          {{/each}}
-          <li><a href="https://github.com/gadicc/meteor-famous-components">GitHub</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -162,39 +149,10 @@ or straight from the Famo.us CDN (see
   {{/Surface}}
 </template>
 
-<template name="test">
-	{{> famous template='ifBlock'}}
-	{{> famous template='hello'}}
-	hello
-</template>
+<template name="notFound">
+  {{#Surface size="[undefined,undefined]" class="padLeft"}}
+    <h1>Not Found</h1>
 
-<template name="hello">
-	Hello World
-</template>
-
-<!-- #if block example -->
-
-<template name="ifBlock">
-	{{#if surfaceOne}}
-		{{>famous template='surfaceOne'}}
-	{{else}}
-		{{>famous template='surfaceTwo'}}
-	{{/if}}	
-</template>
-
-<template name="surfaceOne">
-	surfaceOne
-</template>
-<template name="surfaceTwo">
-	surfaceTwo
-</template>
-
-<!-- other router pages -->
-
-<template name="blah" type="blah" data-moo="moo2">
-adasd
-</template>
-
-<template name="incoming">
-	<div style="width: 100px; height: 100px; background: #aaf; margin: 200px"></div>
+    <p>Explore the navbar above to find the page you're looking for.</p>
+  {{/Surface}}
 </template>

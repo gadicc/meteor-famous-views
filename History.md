@@ -1,6 +1,12 @@
 ## vNEXT
 
+## v0.0.22
+
 * `optionsString` now simply decodes JSON when possible
+* Introduce `size="[undefined,auto]"` for Surfaces (early release)
+* Ensure surface options are parsed with optionString before setting
+* Introduce new famousEvents() method on templates, like Famous
+* Improve docs and examples in the demo
 
 ## v0.0.21
 

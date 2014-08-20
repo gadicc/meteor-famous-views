@@ -43,6 +43,7 @@ if (Meteor.isClient) {
 
   Router.configure({
     onAfterAction: navbarActive,
+    notFoundTemplate: 'notFound',
     yieldTemplates: {
       'header': {to: 'header'}
     }
@@ -67,10 +68,6 @@ if (Meteor.isClient) {
   UI.registerHelper('dstache', function() {
     return '{{';
   });
-
-  Template.ifBlock.surfaceOne = function() {
-    return Session.get('surfaceOne');
-  }
 
   // famous globals for APP code
   Transform=null;
@@ -98,10 +95,10 @@ if (Meteor.isClient) {
 
   Template.header.menu = function(issues) {
     var out = [];
-    for (cat in Menu.list) {
-      if (!issues && cat != 'Issues' || issues && cat == 'Issues')
+    _.each(['Features', 'Views', 'Examples', 'Issues', 'More'], function(cat) {
+      //if (!issues && cat != 'Issues' || issues && cat == 'Issues')
       out.push({ cat: cat, items: Menu.list[cat] });
-    }
+    });
     return out;
   };
 

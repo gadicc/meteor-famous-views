@@ -1,0 +1,202 @@
+<template name="examples_events">
+	{{#Scrollview size="[undefined,undefined]"}}
+
+		{{#Surface size="[undefined,150]" class="padLeft"}}
+
+			<h1>Events</h1>
+
+			<p>Don't forget, there are now two different kinds of events:</p>
+
+			<ol>
+				<li><b>Meteor Events</b>, like usual, inside of a Surface.</li>
+				<li><b>Famous Events</b>, that act on entire Surface or View.</li>
+			</ol>
+
+			<p>In both cases, we need a way to connect the two frameworks.</p>
+		{{/Surface}}
+
+		{{#Surface size="[undefined,100]" class="padLeft"}}
+			<br />
+			<h2>Famous Events</h2>
+
+			<p>Click the red square to increase the count
+			(all reactive, of course):</p>
+		{{/Surface}}
+
+		{{#View translate="[50,0]" size="[undefined,100]"}}
+			{{#Surface size="[undefined,undefined]"}}{{/Surface}}
+			{{>Surface template="ev_surface_click" translate="[0,0,10]"
+				 size="[50,50]" origin="[0.5,0.5]" align="[0.1,0.5]"}}
+		{{/View}}
+
+		{{#Surface size="[undefined,750]" class="padLeft"}}
+			<p>Firstly, our temmplate:</p>
+
+			{{#sh_highlight lang="html"}}
+				&lt;template name="ev_surface_click">
+					&lt;!-- div needed for meteor events, see next section -->
+					&lt;div style="width:100%; height: 100%;" class="ev_surface_click">
+						{{dstache}}clickCount}}
+					&lt;/div>
+				&lt;/template>			
+			{{/sh_highlight}}
+
+			<p>We provide a small shortcut,
+			<code>Template.x.famousEvents()</code> to allow Famous events to be
+			set up more conveniently in a Meteor-like way:</p>
+
+			{{#sh_highlight lang="js"}}
+				Template.ev_surface_click.famousEvents({
+				  'click': function(event, fview) {
+				    // event.type == "click"
+				    clickeyStuff(fview);
+				  }
+				});
+
+				function clickeyStuff(fview) {
+				  fview.modifier.halt();
+				  fview.modifier.setTransform(
+				      Transform.translate(0,0),
+				      { method:"spring", period: 200, dampingRatio: .5, velocity: 0.1 }
+				  );
+				  Session.set('clickCount', Session.get('clickCount')+1);
+				}
+
+				Template.ev_surface_click.clickCount = function() {
+				  return Session.get('clickCount');
+				}
+			{{/sh_highlight}}
+
+			<p>This is identical to doing the following, which is a little more
+			efficient if you need a <code>render()</code> method anyway and/or
+			have more than one event handler:</p>
+
+			{{#sh_highlight lang="js"}}
+				Template.ev_surface_click.rendered = function() {
+				  var fview = FView.fromBlazeView(this.__view__);
+				  var target = fview.surface;
+				  target.on('click', function() {
+				    clickeyStuff(fview);
+				  });
+				}				
+			{{/sh_highlight}}
+
+			<p>For comparison's sake, here's the same event using Meteor's
+			eventmap:</p>
+
+			{{#sh_highlight lang="js"}}
+				Template.ev_surface_click.events({
+				  'click': function(event, tpl) {
+				    var fview = FView.fromTemplate(tpl);
+				    // event.type == "click"
+				    clickeyStuff(fview);
+				  }
+				});				
+			{{/sh_highlight}}
+		{{/Surface}}
+
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			<h2>Meteor Events</h2>
+
+			<p>A reminder that Meteor events, via the <code>Template.x.events()</code>
+			system, are DOM events.  As such, you can only setup events on
+			<b>Surfaces</b>, <i>with at least one element</i>, so make sure if your
+			template is all text, you wrap it in a <code>&lt;div</code> or
+			<code>&lt;span></code>. 	This also only works with inclusion, e.g.
+			<code>{{dstache}}>Surface template='x'}}</code>, since with inline
+			blocks, there is nothing to attach to.  Of course, regular meteor
+			inclusion like <code>{{dstache}}>template}}</code> inside of a Surface work
+			like usual.</p>
+
+			<p>Here's a small example mixing a Meteor event with a Famous action:</p>
+			<br />
+		{{/Surface}}
+		
+		{{! Original Meteor Event demo ball code }}
+		{{>eventsDemo}}
+	{{/Scrollview}}
+</template>
+
+<template name="ev_surface_click">
+	<!-- div is only needed for a meteor event, see note at top of page -->
+	<div style="width:100%; height: 100%;" class="ev_surface_click">
+		{{clickCount}}
+	</div>
+</template>
+
+<template name="eventsDemo">
+	{{#Surface size="[undefined,80]" class="padLeft"}}
+		<b>Catch the ball!</b>
+		<p>Note also the use of <code>{{dstache}}#if}}</code> in the code to render
+		 the appropriate surface reactively.</p>
+		{{> codeButton}}
+	{{/Surface}}
+
+	{{#RenderController id="rc" size=rcSize}}
+		{{#if showCode}}
+			{{>Surface template='ballCode' size="[undefined,undefined]" class="padLeft"}}
+		{{else}}
+			{{#View size="[undefined,undefined]"}}
+				{{#Surface size="[undefined,undefined]"}}
+					<div class="ballBorder"></div>
+				{{/Surface}}
+				{{>Surface template='springBall' size="[100,100]"
+					translate="[50,50,90]"}}
+			{{/View}}
+		{{/if}}
+	{{/RenderController}}
+</template>
+
+<template name="codeButton">
+		<button>{{#if showCode}}Show Demo{{else}}Show Code{{/if}}</button>
+</template>
+
+<template name="springBall">
+	<div class="ball"></div>
+</template>
+
+<template name="ballCode">
+	{{#sh_highlight lang="html"}}
+		&lt;template name="eventsDemo">
+			{{dstache}}#Surface size="[undefined,130]" translate="[20,0]"}}
+				<h3>Catch the ball!</h3>
+				{{dstache}}> codeButton}}
+			{{dstache}}/Surface}}
+
+			{{dstache}}#RenderController size="[undefined,700]"}}
+				{{dstache}}#if showCode}}
+					{{dstache}}>Surface template='ballCode' size="[undefined,undefined]"}}
+				{{dstache}}else}}
+					{{dstache}}>Surface template='springBall' translate="[50,700]"}}
+				{{dstache}}/if}}
+			{{dstache}}/RenderController}}
+		&lt;/template>
+	{{/sh_highlight}}
+
+	{{#sh_highlight lang="js"}}
+		SpringTransition = require("famous/transitions/SpringTransition");
+		Transitionable.registerMethod('spring', SpringTransition);
+
+		var springTransition = {
+		  method: "spring",
+		  period: 100,
+		  dampingRatio: .1,
+		  velocity: 0.005
+		}
+
+		Template.blockSpring.events({
+		  'mouseover': function(event, tpl) {
+		    var fview = FView.fromTemplate(tpl);
+		    fview.modifier.halt();
+		    fview.modifier.setTransform(
+		      Transform.translate(
+		        Math.random()*(window.innerWidth-50),
+		        Math.random()*(window.innerHeight-50),
+		        90
+		      ),
+		      springTransition
+		    );
+		  }
+		});
+	{{/sh_highlight}}
+</template>
