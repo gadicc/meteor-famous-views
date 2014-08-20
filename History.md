@@ -1,5 +1,7 @@
 ## vNEXT
 
+* `optionsString` now simply decodes JSON when possible
+
 ## v0.0.21
 
 * `famousInit` template now added at the correct time!  thanks @blouze

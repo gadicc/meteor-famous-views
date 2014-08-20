@@ -1,11 +1,39 @@
 <template name="layouts">
 	{{#Scrollview size="[undefined,undefined]"}}
 
-		{{#Surface size="[undefined,60]" translate="[20,0]"}}
+		{{#Surface size="[undefined,60]" class="padLeft"}}
 			<h1>Layout Examples</h1>
 		{{/Surface}}
 
-		{{#Surface size="[undefined,90]" translate="[20,0]"}}
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			<h2>Understanding Surface Sizes</h2>
+
+			<p>You <b>have to</b>, <i>always</i>, define a surface size.
+			This is very important for the Famous render model, and for
+			perfomance.</p>
+
+			<p>On a lone surface that is absolutely positioned, you can use
+			values like <code>[false,false]</code> let the surface be the
+			size of it's content.  But this is not possible whenever the
+			surface is part of a sequence, since the parent view needs to
+			know the size of each element to know where to position it's
+			adjacent sibling.  So for a <code>SequentialLayout</code>,
+			<code>Scrollview</code>, etc, you must specify an exact size.
+			A size like <code>[undefined,undefined]</code> is also considered
+			an "exact size", since it's the exact size of the parent container.</p>
+
+			<p>Famous-views introduces a small convenience, known as "auto size".
+			If you specify a size like <code>[undefined,auto]</code>, we will
+			render the div and then adjust the famous size data afterwards.
+			This is only a convenience though and is not performant, you
+			should understand the risks.  This is calculated once on initial
+			render only, so make sure things any <code>img</code> has a size
+			specified in HTML or CSS, and there is no other dynamic content.</p>
+
+			<br />
+		{{/Surface}}
+
+		{{#Surface size="[undefined,90]" class="padLeft"}}
 			<h2>Horizontal SequentialLayout</h2>
 			<p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow
 			horizontally.</p>
@@ -17,7 +45,7 @@
 			{{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
 		{{/SequentialLayout}}
 
-		{{#Surface size="[undefined,110]" translate="[20,0]"}}
+		{{#Surface size="[undefined,110]" class="padLeft"}}
 			{{#sh_highlight lang="html"}}
 				{{dstache}}#SequentialLayout direction="X" size="[undefined,160]"}}
 					{{dstache}}#Surface size="[150,100]" class="red-bg"}}#1{{dstache}}/Surface}}
@@ -27,7 +55,7 @@
 			{{/sh_highlight}}
 		{{/Surface}}
 
-		{{#Surface size="[undefined,90]" translate="[20,0]"}}		
+		{{#Surface size="[undefined,90]" class="padLeft"}}		
 			<h2>Columns</h2>
 			<p>Use a <i>GridLayout</i> with <i>dimensions="[x,1]"</i>
 			for columns that fill the container (try resize the window)</p>
@@ -39,7 +67,7 @@
 			{{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
 		{{/GridLayout}}
 
-		{{#Surface size="[undefined,100]" translate="[20,0]"}}
+		{{#Surface size="[undefined,100]" class="padLeft"}}
 			{{#sh_highlight lang="html"}}
 				{{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}col1{{dstache}}/Surface}}
@@ -49,7 +77,7 @@
 			{{/sh_highlight}}
 		{{/Surface}}
 
-		{{#Surface size="[undefined,90]" translate="[20,0]"}}	
+		{{#Surface size="[undefined,90]" class="padLeft"}}	
 			<h2>Centering / Fine-Tuning Layout</h2>
 			<p>Use <i>view="View"</i> to manually position child surfaces with
 				<i>origin</i>, <i>size</i> and <i>translate</i>.</p>
@@ -66,7 +94,7 @@
 			{{/Surface}}
 		{{/View}}
 
-		{{#Surface size="[undefined,160]" translate="[20,0]"}}
+		{{#Surface size="[undefined,160]" class="padLeft"}}
 			{{#sh_highlight lang="html"}}
 				{{dstache}}#View size="[undefined,160]"}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}
@@ -80,7 +108,7 @@
 			{{/sh_highlight}}
 		{{/Surface}}
 
-		{{#Surface size="[undefined,50]" translate="[20,0]"}}
+		{{#Surface size="[undefined,50]" class="padLeft"}}
 			<p>For more complicated layouts, you'll probably want to use a <b>View</b>.
 			See the drop-down menu at the top of this page for more info.</p>
 		{{/Surface}}
