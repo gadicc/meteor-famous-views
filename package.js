@@ -2,7 +2,7 @@ var fs = Npm.require('fs');
 var path = Npm.require('path');
 
 Package.describe({
-    summary: 'Blaze Components for Famous; doing Famous Meteor-style'
+    summary: 'Blaze Views for Famous; doing Famous Meteor-style'
 });
 
 Package.on_use(function (api) {

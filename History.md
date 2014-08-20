@@ -1,5 +1,11 @@
 ## vNEXT
 
+## v0.0.21
+
+* `famousInit` template now added at the correct time!  thanks @blouze
+* Surface view reactive size no longer checks size before setting
+* Temp workaround for RenderController reactivity
+
 ## v0.0.20
 
 * Renaming / improvements in various internal identifiers
