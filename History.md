@@ -1,5 +1,12 @@
 ## vNEXT
 
+* Mention surface events:
+  click mousedown mousemove mouseup mouseover mouseout
+  touchstart touchmove touchend touchcancel
+  keydown keyup keypress
+
+* for famousEvents (and examples), target = surface || view._eventInput
+
 ## v0.0.22
 
 * `optionsString` now simply decodes JSON when possible

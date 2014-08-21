@@ -29,7 +29,7 @@
 				 size="[50,50]" origin="[0.5,0.5]" align="[0.1,0.5]"}}
 		{{/View}}
 
-		{{#Surface size="[undefined,750]" class="padLeft"}}
+		{{#Surface size="[undefined,780]" class="padLeft"}}
 			<p>Firstly, our temmplate:</p>
 
 			{{#sh_highlight lang="html"}}
@@ -41,7 +41,24 @@
 				&lt;/template>			
 			{{/sh_highlight}}
 
-			<p>We provide a small shortcut,
+			<p>and the helper and action/animation:</p>
+
+			{{#sh_highlight lang="js"}}
+				Template.ev_surface_click.clickCount = function() {
+				  return Session.get('clickCount');
+				}
+
+				function clickeyStuff(fview) {
+				  fview.modifier.halt();
+				  fview.modifier.setTransform(
+				      Transform.translate(0,0),
+				      { method:"spring", period: 200, dampingRatio: .5, velocity: 0.1 }
+				  );
+				  Session.set('clickCount', Session.get('clickCount')+1);
+				}
+			{{/sh_highlight}}
+
+			<p>For setting up the handler itself, we provide a small shortcut,
 			<code>Template.x.famousEvents()</code> to allow Famous events to be
 			set up more conveniently in a Meteor-like way:</p>
 
@@ -53,18 +70,7 @@
 				  }
 				});
 
-				function clickeyStuff(fview) {
-				  fview.modifier.halt();
-				  fview.modifier.setTransform(
-				      Transform.translate(0,0),
-				      { method:"spring", period: 200, dampingRatio: .5, velocity: 0.1 }
-				  );
-				  Session.set('clickCount', Session.get('clickCount')+1);
-				}
 
-				Template.ev_surface_click.clickCount = function() {
-				  return Session.get('clickCount');
-				}
 			{{/sh_highlight}}
 
 			<p>This is identical to doing the following, which is a little more
@@ -74,7 +80,7 @@
 			{{#sh_highlight lang="js"}}
 				Template.ev_surface_click.rendered = function() {
 				  var fview = FView.fromBlazeView(this.__view__);
-				  var target = fview.surface;
+				  var target = fview.surface || fview.view._eventInput;
 				  target.on('click', function() {
 				    clickeyStuff(fview);
 				  });

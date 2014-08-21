@@ -87,7 +87,7 @@ Template.ev_surface_click.famousEvents({
 
 Template.ev_surface_click.rendered = function() {
   var fview = FView.fromBlazeView(this.__view__);
-  var target = fview.surface;
+  var target = fview.surface || fview.view._eventInput;
   target.on('click', function() {
     clickeyStuff(fview);
   });
