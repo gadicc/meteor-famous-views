@@ -1,0 +1,84 @@
+.testimonial {
+	background: #f3f3f3;
+	margin: 20px 0 20px 0;
+	position: relative;
+	padding: 30px 30px 30px 250px;
+}
+
+.testimonial > .author {
+	display: inline-block;
+	position: absolute;
+	top: 30px; left: 40px;
+	text-align: center;
+}
+
+.testimonial > .author > span {
+	font-size: 120%;
+}
+.testimonial > .author > span.title {
+	font-size: 100%;
+}
+
+
+.testimonial > .author > img {
+	border: 1px solid black;
+	border-radius: 75px;
+	width: 150px;
+	height: 150px;
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+	margin-bottom: 15px;
+}
+
+.testimonial > div {
+
+}
+
+.testimonial > blockquote {
+	font-family: arial;
+	font-style: italic;
+	padding: 10px 30px 20px 30px;
+	line-height: 1.45;
+	font-size: 18px;
+	position: relative;
+	color: #333;
+	text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
+
+	/* undo bs3 */
+	border-left: none;
+	margin: 0;
+}
+
+.testimonial > blockquote:before, 
+.testimonial > blockquote:after {
+	font-size: 80px;
+	color: #7a7a7a;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
+}
+
+.testimonial > blockquote:before {
+	position: absolute;
+	content: "\201C";
+	left: -20px;
+	top: -30px;
+}
+
+.testimonial > blockquote:after {
+	content: "\201D";
+	position: absolute;
+	right: 20px;
+	/* bottom: -20px; */
+	bottom: -40px;
+}
+
+
+.testimonial > blockquote > cite {
+	color: #999999;
+	font-size: 18px;
+	display: block;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+ 
+.testimonial > blockquote > cite:before {
+	content: "\2014 \2009";
+}

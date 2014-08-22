@@ -3,7 +3,7 @@
 	"description": "Blaze Views for Famous; doing Famous Meteor-style",
 	"homepage": "https://github.com/gadicc/meteor-famous-components",
 	"author": "Gadi Cohen <dragon@wastelands.net>",
-	"version": "0.0.22",
+	"version": "0.0.23",
 	"git": "https://github.com/gadicc/meteor-famous-components.git",
 	"packages": {
 		"pince": "0.0.5"

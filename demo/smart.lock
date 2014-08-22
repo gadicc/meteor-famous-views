@@ -8,7 +8,7 @@
       },
       "iron-router": {},
       "bootstrap-3": {},
-      "SyntaxHighlighter": {}
+      "syntaxhighlighter": {}
     },
     "packages": {
       "famono": {
@@ -29,15 +29,10 @@
         "tag": "v3.2.0-1",
         "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
       },
-      "SyntaxHighlighter": {
+      "syntaxhighlighter": {
         "git": "https://github.com/gadicohen/meteor-SyntaxHighlighter.git",
-        "tag": "v3.0.83-12",
-        "commit": "5a705b2e73c04f471bf3152a6538aa298d4b8250"
-      },
-      "pince": {
-        "git": "https://github.com/mad-eye/pince.git",
-        "tag": "v0.0.5",
-        "commit": "4524ecc0bdf043c49dc62e91bbd8a99c661081ed"
+        "tag": "v3.0.83-15",
+        "commit": "4beeff7c595c028cea201c704c6d8af0cb505fe7"
       },
       "iron-layout": {
         "git": "https://github.com/EventedMind/iron-layout.git",

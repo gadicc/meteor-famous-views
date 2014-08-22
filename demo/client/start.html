@@ -12,8 +12,14 @@
     	{{#sh_highlight lang="bash"}}
     		$ meteor create app
     		$ cd app
+
+            # for Meteor &lt;= 0.8.3
     		$ mrt add famono             # or mj-famous or famous-compiled (or use CDN)
-    		$ mrt add famous-components  # will become gadicc:famous-views
+    		$ mrt add famous-components
+
+            # for Meteor >= 0.9.0
+            $ meteor add raix:famono     # or mjnetworks:mj-famous, jonperl:famous-compiled
+            $ meteor add gadicohen:famous-components     # will become: gadicc:famous-views
     	{{/sh_highlight}}
 
     	<p>
