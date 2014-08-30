@@ -6,8 +6,3 @@
 standard-app-packages
 autopublish
 insecure
-iron:router
-famous-components
-raix:famono
-gadicohen:syntaxhighlighter@3.0.83-15
-mizzao:bootstrap-3
