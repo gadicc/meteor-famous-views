@@ -1,0 +1,9 @@
+{
+    "famous": {
+        "git": "https://github.com/Famous/famous.git",
+        "branch": "v0.2.1"
+    },
+    "famous.polyfills": {
+        "git": "https://github.com/Famous/polyfills.git"
+    }
+}

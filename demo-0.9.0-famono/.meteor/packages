@@ -1,0 +1,14 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+standard-app-packages
+autopublish
+insecure
+iron:router
+famous-components
+raix:famono
+gadicohen:syntaxhighlighter@3.0.83-15
+mizzao:bootstrap-3
+

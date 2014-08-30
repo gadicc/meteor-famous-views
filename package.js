@@ -19,7 +19,7 @@ Package.on_use(function (api) {
   api.use(['ui', 'blaze', 'minimongo', 'templating', 'deps', 'observe-sequence'], 'client');
 
   if (api.versionsFrom) {
-      api.use('raix:famono@0.7.2', 'client', { weak: true });
+      api.use('raix:famono@0.7.4', 'client', { weak: true });
       api.use('mjnetworks:mj-famous@0.2.1-1', 'client', { weak: true });
       api.use('jonperl:famous-compiled@0.2.0', 'client', { weak: true });
   } else {

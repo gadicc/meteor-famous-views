@@ -1,0 +1,112 @@
+<template name="views_RenderController">
+	{{#Scrollview size="[undefined,undefined]"}}
+		{{#View size="[undefined,780]" translate="[20,0]"}}
+			{{#Surface size="[undefined,undefined]"}}
+				<h1>RenderController demo</h1>
+
+				<p>We can wrap any dynamically rendered template inside a
+				RenderController transition in/out template create/destroys.<br />
+				For example, this site wraps iron-router's <code>{{dstache}}>yield}}</code> to fade-in and fade-out each route's page.</p>
+
+				<p>In the example below, we demonstrate fancier transitions
+				with a dynamic template:</p>
+
+				{{#sh_highlight lang="html"}}
+					{{dstache}}#RenderController size="[150,150]"}}
+						{{dstache}}>showTemplate name=currentTemplate}}
+					{{dstache}}/RenderController}}
+				{{/sh_highlight}}
+
+				{{>rc_buttons}}
+				{{>rc_transitions}}
+				{{>rc_useForPages}}
+
+				{{#sh_highlight lang="js"}}
+					Template.views_RenderController.helpers({
+						'showTemplate': function() {
+							return Template[this.name];
+						}
+					});
+
+					Session.setDefault('currentTemplate', 'rc_surface1');
+					Template.views_RenderController.currentTemplate = function() {
+						return Session.get('currentTemplate');
+					}
+
+					Template.rc_buttons.events({
+						'click button': function(event, tpl) {
+							Session.set('currentTemplate', this.valueOf());
+						}
+					});
+				{{/sh_highlight}}
+
+				{{#sh_highlight lang="html"}}
+					&lt;template name="rc_surface1"&gt;
+						{{dstache}}#Surface class="red-bg" origin="[0,0]" size="[75,150]"}}
+							<div class="full">#1</div>
+						{{dstache}}/Surface}}
+					&lt;/template&gt;
+				{{/sh_highlight}}
+
+				<p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see RenderController.html and
+				RenderController.html)</p>
+			{{/Surface}}
+
+			{{#RenderController transition=getTransition
+					size="[150,150]" translate="[450,175]"}}
+				{{>showTemplate name=currentTemplate}}
+			{{/RenderController}}
+
+		{{/View}}
+	{{/Scrollview}}
+</template>
+
+<template name="rc_buttons">
+	<style type="text/css">
+		button.set { border: 2px solid black; }
+	</style>
+	<p>
+	{{#each buttons}}
+		<button class="{{isSet}}">
+			Session.set('currentTemplate', '{{this}}');
+		</button>
+		<br />
+	{{/each}}
+	</p>
+</template>
+
+<template name="rc_transitions">
+	<p>
+		Transition:
+		{{#each transitions}}
+			<button class="{{isSet}}">{{this}}</button>
+		{{/each}}
+	</p>
+</template>
+
+<template name="rc_useForPages">
+	<p>
+		<label>
+			<input type="checkbox" checked="{{checked}}">
+			Use transition for page changes too
+		</label>
+	</p>
+</template>
+
+<template name="rc_surface1">
+	{{#Surface class="red-bg" origin="[0,0]" size="[75,150]"}}
+		<div class="full">#1</div>
+	{{/Surface}}
+</template>
+
+<template name="rc_surface2">
+	{{#Surface class="green-bg" origin="[0.5,0.5]" size="[150,75]"}}
+		<div class="full">#2</div>
+	{{/Surface}}
+</template>
+
+<template name="rc_surface3">
+	{{#Surface class="blue-bg" origin="[1,1]" size="[75,150]"}}
+		<div class="full">#3</div>
+	{{/Surface}}
+</template>

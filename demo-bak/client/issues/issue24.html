@@ -1,0 +1,27 @@
+<template name="issue24">
+    {{#Scrollview size="[undefined, undefined]" direction="X" paginated="true"}}
+        {{#Surface size="[undefined,undefined]"}}
+            <h1>Hello swiping world!</h1>
+        {{/Surface}}
+        {{#Scrollview size="[undefined, undefined]"}}
+            {{#Surface size="[undefined,50]" classes="centered,white-bg"}}
+                <div class="btn-add ui button">insert</div>
+            {{/Surface}}
+
+            {{#Surface size="[undefined,50]" classes="white-bg"}}
+                <div class="ui horizontal divider">BEGIN</div>
+            {{/Surface}}
+
+            {{#famousEach items}}
+                {{>Surface template="listItem" size="[undefined,50]" classes='centered,red-bg'}}
+            {{/famousEach}}
+
+            {{#Surface size="[undefined,75]" classes="white-bg"}}
+                <div class="ui horizontal divider">END</div>
+            {{/Surface}}
+            {{#Surface size="[undefined,50]" classes="centered,white-bg"}}
+                <div class="btn-disconnect secondary ui button">{{dangerText}}</div>
+            {{/Surface}}
+        {{/Scrollview}}
+    {{/Scrollview}}
+</template>

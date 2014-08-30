@@ -1,0 +1,158 @@
+<head>
+  <title>MeteorFamousViews</title>
+</head>
+
+<body>
+</body>
+
+<!-- Template.famousInit auto added to body when helpers are ready -->
+<template name="famousInit">
+	{{! > famous template='test'}}
+	{{! >famous template='incoming' modifier='pageTransition'}}
+	{{! >famous template='list' view='Scrollview'}}
+</template>
+
+<!-- we want each yield to be on a different surface -->
+<template name="layout">
+  {{#HeaderFooterLayout size="[undefined,undefined]"
+      headerSize="50" footerSize="0"}}
+    {{>Surface target="header" template='yieldHeader'
+      size="[undefined,undefined]" translate="[0,0,100]"}}
+    {{>View target="content" template='yieldMain'
+      size="[undefined,undefined]"}}
+  {{/HeaderFooterLayout}}
+  {{! >famous template='yieldCenter' size="[500,300]" origin="[0.5,0.5]" translate="0,50"}}
+</template>
+
+<template name="yieldMain">
+  {{#RenderController size="[undefined,undefined]" transition=getTransition}}
+    {{>yield}}
+  {{/RenderController}}
+</template>
+
+<template name="yieldHeader">
+	<div id="header">{{> yield region="header"}}</div>
+</template>
+
+<template name="yieldCenter">
+	<div>{{> yield region="center"}}</div>
+</template>
+
+<template name="newPage">
+	{{> yield region="newPage"}}
+</template>
+
+
+<template name="header">
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">MeteorFamousViews</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/start">QuickStart</a></li>
+          {{#each menu}}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{cat}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            	{{#each items}}
+	              <li><a href="{{route}}">{{name}}</a></li>
+  	          {{/each}}
+            </ul>
+          </li>
+         	{{/each}}
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</template>
+
+<template name="home">
+  {{#Surface}}
+    <div id="main" role="main">
+    	<h1>famous-views (for Meteor)</h1>
+<p>
+Famous-views (formerly famous-components)
+is an attempt at a tight integration between Blaze and Famous. All the other
+approaches I've seen so far side step most of Blaze, and require writing large
+amounts of code in JavaScript, which felt very unnatural to me in Meteor. Meteor
+code should be small, concise and easy with powerful results.
+
+Requires
+<a href="http://www.famo.us/">Famo.us</a>, using one of:
+<a href="https://atmospherejs.com/package/famono">famono</a>
+(recommended!),
+<a href="https://atmospherejs.com/package/mj-famous">mj-famous</a>,
+<a href="https://atmospherejs.com/package/famous-compiled">famous-compiled</a>,
+or straight from the Famo.us CDN (see
+<a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo-cdn">demo source</a>).
+</p>
+
+  <p>
+    <b>This site serves as both a demo and live documentation.
+    Explore the navbar above!</b>
+  </p>
+  <p>
+    DoingFAMOUSwithMeteor?
+      <a href="https://doingthiswith.wastelands.net/users/search/famo.us">users</a>,
+      <a href="https://doingthiswith.wastelands.net/apps/search/famo.us">apps</a>
+  </p>
+
+  <h3>Build the Famous Render Tree with Reactive Templates!</h3>
+
+  {{#sh_highlight lang="html"}}
+    {{dstache}}#Scrollview size="[undefined,undefined]"}}
+
+      {{dstache}}#Surface size="[200,undefined]"}}
+        <h1>Scrollview Example</h1>
+      {{dstache}}/Surface}}
+
+      {{dstache}}#famousEach items}}
+        {{dstache}}>Surface template="item" size=reactiveSize}}
+      {{dstache}}/famousEach}}
+
+    {{dstache}}/Scrollview}}
+  {{/sh_highlight}}
+
+  <h3>Additional Features</h3>
+
+  <ul>
+    <li>Works with <a href="/features/iron-router">iron-router</a> out of the
+    box!  Not a single line of code required.</li>
+    <li><code>{{dstache}}#RenderController}}<b>{{dstache}}>yield}}</b>{{dstache}}/RenderController}}</code> for <b>transitions</b> - that's it!</li>
+    <li>Views are <a href="/features/reactivity">fully reactive</a>;
+    use a reactive helper to have views update
+    themsleves automatically with no extra work.</li>
+    <li>Typical Meteor: write your code in JavaScript, CoffeeScript, HTML and Jade</li>
+  </ul>
+
+      <h3>WIP</h3>
+
+    	<p>Not much here yet, I'll be working on this next.</p>
+      <p><b>Explore the navbar</b> above to see what's done so far.
+      Particularly the GridLayout and RenderController are pretty
+      cool.</p>
+    	<p>For anything using data (like the GridLayout and Scrollview),
+      try manipulating the <code>Items</code> collection, e.g.
+      <code>Items.update(Items.findOne({name:'Apple'})._id, {$set: {name:'Capple'}});</code>
+    	in the console.  If you're on a desktop, use the mouse scrollwheel
+    	to simulate 'flicks'.  Scroll up to see the bounce.</p>
+    </div>
+  {{/Surface}}
+</template>
+
+<template name="notFound">
+  {{#Surface size="[undefined,undefined]" class="padLeft"}}
+    <h1>Not Found</h1>
+
+    <p>Explore the navbar above to find the page you're looking for.</p>
+  {{/Surface}}
+</template>
