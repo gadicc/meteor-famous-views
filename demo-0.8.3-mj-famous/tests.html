@@ -1,0 +1,34 @@
+<template name="dataContext_viewWithArgs">
+  {{#with myData}}
+    {{#Surface a=2}}
+      {{getData}}
+    {{/Surface}}
+  {{/with}}
+</template>
+
+<template name="dataContext_viewWithoutArgs">
+  {{#with myData}}
+    {{#Surface}}
+      {{getData}}
+    {{/Surface}}
+  {{/with}}
+</template>
+
+<template name="dataContext_viewWithoutArgs2">
+  {{#with myData}}
+	{{>dataContext_viewWithoutArgs2_helper}}
+  {{/with}}
+</template>
+
+<template name="dataContext_viewWithoutArgs2_helper">
+    {{#Surface}}
+      {{getData}}
+    {{/Surface}}
+</template>
+
+<template name="dataContext_explicit">
+  {{#Surface data=myData}}
+    {{getData}}
+  {{/Surface}}
+</template>
+

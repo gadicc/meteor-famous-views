@@ -8,7 +8,9 @@
       "iron-router": {},
       "mj-famous": {},
       "bootstrap-3": {},
-      "SyntaxHighlighter": {}
+      "SyntaxHighlighter": {},
+      "mocha-web-velocity": {},
+      "velocity-html-reporter": {}
     },
     "packages": {
       "famous-components": {
@@ -16,8 +18,8 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.7.1",
-        "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
+        "tag": "v0.8.2",
+        "commit": "05415a8891ea87a00fb1e2388585f2ca5a38e0da"
       },
       "mj-famous": {
         "git": "https://github.com/mj-networks/mj-famous.git",
@@ -26,28 +28,63 @@
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v3.1.1-1",
-        "commit": "63dd38968828bb8963636df93e9a1c45e2dfe67e"
+        "tag": "v3.2.0-1",
+        "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
       },
       "SyntaxHighlighter": {
         "git": "https://github.com/gadicohen/meteor-SyntaxHighlighter.git",
-        "tag": "v3.0.83-9",
-        "commit": "5dbcd9180a3ea16055e5ecf795e6b1da2c4be6ce"
+        "tag": "v3.0.83-12",
+        "commit": "5a705b2e73c04f471bf3152a6538aa298d4b8250"
+      },
+      "mocha-web-velocity": {
+        "git": "https://github.com/mad-eye/meteor-mocha-web.git",
+        "tag": "v0.3.4",
+        "commit": "5b68e18104c00687748b190b04a7752478472d17"
+      },
+      "velocity-html-reporter": {
+        "git": "https://github.com/rdickert/velocity-html-reporter.git",
+        "tag": "v0.1.5",
+        "commit": "741edd0caa8d0e491c53d597d34636f90cc64b88"
       },
       "pince": {
         "git": "https://github.com/mad-eye/pince.git",
         "tag": "v0.0.5",
         "commit": "4524ecc0bdf043c49dc62e91bbd8a99c661081ed"
       },
-      "blaze-layout": {
-        "git": "https://github.com/EventedMind/blaze-layout.git",
-        "tag": "v0.2.4",
-        "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      "iron-layout": {
+        "git": "https://github.com/EventedMind/iron-layout.git",
+        "tag": "v0.2.0",
+        "commit": "4a2d53e35ba036b0c189c7ceca34be494d4c6c97"
       },
       "sp-marked": {
         "git": "https://bitbucket.org/parhelium/sp-marked",
         "tag": "v0.0.2",
         "commit": "fd044a222eeb4902a62da5839162b3d6dbd477be"
+      },
+      "mirror": {
+        "git": "https://github.com/xdissent/meteor-mirror.git",
+        "tag": "v0.0.2",
+        "commit": "03d965dcab2f976a1fdc6ce513edcd4c17b75746"
+      },
+      "velocity": {
+        "git": "https://github.com/xolvio/velocity.git",
+        "tag": "v0.1.19",
+        "commit": "5ccde8b9a72d8291f22fea9393821142d19a6d0a"
+      },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.5",
+        "commit": "273e3ab7d005d91a1a59c71bd224533b4dae2fbd"
+      },
+      "iron-core": {
+        "git": "https://github.com/EventedMind/iron-core.git",
+        "tag": "v0.2.0",
+        "commit": "0e48b5dc50d03f01025b7b900fb5ce2f13d52cad"
+      },
+      "iron-dynamic-template": {
+        "git": "https://github.com/EventedMind/iron-dynamic-template.git",
+        "tag": "v0.2.1",
+        "commit": "4dd1185c4d9d616c9abdb3f33e4a7d5a88db7e18"
       }
     }
   }

@@ -11,3 +11,5 @@ mj-famous
 famous-components
 bootstrap-3
 SyntaxHighlighter
+velocity-html-reporter
+mocha-web-velocity

@@ -6,6 +6,8 @@
     "iron-router": {},
     "mj-famous": {},
     "bootstrap-3": {},
-    "SyntaxHighlighter": {}
+    "SyntaxHighlighter": {},
+    "mocha-web-velocity": {},
+    "velocity-html-reporter": {}
   }
 }
