@@ -78,7 +78,22 @@ if (!(typeof MochaWeb === 'undefined')){
 				});
 			});
 
-		});
+		});  /* Data Context tests */
+
+		describe("Other tests", function() {
+
+			it("Views should work if inside a template with a space in the name", function(done) {
+				FView.ready(function() {
+					Template["space template"].success = wrap(function() {
+						done();
+					});
+					// We can't catch the error directly, so will pass first
+					Blaze.render(Template["space template"]);
+				});
+			});
+
+		});  /* Other tests */
+
 
 	});
 }
