@@ -1,4 +1,5 @@
-<template name="views_SequentialLayout">
+<template name="SequentialLayout">
+    <!-- {{> sl_buttons}} -->
     {{#SequentialLayout size="[undefined, true]" class="red-bg"}}
         {{#View id="viewA" size=surfaceASize}}
             {{#if show 'A'}}
@@ -38,3 +39,34 @@
     <p>Surface C</p>
   </div>
 </template>
+
+<template name="sl_buttons">
+  <p>
+  {{#each buttons}}
+    <button>
+        Show {{this}}
+    </button>
+    <br />
+  {{/each}}
+  </p>
+</template>
+
+<!--
+<template name="sl_buttons">
+  <style type="text/css">
+    button.set { border: 2px solid black; }
+  </style>
+  <p>
+  {{#each buttons}}
+    <button class="{{isSet}}">
+      {{#if isSet}}
+        Hide {{this}}
+      {{else}}
+        Show {{this}}
+      {{/if}}
+    </button>
+    <br />
+  {{/each}}
+  </p>
+</template>
+-->

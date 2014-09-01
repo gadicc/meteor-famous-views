@@ -4,7 +4,8 @@ Menu.add({name:'SequentialLayout',route:'views/SequentialLayout'}, 'Views');
 
 Router.map(function() {
   this.route('views_SequentialLayout', {
-    path: '/views/SequentialLayout'
+    path: '/views/SequentialLayout',
+    template: 'SequentialLayout',
   });
 });
 
@@ -12,7 +13,7 @@ FView.ready(function(require) {
     FView.registerView('SequentialLayout', famous.views.SequentialLayout);
 });
 
-Template.views_SequentialLayout.helpers({
+Template.SequentialLayout.helpers({
     show: function(target){
         return Session.get(target);
     },
@@ -27,6 +28,20 @@ Template.views_SequentialLayout.helpers({
     },
 });
 
+
+Template.sl_buttons.helpers({
+    buttons: ['A', 'B', 'C'],
+    isSet: function() {
+        return false;
+        //return this.valueOf() == Session.get(this.valueOf()) ? 'set' : '';
+    }
+});
+
+Template.sl_buttons.events({
+    'click button': function(event, tpl) {
+        Session.set(this.valueOf(), !Session.set(this.valueOf()));
+    }
+});
 
 Template.surfaceA.rendered = function(){
     var fview = FView.fromTemplate(this);
