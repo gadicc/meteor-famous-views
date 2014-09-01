@@ -1,0 +1,40 @@
+<template name="views_SequentialLayout">
+    {{#SequentialLayout size="[undefined, true]" class="red-bg"}}
+        {{#View id="viewA" size=surfaceASize}}
+            {{#if show 'A'}}
+                {{>Surface id="sA" template="surfaceA" size="[undefined, true]" class="red-bg"}}
+            {{/if}}
+        {{/View}}
+        {{#View size=surfaceBSize}}
+            {{#if show 'B'}}
+                {{>Surface template="surfaceB" size=surfaceBSize class="green-bg"}}
+            {{/if}}
+        {{/View}}
+        {{#View size=surfaceCSize}}
+            {{#if show 'C'}}
+                {{> Surface template="surfaceC" size=surfaceCSize class="blue-bg"}}
+            {{/if}}
+        {{/View}}
+    {{/SequentialLayout}}
+</template>
+
+<template name="surfaceA">
+  <div id="surfaceA">
+    <p>Surface A</p>
+    <p>Surface A</p>
+    <p>Surface A</p>
+  </div>
+</template>
+
+<template name="surfaceB">
+  <div>
+    <p>Surface B</p>
+  </div>
+</template>
+
+<template name="surfaceC">
+  <div>
+    <p>Surface C</p>
+    <p>Surface C</p>
+  </div>
+</template>

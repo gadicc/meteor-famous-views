@@ -11,7 +11,6 @@ ctl-helper@1.0.2
 ctl@1.0.0
 deps@1.0.1
 ejson@1.0.0
-famous-components@0.0.23
 follower-livedata@1.0.0
 gadicohen:syntaxhighlighter@3.0.83-15
 geojson-utils@1.0.0
@@ -28,10 +27,11 @@ jquery@1.0.0
 json@1.0.0
 livedata@1.0.7
 logging@1.0.2
+meteor-famous-views@0.0.23
 meteor@1.0.2
 minifiers@1.0.2
 minimongo@1.0.1
-mizzao:bootstrap-3@3.2.0-2
+mizzao:bootstrap-3@3.2.0
 mongo-livedata@1.0.3
 observe-sequence@1.0.1
 ordered-dict@1.0.0
