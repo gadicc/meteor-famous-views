@@ -5,7 +5,6 @@ Menu.add({name:'SequentialLayout',route:'views/SequentialLayout'}, 'Views');
 Router.map(function() {
   this.route('views_SequentialLayout', {
     path: '/views/SequentialLayout',
-    template: 'SequentialLayout',
   });
 });
 
@@ -13,7 +12,7 @@ FView.ready(function(require) {
     FView.registerView('SequentialLayout', famous.views.SequentialLayout);
 });
 
-Template.SequentialLayout.helpers({
+Template.views_SequentialLayout.helpers({
     show: function(target){
         return Session.get(target);
     },
@@ -32,66 +31,43 @@ Template.SequentialLayout.helpers({
 Template.sl_buttons.helpers({
     buttons: ['A', 'B', 'C'],
     isSet: function() {
-        return false;
-        //return this.valueOf() == Session.get(this.valueOf()) ? 'set' : '';
+        return Session.get(this.valueOf()) ? 'set' : '';
+    },
+    text: function(){
+        var letter = this.valueOf(); 
+        return (Session.get(letter) ? 'Hide ' : 'Show ') + letter;  
     }
 });
 
 Template.sl_buttons.events({
     'click button': function(event, tpl) {
-        Session.set(this.valueOf(), !Session.set(this.valueOf()));
+        console.log(this.valueOf());
+        Session.set(this.valueOf(), !Session.get(this.valueOf()));
     }
 });
+
+
 
 Template.surfaceA.rendered = function(){
-    var fview = FView.fromTemplate(this);
-    /*
-    console.log('div #surfaceA');
-    console.dir(this.$('#surfaceA')[0]);
-    var sA = this.$('#surfaceA');
-    sA.ready(function(){
-        console.lor('Resizing sA!!!');
-        var heightA = sA.clientHeight;
-        console.lor('heightA: ' + heightA);
-        Session.set('heightA', heightA);
-    });
-    */
-
+    var content = FView.fromTemplate(this).view.content;
     Meteor.setTimeout(function(){
-        var heightA = fview.view.content.clientHeight;
-        Session.set('heightA', heightA);
-        //console.log('2. div #surfaceA');
-        //console.dir($('#surfaceA'));
+        var height = content.clientHeight;
+        Session.set('heightA', height);
     }, 50);
-
-    /*
-    console.log('this:');
-    console.dir(this);
-    console.log('viewA:');
-    console.dir(FView.byId('viewA'));
-    console.log('sA:');
-    console.dir(FView.byId('sA'));
-    */
 };
 
-Template.surfaceA.events({
-    'render #surfaceA': function(){
-        console.log('render #surfaceA: ' + $('#surfaceA').content.clientHeight);
-    }
-});
-
 Template.surfaceB.rendered = function(){
-    var fview = FView.fromTemplate(this);
+    var content = FView.fromTemplate(this).view.content;
     Meteor.setTimeout(function(){
-        var heightA = fview.view.content.clientHeight;
-        Session.set('heightB', heightA);
+        var height = content.clientHeight;
+        Session.set('heightB', height);
     }, 50);
 };
 
 Template.surfaceC.rendered = function(){
-    var fview = FView.fromTemplate(this);
+    var content = FView.fromTemplate(this).view.content;
     Meteor.setTimeout(function(){
-        var heightA = fview.view.content.clientHeight;
-        Session.set('heightC', heightA);
+        var height = content.clientHeight;
+        Session.set('heightC', height);
     }, 50);
 };
