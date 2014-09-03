@@ -1,7 +1,7 @@
 <template name="views_SequentialLayout">
     {{#SequentialLayout size=surfaceASize class="red-bg"}}
         {{>Surface template="sl_buttons" size="[undefined, 66]"}}
-        {{#View id="viewA" size=surfaceASize}}
+        {{#View size=surfaceASize}}
             {{#if show 'A'}}
                 {{>Surface id="sA" template="surfaceA" size="[undefined, true]" class="red-bg"}}
             {{/if}}
