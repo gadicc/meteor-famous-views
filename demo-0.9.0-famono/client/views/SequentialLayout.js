@@ -17,13 +17,13 @@ Template.views_SequentialLayout.helpers({
         return Session.get(target);
     },
     surfaceASize: function(){
-        return Session.get('A') ? [undefined, Session.get('heightA')] : [undefined, undefined];
+        return Session.get('A') ? [undefined, Session.get('heightA')] : [undefined, true];
     },
     surfaceBSize: function(){
-        return Session.get('B') ? [undefined, Session.get('heightB')] : [undefined, undefined];
+        return Session.get('B') ? [undefined, Session.get('heightB')] : [undefined, true];
     },
     surfaceCSize: function(){
-        return Session.get('C') ? [undefined, Session.get('heightC')] : [undefined, undefined];
+        return Session.get('C') ? [undefined, Session.get('heightC')] : [undefined, true];
     },
 });
 
@@ -34,8 +34,8 @@ Template.sl_buttons.helpers({
         return Session.get(this.valueOf()) ? 'set' : '';
     },
     text: function(){
-        var letter = this.valueOf(); 
-        return (Session.get(letter) ? 'Hide ' : 'Show ') + letter;  
+        var letter = this.valueOf();
+        return (Session.get(letter) ? 'Hide ' : 'Show ') + letter;
     }
 });
 
