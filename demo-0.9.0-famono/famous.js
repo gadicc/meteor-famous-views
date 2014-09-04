@@ -102,7 +102,7 @@ if (Meteor.isClient) {
     return out;
   };
 
-  Template.yieldMain.getTransition = function() {
+  Template.layout.getTransition = function() {
     var useForPages = Session.get('transitionPages');
     return useForPages ? Session.get('currentTransition') : 'opacity';
   }

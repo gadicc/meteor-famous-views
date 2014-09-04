@@ -16,32 +16,20 @@
 <template name="layout">
   {{#HeaderFooterLayout size="[undefined,undefined]"
       headerSize="50" footerSize="0"}}
-    {{>Surface target="header" template='yieldHeader'
-      size="[undefined,undefined]" translate="[0,0,100]"}}
-    {{>View target="content" template='yieldMain'
-      size="[undefined,undefined]"}}
+
+    {{#Surface target="header" 
+        size="[undefined,undefined]" translate="[0,0,100]"}}
+      <div id="header">{{> yield region="header"}}</div>
+    {{/Surface}}
+
+    {{#View target="content" size="[undefined,undefined]"}}
+      {{#RenderController size="[undefined,undefined]" transition=getTransition}}
+        {{>yield}}
+      {{/RenderController}}
+    {{/View}}
+
   {{/HeaderFooterLayout}}
-  {{! >famous template='yieldCenter' size="[500,300]" origin="[0.5,0.5]" translate="0,50"}}
 </template>
-
-<template name="yieldMain">
-  {{#RenderController size="[undefined,undefined]" transition=getTransition}}
-    {{>yield}}
-  {{/RenderController}}
-</template>
-
-<template name="yieldHeader">
-	<div id="header">{{> yield region="header"}}</div>
-</template>
-
-<template name="yieldCenter">
-	<div>{{> yield region="center"}}</div>
-</template>
-
-<template name="newPage">
-	{{> yield region="newPage"}}
-</template>
-
 
 <template name="header">
   <!-- Fixed navbar -->
