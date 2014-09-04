@@ -11,7 +11,7 @@ ctl-helper@1.0.2
 ctl@1.0.0
 deps@1.0.1
 ejson@1.0.0
-famous-components@0.0.23
+famous-components@0.0.24
 follower-livedata@1.0.0
 gadicohen:syntaxhighlighter@3.0.83-15
 geojson-utils@1.0.0
