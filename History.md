@@ -5,6 +5,30 @@
   touchstart touchmove touchend touchcancel
   keydown keyup keypress
 
+## v0.0.24
+
+* Add initial Velocity support!  Expect PRs to now include tests :)
+  Unfortunately only available with 0.8.3 until Velocity 0.9 support
+  is ready.  Symlinked from demo-test to demo-0.8.3-mj-famous.
+
+* Make sure a View with no attributes still renders with correct data
+  context.  (Closes #45)
+
+* Re-add support for specifying a data context with `data=`.  Basically
+  a shorcut for surrounding with `{{#with}}`.  (Closes #46)
+
+* Since Meteor supports template names with spaces, and we use the
+  template name as a CSS classname, "s/ /_/" before passing to Famous
+  to avoid an uncaught exception (Closes #47).
+
+* Startup as early as possible, i.e. if famous global var is available
+  before Meteor.startup(), run FView.startup() then.  Also, log when
+  we're starting up so we know what's going on and can better identify
+  problems.  (Relates to #48)
+
+## v0.0.23
+
+* Mixed compatibility with Meteor <= 0.8.3 and Meteor >= 0.9.0
 * for famousEvents (and examples), target = surface || view._eventInput
 
 ## v0.0.22

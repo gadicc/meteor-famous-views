@@ -3,13 +3,13 @@ var path = Npm.require('path');
 
 Package.describe({
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.0.23",
+  version: "0.0.24",
   git: "https://github.com/gadicc/meteor-famous-components.git"
 });
 
 Package.on_use(function (api) {
   if (api.versionsFrom) {
-    api.versionsFrom("METEOR-CORE@0.9.0-atm");
+    api.versionsFrom("METEOR@0.9.0");
     api.use("jag:pince@0.0.5", 'client');
   } else {
     api.use("pince", 'client');
@@ -19,17 +19,26 @@ Package.on_use(function (api) {
   api.use(['ui', 'blaze', 'minimongo', 'templating', 'deps', 'observe-sequence'], 'client');
 
   if (api.versionsFrom) {
-      api.use('raix:famono@0.7.4', 'client', { weak: true });
       api.use('mjnetworks:mj-famous@0.2.1-1', 'client', { weak: true });
       api.use('jonperl:famous-compiled@0.2.0', 'client', { weak: true });
+      api.use('iron:router@0.9.1', 'client', { weak: true });
+      if (packageUsed('raix:famono')) {
+        // File isn't scanned properly on a weak dep
+        api.use('raix:famono@0.7.4', 'client');
+        // Line below means we get to load sooner but code will be sent twice
+        // https://github.com/raix/Meteor-famono/issues/41#issuecomment-54081868
+        // api.add_files('lib/smart.require', 'client');
+      }
   } else {
     // https://github.com/meteor/meteor/issues/1358
     if (packageUsed('famono'))
-      api.use('famono', 'client', { weak: true });
+      api.use('famono', 'client');
     if (packageUsed('mj-famous'))
       api.use('mj-famous', 'client', { weak: true });
     if (packageUsed('famous-compiled'))
       api.use('famous-compiled', 'client', { weak: true });    
+    if (packageUsed('iron-router'))
+      api.use('iron-router', 'client', { weak: true });    
   }
  
   api.add_files(
@@ -47,6 +56,7 @@ Package.on_use(function (api) {
 
   api.add_files(
     [
+      'lib/views/_simple.js',
       'lib/views/EdgeSwapper.js',
       'lib/views/Flipper.js',
       'lib/views/HeaderFooterLayout.js',
