@@ -21,7 +21,7 @@ var springTransition = {
 
 Template.springBall.events({
   'mouseover': function(event, tpl) {
-    var fview = FView.fromTemplate(tpl);
+    var fview = FView.from(tpl);
     var parentSize = fview.parent.parent.getSize();
     fview.modifier.halt();
     fview.modifier.setTransform(
@@ -46,7 +46,7 @@ Template.codeButton.events({
 });
 
 Template.eventsDemo.rcSize = function() {
-  return [undefined, Session.get('showCode') ? 550 : 200];
+  return [undefined, Session.get('showCode') ? 600 : 210];
 }
 
 /* famous events */
@@ -69,7 +69,7 @@ function clickeyStuff(fview) {
 /*
 Template.ev_surface_click.events({
   'click': function(event, tpl) {
-    var fview = FView.fromTemplate(tpl);
+    var fview = FView.from(tpl);
     // event.type == "click"
     clickeyStuff(fview);
   }
@@ -86,7 +86,7 @@ Template.ev_surface_click.famousEvents({
 */
 
 Template.ev_surface_click.rendered = function() {
-  var fview = FView.fromBlazeView(this.__view__);
+  var fview = FView.from(this.view);
   var target = fview.surface || fview.view._eventInput;
   target.on('click', function() {
     clickeyStuff(fview);

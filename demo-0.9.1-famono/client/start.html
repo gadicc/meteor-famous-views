@@ -69,7 +69,7 @@
 
 			{{#sh_highlight lang="js"}}
 				Template.item.rendered = function() {
-					var fview = FView.fromTemplate(this);
+					var fview = FView.from(this);
                     // fview.modifier, fview.view, and other stuff
 				}
 			{{/sh_highlight}}

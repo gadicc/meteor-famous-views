@@ -29,7 +29,7 @@
 				 size="[50,50]" origin="[0.5,0.5]" align="[0.1,0.5]"}}
 		{{/View}}
 
-		{{#Surface size="[undefined,780]" class="padLeft"}}
+		{{#Surface size="[undefined,890]" class="padLeft"}}
 			<p>Firstly, our temmplate:</p>
 
 			{{#sh_highlight lang="html"}}
@@ -79,7 +79,7 @@
 
 			{{#sh_highlight lang="js"}}
 				Template.ev_surface_click.rendered = function() {
-				  var fview = FView.fromBlazeView(this.__view__);
+				  var fview = FView.from(this);
 				  var target = fview.surface || fview.view._eventInput;
 				  target.on('click', function() {
 				    clickeyStuff(fview);
@@ -87,13 +87,30 @@
 				}				
 			{{/sh_highlight}}
 
+			<p>Available Surface events:
+				<ul>
+					<li>
+						<code>click</code>, <code>mousedown</code>,
+						<code>mousemove</code>, <code>mouseup</code>,
+						<code>mouseover</code>, <code>mouseout</code>
+					</li>
+					<li>
+						<code>touchstart</code>, <code>touchmove</code>,
+						<code>touchend</code>, <code>touchcancel</code>
+					</li>
+					<li>
+						<code>keydown</code>, <code>keyup</code>, <code>keypress</code>
+					</li>
+				</ul>
+  		</p>
+
 			<p>For comparison's sake, here's the same event using Meteor's
 			eventmap:</p>
 
 			{{#sh_highlight lang="js"}}
 				Template.ev_surface_click.events({
 				  'click': function(event, tpl) {
-				    var fview = FView.fromTemplate(tpl);
+				    var fview = FView.from(tpl);
 				    // event.type == "click"
 				    clickeyStuff(fview);
 				  }
@@ -192,7 +209,7 @@
 
 		Template.blockSpring.events({
 		  'mouseover': function(event, tpl) {
-		    var fview = FView.fromTemplate(tpl);
+		    var fview = FView.from(tpl);
 		    fview.modifier.halt();
 		    fview.modifier.setTransform(
 		      Transform.translate(

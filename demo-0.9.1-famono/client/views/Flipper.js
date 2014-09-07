@@ -15,7 +15,7 @@ function perspectiveZero() {
 
 Template.views_Flipper_front.events({
 	'click': function(event, tpl) {
-		var fview = FView.fromTemplate(tpl);
+		var fview = FView.from(tpl);
 		FView.mainCtx.setPerspective(500);
 		fview.parent.view
 			.setAngle(Math.PI, { curve : 'easeOutBounce', duration : 500},
@@ -25,7 +25,7 @@ Template.views_Flipper_front.events({
 
 Template.views_Flipper_back.events({
 	'click': function(event, tpl) {
-		var fview = FView.fromTemplate(tpl);
+		var fview = FView.from(tpl);
 		FView.mainCtx.setPerspective(500);
 		fview.parent.view
 			.setAngle(0, { curve : 'easeOutBounce', duration : 500},

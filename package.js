@@ -3,25 +3,25 @@ var path = Npm.require('path');
 
 Package.describe({
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.0.24",
+  version: "0.1.0",
   git: "https://github.com/gadicc/meteor-famous-components.git"
 });
 
 Package.on_use(function (api) {
   if (api.versionsFrom) {
-    api.versionsFrom("METEOR@0.9.0");
+    api.versionsFrom("METEOR@0.9.1.1");
     api.use("jag:pince@0.0.5", 'client');
   } else {
     api.use("pince", 'client');
   }
 
 	api.use(['underscore', 'jquery'], 'client');
-  api.use(['ui', 'blaze', 'minimongo', 'templating', 'deps', 'observe-sequence'], 'client');
+  api.use(['blaze', 'minimongo', 'templating', 'deps', 'observe-sequence'], 'client');
 
   if (api.versionsFrom) {
       api.use('mjnetworks:mj-famous@0.2.1-1', 'client', { weak: true });
       api.use('jonperl:famous-compiled@0.2.0', 'client', { weak: true });
-      api.use('iron:router@0.9.1', 'client', { weak: true });
+      api.use('iron:router@0.9.3', 'client', { weak: true });
       if (packageUsed('raix:famono')) {
         // File isn't scanned properly on a weak dep
         api.use('raix:famono@0.7.4', 'client');

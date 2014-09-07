@@ -1,9 +1,10 @@
 ## vNEXT
 
-* Mention surface events:
-  click mousedown mousemove mouseup mouseover mouseout
-  touchstart touchmove touchend touchcancel
-  keydown keyup keypress
+## v0.1.0
+
+* Meteor 0.9.1.1 support, NOT BACKWARDS COMPATIBLE (too many API changes)
+* Introduce FView.get() shortcut, can take a blazeView, TplInstance, domNode
+* In demo/events, mention all available Famo.us Surface events
 
 ## v0.0.24
 
