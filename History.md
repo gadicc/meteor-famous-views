@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v0.1.2
+
+* Remove `versionsFrom` and depend on individual core packages, so now
+  we can work on both 0.9.1.1 and 0.9.2-rc1
 * Fix one more thing from 0.9.1 changes (FamousEach destroy)
 
 ## v0.1.1

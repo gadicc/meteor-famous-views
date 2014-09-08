@@ -4,20 +4,22 @@ var path = Npm.require('path');
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.1",
+  version: "0.1.2",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
 Package.on_use(function (api) {
   if (api.versionsFrom) {
-    api.versionsFrom("METEOR@0.9.1.1");
+    //api.versionsFrom("METEOR@0.9.1.1");
     api.use("jag:pince@0.0.5", 'client');
+    api.use(['underscore@1.0.0', 'jquery@1.0.0'], 'client');
+    // TODO, deps -> tracker namespace upgrade
+    api.use(['blaze@2.0.0', 'templating@1.0.5', 'deps@1.0.2', 'observe-sequence@1.0.2'], 'client');
   } else {
     api.use("pince", 'client');
+    api.use(['underscore', 'jquery'], 'client');
+    api.use(['blaze', 'templating', 'deps', 'observe-sequence'], 'client');
   }
-
-	api.use(['underscore', 'jquery'], 'client');
-  api.use(['blaze', 'minimongo', 'templating', 'deps', 'observe-sequence'], 'client');
 
   if (api.versionsFrom) {
       if (packageUsed('mjnetworks:famous'))
