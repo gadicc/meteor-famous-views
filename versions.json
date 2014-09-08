@@ -89,14 +89,6 @@
       "1.0.2"
     ],
     [
-      "mjnetworks:famous",
-      "0.2.2-1"
-    ],
-    [
-      "mjnetworks:mj-famous",
-      "0.2.1-1"
-    ],
-    [
       "mongo",
       "1.0.4"
     ],

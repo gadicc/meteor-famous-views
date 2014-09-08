@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v0.1.3
+
+* Error with FView.fromElement (#57)
+
 ## v0.1.2
 
 * Remove `versionsFrom` and depend on individual core packages, so now
