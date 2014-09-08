@@ -1,5 +1,13 @@
 ## vNEXT
 
+* Fix one more thing from 0.9.1 changes (FamousEach destroy)
+
+## v0.1.1
+
+* Faster loading for weak packages
+* Rename to gadicohen:famous-views (there will still be gadicohen:gadicc)
+* Update demo quickstart for more useful help on 0.9.0+
+
 ## v0.1.0
 
 * Meteor 0.9.1.1 support, NOT BACKWARDS COMPATIBLE (too many API changes)

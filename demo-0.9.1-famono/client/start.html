@@ -14,17 +14,18 @@
     		$ cd app
 
             # for Meteor &lt;= 0.8.3
-    		$ mrt add famono             # or mj-famous or famous-compiled (or use CDN)
+    		$ mrt add famono                        # or mj-famous or famous-compiled (or use CDN)
     		$ mrt add famous-components
 
-            # for Meteor >= 0.9.0
-            $ meteor add raix:famono     # or mjnetworks:mj-famous, jonperl:famous-compiled
-            $ meteor add gadicohen:famous-components     # will become: gadicc:famous-views
+            # for Meteor >= 0.9.1.1 (!!)
+            $ meteor add mjnetworks:famous@0.2.2-1  # or raix:famono and install locally (see github)
+            $ meteor add gadicohen:famous-views     # or install in packages folder for famono ^^^^
     	{{/sh_highlight}}
 
     	<p>
     		If you want to play with this demo locally,
-    		<code>cd packages/famous-components/demo; mrt update; meteor</code>.
+    		<code>cd packages/famous-views/demo; mrt update; meteor</code>
+            (requires local package install on 0.9.0+).
     	</p>
 
     	<p>Otherwise, edit <code>app.html</code> and create a template called

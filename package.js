@@ -2,9 +2,10 @@ var fs = Npm.require('fs');
 var path = Npm.require('path');
 
 Package.describe({
+  name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.0",
-  git: "https://github.com/gadicc/meteor-famous-components.git"
+  version: "0.1.1",
+  git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
 Package.on_use(function (api) {
@@ -19,7 +20,10 @@ Package.on_use(function (api) {
   api.use(['blaze', 'minimongo', 'templating', 'deps', 'observe-sequence'], 'client');
 
   if (api.versionsFrom) {
-      api.use('mjnetworks:mj-famous@0.2.1-1', 'client', { weak: true });
+      if (packageUsed('mjnetworks:famous'))
+        api.use('mjnetworks:famous@0.2.2-1', 'client' /*, { weak: true } */);
+      if (packageUsed('mjnetworks:mj-famous'))
+        api.use('mjnetworks:mj-famous@0.2.1-1', 'client' /*, { weak: true } */);
       api.use('jonperl:famous-compiled@0.2.0', 'client', { weak: true });
       api.use('iron:router@0.9.3', 'client', { weak: true });
       if (packageUsed('raix:famono')) {
