@@ -82,7 +82,7 @@
 					},
 
 					// If exists, called when an attribute is reactively updated
-					attrUpdate: function(key, value, data, firstTime) {
+					attrUpdate: function(key, value, oldValue, data, firstTime) {
                         // `this` is the fview for this instance
 					  switch(key) {
 					    case "specialX":

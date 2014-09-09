@@ -1,5 +1,15 @@
 ## vNEXT
 
+## v0.1.4
+
+* `attrUpdate` BREAKING CHANGE.  Insert `oldValue` between value and fullData
+  attrUpdate(key, value, **oldValue**, fullData, isFirstTime).
+* `attrUpdate` now actually gets called on the first time (with initial value)
+
+* Fix `rotateZ` so that it works, and fix demo to actually use it
+* `rotate*`,`skew*` now applies diff of new rotation to previous on that axis
+* `translate` attribute is now reactive.
+
 ## v0.1.3
 
 * Error with FView.fromElement (#57)
