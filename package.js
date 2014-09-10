@@ -4,7 +4,7 @@ var path = Npm.require('path');
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.4",
+  version: "0.1.5",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
@@ -63,6 +63,7 @@ Package.on_use(function (api) {
   api.add_files(
     [
       'lib/views/_simple.js',
+      'lib/views/ContainerSurface.js',
       'lib/views/EdgeSwapper.js',
       'lib/views/Flipper.js',
       'lib/views/HeaderFooterLayout.js',

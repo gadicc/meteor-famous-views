@@ -1,0 +1,153 @@
+<template name="timbre">
+	{{#Scrollview size="[undefined,undefined]" translate="[20,0]"}}
+
+		{{#Surface size="[undefined,130]"}}
+			<h1>Timbre Menu Demo</h1>
+
+			<p>This example shows how you could do a Timbre Menu using famous-views.</p>
+
+			<p>Source below the demo, note the use of a Session variable
+			to reactively move the main app view and trigger the entrance animations.
+			</p>
+
+			<br />
+		{{/Surface}}
+
+		{{#ContainerSurface size="[450,300]" overflow="hidden" class="timbre-cs special"}}
+			{{> timbre_menu}}
+			{{>Surface template="timbre_main" class="timbre-main"
+				size="[undefined,undefined]" translate=menuTranslate}}
+		{{/ContainerSurface}}
+
+		{{>Surface size="[undefined,1250]" template="timbreSource"}}
+
+	{{/Scrollview}}
+</template>
+
+<template name="timbre_menu">
+	{{#SequentialLayout id="timbre-menu" size="[400,500]" translate="[0,35]"}}
+		{{>strip icon="search" text="SEARCH"}}
+		{{>strip icon="star" text="STARRED"}}
+		{{>strip icon="group" text="FRIENDS"}}
+		{{>strip icon="cog" text="SETTINGS"}}
+	{{/SequentialLayout}}
+</template>
+
+<!-- Here we use a regular Meteor template to create a reusable "strip" -->
+<template name="strip">
+	{{#View size="[undefined,50]"}}
+
+		{{!-- Background and text --}}
+		{{#Surface class="timbre-strip" size="[undefined,50]" rotateZ="-10" skewZ="-10"}}
+			{{text}}
+		{{/Surface}}
+
+		{{!-- Icon (which is not rotated/skewed) --}}
+		{{#Surface class="timbre-icon" size="[50,50]" translate="[30,-2]"}}
+			<i class="fa fa-{{icon}}"></i>
+		{{/Surface}}
+
+	{{/View}}
+</template>
+
+<template name="timbre_main">
+	<h3>Main App Page</h3>
+
+	<p>Click me anywhere to see the menu effect.</p>
+
+	<p>This example just
+	covers how to build the Menu using templates, we don't cover
+	dragging, flick with velocity, etc.</p>
+
+	<p>Note, the menu size and speed is exaggerated for the purpose of
+	the demo.</p>
+</template>
+
+<template name="timbreSource">
+	<br />
+	<p><b>Templates:</b></p>
+
+	{{#sh_highlight lang="html"}}
+
+		&lt;template name="screen">
+			{{dstache}}#ContainerSurface size="[450,300]" overflow="hidden" class="timbre-cs"}}
+				{{dstache}}> timbre_menu}}
+				{{dstache}}>Surface template="timbre_main" class="timbre-main"
+					size="[undefined,undefined]" translate=menuTranslate}}
+			{{dstache}}/ContainerSurface}}
+		&lt;/template>
+
+		&lt;template name="timbre_menu">
+			{{dstache}}#SequentialLayout id="timbre-menu" size="[400,500]" translate="[0,35]"}}
+				{{dstache}}>strip icon="search" text="SEARCH"}}
+				{{dstache}}>strip icon="star" text="STARRED"}}
+				{{dstache}}>strip icon="group" text="FRIENDS"}}
+				{{dstache}}>strip icon="cog" text="SETTINGS"}}
+			{{dstache}}/SequentialLayout}}
+		&lt;/template>
+
+		&lt;!-- Here we use a regular Meteor template to create a reusable "strip" -->
+		&lt;template name="strip">
+			{{dstache}}#View size="[undefined,50]"}}
+
+				{{dstache}}!-- Background and text --}}
+				{{dstache}}#Surface class="timbre-strip" size="[undefined,50]" rotateZ="-10" skewZ="-10"}}
+					{{dstache}}text}}
+				{{dstache}}/Surface}}
+
+				{{dstache}}!-- Icon (which is not rotated/skewed) --}}
+				{{dstache}}#Surface class="timbre-icon" size="[50,50]" translate="[30,-2]"}}
+					<i class="fa fa-{{icon}}"></i>
+				{{dstache}}/Surface}}
+
+			{{dstache}}/View}}
+		&lt;/template>
+
+	{{/sh_highlight}}
+
+	<p><b>JavaScript:</b></p>
+
+	{{#sh_highlight lang="js"}}
+		Session.set('menuOpen', false);
+
+		// Translation for "main" page, depending on whether menu is open or not
+		Template.screen.menuTranslate = function() {
+		  return Session.get('menuOpen') ? [300,0,20] : [0,0,20];
+		}
+
+		// Set the transition to be used when translate= changes reactively
+		Template.timbre_main.rendered = function() {
+		  FView.from(this).modifierTransition = { curve: 'easeOut', duration: 500 };
+		}
+
+		// On click, toggle the menuOpen state / reactive Session variable
+		Template.timbre_main.famousEvents({
+		  'click': function(event, tpl) {
+		    Session.set('menuOpen', !Session.get('menuOpen'));
+		  }
+		});
+
+		// Simple queue.  Push functions which will get run and removed every 100ms
+		var queue = [];
+		Meteor.setInterval(function() {
+		  if (queue.length)
+		    queue.shift()();
+		}, 100);
+
+		Deps.autorun(function() {
+		  if (Session.get('menuOpen'))
+		    _.each(FView.byId('timbre-menu').children, function(strip) {
+		      // Move the strips out of sight immediately
+		      strip.modifier.setTransform(Transform.translate(-500,85));
+
+		      // And queue them to stagger in back to their original position
+		      queue.push(function() {
+		        strip.modifier.setTransform(Transform.translate(0,0),
+		          { duration: 500, curve: 'easeOut' });
+		      });
+		    });
+		});
+	{{/sh_highlight}}
+
+	<p>CSS <a href="https://github.com/gadicc/meteor-famous-views/tree/master/demo-0.9.1-famono/client/examples">here</a>.</p>
+</template>

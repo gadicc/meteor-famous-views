@@ -13,7 +13,7 @@ ddp@1.0.8
 deps@1.0.3
 ejson@1.0.1
 follower-livedata@1.0.1
-gadicohen:famous-views@0.1.4
+gadicohen:famous-views@0.1.5
 gadicohen:syntaxhighlighter@3.0.83-17
 geojson-utils@1.0.0
 html-tools@1.0.0
@@ -35,6 +35,7 @@ minifiers@1.0.2
 minimongo@1.0.2
 mizzao:bootstrap-3@3.2.0
 mongo@1.0.4
+natestrauser:font-awesome@4.2.0
 observe-sequence@1.0.2
 ordered-dict@1.0.0
 raix:famono@0.7.4

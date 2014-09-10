@@ -1,4 +1,11 @@
-## vNEXT
+## SOON
+
+* auto check for final size and check for screen resize event
+
+## v0.1.5
+
+* Fix `{{#containSurface}}` and support `overflow="hidden"` + `class=`.
+* Add a Timbre Menu example to the demo/docs.
 
 ## v0.1.4
 

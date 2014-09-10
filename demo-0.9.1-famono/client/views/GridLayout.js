@@ -10,7 +10,6 @@ Router.map(function() {
 
 FView.ready(function(require) {
 	FView.registerView('GridLayout', famous.views.GridLayout);
-	FView.registerView('ContainerSurface', famous.surfaces.ContainerSurface);
 });
 
 Template.views_GridLayout.items = function() {
