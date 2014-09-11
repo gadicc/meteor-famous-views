@@ -4,7 +4,7 @@ var path = Npm.require('path');
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.5",
+  version: "0.1.6",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
@@ -81,37 +81,48 @@ Package.on_use(function (api) {
 // Thanks to Arunoda as usual :)
 // https://github.com/arunoda/meteor-fast-render/blob/master/package.js
 
-// meteorRoot() is null on 0.9.0 during meteor publish
-if (meteorRoot()) {
-  // tiny mod to only read list once
-  var meteorPackages = fs.readFileSync(path.join(meteorRoot(), '.meteor', 'packages'), 'utf8');
-  function packageUsed(package) {
-    if (!meteorPackages) return true; // for inside famono parser
-    return !!meteorPackages.match(new RegExp(package));
-  }
+// tiny mod to only read list once
+var meteorPackages = meteorRoot() // meteorRoot() is null on 0.9.0 during meteor publish
+  && fs.readFileSync(path.join(meteorRoot(), '.meteor', 'packages'), 'utf8');
+  
+/*
+ * We need to cover
+ *
+ * 1) Starting inside Meteor (everything works how we expect)
+ * 2) Inside Famono parser (weird dir?)
+ * 3) While publishing
+*/
+function packageUsed(package) {
+  /* Famono parser.  This hack relies on the fact that famono doesn't provide
+   * the new camel case Package.onUse.  meteorPackages won't be set inside parser
+   * or during publish */
+  if (!meteorPackages && !Package.onUse)
+    return true;
 
-  function isAppDir(filepath) {
-    try {
-      return fs.statSync(path.join(filepath, '.meteor', 'packages')).isFile();
-    } catch (e) {
-      return false;
+  return meteorPackages && !!meteorPackages.match(new RegExp(package));
+}
+
+function isAppDir(filepath) {
+  try {
+    return fs.statSync(path.join(filepath, '.meteor', 'packages')).isFile();
+  } catch (e) {
+    return false;
+  }
+}
+
+function meteorRoot() {
+  var currentDir = process.cwd();
+  while (currentDir) {
+    var newDir = path.dirname(currentDir);
+
+    if (isAppDir(currentDir)) {
+      break;
+    } else if (newDir === currentDir) {
+      return null;
+    } else {
+      currentDir = newDir;
     }
   }
 
-  function meteorRoot() {
-    var currentDir = process.cwd();
-    while (currentDir) {
-      var newDir = path.dirname(currentDir);
-
-      if (isAppDir(currentDir)) {
-        break;
-      } else if (newDir === currentDir) {
-        return null;
-      } else {
-        currentDir = newDir;
-      }
-    }
-
-    return currentDir;
-  }
+  return currentDir;
 }

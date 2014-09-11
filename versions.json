@@ -1,36 +1,12 @@
 {
   "dependencies": [
     [
-      "application-configuration",
-      "1.0.1"
-    ],
-    [
-      "binary-heap",
-      "1.0.0"
-    ],
-    [
       "blaze",
       "2.0.0"
     ],
     [
-      "blaze-tools",
-      "1.0.0"
-    ],
-    [
-      "callback-hook",
-      "1.0.0"
-    ],
-    [
-      "check",
-      "1.0.0"
-    ],
-    [
       "coffeescript",
       "1.0.2"
-    ],
-    [
-      "ddp",
-      "1.0.8"
     ],
     [
       "deps",
@@ -41,15 +17,7 @@
       "1.0.1"
     ],
     [
-      "follower-livedata",
-      "1.0.1"
-    ],
-    [
       "geojson-utils",
-      "1.0.0"
-    ],
-    [
-      "html-tools",
       "1.0.0"
     ],
     [
@@ -73,32 +41,12 @@
       "1.0.0"
     ],
     [
-      "logging",
-      "1.0.2"
-    ],
-    [
       "meteor",
       "1.0.3"
     ],
     [
-      "minifiers",
-      "1.0.2"
-    ],
-    [
       "minimongo",
       "1.0.2"
-    ],
-    [
-      "mjnetworks:famous",
-      "0.2.2-1"
-    ],
-    [
-      "mjnetworks:mj-famous",
-      "0.2.1-1"
-    ],
-    [
-      "mongo",
-      "1.0.4"
     ],
     [
       "observe-sequence",
@@ -109,36 +57,12 @@
       "1.0.0"
     ],
     [
-      "raix:famono",
-      "0.7.4"
-    ],
-    [
       "random",
       "1.0.0"
     ],
     [
       "reactive-var",
       "1.0.1"
-    ],
-    [
-      "reload",
-      "1.0.1"
-    ],
-    [
-      "retry",
-      "1.0.0"
-    ],
-    [
-      "routepolicy",
-      "1.0.0"
-    ],
-    [
-      "spacebars",
-      "1.0.1"
-    ],
-    [
-      "spacebars-compiler",
-      "1.0.2"
     ],
     [
       "templating",
@@ -151,10 +75,6 @@
     [
       "underscore",
       "1.0.0"
-    ],
-    [
-      "webapp",
-      "1.0.3"
     ]
   ],
   "pluginDependencies": [],
