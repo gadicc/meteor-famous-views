@@ -45,7 +45,7 @@
 
 <template name="gridLayoutSource">
 	{{#sh_highlight lang="html"}}
-		&lt;template name="GridLayout">
+		&lt;template name="views_GridLayout">
 			{{dstache}}#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]"}}
 				{{dstache}}#famousEach items}}
 					{{dstache}}>View template='gridItem' size='[undefined,undefined]'}}
@@ -65,7 +65,7 @@
 	{{/sh_highlight}}
 
 	{{#sh_highlight lang="js"}}
-		Template.GridLayout.items = function() {
+		Template.views_GridLayout.items = function() {
 		  return Items.find({}, {sort: {name: 1}, limit: 8});
 		}
 

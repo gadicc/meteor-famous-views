@@ -28,19 +28,19 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="Scrollview_source">
 	<div class="code">
 		{{#sh_highlight lang="html"}}
-			{{dstache}}#Scrollview size="[undefined,undefined]" items=items}}
+			{{dstache}}#Scrollview size="[undefined,undefined]"}}
 
-				{{dstache}}Surface size="[undefined,50]"}}
+				{{dstache}}#Surface size="[undefined,50]"}}
 					Surface above the list (source code at bottom)
 				{{dstache}}/Surface}}
 
 				{{dstache}}#famousEach items}}
-					{{dstache}}#Surface size='[undefined,50]'}}
+					{{dstache}}#Surface size="[undefined,50]"}}
 						<div class="listItem">{{dstache}}name}}</div>
 					{{dstache}}/Surface}}
 				{{dstache}}/famousEach}}
 
-				{{dstache}}>Surface template='Scrollview_source'}}
+				{{dstache}}>Surface template="Scrollview_source" size="[undefined,300]"}}
 
 			{{dstache}}/Scrollview}}
 		{{/sh_highlight}}
@@ -48,7 +48,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 
 	<div class="code" style="margin-top: 10px">
 		{{#sh_highlight lang="js"}}
-			Template.Scrollview.items = function() {
+			Template.views_Scrollview.items = function() {
 			  return Items.find({}, {sort: {name: 1}});
 			}
 		{{/sh_highlight}}

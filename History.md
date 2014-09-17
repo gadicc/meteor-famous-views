@@ -2,6 +2,15 @@
 
 * auto check for final size and check for screen resize event
 
+## v0.1.7
+
+* Fix some typos and superfluous stuff on demo Scrollview page (#58)
+* Warn about any Templates defined with the same name as a View (#54, #58)
+
+## v0.1.6
+
+* Fix how `packageUsed` works during `meteor publish` (#48)
+
 ## v0.1.5
 
 * Fix `{{#containSurface}}` and support `overflow="hidden"` + `class=`.
