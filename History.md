@@ -2,6 +2,11 @@
 
 * auto check for final size and check for screen resize event
 
+## vNEXT
+
+* Revert demo symbolic link so it's easier to link to stuff on github
+* Add a slideWindowLeft/slideWindowRight transition type, not final (#60)
+
 ## v0.1.7
 
 * Fix some typos and superfluous stuff on demo Scrollview page (#58)
