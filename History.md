@@ -4,8 +4,11 @@
 
 ## vNEXT
 
+## v0.1.8
+
 * Revert demo symbolic link so it's easier to link to stuff on github
 * Add a slideWindowLeft/slideWindowRight transition type, not final (#60)
+* Let autoSize take more time if needed (in 10ms increments).
 
 ## v0.1.7
 
