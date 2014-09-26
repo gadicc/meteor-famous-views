@@ -19,17 +19,17 @@
 				class="blue-bg" size="[150,150]" origin="[.5,.5]"}}
 		{{/Flipper}}
 
-		{{#Surface size="[undefined,500]"}}
-			{{#sh_highlight lang="html"}}
+		{{#Surface size="[undefined,auto]"}}
+			{{#prism lang="blaze" class="line-numbers"}}
 				{{dstache}}#Flipper size="[150,150]" translate="[100,0]"}}
 					{{dstache}}>Surface target="front" template="views_Flipper_front"
 						class="red-bg" size="[150,150]" origin="[.5,.5]"}}
 					{{dstache}}>Surface target="back" template="views_Flipper_back"
 						class="blue-bg" size="[150,150]" origin="[.5,.5]"}}
 				{{dstache}}/Flipper}}
-			{{/sh_highlight}}
+			{{/prism}}
 
-			{{#sh_highlight lang="js"}}
+			{{#prism lang="javascript" class="line-numbers"}}
 				// TODO, put flipper in it's own context
 				function perspectiveZero() {
 					FView.mainCtx.setPerspective(0);
@@ -54,7 +54,7 @@
 								perspectiveZero);
 					}
 				});
-			{{/sh_highlight}}
+			{{/prism}}
 		{{/Surface}}
 	{{/Scrollview}}
 </template>

@@ -28,7 +28,7 @@
 
 		{{/GridLayout}}
 
-		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,700]'}}
+		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,auto]'}}
 
 	{{/Scrollview}}
 </template>
@@ -44,7 +44,7 @@
 </template>
 
 <template name="gridLayoutSource">
-	{{#sh_highlight lang="html"}}
+	{{#prism lang="blaze" class="line-numbers"}}
 		&lt;template name="views_GridLayout">
 			{{dstache}}#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]"}}
 				{{dstache}}#famousEach items}}
@@ -62,9 +62,9 @@
 				{{dstache}}name}}
 			{{dstache}}/Surface}}
 		&lt;/template>				
-	{{/sh_highlight}}
+	{{/prism}}
 
-	{{#sh_highlight lang="js"}}
+	{{#prism lang="javascript" class="line-numbers"}}
 		Template.views_GridLayout.items = function() {
 		  return Items.find({}, {sort: {name: 1}, limit: 8});
 		}
@@ -88,5 +88,5 @@
 			if (queue.length)
 				queue.shift()();
 		}, 100);
-	{{/sh_highlight}}
+	{{/prism}}
 </template>

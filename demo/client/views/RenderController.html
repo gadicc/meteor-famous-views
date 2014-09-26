@@ -1,6 +1,6 @@
 <template name="views_RenderController">
 	{{#Scrollview size="[undefined,undefined]"}}
-		{{#View size="[undefined,780]" translate="[20,0]"}}
+		{{#View size="[undefined,900]" translate="[20,0]"}}
 			{{#Surface size="[undefined,undefined]"}}
 				<h1>RenderController demo</h1>
 
@@ -11,17 +11,17 @@
 				<p>In the example below, we demonstrate fancier transitions
 				with a dynamic template:</p>
 
-				{{#sh_highlight lang="html"}}
+				{{#prism lang="blaze" class="line-numbers"}}
 					{{dstache}}#RenderController size="[150,150]"}}
 						{{dstache}}>showTemplate name=currentTemplate}}
 					{{dstache}}/RenderController}}
-				{{/sh_highlight}}
+				{{/prism}}
 
 				{{>rc_buttons}}
 				{{>rc_transitions}}
 				{{>rc_useForPages}}
 
-				{{#sh_highlight lang="js"}}
+				{{#prism lang="javascript" class="line-numbers"}}
 					Template.views_RenderController.helpers({
 						'showTemplate': function() {
 							return Template[this.name];
@@ -38,15 +38,15 @@
 							Session.set('currentTemplate', this.valueOf());
 						}
 					});
-				{{/sh_highlight}}
+				{{/prism}}
 
-				{{#sh_highlight lang="html"}}
+				{{#prism lang="blaze" class="line-numbers"}}
 					&lt;template name="rc_surface1"&gt;
 						{{dstache}}#Surface class="red-bg" origin="[0,0]" size="[75,150]"}}
 							<div class="full">#1</div>
 						{{dstache}}/Surface}}
 					&lt;/template&gt;
-				{{/sh_highlight}}
+				{{/prism}}
 
 				<p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see RenderController.html and
 				RenderController.html)</p>

@@ -29,21 +29,21 @@
 				 size="[50,50]" origin="[0.5,0.5]" align="[0.1,0.5]"}}
 		{{/View}}
 
-		{{#Surface size="[undefined,890]" class="padLeft"}}
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
 			<p>Firstly, our temmplate:</p>
 
-			{{#sh_highlight lang="html"}}
+			{{#prism lang="blaze" class="line-numbers"}}
 				&lt;template name="ev_surface_click">
 					&lt;!-- div needed for meteor events, see next section -->
 					&lt;div style="width:100%; height: 100%;" class="ev_surface_click">
 						{{dstache}}clickCount}}
 					&lt;/div>
 				&lt;/template>			
-			{{/sh_highlight}}
+			{{/prism}}
 
 			<p>and the helper and action/animation:</p>
 
-			{{#sh_highlight lang="js"}}
+			{{#prism lang="javascript" class="line-numbers"}}
 				Template.ev_surface_click.clickCount = function() {
 				  return Session.get('clickCount');
 				}
@@ -56,13 +56,13 @@
 				  );
 				  Session.set('clickCount', Session.get('clickCount')+1);
 				}
-			{{/sh_highlight}}
+			{{/prism}}
 
 			<p>For setting up the handler itself, we provide a small shortcut,
 			<code>Template.x.famousEvents()</code> to allow Famous events to be
 			set up more conveniently in a Meteor-like way:</p>
 
-			{{#sh_highlight lang="js"}}
+			{{#prism lang="javascript" class="line-numbers"}}
 				Template.ev_surface_click.famousEvents({
 				  'click': function(event, fview) {
 				    // event.type == "click"
@@ -71,13 +71,13 @@
 				});
 
 
-			{{/sh_highlight}}
+			{{/prism}}
 
 			<p>This is identical to doing the following, which is a little more
 			efficient if you need a <code>render()</code> method anyway and/or
 			have more than one event handler:</p>
 
-			{{#sh_highlight lang="js"}}
+			{{#prism lang="javascript" class="line-numbers"}}
 				Template.ev_surface_click.rendered = function() {
 				  var fview = FView.from(this);
 				  var target = fview.surface || fview.view._eventInput;
@@ -85,7 +85,7 @@
 				    clickeyStuff(fview);
 				  });
 				}				
-			{{/sh_highlight}}
+			{{/prism}}
 
 			<p>Available Surface events:
 				<ul>
@@ -107,7 +107,7 @@
 			<p>For comparison's sake, here's the same event using Meteor's
 			eventmap:</p>
 
-			{{#sh_highlight lang="js"}}
+			{{#prism lang="javascript" class="line-numbers"}}
 				Template.ev_surface_click.events({
 				  'click': function(event, tpl) {
 				    var fview = FView.from(tpl);
@@ -115,7 +115,7 @@
 				    clickeyStuff(fview);
 				  }
 				});				
-			{{/sh_highlight}}
+			{{/prism}}
 		{{/Surface}}
 
 		{{#Surface size="[undefined,auto]" class="padLeft"}}
@@ -124,7 +124,7 @@
 			<p>A reminder that Meteor events, via the <code>Template.x.events()</code>
 			system, are DOM events.  As such, you can only setup events on
 			<b>Surfaces</b>, <i>with at least one element</i>, so make sure if your
-			template is all text, you wrap it in a <code>&lt;div</code> or
+			template is all text, you wrap it in a <code>&lt;div></code> or
 			<code>&lt;span></code>. 	This also only works with inclusion, e.g.
 			<code>{{dstache}}>Surface template='x'}}</code>, since with inline
 			blocks, there is nothing to attach to.  Of course, regular meteor
@@ -179,7 +179,7 @@
 </template>
 
 <template name="ballCode">
-	{{#sh_highlight lang="html"}}
+	{{#prism lang="blaze" class="line-numbers"}}
 		&lt;template name="eventsDemo">
 			{{dstache}}#Surface size="[undefined,130]" translate="[20,0]"}}
 				<h3>Catch the ball!</h3>
@@ -194,9 +194,9 @@
 				{{dstache}}/if}}
 			{{dstache}}/RenderController}}
 		&lt;/template>
-	{{/sh_highlight}}
+	{{/prism}}
 
-	{{#sh_highlight lang="js"}}
+	{{#prism lang="javascript" class="line-numbers"}}
 		SpringTransition = require("famous/transitions/SpringTransition");
 		Transitionable.registerMethod('spring', SpringTransition);
 
@@ -221,5 +221,5 @@
 		    );
 		  }
 		});
-	{{/sh_highlight}}
+	{{/prism}}
 </template>

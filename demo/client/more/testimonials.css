@@ -3,6 +3,7 @@
 	margin: 20px 0 20px 0;
 	position: relative;
 	padding: 30px 30px 30px 250px;
+	min-height: 280px;
 }
 
 .testimonial > .author {

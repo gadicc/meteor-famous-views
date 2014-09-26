@@ -8,8 +8,8 @@ autopublish
 insecure
 iron:router
 raix:famono
-mizzao:bootstrap-3
 gadicohen:famous-views
 natestrauser:font-awesome
-gadicohen:syntaxhighlighter
+gadicohen:prism@1.0.0-early.1
+mizzao:bootstrap-3
 

@@ -9,18 +9,18 @@
     		and then:
     	</p>
 
-    	{{#sh_highlight lang="bash"}}
-    		$ meteor create app
-    		$ cd app
+    	{{#prism lang="bash" class="line-numbers"}}
+            $ meteor create app
+            $ cd app
 
             # for Meteor &lt;= 0.8.3
-    		$ mrt add famono                        # or mj-famous or famous-compiled (or use CDN)
-    		$ mrt add famous-components
+            $ mrt add famono                        # or mj-famous or famous-compiled (or use CDN)
+            $ mrt add famous-components
 
-            # for Meteor >= 0.9.1.1 (!!)
-            $ meteor add mjnetworks:famous@0.2.2-1  # or raix:famono and install locally (see github)
+            # for Meteor >= 0.9.1.1 (!!)            # 0.9.3+ is suggested
+            $ meteor add mjn:famous                 # or raix:famono and install locally (see github)
             $ meteor add gadicohen:famous-views     # or install in packages folder for famono ^^^^
-    	{{/sh_highlight}}
+    	{{/prism}}
 
     	<p>
     		If you want to play with this demo locally,
@@ -32,13 +32,13 @@
     	<code>famousInit</code> (<b>or</b>, see the
     	<a href="/features/iron-router">iron-router integration</a> page):</p>
 
-    	{{#sh_highlight lang="html"}}
+    	{{#prism lang="blaze" class="line-numbers"}}
     		&lt;template name="famousInit">
     			{{dstache}}#Surface size="[undefined,undefined]"}}
     				I am a full size Surface
     			{{dstache}}/Surface}}
     		&lt;/template>
-    	{{/sh_highlight}}
+    	{{/prism}}
 
     	<p>A number of Views are provided pre-built for instant use (see the
     	drop down menu above).  There are also instructions to quickly and
@@ -46,16 +46,19 @@
 
     	<p>Here's a more advanced example:</p>
 
-		  {{#sh_highlight lang="html"}}
+		  {{#prism lang="blaze" class="line-numbers"}}
 		    {{dstache}}#Scrollview size="200,undefined"}}
+
 		      {{dstache}}#Surface}}
 		        <h1>Scrollview Example</h1>
 		      {{dstache}}/Surface}}
+
 		      {{dstache}}#famousEach items}}
 		        {{dstache}}>Surface template="item"}}
 		      {{dstache}}/famousEach}}
+
 		    {{dstache}}/Scrollview}}
-		  {{/sh_highlight}}
+		  {{/prism}}
 
 			<p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
 			example of how to setup the <code>items</code> reactive data source
@@ -68,12 +71,12 @@
 			callbacks, events, and helpers on this template, just like you'd
 			expect:</p>
 
-			{{#sh_highlight lang="js"}}
-				Template.item.rendered = function() {
-					var fview = FView.from(this);
+			{{#prism lang="javascript" class="line-numbers"}}
+                Template.item.rendered = function() {
                     // fview.modifier, fview.view, and other stuff
-				}
-			{{/sh_highlight}}
+                    var fview = FView.from(this);
+                }
+			{{/prism}}
 
    	</div>
   {{/Surface}}

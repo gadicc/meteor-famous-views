@@ -19,7 +19,7 @@
 				size="[undefined,undefined]" translate=menuTranslate}}
 		{{/ContainerSurface}}
 
-		{{>Surface size="[undefined,1250]" template="timbreSource"}}
+		{{>Surface size="[undefined,auto]" template="timbreSource"}}
 
 	{{/Scrollview}}
 </template>
@@ -67,8 +67,7 @@
 	<br />
 	<p><b>Templates:</b></p>
 
-	{{#sh_highlight lang="html"}}
-
+	{{#prism lang="blaze" class="line-numbers"}}
 		&lt;template name="screen">
 			{{dstache}}#ContainerSurface size="[450,300]" overflow="hidden" class="timbre-cs"}}
 				{{dstache}}> timbre_menu}}
@@ -102,12 +101,11 @@
 
 			{{dstache}}/View}}
 		&lt;/template>
-
-	{{/sh_highlight}}
+	{{/prism}}
 
 	<p><b>JavaScript:</b></p>
 
-	{{#sh_highlight lang="js"}}
+	{{#prism lang="javascript" class="line-numbers"}}
 		Session.set('menuOpen', false);
 
 		// Translation for "main" page, depending on whether menu is open or not
@@ -147,7 +145,7 @@
 		      });
 		    });
 		});
-	{{/sh_highlight}}
+	{{/prism}}
 
 	<p>CSS <a href="https://github.com/gadicc/meteor-famous-views/tree/master/demo-0.9.1-famono/client/examples">here</a>.
 	Standalone app 

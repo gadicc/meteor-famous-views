@@ -35,6 +35,7 @@
 	margin: 0 10px 0 10px;
 }
 
+/*
 div.code {
 	border: 1px solid #aaa;
 	background: #efefef;
@@ -47,6 +48,11 @@ div.code > .syntaxhighlighter {
 	border-radius: 5px;
 	padding: 1em;
 	margin: 0 !important;
+}
+*/
+
+pre[class*="language-"] {
+	overflow-y: hidden;
 }
 
 /* Velocity */

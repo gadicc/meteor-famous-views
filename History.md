@@ -4,6 +4,9 @@
 
 ## vNEXT
 
+* Demo: Switch to prism for syntax highlighting, cleanup code examples
+* Switch to Famous 0.3.0-alpha, emphasize `align` in examples/layouts.
+
 ## v0.1.8
 
 * Revert demo symbolic link so it's easier to link to stuff on github

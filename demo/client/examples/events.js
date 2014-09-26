@@ -46,7 +46,7 @@ Template.codeButton.events({
 });
 
 Template.eventsDemo.rcSize = function() {
-  return [undefined, Session.get('showCode') ? 600 : 210];
+  return [undefined, Session.get('showCode') ? 800 : 250];
 }
 
 /* famous events */

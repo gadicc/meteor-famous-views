@@ -27,7 +27,7 @@
 		{{/View}}
 
 		{{>Surface template="reactiveGridLayoutSource"
-			class="leftPad" size="[undefined,340]"}}
+			class="leftPad" size="[undefined,auto]"}}
 
 		{{#Surface size="[undefined,140]" class="leftPad"}}
 			<h2>StateModifier</h2>
@@ -51,7 +51,7 @@
 		{{/SequentialLayout}}
 
 		{{>Surface template="reactivityModStateSource"
-			size="[undefined,450]" class="leftPad"}}
+			size="[undefined,auto]" class="leftPad"}}
 	{{/Scrollview}}
 </template>
 
@@ -59,7 +59,7 @@
 	<br />
 	<p><b>Template:</b></p>
 
-	{{#sh_highlight lang="html"}}
+	{{#prism lang="blaze" class="line-numbers"}}
 		{{dstache}}#View size=gridSize}}
 			{{dstache}}#GridLayout dimensions=gridDimensions}}
 				{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}{{dstache}}/Surface}}
@@ -67,14 +67,14 @@
 				{{dstache}}#Surface size="[undefined,undefined]" class="blue-bg"}}{{dstache}}/Surface}}
 			{{dstache}}/GridLayout}}
 		{{dstache}}/View}}
-	{{/sh_highlight}}
+	{{/prism}}
 
 	<p>Of course, you could as easily use a <code>{{dstache}}#famousEach}}</code>,
 	with a reactive helper returning a minimongo query, appropriately limited.</p>
 
 	<p><b>JavaScript:</b></p>
 
-	{{#sh_highlight lang="js"}}
+	{{#prism lang="javascript" class="line-numbers"}}
 		Session.setDefault('width', 350);
 		Template.reactivity.gridSize = function() {
 			return [ Session.get('width'), 100 ];
@@ -82,7 +82,7 @@
 		Template.reactivity.gridDimensions = function() {
 			return [ Math.ceil(Session.get('width') / 234), 1 ];
 		}
-	{{/sh_highlight}}	
+	{{/prism}}	
 </template>
 
 <template name="reactiveBlock">
@@ -133,16 +133,16 @@
 <template name="reactivityModStateSource">
 	<b>Template:</b>
 
-	{{#sh_highlight lang="html"}}
+	{{#prism lang="blaze" class="line-numbers"}}
 		{{dstache}}>Surface id="block" template="reactiveBlock"
 			origin="[.5,.5]" class="red-bg"
 			size=getSize skewX=sess.skewX skewY=sess.skewY
 			rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateY}}
-	{{/sh_highlight}}
+	{{/prism}}
 
 	<b>Javascript:</b>
 
-	{{#sh_highlight lang="js"}}
+	{{#prism lang="javascript" class="line-numbers"}}
 		// Reactive getSize() helper
 		Template.reactivity.getSize = function() {
 			return [ Session.get('sizeX'), Session.get('sizeY') ];
@@ -159,7 +159,7 @@
 				}
 			});
 		}
-	{{/sh_highlight}}
+	{{/prism}}
 
 	<p>Note, setting <code>compView.modifierTransition</code> is not documented
 	anywhere else yet, but you get the idea.  So far this is only used for

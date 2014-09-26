@@ -45,15 +45,17 @@
 			{{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
 		{{/SequentialLayout}}
 
-		{{#Surface size="[undefined,110]" class="padLeft"}}
-			{{#sh_highlight lang="html"}}
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			{{#prism lang="blaze" class="line-numbers"}}
 				{{dstache}}#SequentialLayout direction="X" size="[undefined,160]"}}
 					{{dstache}}#Surface size="[150,100]" class="red-bg"}}#1{{dstache}}/Surface}}
 					{{dstache}}#Surface size="[150,100]" class="green-bg"}}#2{{dstache}}/Surface}}
 					{{dstache}}#Surface size="[150,100]" class="blue-bg"}}#3{{dstache}}/Surface}}
 				{{dstache}}/SequentialLayout}}
-			{{/sh_highlight}}
+			{{/prism}}
+			<br />
 		{{/Surface}}
+
 
 		{{#Surface size="[undefined,90]" class="padLeft"}}		
 			<h2>Columns</h2>
@@ -67,20 +69,22 @@
 			{{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
 		{{/GridLayout}}
 
-		{{#Surface size="[undefined,100]" class="padLeft"}}
-			{{#sh_highlight lang="html"}}
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			{{#prism lang="blaze" class="line-numbers"}}
 				{{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}col1{{dstache}}/Surface}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}col2{{dstache}}/Surface}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="blue-bg"}}col3{{dstache}}/Surface}}
 				{{dstache}}/GridLayout}}
-			{{/sh_highlight}}
+			{{/prism}}
+			<br />
 		{{/Surface}}
+
 
 		{{#Surface size="[undefined,90]" class="padLeft"}}	
 			<h2>Centering / Fine-Tuning Layout</h2>
 			<p>Use <i>view="View"</i> to manually position child surfaces with
-				<i>origin</i>, <i>size</i> and <i>translate</i>.</p>
+				<i>origin</i>, <i>align</i>, <i>size</i> and <i>translate</i>.</p>
 		{{/Surface}}
 
 		{{#View size="[undefined,160]"}}
@@ -88,27 +92,34 @@
 				background
 			{{/Surface}}
 
-			{{#Surface size="[75,75]" origin="[0.5,0.5]" translate='[0,0,1]'
+			{{#Surface size="[75,75]" align="[0.5,0.5]" origin="[0.5,0.5]" translate='[0,0,1]'
 				class="red-bg"}}
 				block
 			{{/Surface}}
 		{{/View}}
 
-		{{#Surface size="[undefined,160]" class="padLeft"}}
-			{{#sh_highlight lang="html"}}
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			{{#prism lang="blaze" class="line-numbers"}}
 				{{dstache}}#View size="[undefined,160]"}}
 					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}
 						background
 					{{dstache}}/Surface}}
 
-					{{dstache}}#Surface size="[50,50]" origin="[0.5,0.5]" translate='[0,0,1]' class='red-bg'}}
+					{{dstache}}!-- The align="[0.5,0.5]" is required since Famous 0.3 --}}
+					{{dstache}}#Surface size="[50,50]" class='red-bg'
+							origin="[0.5,0.5]" align="[0.5,0.5]" translate='[0,0,1]'}}
 						block
 					{{dstache}}/Surface}}
 				{{dstache}}/View}}
-			{{/sh_highlight}}
+			{{/prism}}
+			<br />
 		{{/Surface}}
 
-		{{#Surface size="[undefined,50]" class="padLeft"}}
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			<p>More info on needing to
+			<a href="https://github.com/Famous/famous/issues/298">explicitly specify
+			<i>align</i></a> on Famous 0.3.</p>
+
 			<p>For more complicated layouts, you'll probably want to use a <b>View</b>.
 			See the drop-down menu at the top of this page for more info.</p>
 		{{/Surface}}

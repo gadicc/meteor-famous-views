@@ -17,23 +17,23 @@
 
     	<h2>Registering a new View</h2>
 
-    	{{#sh_highlight lang="js"}}
+    	{{#prism lang="javascript" class="line-numbers"}}
     		FView.registerView('Scrollview', famous.views.Scrollview);
-    	{{/sh_highlight}}
+    	{{/prism}}
 
     	<p>This let's you do:</p>
 
-    	{{#sh_highlight lang="html"}}
+    	{{#prism lang="blaze" class="line-numbers"}}
     		{{dstache}}#ScrollView arg1=blah arg2=etc}}
     		  ...
     		{{dstache}}/ScrollView}}
-    	{{/sh_highlight}}
+    	{{/prism}}
 
     	<p>and also:</p>
 
-    	{{#sh_highlight lang="html"}}
+    	{{#prism lang="blaze" class="line-numbers"}}
     		{{dstache}}>Scrollview template=name arg2=etc}}
-    	{{/sh_highlight}}
+    	{{/prism}}
 
     	<h3>Out of the Box</h3>
 
@@ -69,7 +69,7 @@
 
     	<h3>Advanced Views</h3>
 
-    	{{#sh_highlight lang="js"}}
+    	{{#prism lang="javascript" class="line-numbers"}}
 				FView.registerView('MyView', myViewClass, {
 
 					// If exists, called instead of the view's own add() method
@@ -101,7 +101,7 @@
 					}
 
 				});
-    	{{/sh_highlight}}
+    	{{/prism}}
 
     	<p>See some <a href="https://github.com/gadicc/meteor-famous-components/tree/master/lib/views">actual examples</a> from the source code of our pre-built
     	views.</p>

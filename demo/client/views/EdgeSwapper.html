@@ -1,6 +1,6 @@
 <template name="views_EdgeSwapper">
 	{{#Scrollview size="[undefined,undefined]"}}
-		{{#View size="[undefined,780]" translate="[20,0]"}}
+		{{#View size="[undefined,800]" translate="[20,0]"}}
 			{{#Surface size="[undefined,undefined]"}}
 				<h1>EdgeSwapper demo</h1>
 
@@ -12,15 +12,15 @@
 				an <code>{{dstache}}#if}}</code> or iron-routers
 				<code>{{dstache}}>yield}}</code>, just like with RenderController.</p>
 
-				{{#sh_highlight lang="html"}}
+				{{#prism lang="blaze" class="line-numbers"}}
 					{{dstache}}#EdgeSwapper size="[150,150]"}}
 						{{dstache}}>showTemplate name=esTemplate}}
 					{{dstache}}/EdgeSwapper}}
-				{{/sh_highlight}}
+				{{/prism}}
 
 				{{>es_buttons}}
 
-				{{#sh_highlight lang="js"}}
+				{{#prism lang="javascript" class="line-numbers"}}
 					Template.views_EdgeSwapper.helpers({
 						'showTemplate': function() {
 							return Template[this.name];
@@ -43,20 +43,20 @@
 							Session.set('esTemplate', this.valueOf());
 						}
 					});
-				{{/sh_highlight}}
+				{{/prism}}
 
-				{{#sh_highlight lang="html"}}
+				{{#prism lang="blaze" class="line-numbers"}}
 					&lt;template name="es_surface1"&gt;
 						{{dstache}}#Surface class="red-bg" size="[150,150]"}}
 							<div class="full">#1</div>
 						{{dstache}}/Surface}}
 					&lt;/template&gt;
-				{{/sh_highlight}}
+				{{/prism}}
 
 				<p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see EdgeSwapper.html and EdgeSwapper.js)</p>
 			{{/Surface}}
 
-			{{#EdgeSwapper size="[150,150]" translate="[450,175,5]"}}
+			{{#EdgeSwapper size="[150,150]" translate="[450,205,5]"}}
 				{{>showTemplate name=esTemplate}}
 			{{/EdgeSwapper}}
 
