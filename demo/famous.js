@@ -27,6 +27,9 @@ if (Meteor.isServer) {
 
 if (Meteor.isClient) {
 
+  // Force debug logging even on production for famous-views.meteor.com
+  Logger.setLevel('famous-views', 'debug');
+
   navbar = null;
   Template.header.rendered = function() {
     navbar = this.$('.navbar');

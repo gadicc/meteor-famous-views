@@ -46,7 +46,7 @@ Package.on_use(function (api) {
     if (packageUsed('iron-router'))
       api.use('iron-router', 'client', { weak: true });    
   }
- 
+
   api.add_files(
   	[
   		'lib/famous-views.js',
