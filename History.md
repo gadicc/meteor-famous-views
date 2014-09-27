@@ -6,6 +6,7 @@
 
 * Demo: Switch to prism for syntax highlighting, cleanup code examples
 * Switch to Famous 0.3.0-alpha, emphasize `align` in examples/layouts.
+* famousEach now properly destroys livedata removes (fixes #67)
 
 ## v0.1.8
 
