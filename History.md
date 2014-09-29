@@ -4,9 +4,13 @@
 
 ## vNEXT
 
+## v0.1.9
+
 * Demo: Switch to prism for syntax highlighting, cleanup code examples
 * Switch to Famous 0.3.0-alpha, emphasize `align` in examples/layouts.
 * famousEach now properly destroys livedata removes (fixes #67)
+* famousEach now properly supports fview.preventDestroy() (fixes #66)
+* Catch and report on JSON parse errors for optionString
 
 ## v0.1.8
 
