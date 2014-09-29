@@ -1,0 +1,122 @@
+<template name="examples_uihooks">
+	{{#Scrollview size="[undefined,undefined]"}}
+
+		{{#Surface size="[undefined,auto]" class="pagePad"}}
+			<h1>Entrance and Exit Animations</h1>
+
+			<p>This is a simple example showing how we can use the <code>rendered</code>
+			callback to create an entrance animation and setup a destroy animation.
+			</p>
+
+			{{>examples_uihooks_buttons}}
+
+			<br /><br />
+		{{/Surface}}
+
+		{{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
+			{{#famousEach items}}
+				{{>Surface size="[100,100]" origin="[.5,.5]" align="[0,.5]"
+					template="examples_uihooks_item"}}
+			{{/famousEach}}
+		{{/SequentialLayout}}
+
+		{{#Surface size="[undefined,auto]" class="pagePad"}}
+			<br />
+			<p>This works very well for a View like SequentialLayout, which uses the
+			size of child elements for positioning... so we can grow/shrink children
+			as part of the animation and everything works great.</p>
+
+			<p>The same is not true of say, GridLayout, which forces a fixed size
+			on each child.  We could spin out an object on removal, but then the
+			resulting gap would disappear very suddenly at the end of the animation.
+			This is not something we can address at the application level, we'd
+			need someone to write a new famous view (say, "GridLayoutTransition")
+			which could accomodate such cases.</p>
+		{{/Surface}}
+
+		{{>Surface template="examples_uihoooks_source" size="[undefined,auto]"
+			class="pagePad"}}
+
+	{{/Scrollview}}
+</template>
+
+<template name="examples_uihooks_buttons">
+	<p>
+		<button id="insert">Insert Random</button>
+		&lt;-- Try pressing quickly & repeatedly.  Click an item to remove it.
+	</p>
+</template>
+
+<template name="examples_uihooks_item">
+	<img src="{{picUrl}}" style="width: 100px; height: 100px">
+</template>
+
+<template name="examples_uihoooks_source">
+	{{#prism lang="blaze" class="line-numbers"}}
+		&lt;template name="examples_uihooks">
+			{{dstache}}#SequentialLayout direction="X" size="[undefined,100]"}}
+				{{dstache}}#famousEach items}}
+					{{dstache}}>Surface size="[100,100]" origin="[.5,.5]" align="[0,.5]"
+						template="examples_uihooks_item"}}
+				{{dstache}}/famousEach}}
+			{{dstache}}/SequentialLayout}}
+		&lt;/template>
+
+		&lt;template name="examples_uihooks_item">
+			<img src="{{dstache}}picUrl}}" style="width: 100px; height: 100px">
+		&lt;/template>
+	{{/prism}}
+
+	{{#prism lang="javascript" class="line-numbers"}}
+		// Reactive query, sorted by name, for items
+		Template.examples_uihooks.helpers({
+			'items': function() {
+				return uiItems.find({}, { sort: { name : 1 } });
+			}
+		});
+
+		// Remove the clicked item from the collection
+		Template.examples_uihooks_item.events({
+			'click': function(event, tpl) {
+				uiItems.remove(this._id);
+			}
+		});
+
+		Template.examples_uihooks_item.rendered = function() {
+			var fview = FView.from(this);
+
+			// Start off with width 0, scaled to zero and rotated half a revolution
+			fview.modifier.setSize([0,100]);
+			fview.modifier.setTransform(
+				Transform.multiply(Transform.rotate(0,0,-Math.PI), Transform.scale(0.01,0.01))
+			);
+
+			// Transition back to full size, then full scale and zero rotation
+			fview.modifier.setSize([100,100], { duration: 1000, curve: 'easeOut' }, function() {
+				fview.modifier.setTransform(
+					Transform.multiply(Transform.rotate(0,0,0), Transform.scale(1,1)),
+					{ duration: 1000, curve: 'easeOut' }
+				);
+			});
+
+			// Disable auto-cleanup.  Must call fview.destroy() in onDestroy callback.
+			fview.preventDestroy();
+
+			fview.onDestroy = function() {
+				var fview = this;
+				// First spin and scale to 0
+				fview.modifier.setTransform(
+					Transform.multiply(Transform.scale(0.01,0.01), Transform.rotate(0,0,-Math.PI)),
+					{ duration: 1000, curve: 'easeOut' },
+					function() {
+						// when spin+scale is done, shrink the width
+						fview.modifier.setSize([0,0], { duration: 1000, curve: 'easeOut' }, function() {
+							// Finally after everything, do proper cleanup
+							fview.destroy();
+						});
+					}
+				);
+			}
+		}
+	{{/prism}}
+</template>
