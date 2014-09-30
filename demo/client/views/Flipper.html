@@ -1,6 +1,6 @@
 <template name="views_Flipper">
-	{{#Scrollview translate="[20,0]"}}
-		{{#Surface size="[undefined,150]"}}
+	{{#Scrollview size="[undefined,undefined]"}}
+		{{#Surface size="[undefined,auto]" class="pagePad"}}
 			<h1>Flipper</h1>
 			<p>Links two renderables back to back that can be flipped along the axis.
 			For this to look really good<br> we need to change the perspective a bit,
@@ -10,22 +10,24 @@
 				<a href="http://www.famo.us/docs/0.2.0/views/Flipper">Docs</a> |
 				<a href="http://www.famo.us/examples/0.2.0/views/flipper/example">Example</a>
 			</p>
+			<br />
 		{{/Surface}}
 
-		{{#Flipper size="[150,150]" translate="[50,0]"}}
+		{{#Flipper size="[150,150]" translate="[20,0]"}}
 			{{>Surface target="front" template="views_Flipper_front"
-				class="red-bg" size="[150,150]" origin="[.5,.5]"}}
+				class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
 			{{>Surface target="back" template="views_Flipper_back"
-				class="blue-bg" size="[150,150]" origin="[.5,.5]"}}
+				class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
 		{{/Flipper}}
 
-		{{#Surface size="[undefined,auto]"}}
+		{{#Surface size="[undefined,auto]" class="pagePad"}}
+			<br />
 			{{#prism lang="blaze" class="line-numbers"}}
 				{{dstache}}#Flipper size="[150,150]" translate="[100,0]"}}
 					{{dstache}}>Surface target="front" template="views_Flipper_front"
-						class="red-bg" size="[150,150]" origin="[.5,.5]"}}
+						class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
 					{{dstache}}>Surface target="back" template="views_Flipper_back"
-						class="blue-bg" size="[150,150]" origin="[.5,.5]"}}
+						class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
 				{{dstache}}/Flipper}}
 			{{/prism}}
 
