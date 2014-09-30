@@ -4,6 +4,16 @@
 
 ## vNEXT
 
+## v0.1.10
+
+* More famous 0.3 align fixes for Flipper, RenderController demo
+* Add in scaleX, scaleY, scaleZ attribute transform reactive helpers
+* Add Views to Famous Render Tree at latest possible time, allowing
+  render() functions to run beforehand.
+* Fixed one more bug in famousEach ordering with preventDestroy
+  Note, adding more items after a remove starts and before it finishes
+  can still result in out-of-order items, will fix this in next release.
+
 ## v0.1.9
 
 * Demo: Switch to prism for syntax highlighting, cleanup code examples

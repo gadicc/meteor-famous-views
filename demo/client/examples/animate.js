@@ -1,12 +1,12 @@
-Menu.add({name:'uihooks',route:'examples/uihooks'}, 'Examples');
+Menu.add({name:'Animations',route:'examples/animate'}, 'Examples');
 
 Router.map(function() {
-  this.route('examples_uihooks', { path: '/examples/uihooks' });
+  this.route('examples_animate', { path: '/examples/animate' });
 });
 
 var uiItems = new Meteor.Collection();
 
-Template.examples_uihooks_buttons.events({
+Template.examples_animate_buttons.events({
 	'click #insert': function() {
 		var allItems = Items.find().fetch();
 		var idx = Math.round((allItems.length-1) * Math.random());
@@ -22,26 +22,30 @@ Template.examples_uihooks_buttons.events({
 });
 
 // Reactive query, sorted by name, for items
-Template.examples_uihooks.helpers({
+Template.examples_animate.helpers({
 	'items': function() {
 		return uiItems.find({}, { sort: { name : 1 } });
 	}
 });
 
 // Remove the clicked item from the collection
-Template.examples_uihooks_item.events({
+Template.examples_animate_item.events({
 	'click': function(event, tpl) {
 		uiItems.remove(this._id);
 	}
 });
 
-Template.examples_uihooks_item.rendered = function() {
+Template.examples_animate_item.rendered = function() {
 	var fview = FView.from(this);
+
+	// Set origin to center, and align middle left
+	fview.modifier.setOrigin([.5,.5]);
+	fview.modifier.setAlign([0,.5]);
 
 	// Start off with width 0, scaled to zero and rotated half a revolution
 	fview.modifier.setSize([0,100]);
 	fview.modifier.setTransform(
-		Transform.multiply(Transform.rotate(0,0,-Math.PI), Transform.scale(0.01,0.01))
+		Transform.multiply(Transform.rotate(0,0,-Math.PI), Transform.scale(0.001,0.001))
 	);
 
 	// Transition back to full size, then full scale and zero rotation
@@ -59,7 +63,7 @@ Template.examples_uihooks_item.rendered = function() {
 		var fview = this;
 		// First spin and scale to 0
 		fview.modifier.setTransform(
-			Transform.multiply(Transform.scale(0.01,0.01), Transform.rotate(0,0,-Math.PI)),
+			Transform.multiply(Transform.scale(0.001,0.001), Transform.rotate(0,0,-Math.PI)),
 			{ duration: 1000, curve: 'easeOut' },
 			function() {
 				// when spin+scale is done, shrink the width
