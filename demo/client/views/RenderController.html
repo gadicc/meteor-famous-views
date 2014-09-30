@@ -42,7 +42,7 @@
 
 				{{#prism lang="blaze" class="line-numbers"}}
 					&lt;template name="rc_surface1"&gt;
-						{{dstache}}#Surface class="red-bg" origin="[0,0]" size="[75,150]"}}
+						{{dstache}}#Surface class="red-bg" align="[0,0]" origin="[0,0]" size="[75,150]"}}
 							<div class="full">#1</div>
 						{{dstache}}/Surface}}
 					&lt;/template&gt;
@@ -94,19 +94,19 @@
 </template>
 
 <template name="rc_surface1">
-	{{#Surface class="red-bg" origin="[0,0]" size="[75,150]"}}
+	{{#Surface class="red-bg" origin="[0,0]" align="[0,0]" size="[75,150]"}}
 		<div class="full">#1</div>
 	{{/Surface}}
 </template>
 
 <template name="rc_surface2">
-	{{#Surface class="green-bg" origin="[0.5,0.5]" size="[150,75]"}}
+	{{#Surface class="green-bg" origin="[.5,.5]" align="[0.5,0.5]" size="[150,75]"}}
 		<div class="full">#2</div>
 	{{/Surface}}
 </template>
 
 <template name="rc_surface3">
-	{{#Surface class="blue-bg" origin="[1,1]" size="[75,150]"}}
+	{{#Surface class="blue-bg" origin="[1,1]" align="[1,1]" size="[75,150]"}}
 		<div class="full">#3</div>
 	{{/Surface}}
 </template>
