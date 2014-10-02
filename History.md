@@ -4,6 +4,12 @@
 
 ## vNEXT
 
+* Fixed bug in childSequence.push()  (removed erranous -1 for parent)
+* Change sequencer naming to clearer and more flexible.
+  fview->sequencer is now fview->sequence
+  sequencer->sequence is now sequencer->_sequence to be clearer that this
+  shouldn't be accessed directly.  sequencer.push() method added.
+
 ## v0.1.10
 
 * More famous 0.3 align fixes for Flipper, RenderController demo
