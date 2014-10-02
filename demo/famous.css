@@ -1,5 +1,17 @@
 /* CSS declarations go here */
 
+#notice {
+	background: #a00;
+	border: 1px solid black;
+	padding: 5px;
+	text-align: center;
+	margin-bottom: 5px;
+	font-family: verdana;
+	color: white;
+	font-weight: bold;
+}
+#notice a { color: #ccf; }
+
 #header {
 	background: black;
 	color: white;
