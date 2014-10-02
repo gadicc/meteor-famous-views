@@ -54,6 +54,7 @@ Package.on_use(function (api) {
       'lib/sequencer.js',
       'lib/famous.js',
       'lib/famousEach.js',
+      'lib/famousIf.js',
       'lib/modifiers.js',
       'lib/views.js'
   	],
