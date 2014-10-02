@@ -10,8 +10,7 @@ Template.examples_animate_buttons.events({
 	'click #insert': function() {
 		var allItems = Items.find().fetch();
 		var idx = Math.round((allItems.length-1) * Math.random());
-		var item = allItems[idx];
-		delete(item._id);
+		delete allItems[idx]._id;
 		uiItems.insert(allItems[idx]);
 	},
 	'click #remove': function() {
