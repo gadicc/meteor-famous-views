@@ -1,0 +1,34 @@
+<template name="issue72">
+	{{#SequentialLayout size="[undefined,undefined]"}}
+			{{>Surface template="issue72_buttons" size="[undefined,30]"}}
+
+			{{#if showIf}}
+	    {{#famousIf show 'A'}}
+	        {{>Surface template="issue72_surfaceA" size="[undefined,30]" class="red-bg"}}
+	    {{/famousIf}}
+	    {{/if}}
+
+	    {{#famousIf show 'B'}}
+	        {{>Surface template="issue72_surfaceB" size="[undefined,30]" class="blue-bg"}}
+	    {{/famousIf}}
+	    {{#famousIf show 'C'}}
+        {{> Surface template="issue72_surfaceC" size="[undefined,30]" class="green-bg"}}
+	    {{/famousIf}}
+	{{/SequentialLayout}}
+</template>
+
+<template name="issue72_surfaceA">
+	hello A
+</template>
+<template name="issue72_surfaceB">
+	hello B
+</template>
+<template name="issue72_surfaceC">
+	hello C
+</template>
+
+<template name="issue72_buttons">
+	<label><input type="checkbox" name="show" value="A" checked={{show 'A'}}> Show A</label> &nbsp;
+	<label><input type="checkbox" name="show" value="B" checked={{show 'B'}}> Show B</label> &nbsp;
+	<label><input type="checkbox" name="show" value="C" checked={{show 'C'}}> Show C</label>
+</template>

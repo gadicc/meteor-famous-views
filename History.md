@@ -4,6 +4,9 @@
 
 ## vNEXT
 
+* Add {{#famousIf}} which currently just retains order in a sequence
+  (Some more notes/thoughts in lib/famousIf.js)
+
 * Fixed bug in childSequence.push()  (removed erranous -1 for parent)
 * Change sequencer naming to clearer and more flexible.
   fview->sequencer is now fview->sequence
