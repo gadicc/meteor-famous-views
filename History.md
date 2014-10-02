@@ -4,6 +4,8 @@
 
 ## vNEXT
 
+* We now throw an error if put any kind of View inside a Surface (#78)
+
 * Add {{#famousIf}} which currently just retains order in a sequence
   (Some more notes/thoughts in lib/famousIf.js)
 
