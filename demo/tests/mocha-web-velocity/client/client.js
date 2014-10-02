@@ -1,3 +1,5 @@
+/* Until further notice we're switching to jasmine; the below is no longer used */
+
 wrap = function(func) {
 	return function() {
 		var self = this, args = arguments;
