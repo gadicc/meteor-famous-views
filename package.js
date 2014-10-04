@@ -78,6 +78,10 @@ Package.on_use(function (api) {
   api.export(['famousCmp', 'FView'], 'client');
 });
 
+Package.on_test(function(api) {
+  api.use('tinytest', 'client');
+  api.add_files(['lib/sequencer.js', 'tests/sequencer.js'], 'client');
+});
 
 // Thanks to Arunoda as usual :)
 // https://github.com/arunoda/meteor-fast-render/blob/master/package.js

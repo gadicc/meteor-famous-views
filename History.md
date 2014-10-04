@@ -4,6 +4,8 @@
 
 ## vNEXT
 
+* Sequencer is now 100% recursive, and supports multiple generations
+
 * We now throw an error if put any kind of View inside a Surface (#78)
 
 * Add {{#famousIf}} which currently just retains order in a sequence
