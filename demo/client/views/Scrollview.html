@@ -1,0 +1,73 @@
+<!--
+
+https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/example.js
+
+-->
+
+<template name="views_Scrollview">
+	{{#Scrollview size="[undefined,undefined]" items=items}}
+
+		{{#Surface size="[undefined,80]" class="margin10" items=items}}
+			<h3>Scrollview Demo</h3>
+			<!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
+			<p>Scroll to bottom to see source</p>
+		{{/Surface}}
+
+		{{#famousEach items}}
+			{{#Surface size='[undefined,50]'}}
+				<div class="listItem">{{name}}</div>
+			{{/Surface}}
+		{{/famousEach}}
+
+		{{>Surface template='Scrollview_source' size="[undefined,430]"}}
+	{{/Scrollview}}
+</template>
+
+<template name="moo">{{> UI.contentBlock}}</template>
+
+<template name="Scrollview_source">
+	<div class="code">
+		{{#prism lang="blaze" class="line-numbers"}}
+			{{dstache}}#Scrollview size="[undefined,undefined]"}}
+
+				{{dstache}}#Surface size="[undefined,50]"}}
+					Surface above the list (source code at bottom)
+				{{dstache}}/Surface}}
+
+				{{dstache}}#famousEach items}}
+					{{dstache}}#Surface size="[undefined,50]"}}
+						<div class="listItem">{{dstache}}name}}</div>
+					{{dstache}}/Surface}}
+				{{dstache}}/famousEach}}
+
+				{{dstache}}>Surface template="Scrollview_source" size="[undefined,300]"}}
+
+			{{dstache}}/Scrollview}}
+		{{/prism}}
+	</div>
+
+	<div class="code" style="margin-top: 10px">
+		{{#prism lang="javascript" class="line-numbers"}}
+			Template.views_Scrollview.items = function() {
+			  return Items.find({}, {sort: {name: 1}});
+			}
+		{{/prism}}
+	</div>
+</template>
+
+<!-- alternatively could be done like below -->
+
+<!-- router page -->
+<template name="_Scrollview">
+	{{>famous template='list' view='Scrollview' size="undefined,undefined"}}
+</template>
+
+<!-- will be loaded as a Scrollview -->
+<template name="list" view="Scrollview (requires PR)">
+	{{>famousEach data=items template='listItem' size='undefined,100'}}
+</template>
+
+<!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
+<template name="listItem">
+	<div class="listItem">{{name}}</div>
+</template>

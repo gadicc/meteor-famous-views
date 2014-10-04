@@ -1,0 +1,83 @@
+<template name="start">
+  {{#Surface size="[undefined,undefined]"}}
+    <div id="main" role="main">
+    	<h1>Quick Start</h1>
+
+    	<p>
+    		Need Meteor?
+    		<code>curl https://install.meteor.com/ | sh</code>
+    		and then:
+    	</p>
+
+    	{{#prism lang="bash" class="line-numbers"}}
+            $ meteor create app
+            $ cd app
+
+            # for Meteor &lt;= 0.8.3
+            $ mrt add famono                        # or mj-famous or famous-compiled (or use CDN)
+            $ mrt add famous-components
+
+            # for Meteor >= 0.9.1.1 (!!)            # 0.9.3+ is suggested
+            $ meteor add mjn:famous                 # or raix:famono and install locally (see github)
+            $ meteor add gadicohen:famous-views     # or install in packages folder for famono ^^^^
+    	{{/prism}}
+
+    	<p>
+    		If you want to play with this demo locally,
+    		<code>cd packages/famous-views/demo; mrt update; meteor</code>
+            (requires local package install on 0.9.0+).
+    	</p>
+
+    	<p>Otherwise, edit <code>app.html</code> and create a template called
+    	<code>famousInit</code> (<b>or</b>, see the
+    	<a href="/features/iron-router">iron-router integration</a> page):</p>
+
+    	{{#prism lang="blaze" class="line-numbers"}}
+    		&lt;template name="famousInit">
+    			{{dstache}}#Surface size="[undefined,undefined]"}}
+    				I am a full size Surface
+    			{{dstache}}/Surface}}
+    		&lt;/template>
+    	{{/prism}}
+
+    	<p>A number of Views are provided pre-built for instant use (see the
+    	drop down menu above).  There are also instructions to quickly and
+    	easily add your own in the <a href="/views/README">Views README</a>.</p>
+
+    	<p>Here's a more advanced example:</p>
+
+		  {{#prism lang="blaze" class="line-numbers"}}
+		    {{dstache}}#Scrollview size="200,undefined"}}
+
+		      {{dstache}}#Surface}}
+		        <h1>Scrollview Example</h1>
+		      {{dstache}}/Surface}}
+
+		      {{dstache}}#famousEach items}}
+		        {{dstache}}>Surface template="item"}}
+		      {{dstache}}/famousEach}}
+
+		    {{dstache}}/Scrollview}}
+		  {{/prism}}
+
+			<p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
+			example of how to setup the <code>items</code> reactive data source
+			(hint: it's a templat helper that returns a reactive cursor from a
+			minimongo query, just like you'd expect).</p>
+
+			<p>You'll also notice that we used <b>template inclusion</b> instead
+			of specifying the view contents inline, i.e.
+			<code>{{dstache}}#Surface}}</code>.  This let's us setup lifecycle
+			callbacks, events, and helpers on this template, just like you'd
+			expect:</p>
+
+			{{#prism lang="javascript" class="line-numbers"}}
+                Template.item.rendered = function() {
+                    // fview.modifier, fview.view, and other stuff
+                    var fview = FView.from(this);
+                }
+			{{/prism}}
+
+   	</div>
+  {{/Surface}}
+</template>

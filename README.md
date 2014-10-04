@@ -1,11 +1,15 @@
-## Meteor Famous Components
+## famous-views (for Meteor)
 
 *Doing Famous the Meteor Way*
 
-Famous-components is an attempt at a tight integration between Blaze and Famous. All the other approaches I've seen so far side step most of Blaze, and require writing large amounts of code in JavaScript, which felt very unnatural to me in Meteor. Meteor code should be small, concise and easy with powerful results.
+Famous-views (formerly famous-components) is an attempt at a tight integration
+between Blaze and Famous. All the other approaches I've seen so far side step
+most of Blaze, and require writing large amounts of code in JavaScript, which
+felt very unnatural to me in Meteor. Meteor code should be small, concise and
+easy with powerful results.
 
-***Early*** demo available in the source and live at
-[famous-components.meteor.com](https://famous-components.meteor.com/).
+Demo, QuickStart, Docs and Example Code available in the source and live at
+[famous-views.meteor.com](https://famous-views.meteor.com/).
 The demo includes example code, ***which supercedes the syntax/examples
 given in this README***!  **PLEASE FOLLOW [History.md](History.md) IN THESE
 EARLY DAYS**.
@@ -61,7 +65,7 @@ github.
 
 ## See the Demo and Live Docs
 
-https://famous-components.meteor.com/
+https://famous-views.meteor.com/
 
 The most up-to-date information is here, including Quick Start,
 iron-router integration, etc.  Information below this line is less
@@ -70,8 +74,8 @@ up to date, but still an important read until it makes it online :)
 ## Contributing
 
 ```bash
-$ git clone https://github.com/gadicc/meteor-famous-components
-$ cd meteor-famous-components/demo
+$ git clone https://github.com/gadicc/meteor-famous-views
+$ cd meteor-famous-views/demo
 $ mrt update
 $ meteor
 ```
@@ -102,7 +106,7 @@ registered, to avoid unnecessary code being send down to the client:
 `FView.registerView('View', require("famous/core/View"));`
 
 For more examples see the live demo at
-[famous-components.meteor.com](https://famous-components.meteor.com/).
+[famous-views.meteor.com](https://famous-views.meteor.com/).
 
 **Template Attributes:**
 
@@ -169,7 +173,7 @@ drop, etc).  See the Sample Render Tree at the  bottom of this doc.
 ```
 
 For more examples see the live demo at
-[famous-components.meteor.com](https://famous-components.meteor.com/).
+[famous-views.meteor.com](https://famous-views.meteor.com/).
 
 ### Surfaces and Events
 
@@ -184,7 +188,7 @@ nothing to attach to.
 
 * Don't forget that HTML comments affect browser rendering only and have
 no effect on Blaze.  Just like `<!-- {{name}} -->` would still translate
-to `<!-- Gadi -->`, "commenting out" famous-components helpers (with
+to `<!-- Gadi -->`, "commenting out" famous-views helpers (with
 HTML) will have no effect, and everything will still be rendered.  To
 comment out components, use Blaze's comment syntax `{{! like this}}`.
 
@@ -239,7 +243,7 @@ element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
 containing view in the case of a sequence (need to think about this). 
 
 For more examples see the live demo at
-[famous-components.meteor.com](https://famous-components.meteor.com/).
+[famous-views.meteor.com](https://famous-views.meteor.com/).
 
 ### CompView methods
 
@@ -249,7 +253,7 @@ can then call `destroy()` at a later time (like after a transition;
 we do this in the RenderController helper).
 
 For more examples see the live demo at
-[famous-components.meteor.com](https://famous-components.meteor.com/).
+[famous-views.meteor.com](https://famous-views.meteor.com/).
 
 ### registerView options
 
@@ -352,7 +356,7 @@ enhancements to the package for things I needed for this package.  Thanks raix!
 
 * Big props also to sayawan, for his 
 [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
-example.  This was the first app written by someone else famous-components,
+example.  This was the first app written by someone else using famous-views,
 in under 24 hours after it was first made public.
 
 * [Zoltan Olah](https://github.com/zol) from

@@ -1,0 +1,35 @@
+<template name="issue14">
+	{{#SequentialLayout size="[undefined,undefined]"}}
+
+    {{#Surface size="[undefined,50]"}}
+      <div class="row-fluid">
+        <div class="span2">
+          <a href="#" class="btn-add btn btn-primary btn-large">insert number</a>
+        </div> 
+      </div>
+    {{/Surface}}
+ 
+    {{#famousEach myVariables}}
+      {{>Surface template="issue14_detailTemplate" size="[undefined, 40]"}}
+    {{/famousEach}}
+ 
+    {{#Surface size="[undefined,50]"}}
+        <div class="row-fluid">
+            <div class="span2">
+                <a href="#" class="btn-disconnect btn btn-large {{isDanger}}">{{dangerText}}</a>
+            </div>
+        </div>
+    {{/Surface}}
+
+	{{/SequentialLayout}}
+</template>
+ 
+<template name="issue14_detailTemplate">
+    <div class="row-fluid">
+        <div class="span7">
+            <a href="#" class="btn-decrease btn btn-warning">decrease</a>
+            {{../numar}}
+            <a href="#" class="btn-increase btn btn-success">increase</a>
+        </div>
+    </div>
+</template>

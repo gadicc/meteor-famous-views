@@ -1,10 +1,114 @@
+## SOON
+
+* auto check for final size and check for screen resize event
+
 ## vNEXT
 
-* Mention surface events:
-  click mousedown mousemove mouseup mouseover mouseout
-  touchstart touchmove touchend touchcancel
-  keydown keyup keypress
+* We now throw an error if put any kind of View inside a Surface (#78)
 
+* Add {{#famousIf}} which currently just retains order in a sequence
+  (Some more notes/thoughts in lib/famousIf.js)
+
+* Fixed bug in childSequence.push()  (removed erranous -1 for parent)
+* Change sequencer naming to clearer and more flexible.
+  fview->sequencer is now fview->sequence
+  sequencer->sequence is now sequencer->_sequence to be clearer that this
+  shouldn't be accessed directly.  sequencer.push() method added.
+
+## v0.1.10
+
+* More famous 0.3 align fixes for Flipper, RenderController demo
+* Add in scaleX, scaleY, scaleZ attribute transform reactive helpers
+* Add Views to Famous Render Tree at latest possible time, allowing
+  render() functions to run beforehand.
+* Fixed one more bug in famousEach ordering with preventDestroy
+  Note, adding more items after a remove starts and before it finishes
+  can still result in out-of-order items, will fix this in next release.
+
+## v0.1.9
+
+* Demo: Switch to prism for syntax highlighting, cleanup code examples
+* Switch to Famous 0.3.0-alpha, emphasize `align` in examples/layouts.
+* famousEach now properly destroys livedata removes (fixes #67)
+* famousEach now properly supports fview.preventDestroy() (fixes #66)
+* Catch and report on JSON parse errors for optionString
+
+## v0.1.8
+
+* Revert demo symbolic link so it's easier to link to stuff on github
+* Add a slideWindowLeft/slideWindowRight transition type, not final (#60)
+* Let autoSize take more time if needed (in 10ms increments).
+
+## v0.1.7
+
+* Fix some typos and superfluous stuff on demo Scrollview page (#58)
+* Warn about any Templates defined with the same name as a View (#54, #58)
+
+## v0.1.6
+
+* Fix how `packageUsed` works during `meteor publish` (#48)
+
+## v0.1.5
+
+* Fix `{{#containSurface}}` and support `overflow="hidden"` + `class=`.
+* Add a Timbre Menu example to the demo/docs.
+
+## v0.1.4
+
+* `attrUpdate` BREAKING CHANGE.  Insert `oldValue` between value and fullData
+  attrUpdate(key, value, **oldValue**, fullData, isFirstTime).
+* `attrUpdate` now actually gets called on the first time (with initial value)
+
+* Fix `rotateZ` so that it works, and fix demo to actually use it
+* `rotate*`,`skew*` now applies diff of new rotation to previous on that axis
+* `translate` attribute is now reactive.
+
+## v0.1.3
+
+* Error with FView.fromElement (#57)
+
+## v0.1.2
+
+* Remove `versionsFrom` and depend on individual core packages, so now
+  we can work on both 0.9.1.1 and 0.9.2-rc1
+* Fix one more thing from 0.9.1 changes (FamousEach destroy)
+
+## v0.1.1
+
+* Faster loading for weak packages
+* Rename to gadicohen:famous-views (there will still be gadicohen:gadicc)
+* Update demo quickstart for more useful help on 0.9.0+
+
+## v0.1.0
+
+* Meteor 0.9.1.1 support, NOT BACKWARDS COMPATIBLE (too many API changes)
+* Introduce FView.get() shortcut, can take a blazeView, TplInstance, domNode
+* In demo/events, mention all available Famo.us Surface events
+
+## v0.0.24
+
+* Add initial Velocity support!  Expect PRs to now include tests :)
+  Unfortunately only available with 0.8.3 until Velocity 0.9 support
+  is ready.  Symlinked from demo-test to demo-0.8.3-mj-famous.
+
+* Make sure a View with no attributes still renders with correct data
+  context.  (Closes #45)
+
+* Re-add support for specifying a data context with `data=`.  Basically
+  a shorcut for surrounding with `{{#with}}`.  (Closes #46)
+
+* Since Meteor supports template names with spaces, and we use the
+  template name as a CSS classname, "s/ /_/" before passing to Famous
+  to avoid an uncaught exception (Closes #47).
+
+* Startup as early as possible, i.e. if famous global var is available
+  before Meteor.startup(), run FView.startup() then.  Also, log when
+  we're starting up so we know what's going on and can better identify
+  problems.  (Relates to #48)
+
+## v0.0.23
+
+* Mixed compatibility with Meteor <= 0.8.3 and Meteor >= 0.9.0
 * for famousEvents (and examples), target = surface || view._eventInput
 
 ## v0.0.22
