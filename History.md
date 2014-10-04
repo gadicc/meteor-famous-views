@@ -4,6 +4,10 @@
 
 ## vNEXT
 
+## v0.1.11
+
+* Fix links to famo.us examples, thanks @PEM--!  (fixes #75, #79)
+
 * Sequencer is now 100% recursive, and supports multiple generations
 
 * famousEach is now a lot smarter and uses sequencer a lot better.
