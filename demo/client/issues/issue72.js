@@ -13,6 +13,17 @@ Template.issue72.showIf = function() {
 	return Session.get('showIf');
 }
 
+
+Template.issue72_surfaceA.rendered = function() {
+	var fview = FView.from(this);
+	fview.preventDestroy();
+	fview.onDestroy = function() {
+		window.setTimeout(function() {
+			fview.destroy();
+		}, 1000);
+	};
+}
+
 Session.setDefault('A', true);
 Session.setDefault('B', true);
 Session.setDefault('C', true);
