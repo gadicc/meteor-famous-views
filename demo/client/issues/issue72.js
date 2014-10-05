@@ -8,9 +8,26 @@ Template.issue72.show = Template.issue72_buttons.show = function(surface) {
 	return Session.get(surface);
 };
 
+Template.issue72.helpers({
+	items: function() {
+		return Items.find({}, {limit: 3});
+	}
+});
+
 Session.setDefault('showIf', true);
 Template.issue72.showIf = function() {
 	return Session.get('showIf');
+}
+
+
+Template.issue72_surfaceA.rendered = function() {
+	var fview = FView.from(this);
+	fview.preventDestroy();
+	fview.onDestroy = function() {
+		window.setTimeout(function() {
+			fview.destroy();
+		}, 1000);
+	};
 }
 
 Session.setDefault('A', true);

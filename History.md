@@ -4,6 +4,18 @@
 
 ## vNEXT
 
+## v0.1.11
+
+* Fix links to famo.us examples, thanks @PEM--!  (fixes #75, #79)
+
+* Sequencer is now 100% recursive, and supports multiple generations
+
+* famousEach is now a lot smarter and uses sequencer a lot better.
+  In short, preventDestroy() and other hooks will now work for more
+  than one child View, and famousIf also benefits from this logic.
+
+* Defer all add()'s to the render tree; this reduces a lot of flicker.
+
 * We now throw an error if put any kind of View inside a Surface (#78)
 
 * Add {{#famousIf}} which currently just retains order in a sequence

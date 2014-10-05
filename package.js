@@ -4,7 +4,7 @@ var path = Npm.require('path');
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.11-pre.1",
+  version: "0.1.11",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
@@ -78,6 +78,10 @@ Package.on_use(function (api) {
   api.export(['famousCmp', 'FView'], 'client');
 });
 
+Package.on_test(function(api) {
+  api.use('tinytest', 'client');
+  api.add_files(['lib/sequencer.js', 'tests/sequencer.js'], 'client');
+});
 
 // Thanks to Arunoda as usual :)
 // https://github.com/arunoda/meteor-fast-render/blob/master/package.js

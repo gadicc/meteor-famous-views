@@ -1,24 +1,52 @@
 <template name="issue72">
-	{{#SequentialLayout size="[undefined,undefined]"}}
+	{{#SequentialLayout size="[undefined,undefined]" translate="[20,0]"}}
+	    {{#Surface size="[undefined,auto]"}}
+	    	<h3>famousIf</h3>
+	    	<br />
+	    {{/Surface}}
+
 			{{>Surface template="issue72_buttons" size="[undefined,30]"}}
 
 			{{#if showIf}}
-	    {{#famousIf show 'A'}}
-	        {{>Surface template="issue72_surfaceA" size="[undefined,30]" class="red-bg"}}
-	    {{/famousIf}}
+	    	{{#famousIf show 'A'}}
+	        {{>Surface template="issue72_surfaceA" size="[300,30]" class="red-bg"}}
+	    	{{/famousIf}}
 	    {{/if}}
 
 	    {{#famousIf show 'B'}}
-	        {{>Surface template="issue72_surfaceB" size="[undefined,30]" class="blue-bg"}}
+        {{>Surface template="issue72_surfaceB" size="[300,30]" class="blue-bg"}}
 	    {{/famousIf}}
+
 	    {{#famousIf show 'C'}}
-        {{> Surface template="issue72_surfaceC" size="[undefined,30]" class="green-bg"}}
+        {{> Surface template="issue72_surfaceC" size="[300,30]" class="green-bg"}}
+	    {{/famousIf}}
+
+	    {{#Surface size="[undefined,auto]"}}
+	    	<h3>famousEach in famousIf (also in #51)</h3>
+	    	<p>(Uses show buttons above)</p>
+	    	<br />
+	    {{/Surface}}
+
+	    {{#famousIf show 'A'}}
+	    	{{#famousEach items}}
+	    		{{#Surface size="[undefined,20]"}}
+	    			A: {{name}}
+	    		{{/Surface}}
+	    	{{/famousEach}}
+	    {{/famousIf}}
+
+	    {{#famousIf show 'B'}}
+	    	{{#famousEach items}}
+	    		{{#Surface size="[undefined,20]"}}
+	    			B: {{name}}
+	    		{{/Surface}}
+	    	{{/famousEach}}
 	    {{/famousIf}}
 	{{/SequentialLayout}}
 </template>
 
 <template name="issue72_surfaceA">
-	hello A
+	hello A (delayed destroy)
 </template>
 <template name="issue72_surfaceB">
 	hello B
