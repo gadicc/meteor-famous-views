@@ -4,6 +4,11 @@
 
 ## vNEXT
 
+## v0.1.12
+
+* Fix undefined fview in famousIf destroyed (fixes #81)
+* Refactor code for View destroys and fview.destroy().
+
 ## v0.1.11
 
 * Fix links to famo.us examples, thanks @PEM--!  (fixes #75, #79)
