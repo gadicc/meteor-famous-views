@@ -22,16 +22,16 @@
 
 		{{#Surface size="[undefined,auto]" class="pagePad"}}
 			<br />
-			{{#prism lang="blaze" class="line-numbers"}}
+			{{#snippet lang="spacebars"}}
 				{{dstache}}#Flipper size="[150,150]" translate="[100,0]"}}
 					{{dstache}}>Surface target="front" template="views_Flipper_front"
 						class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
 					{{dstache}}>Surface target="back" template="views_Flipper_back"
 						class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
 				{{dstache}}/Flipper}}
-			{{/prism}}
+			{{/snippet}}
 
-			{{#prism lang="javascript" class="line-numbers"}}
+			{{#snippet lang="javascript"}}
 				// TODO, put flipper in it's own context
 				function perspectiveZero() {
 					FView.mainCtx.setPerspective(0);
@@ -56,7 +56,7 @@
 								perspectiveZero);
 					}
 				});
-			{{/prism}}
+			{{/snippet}}
 		{{/Surface}}
 	{{/Scrollview}}
 </template>

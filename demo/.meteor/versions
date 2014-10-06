@@ -17,7 +17,8 @@ ejson@1.0.3
 fastclick@1.0.0
 follower-livedata@1.0.1
 gadicohen:famous-views@0.1.12
-gadicohen:prism@1.0.0
+gadicohen:prism@1.0.3
+gadicohen:snippets@0.0.1
 geojson-utils@1.0.0
 html-tools@1.0.1
 htmljs@1.0.1

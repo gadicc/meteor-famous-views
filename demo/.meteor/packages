@@ -10,9 +10,9 @@ iron:router
 raix:famono
 gadicohen:famous-views
 natestrauser:font-awesome
-gadicohen:prism@1.0.0-early.1
 mizzao:bootstrap-3
 #sanjo:jasmine
 #velocity:core
 #velocity:html-reporter
+gadicohen:snippets
 

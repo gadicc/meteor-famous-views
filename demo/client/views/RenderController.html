@@ -11,17 +11,17 @@
 				<p>In the example below, we demonstrate fancier transitions
 				with a dynamic template:</p>
 
-				{{#prism lang="blaze" class="line-numbers"}}
+				{{#snippet lang="spacebars"}}
 					{{dstache}}#RenderController size="[150,150]"}}
 						{{dstache}}>showTemplate name=currentTemplate}}
 					{{dstache}}/RenderController}}
-				{{/prism}}
+				{{/snippet}}
 
 				{{>rc_buttons}}
 				{{>rc_transitions}}
 				{{>rc_useForPages}}
 
-				{{#prism lang="javascript" class="line-numbers"}}
+				{{#snippet lang="javascript"}}
 					Template.views_RenderController.helpers({
 						'showTemplate': function() {
 							return Template[this.name];
@@ -38,15 +38,15 @@
 							Session.set('currentTemplate', this.valueOf());
 						}
 					});
-				{{/prism}}
+				{{/snippet}}
 
-				{{#prism lang="blaze" class="line-numbers"}}
+				{{#snippet lang="spacebars"}}
 					&lt;template name="rc_surface1"&gt;
 						{{dstache}}#Surface class="red-bg" align="[0,0]" origin="[0,0]" size="[75,150]"}}
 							<div class="full">#1</div>
 						{{dstache}}/Surface}}
 					&lt;/template&gt;
-				{{/prism}}
+				{{/snippet}}
 
 				<p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see RenderController.html and
 				RenderController.html)</p>

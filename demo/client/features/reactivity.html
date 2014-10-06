@@ -59,7 +59,7 @@
 	<br />
 	<p><b>Template:</b></p>
 
-	{{#prism lang="blaze" class="line-numbers"}}
+	{{#snippet lang="spacebars"}}
 		{{dstache}}#View size=gridSize}}
 			{{dstache}}#GridLayout dimensions=gridDimensions}}
 				{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}{{dstache}}/Surface}}
@@ -67,14 +67,14 @@
 				{{dstache}}#Surface size="[undefined,undefined]" class="blue-bg"}}{{dstache}}/Surface}}
 			{{dstache}}/GridLayout}}
 		{{dstache}}/View}}
-	{{/prism}}
+	{{/snippet}}
 
 	<p>Of course, you could as easily use a <code>{{dstache}}#famousEach}}</code>,
 	with a reactive helper returning a minimongo query, appropriately limited.</p>
 
 	<p><b>JavaScript:</b></p>
 
-	{{#prism lang="javascript" class="line-numbers"}}
+	{{#snippet lang="javascript"}}
 		Session.setDefault('width', 350);
 		Template.reactivity.gridSize = function() {
 			return [ Session.get('width'), 100 ];
@@ -82,7 +82,7 @@
 		Template.reactivity.gridDimensions = function() {
 			return [ Math.ceil(Session.get('width') / 234), 1 ];
 		}
-	{{/prism}}	
+	{{/snippet}}	
 </template>
 
 <template name="reactiveBlock">
@@ -133,16 +133,16 @@
 <template name="reactivityModStateSource">
 	<b>Template:</b>
 
-	{{#prism lang="blaze" class="line-numbers"}}
+	{{#snippet lang="spacebars"}}
 		{{dstache}}>Surface id="block" template="reactiveBlock"
 			origin="[.5,.5]" class="red-bg"
 			size=getSize skewX=sess.skewX skewY=sess.skewY
 			rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateY}}
-	{{/prism}}
+	{{/snippet}}
 
 	<b>Javascript:</b>
 
-	{{#prism lang="javascript" class="line-numbers"}}
+	{{#snippet lang="javascript"}}
 		// Reactive getSize() helper
 		Template.reactivity.getSize = function() {
 			return [ Session.get('sizeX'), Session.get('sizeY') ];
@@ -159,7 +159,7 @@
 				}
 			});
 		}
-	{{/prism}}
+	{{/snippet}}
 
 	<p>Note, setting <code>compView.modifierTransition</code> is not documented
 	anywhere else yet, but you get the idea.  So far this is only used for

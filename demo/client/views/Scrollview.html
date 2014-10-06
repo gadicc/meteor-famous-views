@@ -27,7 +27,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 
 <template name="Scrollview_source">
 	<div class="code">
-		{{#prism lang="blaze" class="line-numbers"}}
+		{{#snippet lang="spacebars"}}
 			{{dstache}}#Scrollview size="[undefined,undefined]"}}
 
 				{{dstache}}#Surface size="[undefined,50]"}}
@@ -43,15 +43,15 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 				{{dstache}}>Surface template="Scrollview_source" size="[undefined,300]"}}
 
 			{{dstache}}/Scrollview}}
-		{{/prism}}
+		{{/snippet}}
 	</div>
 
 	<div class="code" style="margin-top: 10px">
-		{{#prism lang="javascript" class="line-numbers"}}
+		{{#snippet lang="javascript"}}
 			Template.views_Scrollview.items = function() {
 			  return Items.find({}, {sort: {name: 1}});
 			}
-		{{/prism}}
+		{{/snippet}}
 	</div>
 </template>
 

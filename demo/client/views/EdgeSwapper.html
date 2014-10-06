@@ -12,15 +12,15 @@
 				an <code>{{dstache}}#if}}</code> or iron-routers
 				<code>{{dstache}}>yield}}</code>, just like with RenderController.</p>
 
-				{{#prism lang="blaze" class="line-numbers"}}
+				{{#snippet lang="spacebars"}}
 					{{dstache}}#EdgeSwapper size="[150,150]"}}
 						{{dstache}}>showTemplate name=esTemplate}}
 					{{dstache}}/EdgeSwapper}}
-				{{/prism}}
+				{{/snippet}}
 
 				{{>es_buttons}}
 
-				{{#prism lang="javascript" class="line-numbers"}}
+				{{#snippet lang="javascript"}}
 					Template.views_EdgeSwapper.helpers({
 						'showTemplate': function() {
 							return Template[this.name];
@@ -43,15 +43,15 @@
 							Session.set('esTemplate', this.valueOf());
 						}
 					});
-				{{/prism}}
+				{{/snippet}}
 
-				{{#prism lang="blaze" class="line-numbers"}}
+				{{#snippet lang="spacebars"}}
 					&lt;template name="es_surface1"&gt;
 						{{dstache}}#Surface class="red-bg" size="[150,150]"}}
 							<div class="full">#1</div>
 						{{dstache}}/Surface}}
 					&lt;/template&gt;
-				{{/prism}}
+				{{/snippet}}
 
 				<p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see EdgeSwapper.html and EdgeSwapper.js)</p>
 			{{/Surface}}

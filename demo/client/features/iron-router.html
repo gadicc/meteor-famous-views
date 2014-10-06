@@ -30,15 +30,15 @@
 
   		<p><b>JavaScript:</b></p>
 
-  		{{#prism lang="javascript" class="line-numbers"}}
+  		{{#snippet lang="javascript"}}
   			Router.configure({
   				layoutTemplate: 'layout'
   			});
-  		{{/prism}}
+  		{{/snippet}}
 
   		<p><b>Templates:</b></p>
 
-  		{{#prism lang="blaze" class="line-numbers"}}
+  		{{#snippet lang="spacebars"}}
 				&lt;template name="layout">
 				  {{dstache}}#HeaderFooterLayout size="[undefined,undefined]" headerSize="50" footerSize="0"}}
 
@@ -52,7 +52,7 @@
 
 				  {{dstache}}/HeaderFooterLayout}}
 				&lt;/template>
-  		{{/prism}}  		
+  		{{/snippet}}  		
 
 			<p>Note:</p>
 
@@ -64,7 +64,7 @@
 
 			<p><b>Example Templates:</b></p>
 
-  		{{#prism lang="blaze" class="line-numbers"}}
+  		{{#snippet lang="spacebars"}}
 				&lt;template name="exampleHeaderYield">
 					I'm already wrapped inside a div in a surface!
 				&lt;/template>
@@ -76,7 +76,7 @@
 						{{dstache}}/famousEach}}
 					{{dstache}}/Scrollview}}
 				&lt;/template>
-  		{{/prism}}  		
+  		{{/snippet}}  		
 
   		<p>See the <a href="/examples/layouts">Layouts Page</a> for more help
   		setting out your page.</p>

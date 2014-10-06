@@ -32,18 +32,18 @@
 		{{#Surface size="[undefined,auto]" class="padLeft"}}
 			<p>Firstly, our temmplate:</p>
 
-			{{#prism lang="blaze" class="line-numbers"}}
+			{{#snippet lang="spacebars"}}
 				&lt;template name="ev_surface_click">
 					&lt;!-- div needed for meteor events, see next section -->
 					&lt;div style="width:100%; height: 100%;" class="ev_surface_click">
 						{{dstache}}clickCount}}
 					&lt;/div>
 				&lt;/template>			
-			{{/prism}}
+			{{/snippet}}
 
 			<p>and the helper and action/animation:</p>
 
-			{{#prism lang="javascript" class="line-numbers"}}
+			{{#snippet lang="javascript"}}
 				Template.ev_surface_click.clickCount = function() {
 				  return Session.get('clickCount');
 				}
@@ -56,13 +56,13 @@
 				  );
 				  Session.set('clickCount', Session.get('clickCount')+1);
 				}
-			{{/prism}}
+			{{/snippet}}
 
 			<p>For setting up the handler itself, we provide a small shortcut,
 			<code>Template.x.famousEvents()</code> to allow Famous events to be
 			set up more conveniently in a Meteor-like way:</p>
 
-			{{#prism lang="javascript" class="line-numbers"}}
+			{{#snippet lang="javascript"}}
 				Template.ev_surface_click.famousEvents({
 				  'click': function(event, fview) {
 				    // event.type == "click"
@@ -71,13 +71,13 @@
 				});
 
 
-			{{/prism}}
+			{{/snippet}}
 
 			<p>This is identical to doing the following, which is a little more
 			efficient if you need a <code>render()</code> method anyway and/or
 			have more than one event handler:</p>
 
-			{{#prism lang="javascript" class="line-numbers"}}
+			{{#snippet lang="javascript"}}
 				Template.ev_surface_click.rendered = function() {
 				  var fview = FView.from(this);
 				  var target = fview.surface || fview.view._eventInput;
@@ -85,7 +85,7 @@
 				    clickeyStuff(fview);
 				  });
 				}				
-			{{/prism}}
+			{{/snippet}}
 
 			<p>Available Surface events:
 				<ul>
@@ -107,7 +107,7 @@
 			<p>For comparison's sake, here's the same event using Meteor's
 			eventmap:</p>
 
-			{{#prism lang="javascript" class="line-numbers"}}
+			{{#snippet lang="javascript"}}
 				Template.ev_surface_click.events({
 				  'click': function(event, tpl) {
 				    var fview = FView.from(tpl);
@@ -115,7 +115,7 @@
 				    clickeyStuff(fview);
 				  }
 				});				
-			{{/prism}}
+			{{/snippet}}
 		{{/Surface}}
 
 		{{#Surface size="[undefined,auto]" class="padLeft"}}
@@ -179,7 +179,7 @@
 </template>
 
 <template name="ballCode">
-	{{#prism lang="blaze" class="line-numbers"}}
+	{{#snippet lang="spacebars"}}
 		&lt;template name="eventsDemo">
 			{{dstache}}#Surface size="[undefined,130]" translate="[20,0]"}}
 				<h3>Catch the ball!</h3>
@@ -194,9 +194,9 @@
 				{{dstache}}/if}}
 			{{dstache}}/RenderController}}
 		&lt;/template>
-	{{/prism}}
+	{{/snippet}}
 
-	{{#prism lang="javascript" class="line-numbers"}}
+	{{#snippet lang="javascript"}}
 		SpringTransition = require("famous/transitions/SpringTransition");
 		Transitionable.registerMethod('spring', SpringTransition);
 
@@ -221,5 +221,5 @@
 		    );
 		  }
 		});
-	{{/prism}}
+	{{/snippet}}
 </template>

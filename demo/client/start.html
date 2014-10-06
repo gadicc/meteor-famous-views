@@ -32,13 +32,13 @@
     	<code>famousInit</code> (<b>or</b>, see the
     	<a href="/features/iron-router">iron-router integration</a> page):</p>
 
-    	{{#prism lang="blaze" class="line-numbers"}}
+    	{{#snippet lang="spacebars"}}
     		&lt;template name="famousInit">
     			{{dstache}}#Surface size="[undefined,undefined]"}}
     				I am a full size Surface
     			{{dstache}}/Surface}}
     		&lt;/template>
-    	{{/prism}}
+    	{{/snippet}}
 
     	<p>A number of Views are provided pre-built for instant use (see the
     	drop down menu above).  There are also instructions to quickly and
@@ -46,7 +46,7 @@
 
     	<p>Here's a more advanced example:</p>
 
-		  {{#prism lang="blaze" class="line-numbers"}}
+		  {{#snippet lang="spacebars"}}
 		    {{dstache}}#Scrollview size="200,undefined"}}
 
 		      {{dstache}}#Surface}}
@@ -58,7 +58,7 @@
 		      {{dstache}}/famousEach}}
 
 		    {{dstache}}/Scrollview}}
-		  {{/prism}}
+		  {{/snippet}}
 
 			<p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
 			example of how to setup the <code>items</code> reactive data source
@@ -71,12 +71,12 @@
 			callbacks, events, and helpers on this template, just like you'd
 			expect:</p>
 
-			{{#prism lang="javascript" class="line-numbers"}}
+			{{#snippet lang="javascript"}}
                 Template.item.rendered = function() {
                     // fview.modifier, fview.view, and other stuff
                     var fview = FView.from(this);
                 }
-			{{/prism}}
+			{{/snippet}}
 
    	</div>
   {{/Surface}}

@@ -4,6 +4,8 @@
 
 ## vNEXT
 
+* Demo: Switch from prism to snippets (show js+coffee, spacebars+jade)
+
 ## v0.1.12
 
 * Fix undefined fview in famousIf destroyed (fixes #81)

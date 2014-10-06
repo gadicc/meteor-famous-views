@@ -52,7 +52,7 @@
 </template>
 
 <template name="examples_uihoooks_source">
-	{{#prism lang="blaze" class="line-numbers"}}
+	{{#snippet lang="spacebars"}}
 		&lt;template name="examples_animate">
 			{{dstache}}#SequentialLayout direction="X" size="[undefined,100]"}}
 				{{dstache}}#famousEach items}}
@@ -65,9 +65,9 @@
 		&lt;template name="examples_animate_item">
 			<img src="{{dstache}}picUrl}}" style="width: 100px; height: 100px">
 		&lt;/template>
-	{{/prism}}
+	{{/snippet}}
 
-	{{#prism lang="javascript" class="line-numbers"}}
+	{{#snippet lang="javascript"}}
 		// Reactive query, sorted by name, for items
 		Template.examples_animate.helpers({
 			'items': function() {
@@ -122,5 +122,5 @@
 				);
 			}
 		}
-	{{/prism}}
+	{{/snippet}}
 </template>

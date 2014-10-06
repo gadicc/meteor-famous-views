@@ -44,7 +44,7 @@
 </template>
 
 <template name="gridLayoutSource">
-	{{#prism lang="blaze" class="line-numbers"}}
+	{{#snippet lang="spacebars"}}
 		&lt;template name="views_GridLayout">
 			{{dstache}}#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]"}}
 				{{dstache}}#famousEach items}}
@@ -62,9 +62,9 @@
 				{{dstache}}name}}
 			{{dstache}}/Surface}}
 		&lt;/template>				
-	{{/prism}}
+	{{/snippet}}
 
-	{{#prism lang="javascript" class="line-numbers"}}
+	{{#snippet lang="javascript"}}
 		Template.views_GridLayout.items = function() {
 		  return Items.find({}, {sort: {name: 1}, limit: 8});
 		}
@@ -88,5 +88,5 @@
 			if (queue.length)
 				queue.shift()();
 		}, 100);
-	{{/prism}}
+	{{/snippet}}
 </template>
