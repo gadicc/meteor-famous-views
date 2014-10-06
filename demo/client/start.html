@@ -40,6 +40,10 @@
     		&lt;/template>
     	{{/snippet}}
 
+        <p>Don't manually include the <code>famousInit</code> template anywhere,
+        famous-views will add it to the document automatically once famo.us is
+        fully loaded.</p>
+
     	<p>A number of Views are provided pre-built for instant use (see the
     	drop down menu above).  There are also instructions to quickly and
     	easily add your own in the <a href="/views/README">Views README</a>.</p>
@@ -47,14 +51,14 @@
     	<p>Here's a more advanced example:</p>
 
 		  {{#snippet lang="spacebars"}}
-		    {{dstache}}#Scrollview size="200,undefined"}}
+		    {{dstache}}#Scrollview size="[200,undefined]"}}
 
-		      {{dstache}}#Surface}}
+		      {{dstache}}#Surface size="[undefined,auto]"}}
 		        <h1>Scrollview Example</h1>
 		      {{dstache}}/Surface}}
 
 		      {{dstache}}#famousEach items}}
-		        {{dstache}}>Surface template="item"}}
+		        {{dstache}}>Surface template="item" size="[undefined,20]"}}
 		      {{dstache}}/famousEach}}
 
 		    {{dstache}}/Scrollview}}
@@ -65,16 +69,22 @@
 			(hint: it's a templat helper that returns a reactive cursor from a
 			minimongo query, just like you'd expect).</p>
 
-			<p>You'll also notice that we used <b>template inclusion</b> instead
-			of specifying the view contents inline, i.e.
-			<code>{{dstache}}#Surface}}</code>.  This let's us setup lifecycle
-			callbacks, events, and helpers on this template, just like you'd
-			expect:</p>
+			<p>You'll also notice that we used the <b>template inclusion</b>
+            <code>{{dstache}}>Surface template="item"}}</code> instead
+			of specifying the view contents inline with
+			<code>{{dstache}}#Surface}}content{{dstache}}/Surface}}</code>.
+            This let's us setup lifecycle callbacks, events, and helpers on
+            <code>Template.item</code>, just like you'd expect:</p>
 
 			{{#snippet lang="javascript"}}
                 Template.item.rendered = function() {
-                    // fview.modifier, fview.view, and other stuff
                     var fview = FView.from(this);
+
+                    // "Fly in" animation (see examples/animations for more)
+                    fview.modifier.setTransform(
+                        Transform.translate(-500,-500),
+                        { duration : 1000, curve: 'easeOut' }
+                    );
                 }
 			{{/snippet}}
 
