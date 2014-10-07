@@ -50,44 +50,51 @@
 
     	<p>Here's a more advanced example:</p>
 
-		  {{#snippet lang="spacebars"}}
-		    {{dstache}}#Scrollview size="[200,undefined]"}}
+        {{#snippet lang="spacebars"}}
+        {{dstache}}#Scrollview size="[200,undefined]"}}
 
-		      {{dstache}}#Surface size="[undefined,auto]"}}
-		        <h1>Scrollview Example</h1>
-		      {{dstache}}/Surface}}
+          {{dstache}}#Surface size="[undefined,auto]"}}
+            <h1>Scrollview Example</h1>
+          {{dstache}}/Surface}}
 
-		      {{dstache}}#famousEach items}}
-		        {{dstache}}>Surface template="item" size="[undefined,20]"}}
-		      {{dstache}}/famousEach}}
+          {{dstache}}#famousEach items}}
+            {{dstache}}>Surface template="item" size="[undefined,20]"}}
+          {{dstache}}/famousEach}}
 
-		    {{dstache}}/Scrollview}}
-		  {{/snippet}}
+        {{dstache}}/Scrollview}}
+        {{/snippet}}
 
-			<p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
-			example of how to setup the <code>items</code> reactive data source
-			(hint: it's a templat helper that returns a reactive cursor from a
-			minimongo query, just like you'd expect).</p>
+		<p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
+		example of how to setup the <code>items</code> reactive data source
+		(hint: it's a templat helper that returns a reactive cursor from a
+		minimongo query, just like you'd expect).</p>
 
-			<p>You'll also notice that we used the <b>template inclusion</b>
-            <code>{{dstache}}>Surface template="item"}}</code> instead
-			of specifying the view contents inline with
-			<code>{{dstache}}#Surface}}content{{dstache}}/Surface}}</code>.
-            This let's us setup lifecycle callbacks, events, and helpers on
-            <code>Template.item</code>, just like you'd expect:</p>
+		<p>You'll also notice that we used the <b>template inclusion</b>
+        <code>{{dstache}}>Surface template="item"}}</code> instead
+		of specifying the view contents inline with
+		<code>{{dstache}}#Surface}}content{{dstache}}/Surface}}</code>.
+        This let's us setup lifecycle callbacks, events, and helpers on
+        <code>Template.item</code>, just like you'd expect:</p>
 
-			{{#snippet lang="javascript"}}
-                Template.item.rendered = function() {
-                    var fview = FView.from(this);
+		{{#snippet lang="javascript"}}
+            Template.item.rendered = function() {
+                var fview = FView.from(this);
 
-                    // "Fly in" animation (see examples/animations for more)
-                    fview.modifier.setTransform(
-                        Transform.translate(-500,-500),
-                        { duration : 1000, curve: 'easeOut' }
-                    );
-                }
-			{{/snippet}}
+                // "Fly in" animation (see examples/animations for more)
+                fview.modifier.setTransform(
+                    Transform.translate(-500,-500),
+                    { duration : 1000, curve: 'easeOut' }
+                );
+            }
+		{{/snippet}}
 
+        <p>To make sure everything fits nicely on mobile, we suggest adding
+        the following line to your <code>&lt;head></code>:</p>
+
+        <p>&nbsp;&nbsp; <code>&lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no"></code></p>
+
+        <p><b>That's it!</b>  Explore the nav bar above to see documented
+        examples on how to other cool stuff.</p>
    	</div>
   {{/Surface}}
 </template>
