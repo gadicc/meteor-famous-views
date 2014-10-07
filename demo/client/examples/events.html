@@ -1,23 +1,28 @@
 <template name="examples_events">
 	{{#Scrollview size="[undefined,undefined]"}}
 
-		{{#Surface size="[undefined,150]" class="padLeft"}}
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
 
 			<h1>Events</h1>
 
-			<p>Don't forget, there are now two different kinds of events:</p>
+			<p>
+				<b>It is critical to understand</b>
+				that there are now <b>two different kinds of events</b>:
+			</p>
 
 			<ol>
-				<li><b>Meteor Events</b>, like usual, inside of a Surface.</li>
-				<li><b>Famous Events</b>, that act on entire Surface or View.</li>
+				<li><b>Meteor Events</b>, like usual, <u>inside of</u> a Surface (only).</li>
+				<li><b>Famous Events</b>, that act on <u>an entire Surface</u> or <u>View</u>.</li>
 			</ol>
 
-			<p>In both cases, we need a way to connect the two frameworks.</p>
+			<p>
+				<b>Failure to understand the difference</b> will
+				result in events working correctly but <b>not how you expect</b>.
+			</p>
 		{{/Surface}}
 
-		{{#Surface size="[undefined,100]" class="padLeft"}}
-			<br />
-			<h2>Famous Events</h2>
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			<h2>Three Ways to Accomplish the Same Goal</h2>
 
 			<p>Click the red square to increase the count
 			(all reactive, of course):</p>
@@ -30,25 +35,26 @@
 		{{/View}}
 
 		{{#Surface size="[undefined,auto]" class="padLeft"}}
-			<p>Firstly, our temmplate:</p>
+			<h3>Method Agnostic Preparation</h3>
+
+			<p>First, let's set up the template, reactive helper, and
+			animation code... which can be used by any of the three methods.</p>
 
 			{{#snippet lang="spacebars"}}
 				&lt;template name="ev_surface_click">
-					&lt;!-- div needed for meteor events, see next section -->
+					&lt;!-- div needed only for Method 3: Template.x.events() -->
 					&lt;div style="width:100%; height: 100%;" class="ev_surface_click">
 						{{dstache}}clickCount}}
 					&lt;/div>
 				&lt;/template>			
 			{{/snippet}}
 
-			<p>and the helper and action/animation:</p>
-
 			{{#snippet lang="javascript"}}
 				Template.ev_surface_click.clickCount = function() {
 				  return Session.get('clickCount');
 				}
 
-				function clickeyStuff(fview) {
+				function animateAndIncrement(fview) {
 				  fview.modifier.halt();
 				  fview.modifier.setTransform(
 				      Transform.translate(0,0),
@@ -58,6 +64,10 @@
 				}
 			{{/snippet}}
 
+			<h3>Event Registration</h3>
+
+			<p><b>Method 1: Template.x.famousEvents()</b> - a Famous event</p>
+
 			<p>For setting up the handler itself, we provide a small shortcut,
 			<code>Template.x.famousEvents()</code> to allow Famous events to be
 			set up more conveniently in a Meteor-like way:</p>
@@ -66,28 +76,31 @@
 				Template.ev_surface_click.famousEvents({
 				  'click': function(event, fview) {
 				    // event.type == "click"
-				    clickeyStuff(fview);
+				    animateAndIncrement(fview);
 				  }
 				});
 
 
 			{{/snippet}}
 
-			<p>This is identical to doing the following, which is a little more
+			<br />
+			<p><b>Method 2: surface.on() in rendered callback</b> - a Famous event</p>
+
+			<p>This is identical to the above, but more
 			efficient if you need a <code>render()</code> method anyway and/or
-			have more than one event handler:</p>
+			have many event handlers:</p>
 
 			{{#snippet lang="javascript"}}
 				Template.ev_surface_click.rendered = function() {
 				  var fview = FView.from(this);
 				  var target = fview.surface || fview.view._eventInput;
 				  target.on('click', function() {
-				    clickeyStuff(fview);
+				    animateAndIncrement(fview);
 				  });
 				}				
 			{{/snippet}}
 
-			<p>Available Surface events:
+			<p>Available Surface events (for use in Famous Events, i.e. method 1 or 2):
 				<ul>
 					<li>
 						<code>click</code>, <code>mousedown</code>,
@@ -104,32 +117,67 @@
 				</ul>
   		</p>
 
-			<p>For comparison's sake, here's the same event using Meteor's
-			eventmap:</p>
+  		<br />
+			<p><b>Method 3: Template.x.events()</b> - a Meteor event</p>
+
+			<p>For comparison's sake, we can accomplish the same goal using
+			Meteor's eventmap, but it's a little more complicated:</p>
 
 			{{#snippet lang="javascript"}}
 				Template.ev_surface_click.events({
 				  'click': function(event, tpl) {
 				    var fview = FView.from(tpl);
 				    // event.type == "click"
-				    clickeyStuff(fview);
+				    animateAndIncrement(fview);
 				  }
 				});				
 			{{/snippet}}
+
+			<br />
+			<p>
+				Recall that Meteor events (via <code>Template.x.events()</code>)
+				are DOM events, and captured via delegation on the parent node.
+				As such, your template must:
+			</p>
+
+			<ol>
+				<li>
+					Be a Surface (or inside a surface), and be setup with inclusion so
+					we can use <code>Template.x.events()</code>.  e.g.
+					<code>{{dstache}}>Surface template='x'}}</code> or
+					<code>{{dstache}}Surface}} {{dstache}}>x}} {{dstache}}/Surface}}</code>.
+				</li>
+				<li>
+					The Surface must contain <i>at least one element</i> (it can't be
+					just text).  Recall the extra <code>div</code> in our template
+					above.
+				</li>
+				<li>
+				  Say you want to be able to click anywhere on the Surface.
+				  Recall that the event is on the <code>div</code> and not the
+				  Surface, so the div needs to <i>fills the entire surface</i>.
+				  That's the <code>style="width:100%; height: 100%;"</code> in
+				  the div.
+				</li>
+			</ol>
+
+			<h3>When to use what?</h3>
+
+			<p>When in doubt, use this guideline:</p>
+
+			<ul>
+				<li>Acting on an entire surface - use a Famous event (methods 1 & 2)</li>
+				<li>Acting inside of a surface - use a Meteor event (method 3)</li>
+			</ul>
+
+			<p>To be clear, <b>Meteor events work like normal</b>.  You don't need
+			to put any extra thought into using them <i>unless you want to affect
+			an entire Surface</i>.  For that reason, rather use Famous events for
+			this purpose.</p>
 		{{/Surface}}
 
 		{{#Surface size="[undefined,auto]" class="padLeft"}}
-			<h2>Meteor Events</h2>
-
-			<p>A reminder that Meteor events, via the <code>Template.x.events()</code>
-			system, are DOM events.  As such, you can only setup events on
-			<b>Surfaces</b>, <i>with at least one element</i>, so make sure if your
-			template is all text, you wrap it in a <code>&lt;div></code> or
-			<code>&lt;span></code>. 	This also only works with inclusion, e.g.
-			<code>{{dstache}}>Surface template='x'}}</code>, since with inline
-			blocks, there is nothing to attach to.  Of course, regular meteor
-			inclusion like <code>{{dstache}}>template}}</code> inside of a Surface work
-			like usual.</p>
+			<h2>Another Example</h2>
 
 			<p>Here's a small example mixing a Meteor event with a Famous action:</p>
 			<br />
