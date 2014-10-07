@@ -9,6 +9,21 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
+  configurePackage(api);
+});
+
+Package.on_test(function(api) {
+  configurePackage(api, true /* isTesting */);
+
+  api.use('tinytest', 'client');
+  api.add_files([
+    'tests/sequencer.js',
+    'tests/famous.html',
+    'tests/famous.js'
+  ], 'client');
+});
+
+function configurePackage(api, testing) {
   if (api.versionsFrom) {
     //api.versionsFrom("METEOR@0.9.1.1");
     api.use("jag:pince@0.0.5", 'client');
@@ -22,19 +37,18 @@ Package.on_use(function (api) {
   }
 
   if (api.versionsFrom) {
-      if (packageUsed('mjnetworks:famous'))
-        api.use('mjnetworks:famous@0.2.2-1', 'client' /*, { weak: true } */);
-      if (packageUsed('mjnetworks:mj-famous'))
-        api.use('mjnetworks:mj-famous@0.2.1-1', 'client' /*, { weak: true } */);
-      api.use('jonperl:famous-compiled@0.2.0', 'client', { weak: true });
-      api.use('iron:router@0.9.3', 'client', { weak: true });
-      if (packageUsed('raix:famono')) {
-        // File isn't scanned properly on a weak dep
-        api.use('raix:famono@0.7.4', 'client');
-        // Line below means we get to load sooner but code will be sent twice
-        // https://github.com/raix/Meteor-famono/issues/41#issuecomment-54081868
-        // api.add_files('lib/smart.require', 'client');
-      }
+    if (testing)
+      api.use('mjn:famous', 'client');
+    else if (packageUsed('mjn:famous'))
+      api.use('mjn:famous', 'client' /*, { weak: true } */);
+    else if (packageUsed('raix:famono')) {
+      // File isn't scanned properly on a weak dep
+      api.use('raix:famono@0.7.4', 'client');
+      // Line below means we get to load sooner but code will be sent twice
+      // https://github.com/raix/Meteor-famono/issues/41#issuecomment-54081868
+      // api.add_files('lib/smart.require', 'client');
+    }
+    api.use('iron:router@0.9.3', 'client', { weak: true });
   } else {
     // https://github.com/meteor/meteor/issues/1358
     if (packageUsed('famono'))
@@ -48,8 +62,8 @@ Package.on_use(function (api) {
   }
 
   api.add_files(
-  	[
-  		'lib/famous-views.js',
+    [
+      'lib/famous-views.js',
       'lib/meteorFamousView.js',
       'lib/sequencer.js',
       'lib/famous.js',
@@ -57,8 +71,8 @@ Package.on_use(function (api) {
       'lib/famousIf.js',
       'lib/modifiers.js',
       'lib/views.js'
-  	],
-  	'client'
+    ],
+    'client'
   );
 
   api.add_files(
@@ -76,12 +90,7 @@ Package.on_use(function (api) {
   );
 
   api.export(['famousCmp', 'FView'], 'client');
-});
-
-Package.on_test(function(api) {
-  api.use('tinytest', 'client');
-  api.add_files(['lib/sequencer.js', 'tests/sequencer.js'], 'client');
-});
+}
 
 // Thanks to Arunoda as usual :)
 // https://github.com/arunoda/meteor-fast-render/blob/master/package.js

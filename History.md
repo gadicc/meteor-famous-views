@@ -5,6 +5,8 @@
 ## vNEXT
 
 * Demo: Switch from prism to snippets (show js+coffee, spacebars+jade)
+* Testing: initial tinytests for Views (famous.js)
+* Fix loop invariant for famousEvents (#84)
 
 ## v0.1.12
 
