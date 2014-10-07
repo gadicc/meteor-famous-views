@@ -8,6 +8,7 @@
 * Testing: initial tinytests for Views (famous.js)
 * Fix loop invariant for famousEvents (#84)
 * Docs: improve event example/explanation (#84)
+* Docs: start a FAQ page
 
 ## v0.1.12
 
