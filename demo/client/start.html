@@ -28,21 +28,31 @@
             (requires local package install on 0.9.0+).
     	</p>
 
-    	<p>Otherwise, edit <code>app.html</code> and create a template called
-    	<code>famousInit</code> (<b>or</b>, see the
-    	<a href="/features/iron-router">iron-router integration</a> page):</p>
+    	<p>Otherwise, edit <code>app.html</code> as follows, creating a
+        template called <code>famousInit</code>:</p>
 
     	{{#snippet lang="spacebars"}}
-    		&lt;template name="famousInit">
-    			{{dstache}}#Surface size="[undefined,undefined]"}}
-    				I am a full size Surface
-    			{{dstache}}/Surface}}
-    		&lt;/template>
+            &lt;head>
+                {{dstache}}!-- this is critical for mobile and emulation to look and work properly --}}
+                &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">            
+            &lt;/head>
+
+            &lt;body>
+                {{dstache}}!-- leave this empty or leave it out, dont add famousInit here!  --}}
+            &lt;/body>
+
+            &lt;template name="famousInit">
+                {{dstache}}#Surface size="[undefined,undefined]"}}
+                    I am a full size Surface
+                {{dstache}}/Surface}}
+            &lt;/template>
     	{{/snippet}}
 
-        <p>Don't manually include the <code>famousInit</code> template anywhere,
-        famous-views will add it to the document automatically once famo.us is
-        fully loaded.</p>
+        <p>The <code>famousInit</code> template is added to your document
+        automatically once famo.us is fully loaded, don't include it yourself.
+        Alternatively, instead of using this template, you can use any
+        template via <a href="/features/iron-router">iron-router integration</a>.
+        </p>
 
     	<p>A number of Views are provided pre-built for instant use (see the
     	drop down menu above).  There are also instructions to quickly and
@@ -87,11 +97,6 @@
                 );
             }
 		{{/snippet}}
-
-        <p>To make sure everything fits nicely on mobile, we suggest adding
-        the following line to your <code>&lt;head></code>:</p>
-
-        <p>&nbsp;&nbsp; <code>&lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no"></code></p>
 
         <p><b>That's it!</b>  Explore the nav bar above to see documented
         examples on how to other cool stuff.</p>
