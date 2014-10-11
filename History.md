@@ -4,6 +4,8 @@
 
 ## vNEXT
 
+## v0.1.13
+
 * Feature: allow transition/halt/etc in reactive modifiers (#87)
   Thanks @mcbain for the idea.  Example at bottom of reactive demo.
 
