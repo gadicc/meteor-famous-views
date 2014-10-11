@@ -87,7 +87,7 @@ Template.ev_surface_click.famousEvents({
 
 Template.ev_surface_click.rendered = function() {
   var fview = FView.from(this.view);
-  var target = fview.surface || fview.view._eventInput;
+  var target = fview.surface || fview.view;
   target.on('click', function() {
     clickeyStuff(fview);
   });

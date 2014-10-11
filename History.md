@@ -4,6 +4,12 @@
 
 ## vNEXT
 
+## v0.1.14
+
+* Bugfix: famousEvents now correctly works on Views (#26)
+  It also now provides the same context/this and arguments as
+  the original function provides (since Famous 0.3)
+
 ## v0.1.13
 
 * Feature: allow transition/halt/etc in reactive modifiers (#87)
