@@ -4,11 +4,18 @@
 
 ## vNEXT
 
-* Demo: Switch from prism to snippets (show js+coffee, spacebars+jade)
+* Feature: allow transition/halt/etc in reactive modifiers (#87)
+  Thanks @mcbain for the idea.  Example at bottom of reactive demo.
+
+* Bugfix: famousEvents now works with multiple events (#84)
+* Bugfix: correctly transform mid-transition modifierstates
+
+* Docs/demo: Switch from prism to snippets (show js+coffee, spacebars+jade)
+* Docs/demo: improve event example/explanation (#84)
+* Docs/demo: start a FAQ page, more tips in QuickStart
+* Docs/demo: Fix reactive demo sliders for skewX/skewY + pic align
+
 * Testing: initial tinytests for Views (famous.js)
-* Fix loop invariant for famousEvents (#84)
-* Docs: improve event example/explanation (#84)
-* Docs: start a FAQ page, more tips in QuickStart
 
 ## v0.1.12
 

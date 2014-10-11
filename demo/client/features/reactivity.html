@@ -44,7 +44,7 @@
 			{{>Surface template="reactivityModState" size="[400,undefined]"}}
 			{{#View size="[400,undefined]"}}
 				{{>Surface id="block" template="reactiveBlock"
-					origin="[.5,.5]" class="red-bg"
+					origin="[.5,.5]" align="[.5,.5]" class="red-bg"
 					size=getSize skewX=sess.skewX skewY=sess.skewY
 					rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateZ}}
 			{{/View}}
@@ -105,9 +105,9 @@
 		{{>nameSliderValue name="sizeY" value=sess.sizeY label="Size Y:"
 			min="0" max="300" step="1"}}
 		{{>nameSliderValue name="skewX" value=sess.skewX label="Skew X:"
-			min="-1.5" max="1.5" step="0.01"}}
+			min="-90" max="90" step="1"}}
 		{{>nameSliderValue name="skewY" value=sess.skewY label="Skew Y:"
-			min="-1.5" max="1.5" step="0.01"}}
+			min="-90" max="90" step="1"}}
 		{{>nameSliderValue name="rotateX" value=sess.rotateX label="Rotate X:"
 			min="-90" max="90" step="1"}}
 		{{>nameSliderValue name="rotateY" value=sess.rotateY label="Rotate Y:"
@@ -164,6 +164,29 @@
 	<p>Note, setting <code>compView.modifierTransition</code> is not documented
 	anywhere else yet, but you get the idea.  So far this is only used for
 	reactive modifier updates.</p>
+
+	<p><code>ModifierState</code> reactive modifiers can also pass back the
+	desired transition, halt, and done callbacks to use, on an individual basis
+	and without relying on the defaults set above.  So, <code>getSize()</code>
+	above could also be written as:</p>
+
+	{{#snippet lang="javascript"}}
+		// Reactive getSize() helper
+		Template.reactivity.getSize = function() {
+			return {
+				value: [ Session.get('sizeX'), Session.get('sizeY') ],
+				transition: { curve: 'easeIn', duration: 1000 },
+				halt: true,
+				done: function() {
+					console.log('getSize transform finished');
+				}
+			};
+		}
+	{{/snippet}}
+
+	<p>Note, if you're using Session variable's for reactivity, they can't
+	contain functions... so don't try squeeze a <code>done()</code> callback
+	into a Session variable.</p>
 
 	<p>Full source:
 		<a href="https://github.com/gadicc/meteor-famous-components/blob/master/demo/client/features/reactivity.html">reactivity.html</a> |
