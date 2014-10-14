@@ -4,6 +4,11 @@
 
 ## vNEXT
 
+## v0.1.15
+
+* Remove iron-router weak dependency.  famous-views no longer requires
+  iron-router directly, just include the version you need in your app.
+
 ## v0.1.14
 
 * Bugfix: famousEvents now correctly works on Views (#26)

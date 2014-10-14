@@ -1,15 +1,7 @@
 {
   "dependencies": [
     [
-      "application-configuration",
-      "1.0.2"
-    ],
-    [
       "base64",
-      "1.0.0"
-    ],
-    [
-      "binary-heap",
       "1.0.0"
     ],
     [
@@ -17,28 +9,8 @@
       "2.0.1"
     ],
     [
-      "blaze-tools",
-      "1.0.0"
-    ],
-    [
-      "boilerplate-generator",
-      "1.0.0"
-    ],
-    [
-      "callback-hook",
-      "1.0.0"
-    ],
-    [
-      "check",
-      "1.0.1"
-    ],
-    [
       "coffeescript",
       "1.0.3"
-    ],
-    [
-      "ddp",
-      "1.0.9"
     ],
     [
       "deps",
@@ -49,16 +21,8 @@
       "1.0.3"
     ],
     [
-      "follower-livedata",
-      "1.0.1"
-    ],
-    [
       "geojson-utils",
       "1.0.0"
-    ],
-    [
-      "html-tools",
-      "1.0.1"
     ],
     [
       "htmljs",
@@ -81,24 +45,12 @@
       "1.0.0"
     ],
     [
-      "logging",
-      "1.0.3"
-    ],
-    [
       "meteor",
       "1.1.1"
     ],
     [
-      "minifiers",
-      "1.1.0"
-    ],
-    [
       "minimongo",
       "1.0.3"
-    ],
-    [
-      "mongo",
-      "1.0.6"
     ],
     [
       "observe-sequence",
@@ -109,35 +61,11 @@
       "1.0.0"
     ],
     [
-      "raix:famono",
-      "0.7.4"
-    ],
-    [
       "random",
       "1.0.0"
     ],
     [
       "reactive-var",
-      "1.0.2"
-    ],
-    [
-      "reload",
-      "1.1.0"
-    ],
-    [
-      "retry",
-      "1.0.0"
-    ],
-    [
-      "routepolicy",
-      "1.0.1"
-    ],
-    [
-      "spacebars",
-      "1.0.2"
-    ],
-    [
-      "spacebars-compiler",
       "1.0.2"
     ],
     [
@@ -149,19 +77,7 @@
       "1.0.2"
     ],
     [
-      "ui",
-      "1.0.3"
-    ],
-    [
       "underscore",
-      "1.0.0"
-    ],
-    [
-      "webapp",
-      "1.1.2"
-    ],
-    [
-      "webapp-hashing",
       "1.0.0"
     ]
   ],

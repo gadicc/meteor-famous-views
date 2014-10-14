@@ -4,7 +4,7 @@ var path = Npm.require('path');
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.14",
+  version: "0.1.15",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
@@ -48,7 +48,7 @@ function configurePackage(api, testing) {
       // https://github.com/raix/Meteor-famono/issues/41#issuecomment-54081868
       // api.add_files('lib/smart.require', 'client');
     }
-    api.use('iron:router@0.9.3', 'client', { weak: true });
+//    api.use('iron:router@0.9.3', 'client', { weak: true });
   } else {
     // https://github.com/meteor/meteor/issues/1358
     if (packageUsed('famono'))
@@ -57,8 +57,8 @@ function configurePackage(api, testing) {
       api.use('mj-famous', 'client', { weak: true });
     if (packageUsed('famous-compiled'))
       api.use('famous-compiled', 'client', { weak: true });    
-    if (packageUsed('iron-router'))
-      api.use('iron-router', 'client', { weak: true });    
+//    if (packageUsed('iron-router'))
+//      api.use('iron-router', 'client', { weak: true });    
   }
 
   api.add_files(
