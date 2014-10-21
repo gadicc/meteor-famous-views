@@ -26,8 +26,13 @@ Package.on_test(function(api) {
     'tests/sequencer.js',
     'tests/famous.html',
     'tests/famous.js',
+
+    'tests/surface/AttrClassTests.html',
+    'tests/surface/AttrClassTests.js',
+
     'tests/surface/AttrSizeTests.html',
     'tests/surface/AttrSizeTests.js',
+
     'tests/surface/AttrPropertiesTests.html',
     'tests/surface/AttrPropertiesTests.js',
   ], 'client');
