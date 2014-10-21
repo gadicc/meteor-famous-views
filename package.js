@@ -16,10 +16,20 @@ Package.on_test(function(api) {
   configurePackage(api, true /* isTesting */);
 
   api.use('tinytest', 'client');
+  api.use('less', 'client');
+  api.use('reactive-var', 'client');
+  api.use('mjn:famous-views-utils', 'client');
+
   api.add_files([
+    'tests/TestStyles.less',
+    'tests/TestUtils.js',
     'tests/sequencer.js',
     'tests/famous.html',
-    'tests/famous.js'
+    'tests/famous.js',
+    'tests/surface/AttrSizeTests.html',
+    'tests/surface/AttrSizeTests.js',
+    'tests/surface/AttrPropertiesTests.html',
+    'tests/surface/AttrPropertiesTests.js',
   ], 'client');
 });
 
