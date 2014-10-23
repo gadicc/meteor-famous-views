@@ -4,10 +4,14 @@
 
 ## vNEXT
 
+## v0.1.16
+
 * Merge PR #103 from @mcbain, some very welcome tiny tests to help
   get famous-views more production ready.
 
 * Upgrade famono demo from 0.3.0-alpha to 0.3.0, add src:root (#102)
+
+* More cleanly separate into demo-base, demo-famono and demo-mjn.
 
 ## v0.1.15
 
