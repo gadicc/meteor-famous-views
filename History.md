@@ -4,6 +4,11 @@
 
 ## vNEXT
 
+* Merge PR #103 from @mcbain, some very welcome tiny tests to help
+  get famous-views more production ready.
+
+* Upgrade famono demo from 0.3.0-alpha to 0.3.0, add src:root (#102)
+
 ## v0.1.15
 
 * Remove iron-router weak dependency.  famous-views no longer requires
