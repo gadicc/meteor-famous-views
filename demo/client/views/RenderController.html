@@ -1,7 +1,7 @@
 <template name="views_RenderController">
 	{{#Scrollview size="[undefined,undefined]"}}
-		{{#View size="[undefined,900]" translate="[20,0]"}}
-			{{#Surface size="[undefined,undefined]"}}
+		{{#View size="[undefined,980]"}}
+			{{#Surface size="[undefined,undefined]" class="padLeft"}}
 				<h1>RenderController demo</h1>
 
 				<p>We can wrap any dynamically rendered template inside a
@@ -12,7 +12,7 @@
 				with a dynamic template:</p>
 
 				{{#snippet lang="spacebars"}}
-					{{dstache}}#RenderController size="[150,150]"}}
+					{{dstache}}#RenderController transition=getTransition size="[150,150]"}}
 						{{dstache}}>showTemplate name=currentTemplate}}
 					{{dstache}}/RenderController}}
 				{{/snippet}}
@@ -25,13 +25,18 @@
 					Template.views_RenderController.helpers({
 						'showTemplate': function() {
 							return Template[this.name];
+						},
+						'getTransition': function() {
+							return Session.get('currentTransition');
 						}
 					});
 
 					Session.setDefault('currentTemplate', 'rc_surface1');
-					Template.views_RenderController.currentTemplate = function() {
-						return Session.get('currentTemplate');
-					}
+					Template.views_RenderController.helpers({
+						currentTemplate: function() {
+							return Session.get('currentTemplate');
+						}
+					});				
 
 					Template.rc_buttons.events({
 						'click button': function(event, tpl) {
@@ -53,7 +58,7 @@
 			{{/Surface}}
 
 			{{#RenderController transition=getTransition
-					size="[150,150]" translate="[450,175]"}}
+					size="[150,150]" translate="[620,175]"}}
 				{{>showTemplate name=currentTemplate}}
 			{{/RenderController}}
 
