@@ -15,10 +15,10 @@ given in this README***!  **PLEASE FOLLOW [History.md](History.md) IN THESE
 EARLY DAYS**.
 
 Requires Famo.us, using any of:
-[famono](https://atmospherejs.com/package/famono)
+[famono](https://atmospherejs.com/raix/famono)
 (recommended),
-[mj-famous](https://atmospherejs.com/package/mj-famous),
-[famous-compiled](https://atmospherejs.com/package/famous-compiled),
+[mjn-famous](https://atmospherejs.com/mjn/famous),
+[famous-compiled](https://atmospherejs.com/jonperl/famous-compiled),
 or straight from the Famo.us CDN (see
 [demo](https://github.com/gadicc/meteor-famous-components/tree/master/demo-cdn)).
 
@@ -349,7 +349,7 @@ is a StateModifier.
 ## Credits
 
 * Massive props to Morten Henriksen aka raix, firstly for his awesome
-[famono](https://atmosphere.meteor.com/package/famono) package which
+[famono](https://atmospherejs.com/raix/famono) package which
 is used to `require` Famous (and anything else for that matter; a super big
 deal for us Meteorites), but more so, for his stellar efforts at super quick
 enhancements to the package for things I needed for this package.  Thanks raix!
