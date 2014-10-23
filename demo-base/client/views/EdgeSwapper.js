@@ -15,9 +15,11 @@ Template.views_EdgeSwapper.helpers({
 });
 
 Session.setDefault('esTemplate', 'rc_surface1');
-Template.views_EdgeSwapper.esTemplate = function() {
-	return Session.get('esTemplate');
-}
+Template.views_EdgeSwapper.helpers({
+	esTemplate: function() {
+		return Session.get('esTemplate');
+	}
+});
 
 Template.es_buttons.helpers({
 	'buttons': ['es_surface1', 'es_surface2', 'es_surface3'],

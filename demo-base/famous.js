@@ -96,18 +96,21 @@ if (Meteor.isClient) {
     }
   }
 
-  Template.header.menu = function(issues) {
-    var out = [];
-    _.each(['Features', 'Views', 'Examples', 'Issues', 'More'], function(cat) {
-      //if (!issues && cat != 'Issues' || issues && cat == 'Issues')
-      out.push({ cat: cat, items: Menu.list[cat] });
-    });
-    return out;
-  };
+  Template.header.helpers({
+    menu: function(issues) {
+      var out = [];
+      _.each(['Features', 'Views', 'Examples', 'Issues', 'More'], function(cat) {
+        //if (!issues && cat != 'Issues' || issues && cat == 'Issues')
+        out.push({ cat: cat, items: Menu.list[cat] });
+      });
+      return out;
+    }
+  });
 
-  Template.layout.getTransition = function() {
-    var useForPages = Session.get('transitionPages');
-    return useForPages ? Session.get('currentTransition') : 'opacity';
-  }
-
+  Template.layout.helpers({
+    getTransition: function() {
+      var useForPages = Session.get('transitionPages');
+      return useForPages ? Session.get('currentTransition') : 'opacity';
+    }
+  });
 }
