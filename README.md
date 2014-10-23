@@ -14,14 +14,6 @@ The demo includes example code, ***which supercedes the syntax/examples
 given in this README***!  **PLEASE FOLLOW [History.md](History.md) IN THESE
 EARLY DAYS**.
 
-Requires Famo.us, using any of:
-[famono](https://atmospherejs.com/raix/famono)
-(recommended),
-[mjn-famous](https://atmospherejs.com/mjn/famous),
-[famous-compiled](https://atmospherejs.com/jonperl/famous-compiled),
-or straight from the Famo.us CDN (see
-[demo](https://github.com/gadicc/meteor-famous-components/tree/master/demo-cdn)).
-
 Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
 ### Build the Famous Render Tree with Reactive Blaze Views
@@ -42,12 +34,12 @@ Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 
 ### Features & Basics
 
-* The `{{famous}}` component uses templates to create
+* The `{{#famous}}` component uses templates to create
 Famous Views and Surfaces, without touching any Javascript.  Registered
 Views are aliased as their own block helpers for ease and clarity, e.g.
 `{{#Scrollview}}`, etc.
 
-* `{{famousEach}}` helps creates Sequences (for e.g. Scrollview) using
+* `{{#famousEach}}` helps creates Sequences (for e.g. Scrollview) using
 regular Template helpers/data like Items.find().  No additional code.
 Still 100% reactive.
 
