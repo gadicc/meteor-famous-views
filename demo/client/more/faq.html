@@ -1,0 +1,26 @@
+<template name="faq">
+  {{#Surface size="[undefined,undefined]"}}
+    <div id="main" role="main">
+    	<h1>Frequently Asked Questions</h1>
+
+    	<p>Read through these to avoid unnecessary misery :)</p>
+
+    	<ol class="faq">
+
+    		<li>
+    			<div class="q">
+    				Views work on desktop but look weird on mobile or emulation
+    			</div>
+    			<div class="a">
+    				Disable user scaling by putting the following in your
+    				<code>&lt;head></code>:<br />
+    				<code>&lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
+  					</code>
+  				</div>
+  			</li>
+
+  		</ol>
+
+    </div>
+  {{/Surface}}
+</template>
