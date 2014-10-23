@@ -1,3 +1,4 @@
+/*
 Tinytest.addAsync('Famous - Surface - attribute - class - allow initial value', function (test, complete) {
   var root = createTestDIV([200, 200]);
   Blaze.render(Template.AttrClassTests_1, root);
@@ -8,6 +9,7 @@ Tinytest.addAsync('Famous - Surface - attribute - class - allow initial value', 
     complete();
   }, 50);
 });
+*/
 
 Tinytest.addAsync('Famous - Surface - attribute - class - allow reactive update', function (test, complete) {
   var root = createTestDIV([200, 200]);
