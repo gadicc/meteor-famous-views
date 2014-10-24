@@ -116,10 +116,33 @@
 		{{/Surface}}
 
 		{{#Surface size="[undefined,auto]" class="padLeft"}}
-			<p>More info on needing to
+			<p>Reference: needing to
 			<a href="https://github.com/Famous/famous/issues/298">explicitly specify
 			<i>align</i></a> on Famous 0.3.</p>
 
+			<h2>Proportional Sizing</h2>
+			<p>Since Famous 0.3 sizing can be specified <b>by proportion</b> without
+			needing to do your own calculations.</p>
+		{{/Surface}}
+
+		{{#View size="[undefined,100]"}}
+			{{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
+				class="green-bg"}} background {{/Surface}}
+			{{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
+				class="red-bg"}} 30% of parent's width and height {{/Surface}}
+		{{/View}}
+
+		{{#Surface size="[undefined,auto]" class="padLeft"}}
+			{{#snippet lang="spacebars"}}
+				{{dstache}}#View size="[undefined,100]" translate="[20,0]"}}
+					{{dstache}}#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
+						class="green-bg"}} background {{dstache}}/Surface}}
+					{{dstache}}#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
+						class="red-bg"}} 30% of parent's width and height {{dstache}}/Surface}}
+				{{dstache}}/View}}
+			{{/snippet}}
+
+			<h2>Other</h2>
 			<p>For more complicated layouts, you'll probably want to use a <b>View</b>.
 			See the drop-down menu at the top of this page for more info.</p>
 		{{/Surface}}
