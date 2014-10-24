@@ -1,5 +1,5 @@
 Tinytest.addAsync('Famous - Surface - attribute - properties - allow initial value', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
   Blaze.render(Template.AttrPropertiesTests_1, root);
 
   Meteor.setTimeout(function () {
@@ -11,7 +11,7 @@ Tinytest.addAsync('Famous - Surface - attribute - properties - allow initial val
 });
 
 Tinytest.addAsync('Famous - Surface - attribute - properties - allow reactive update', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
 
   var props = new ReactiveVar({
     backgroundColor : 'rgb(44, 55, 66)'

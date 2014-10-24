@@ -12,7 +12,7 @@ Tinytest.addAsync('Famous - Surface - attribute - class - allow initial value', 
 */
 
 Tinytest.addAsync('Famous - Surface - attribute - class - allow reactive update', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
 
   var classes = new ReactiveVar(['a','b']);
 

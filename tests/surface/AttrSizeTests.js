@@ -1,5 +1,5 @@
 Tinytest.addAsync('Famous - Surface - attribute - size - allow initial value', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
   Blaze.render(Template.AttrSizeTests_1, root);
 
   Meteor.setTimeout(function () {
@@ -12,7 +12,7 @@ Tinytest.addAsync('Famous - Surface - attribute - size - allow initial value', f
 });
 
 Tinytest.addAsync('Famous - Surface - attribute - size - allow reactive update', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
 
   var size = new ReactiveVar([101, 102]);
 

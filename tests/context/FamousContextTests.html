@@ -1,0 +1,29 @@
+    <template name="FamousContextTests1">
+        <h1>Block A</h1>
+        <div style="width: 100px; height: 133px; border: 1px solid red">
+            {{#FamousContext}}
+                {{#Surface size='[undefined, undefined]' class="FamousContextTests1"}}
+                <div>Fill whole context area</div>
+                {{/Surface}}
+            {{/FamousContext}}
+        </div>
+        <p>Lorem impsum</p>
+    </template>
+
+<template name="FamousContextTests2">
+    <div style="width: 50px; height: 50px; border: 1px solid red">
+        {{#FamousContext}}
+            {{#Surface size='[undefined, undefined]' class="FamousContextTests2_A"}}
+            <div>A</div>
+            {{/Surface}}
+        {{/FamousContext}}
+    </div>
+
+    <div style="width: 66px; height: 66px; border: 1px solid red">
+    {{#FamousContext}}
+        {{#Surface size='[undefined, undefined]' class="FamousContextTests2_B"}}
+        <div>B</div>
+        {{/Surface}}
+    {{/FamousContext}}
+    </div>
+</template>
