@@ -1,17 +1,18 @@
-/*
-Tinytest.addAsync('Famous - Surface - attribute - class - allow initial value', function (test, complete) {
+Tinytest.addAsync('Famous - Surface - attribute - class - static text value', function (test, complete) {
   var root = createTestDIV([200, 200]);
+
+  Template.AttrClassTests_1.rendered = function() {
+    window.requestAnimationFrame(function() {
+      test.length($(root).find('.abc'), 1);
+      test.length($(root).find('.def'), 1);
+      complete();
+    });
+  };
+
   Blaze.render(Template.AttrClassTests_1, root);
-
-  Meteor.setTimeout(function () {
-    test.length($(root).find('.abc'), 1);
-    test.length($(root).find('.def'), 1);
-    complete();
-  }, 50);
 });
-*/
 
-Tinytest.addAsync('Famous - Surface - attribute - class - allow reactive update', function (test, complete) {
+Tinytest.addAsync('Famous - Surface - attribute - class - reactive helper', function (test, complete) {
   var root = createTestDIV([200, 200]);
 
   var classes = new ReactiveVar(['a','b']);
@@ -22,20 +23,24 @@ Tinytest.addAsync('Famous - Surface - attribute - class - allow reactive update'
     }
   });
 
-  Blaze.render(Template.AttrClassTests_2, root);
-
-  Meteor.setTimeout(function () {
-    test.length($(root).find('.a'), 1);
-    test.length($(root).find('.b'), 1);
-
-    classes.set(['a','c']);
-    Tracker.flush();
-
-    Meteor.setTimeout(function () {
+  Template.AttrClassTests_2.rendered = function() {
+    window.requestAnimationFrame(function() {
+      // Test initial value
       test.length($(root).find('.a'), 1);
-      test.length($(root).find('.c'), 1);
+      test.length($(root).find('.b'), 1);
 
-      complete();
-    }, 50);
-  }, 50);
+      classes.set(['a','c']);
+      Tracker.flush();
+
+      // Test reactive change
+      window.requestAnimationFrame(function() {
+        test.length($(root).find('.a'), 1);
+        test.length($(root).find('.c'), 1);
+
+        complete();
+      });
+    });
+  };
+
+  Blaze.render(Template.AttrClassTests_2, root);
 });

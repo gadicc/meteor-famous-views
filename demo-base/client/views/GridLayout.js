@@ -18,6 +18,7 @@ Template.views_GridLayout.items = function() {
 
 var queue = [];
 Template.gridItem.rendered = function() {
+	console.log(this.$("*"));
 	var modifier = FView.from(this).modifier;
 
 	// not sure about this :>

@@ -1,17 +1,20 @@
-Tinytest.addAsync('Famous - Surface - attribute - size - allow initial value', function (test, complete) {
+Tinytest.addAsync('Famous - Surface - attribute - size - static text value', function (test, complete) {
   var root = createTestDIV([200, 200]);
+
+  Template.AttrSizeTests_1.rendered = function() {
+    window.requestAnimationFrame(function() {
+      var target = $(root).find('.surface');
+
+      test.equal(target.width(), 101);
+      test.equal(target.height(), 102);
+      complete();
+    });
+  };
+
   Blaze.render(Template.AttrSizeTests_1, root);
-
-  Meteor.setTimeout(function () {
-    var target = $(root).find('.surface');
-
-    test.equal(target.width(), 101);
-    test.equal(target.height(), 102);
-    complete();
-  }, 50);
 });
 
-Tinytest.addAsync('Famous - Surface - attribute - size - allow reactive update', function (test, complete) {
+Tinytest.addAsync('Famous - Surface - attribute - size - reactive update', function (test, complete) {
   var root = createTestDIV([200, 200]);
 
   var size = new ReactiveVar([101, 102]);
@@ -22,24 +25,25 @@ Tinytest.addAsync('Famous - Surface - attribute - size - allow reactive update',
     }
   });
 
-  Blaze.render(Template.AttrSizeTests_2, root);
-
-  Meteor.setTimeout(function () {
-    var target = $(root).find('.surface');
-
-    test.equal(target.width(), 101);
-    test.equal(target.height(), 102);
-
-    size.set([87, 86]);
-    Tracker.flush();
-
-    Meteor.setTimeout(function () {
+  Template.AttrSizeTests_2.rendered = function() {
+    window.requestAnimationFrame(function() {
       var target = $(root).find('.surface');
 
-      test.equal(target.width(), 87);
-      test.equal(target.height(), 86);
+      test.equal(target.width(), 101);
+      test.equal(target.height(), 102);
 
-      complete();
-    }, 50);
-  }, 50);
+      size.set([87, 86]);
+      Tracker.flush();
+
+      window.requestAnimationFrame(function() {
+        var target = $(root).find('.surface');
+
+        test.equal(target.width(), 87);
+        test.equal(target.height(), 86);
+        complete();
+      });
+    });
+  };
+
+  Blaze.render(Template.AttrSizeTests_2, root);
 });
