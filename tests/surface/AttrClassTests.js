@@ -12,8 +12,8 @@ Tinytest.addAsync('Famous - Surface - attribute - class - static text value', fu
   Blaze.render(Template.AttrClassTests_1, root);
 });
 
-Tinytest.addAsync('Famous - Surface - attribute - class - reactive helper', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+Tinytest.addAsync('Famous - Surface - attribute - class - reactive helper + updates', function (test, complete) {
+  var root = createTestDIV([200, 200], test);
 
   var classes = new ReactiveVar(['a','b']);
 

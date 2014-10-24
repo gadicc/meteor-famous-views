@@ -1,5 +1,5 @@
 Tinytest.addAsync('Famous - Surface - attribute - properties - static text value', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
 
   Template.AttrPropertiesTests_1.rendered = function() {
     window.requestAnimationFrame(function() {
@@ -12,8 +12,8 @@ Tinytest.addAsync('Famous - Surface - attribute - properties - static text value
   Blaze.render(Template.AttrPropertiesTests_1, root);
 });
 
-Tinytest.addAsync('Famous - Surface - attribute - properties - reactive helper', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+Tinytest.addAsync('Famous - Surface - attribute - properties - reactive helper + updates', function (test, complete) {
+  var root = createTestDIV([200, 200], test);
 
   var props = new ReactiveVar({
     backgroundColor : 'rgb(44, 55, 66)'

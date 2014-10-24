@@ -1,5 +1,5 @@
 Tinytest.addAsync('Famous - Surface - attribute - size - static text value', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
 
   Template.AttrSizeTests_1.rendered = function() {
     window.requestAnimationFrame(function() {
@@ -14,8 +14,8 @@ Tinytest.addAsync('Famous - Surface - attribute - size - static text value', fun
   Blaze.render(Template.AttrSizeTests_1, root);
 });
 
-Tinytest.addAsync('Famous - Surface - attribute - size - reactive update', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+Tinytest.addAsync('Famous - Surface - attribute - size - reactive helper update + updates', function (test, complete) {
+  var root = createTestDIV([200, 200], test);
 
   var size = new ReactiveVar([101, 102]);
 

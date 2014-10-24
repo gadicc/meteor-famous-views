@@ -18,7 +18,6 @@ Package.on_test(function(api) {
   api.use('tinytest', 'client');
   api.use('less', 'client');
   api.use('reactive-var', 'client');
-  api.use('mjn:famous-views-utils', 'client');
 
   api.add_files([
     'tests/TestStyles.less',
@@ -35,6 +34,9 @@ Package.on_test(function(api) {
 
     'tests/surface/AttrPropertiesTests.html',
     'tests/surface/AttrPropertiesTests.js',
+
+    'tests/context/FamousContextTests.html',
+    'tests/context/FamousContextTests.js'
   ], 'client');
 });
 
@@ -99,7 +101,10 @@ function configurePackage(api, testing) {
       'lib/views/HeaderFooterLayout.js',
       'lib/views/RenderController.js',
       'lib/views/Scrollview.js',
-      'lib/views/Surface.js'
+      'lib/views/Surface.js',
+
+      'lib/context/FamousContext.html',
+      'lib/context/FamousContext.js'
     ],
     'client'
   );
