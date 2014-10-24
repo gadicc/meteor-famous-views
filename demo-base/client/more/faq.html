@@ -9,7 +9,7 @@
 
     		<li>
     			<div class="q">
-    				Views work on desktop but look weird on mobile or emulation
+    				Views work on desktop but don't (or look weird) on mobile or emulation
     			</div>
     			<div class="a">
     				Disable user scaling by putting the following in your
@@ -18,6 +18,32 @@
   					</code>
   				</div>
   			</li>
+
+        <li>
+          <div class="q">
+            DOM not updated / <code>$(selector)</code> not working (inside <code>rendered()</code> callback)
+          </div>
+          <div class="a">
+            It would be great but very inefficient for us to emulate Meteor's
+            behaviour exactly.  Note that as per the
+            <a href="http://famo.us/guides/pitfalls">Famo.us Pitfalls</a>
+            guide, pinging the DOM <i>is really bad practice</i> and can cause
+            performance problems in your app.  Two easy workarounds:
+
+            <ol>
+              <li><b>Use <code>this.$()</code> instead</b> - since although your
+              template is not in the DOM yet, it is part of the DOM range in
+              your template instance.  <i>This is much faster too</i>.</li>
+
+              <li><b>Wrap your code in
+              <code>window.requestAnimationFrame()</code></b>,
+              if you need your DIV to be "fully rendered", i.e., not just on the
+              DOM, but updated by Famous too.  This is because Famo.us buffers
+              changes for performance, and this way you'll ensure your code runs
+              after the commit.  <i>Avoid if possible.</i></li>
+            </ol>
+          </div>
+        </li>
 
   		</ol>
 
