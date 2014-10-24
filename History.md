@@ -4,6 +4,16 @@
 
 ## vNEXT
 
+## v0.1.17
+
+* Fix Surface classes="multiple classes" regression
+
+* Introduce {{#famousContext}}, full credits to #mcbain!
+  See https://github.com/gadicc/meteor-famous-views/issues/74 for more
+  info.
+
+* Test improvements, continous integration testing via Travis
+
 ## v0.1.16
 
 * Merge PR #103 from @mcbain, some very welcome tiny tests to help

@@ -4,7 +4,7 @@ var path = Npm.require('path');
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.16",
+  version: "0.1.17",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
@@ -86,6 +86,7 @@ function configurePackage(api, testing) {
       'lib/famous.js',
       'lib/famousEach.js',
       'lib/famousIf.js',
+      'lib/famousContext.js',
       'lib/modifiers.js',
       'lib/views.js'
     ],
@@ -102,9 +103,6 @@ function configurePackage(api, testing) {
       'lib/views/RenderController.js',
       'lib/views/Scrollview.js',
       'lib/views/Surface.js',
-
-      'lib/context/FamousContext.html',
-      'lib/context/FamousContext.js'
     ],
     'client'
   );
