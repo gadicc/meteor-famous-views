@@ -1,4 +1,4 @@
-## famous-views (for Meteor)
+## famous-views (for Meteor) [![Build Status](https://api.travis-ci.org/gadicc/meteor-famous-views.svg?branch=master)](https://travis-ci.org/gadicc/meteor-famous-views)
 
 *Doing Famous the Meteor Way*
 
