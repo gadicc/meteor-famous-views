@@ -1,15 +1,10 @@
 {
-	"famous": {
-		"git": "https://github.com/raix/famous.git",
-		"branch": "famono"
-	},
-	"famous.polyfills": {
-		"git": "https://github.com/Famous/polyfills.git"
-	},
-	"library": {
-		"git": "https://github.com/raix/library.git"
-	},
-	"famous-polyfills": {
-		"alias": "famous.polyfills"
-	}
+    "famous": {
+        "git": "https://github.com/Famous/famous.git",
+        "branch": "v0.3.0",
+        "root": "src"
+    },
+    "famous.polyfills": {
+        "git": "https://github.com/Famous/polyfills.git"
+    }
 }

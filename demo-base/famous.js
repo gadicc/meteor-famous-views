@@ -74,7 +74,7 @@ if (Meteor.isClient) {
 
   // famous globals for APP code
   Transform=null;
-  famousCmp.ready(function(require) {
+  FView.ready(function(require) {
     Transform        = famous.core.Transform;
   });
 

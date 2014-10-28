@@ -4,6 +4,10 @@
 
 ## vNEXT
 
+## v0.1.18
+
+* package.js cleanup, deps->tracker, famono tested working again
+
 ## v0.1.17
 
 * Fix Surface classes="multiple classes" regression
