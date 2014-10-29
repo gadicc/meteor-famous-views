@@ -21,17 +21,6 @@ function configurePackage(api, testing) {
   // Community Packages
   api.use("jag:pince@0.0.5", 'client');
 
-  // Famous Providers
-  api.use('mjn:famous@0.3.0_5', 'client', { weak: true });
-  api.use('raix:famono@0.9.14', { weak: true });
-
-  /*
-   * This lets us access Famono stuff before Meteor.startup(), but also
-   * results in all the deps being sent down the wire twice.  Need to work
-   * something out with Famono.  Note, only works without { weak: true }
-   */
-  // api.add_files('lib/smart.require', 'client');
-
   api.add_files(
     [
       'lib/famous-views.js',
@@ -66,6 +55,17 @@ function configurePackage(api, testing) {
 
 Package.on_use(function (api) {
   configurePackage(api);
+
+  // Famous Providers
+  api.use('mjn:famous@0.3.0_5', 'client', { weak: true });
+  api.use('raix:famono@0.9.14', { weak: true });
+
+  /*
+   * This lets us access Famono stuff before Meteor.startup(), but also
+   * results in all the deps being sent down the wire twice.  Need to work
+   * something out with Famono.  Note, only works without { weak: true }
+   */
+  // api.add_files('lib/smart.require', 'client');
 });
 
 Package.on_test(function(api) {
@@ -74,6 +74,9 @@ Package.on_test(function(api) {
   api.use('tinytest', 'client');
   api.use('less', 'client');
   api.use('reactive-var', 'client');
+
+  // Strong dependency; force testing platform to install this
+  api.use('mjn:famous@0.3.0_5', 'client');
 
   api.add_files([
     'tests/TestStyles.less',
