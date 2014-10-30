@@ -42,6 +42,17 @@
                     I am a full size Surface
                 {{dstache}}/Surface}}
             &lt;/template>
+        {{else}}
+            {{#if currentLang "jade"}}
+                head
+                  //- -- this is critical for mobile and emulation to look and work -properly --
+                  meta(name="viewport", content="width=device-width, maximum-scale=1, user-scalable=no")            
+                body
+                  //- -- leave this empty or leave it out, dont add famousInit here! --
+                template(name="famousInit")
+                  +Surface size="[undefined,undefined]"
+                    | I am a full size Surface            
+            {{/if}}
     	{{/snippet}}
 
         <p>The <code>famousInit</code> template is added to your document
