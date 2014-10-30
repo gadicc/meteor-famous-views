@@ -1,0 +1,16 @@
+<template name="issue110">
+{{!-- this the View example from examples/layouts, using Modifier instead --}}
+{{!-- and add reactive getSize to test --}}
+
+{{#Modifier size=getSize}}
+	{{#Surface size="[undefined,undefined]" class="green-bg"}}
+		background
+	{{/Surface}}
+
+	{{!-- The align="[0.5,0.5]" is required since Famous 0.3 --}}
+	{{#Surface size="[50,50]" class='red-bg'
+			origin="[0.5,0.5]" align="[0.5,0.5]" translate='[0,0,1]'}}
+		block
+	{{/Surface}}
+{{/Modifier}}
+</template>
