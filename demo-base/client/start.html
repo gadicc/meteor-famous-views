@@ -16,6 +16,10 @@
             # for Meteor >= 0.9.3 (!!)
             $ meteor add mjn:famous OR raix:famono  # raix:famono since 0.9.14
             $ meteor add gadicohen:famous-views     # ^__ released 2014-10-28
+            # Optional, if you want to use Jade
+            $ meteor add mquandalle:jade
+            # Optional, if you want to use CoffeeScript
+            $ meteor add coffeescript
     	{{/prism}}
 
     	<p>
@@ -46,11 +50,11 @@
             {{#if currentLang "jade"}}
                 head
                   //- -- this is critical for mobile and emulation to look and work -properly --
-                  meta(name="viewport", content="width=device-width, maximum-scale=1, user-scalable=no")            
+                  meta(name='viewport', content='width=device-width, maximum-scale=1, user-scalable=no')
                 body
                   //- -- leave this empty or leave it out, dont add famousInit here! --
-                template(name="famousInit")
-                  +Surface size="[undefined,undefined]"
+                template(name='famousInit')
+                  +Surface size='[undefined,undefined]'
                     | I am a full size Surface            
             {{/if}}
     	{{/snippet}}
