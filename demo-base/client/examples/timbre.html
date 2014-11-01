@@ -16,7 +16,8 @@
 		{{#ContainerSurface size="[450,300]" overflow="hidden" class="timbre-cs special"}}
 			{{> timbre_menu}}
 			{{>Surface template="timbre_main" class="timbre-main"
-				size="[undefined,undefined]" translate=menuTranslate}}
+				size="[undefined,undefined]" modifier="StateModifier"
+				translate=menuTranslate}}
 		{{/ContainerSurface}}
 
 		{{>Surface size="[undefined,auto]" template="timbreSource"}}
@@ -35,10 +36,11 @@
 
 <!-- Here we use a regular Meteor template to create a reusable "strip" -->
 <template name="strip">
-	{{#View size="[undefined,50]"}}
+	{{#StateModifier size="[undefined,50]"}}
 
 		{{!-- Background and text --}}
-		{{#Surface class="timbre-strip" size="[undefined,50]" rotateZ="-10" skewZ="-10"}}
+		{{#Surface class="timbre-strip" size="[undefined,50]"
+				modifier="StateModifier" rotateZ="-10" skewZ="-10"}}
 			{{text}}
 		{{/Surface}}
 
@@ -47,7 +49,7 @@
 			<i class="fa fa-{{icon}}"></i>
 		{{/Surface}}
 
-	{{/View}}
+	{{/StateModifier}}
 </template>
 
 <template name="timbre_main">
@@ -72,7 +74,8 @@
 			{{dstache}}#ContainerSurface size="[450,300]" overflow="hidden" class="timbre-cs"}}
 				{{dstache}}> timbre_menu}}
 				{{dstache}}>Surface template="timbre_main" class="timbre-main"
-					size="[undefined,undefined]" translate=menuTranslate}}
+					size="[undefined,undefined]" modifier="StateModifier"
+					translate=menuTranslate}}
 			{{dstache}}/ContainerSurface}}
 		&lt;/template>
 
@@ -87,10 +90,11 @@
 
 		&lt;!-- Here we use a regular Meteor template to create a reusable "strip" -->
 		&lt;template name="strip">
-			{{dstache}}#View size="[undefined,50]"}}
+			{{dstache}}#StateModifier size="[undefined,50]"}}
 
 				{{dstache}}!-- Background and text --}}
-				{{dstache}}#Surface class="timbre-strip" size="[undefined,50]" rotateZ="-10" skewZ="-10"}}
+				{{dstache}}#Surface class="timbre-strip" size="[undefined,50]"
+						modifier="StateModifier" rotateZ="-10" skewZ="-10"}}
 					{{dstache}}text}}
 				{{dstache}}/Surface}}
 
@@ -99,7 +103,7 @@
 					<i class="fa fa-{{dstache}}icon}}"></i>
 				{{dstache}}/Surface}}
 
-			{{dstache}}/View}}
+			{{dstache}}/StateModifier}}
 		&lt;/template>
 	{{/snippet}}
 

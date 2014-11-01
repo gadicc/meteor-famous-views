@@ -22,7 +22,7 @@
 			{{/ContainerSurface}}
 
 			{{#famousEach items}}
-				{{>ContainerSurface template='gridItem'
+				{{>ContainerSurface template='gridItem' modifier="StateModifier"
 					size='[undefined,undefined]'}}
 			{{/famousEach}}
 
@@ -48,7 +48,8 @@
 		&lt;template name="views_GridLayout">
 			{{dstache}}#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]"}}
 				{{dstache}}#famousEach items}}
-					{{dstache}}>View template='gridItem' size='[undefined,undefined]'}}
+					{{dstache}}>View template='gridItem' modifier="StateModifier"
+					  size='[undefined,undefined]'}}
 				{{dstache}}/famousEach}}
 			{{dstache}}/GridLayout}}
 		&lt;/template>

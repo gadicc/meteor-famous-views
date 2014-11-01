@@ -14,19 +14,16 @@
 
 <!-- we want each yield to be on a different surface -->
 <template name="layout">
-  {{#HeaderFooterLayout size="[undefined,undefined]"
-      headerSize="50" footerSize="0"}}
+  {{#HeaderFooterLayout headerSize="50" footerSize="0"}}
 
     {{#Surface target="header" 
         size="[undefined,undefined]" translate="[0,0,100]"}}
       <div id="header">{{> yield region="header"}}</div>
     {{/Surface}}
 
-    {{#View target="content" size="[undefined,undefined]"}}
-      {{#RenderController size="[undefined,undefined]" transition=getTransition}}
+    {{#RenderController target="content" transition=getTransition}}
         {{>yield}}
-      {{/RenderController}}
-    {{/View}}
+    {{/RenderController}}
 
   {{/HeaderFooterLayout}}
 </template>

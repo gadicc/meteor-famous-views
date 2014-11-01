@@ -18,13 +18,13 @@
 				min="30" max="700" step="1"}}
 		{{/Surface}}
 
-		{{#View size=gridSize translate="[20,0]"}}
+		{{#StateModifier size=gridSize translate="[20,0]"}}
 			{{#GridLayout dimensions=gridDimensions}}
 				{{#Surface size="[undefined,undefined]" class="red-bg"}}{{/Surface}}
 				{{#Surface size="[undefined,undefined]" class="green-bg"}}{{/Surface}}
 				{{#Surface size="[undefined,undefined]" class="blue-bg"}}{{/Surface}}
 			{{/GridLayout}}
-		{{/View}}
+		{{/StateModifier}}
 
 		{{>Surface template="reactiveGridLayoutSource"
 			class="leftPad" size="[undefined,auto]"}}
@@ -43,7 +43,7 @@
 				size="[undefined,230]" translate="[20,0,0]"}}
 			{{>Surface template="reactivityModState" size="[400,undefined]"}}
 			{{#View size="[400,undefined]"}}
-				{{>Surface id="block" template="reactiveBlock"
+				{{>Surface id="block" template="reactiveBlock" modifier="StateModifier"
 					origin="[.5,.5]" align="[.5,.5]" class="red-bg"
 					size=getSize skewX=sess.skewX skewY=sess.skewY
 					rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateZ}}
@@ -60,13 +60,13 @@
 	<p><b>Template:</b></p>
 
 	{{#snippet lang="spacebars"}}
-		{{dstache}}#View size=gridSize}}
+		{{dstache}}#StateModifier size=gridSize}}
 			{{dstache}}#GridLayout dimensions=gridDimensions}}
 				{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}{{dstache}}/Surface}}
 				{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}{{dstache}}/Surface}}
 				{{dstache}}#Surface size="[undefined,undefined]" class="blue-bg"}}{{dstache}}/Surface}}
 			{{dstache}}/GridLayout}}
-		{{dstache}}/View}}
+		{{dstache}}/StateModifier}}
 	{{/snippet}}
 
 	<p>Of course, you could as easily use a <code>{{dstache}}#famousEach}}</code>,
@@ -134,7 +134,7 @@
 	<b>Template:</b>
 
 	{{#snippet lang="spacebars"}}
-		{{dstache}}>Surface id="block" template="reactiveBlock"
+		{{dstache}}>Surface id="block" template="reactiveBlock" modifier="StateModifier"
 			origin="[.5,.5]" class="red-bg"
 			size=getSize skewX=sess.skewX skewY=sess.skewY
 			rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateY}}
@@ -165,7 +165,7 @@
 	anywhere else yet, but you get the idea.  So far this is only used for
 	reactive modifier updates.</p>
 
-	<p><code>ModifierState</code> reactive modifiers can also pass back the
+	<p><code>StateModifier</code> reactive modifiers can also pass back the
 	desired transition, halt, and done callbacks to use, on an individual basis
 	and without relying on the defaults set above.  So, <code>getSize()</code>
 	above could also be written as:</p>

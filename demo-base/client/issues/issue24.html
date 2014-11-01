@@ -4,22 +4,22 @@
             <h1>Hello swiping world!</h1>
         {{/Surface}}
         {{#Scrollview size="[undefined, undefined]"}}
-            {{#Surface size="[undefined,50]" classes="centered,white-bg"}}
+            {{#Surface size="[undefined,50]" class="centered,white-bg"}}
                 <div class="btn-add ui button">insert</div>
             {{/Surface}}
 
-            {{#Surface size="[undefined,50]" classes="white-bg"}}
+            {{#Surface size="[undefined,50]" class="white-bg"}}
                 <div class="ui horizontal divider">BEGIN</div>
             {{/Surface}}
 
             {{#famousEach items}}
-                {{>Surface template="listItem" size="[undefined,50]" classes='centered,red-bg'}}
+                {{>Surface template="listItem" size="[undefined,50]" class='centered,red-bg'}}
             {{/famousEach}}
 
-            {{#Surface size="[undefined,75]" classes="white-bg"}}
+            {{#Surface size="[undefined,75]" class="white-bg"}}
                 <div class="ui horizontal divider">END</div>
             {{/Surface}}
-            {{#Surface size="[undefined,50]" classes="centered,white-bg"}}
+            {{#Surface size="[undefined,50]" class="centered white-bg"}}
                 <div class="btn-disconnect secondary ui button">{{dangerText}}</div>
             {{/Surface}}
         {{/Scrollview}}

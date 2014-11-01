@@ -10,7 +10,8 @@
     {{/Surface}}
  
     {{#famousEach myVariables}}
-      {{>Surface template="issue14_detailTemplate" size="[undefined, 40]"}}
+      {{>Surface template="issue14_detailTemplate"
+        modifier="StateModifier" size="[undefined, 40]"}}
     {{/famousEach}}
  
     {{#Surface size="[undefined,50]"}}

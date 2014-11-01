@@ -4,6 +4,22 @@
 
 ## vNEXT
 
+* Support for {{#Modifier}}, etc.
+* Internally, FView.views and FView.modifiers now live in
+  FView._registerables, with { type: "view", constructor: func }, etc.
+
+* BREAKING.  Default to adding `modifier="Modifier"` on transform, translate,
+  align, etc.  Specify modifier=`StateModifier` explicitly if you want reactivity
+
+  It seems we used to inadvertantly adding StateModifier to anything
+  specifying `size=`.  So if some of your old code break, maybe it's because
+  you need to explicitly specify `modifier="StateModifier"` now.  (We now
+  only do this for things that can't have their own size, e.g.
+  famous.core.View).
+
+  See also examples/layouts on the site, some of our recommendations have
+  changed.  (TODO)
+
 ## v0.1.18
 
 * package.js cleanup, deps->tracker, famono tested working again
