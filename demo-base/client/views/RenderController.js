@@ -8,7 +8,13 @@ Router.map(function() {
   });
 });
 
+Session.setDefault('currentTemplate', 'rc_surface1');
+Session.setDefault('currentTransition', 'opacity');
+
 Template.views_RenderController.helpers({
+	currentTemplate: function() {
+		return Session.get('currentTemplate');
+	},
 	'showTemplate': function() {
 		return Template[this.name];
 	},
@@ -16,11 +22,6 @@ Template.views_RenderController.helpers({
 		return Session.get('currentTransition');
 	}
 });
-
-Session.setDefault('currentTemplate', 'rc_surface1');
-Template.views_RenderController.currentTemplate = function() {
-	return Session.get('currentTemplate');
-}
 
 Template.rc_buttons.helpers({
 	'buttons': ['rc_surface1', 'rc_surface2', 'rc_surface3'],
@@ -34,7 +35,6 @@ Template.rc_buttons.events({
 	}
 });
 
-Session.setDefault('currentTransition', 'opacity');
 Template.rc_transitions.helpers({
 	'transitions': _.keys(FView.transitions),
 	isSet: function() {

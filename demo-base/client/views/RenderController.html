@@ -1,6 +1,6 @@
 <template name="views_RenderController">
 	{{#Scrollview size="[undefined,undefined]"}}
-		{{#View size="[undefined,980]"}}
+		{{#Modifier size="[undefined,1000]"}}
 			{{#Surface size="[undefined,undefined]" class="padLeft"}}
 				<h1>RenderController demo</h1>
 
@@ -62,7 +62,7 @@
 				{{>showTemplate name=currentTemplate}}
 			{{/RenderController}}
 
-		{{/View}}
+		{{/Modifier}}
 	{{/Scrollview}}
 </template>
 
@@ -93,7 +93,7 @@
 	<p>
 		<label>
 			<input type="checkbox" checked="{{checked}}">
-			Use transition for page changes too
+			Use transition for page changes on the rest of the site too
 		</label>
 	</p>
 </template>

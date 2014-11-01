@@ -7,9 +7,11 @@ Router.map(function() {
 Session.set('menuOpen', false);
 
 // Translation for "main" page, depending on whether menu is open or not
-Template.timbre.menuTranslate = function() {
-  return Session.get('menuOpen') ? [300,0,20] : [0,0,20];
-}
+Template.timbre.helpers({
+  menuTranslate: function() {
+    return Session.get('menuOpen') ? [300,0,20] : [0,0,20];
+  }
+});
 
 // Set the transition to be used when translate= changes reactively
 Template.timbre_main.rendered = function() {

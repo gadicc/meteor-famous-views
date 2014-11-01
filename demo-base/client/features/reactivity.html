@@ -27,7 +27,7 @@
 		{{/StateModifier}}
 
 		{{>Surface template="reactiveGridLayoutSource"
-			class="leftPad" size="[undefined,auto]"}}
+			class="leftPad" size="[undefined,true]"}}
 
 		{{#Surface size="[undefined,140]" class="leftPad"}}
 			<h2>StateModifier</h2>
@@ -51,7 +51,7 @@
 		{{/SequentialLayout}}
 
 		{{>Surface template="reactivityModStateSource"
-			size="[undefined,auto]" class="leftPad"}}
+			size="[undefined,true]" class="leftPad"}}
 	{{/Scrollview}}
 </template>
 
@@ -76,12 +76,14 @@
 
 	{{#snippet lang="javascript"}}
 		Session.setDefault('width', 350);
-		Template.reactivity.gridSize = function() {
-			return [ Session.get('width'), 100 ];
-		}
-		Template.reactivity.gridDimensions = function() {
-			return [ Math.ceil(Session.get('width') / 234), 1 ];
-		}
+		Template.reactivity.helpers({
+			gridSize: function() {
+				return [ Session.get('width'), 100 ];
+			},
+			gridDimensions: function() {
+				return [ Math.ceil(Session.get('width') / 234), 1 ];
+			}
+		});
 	{{/snippet}}	
 </template>
 
@@ -144,9 +146,11 @@
 
 	{{#snippet lang="javascript"}}
 		// Reactive getSize() helper
-		Template.reactivity.getSize = function() {
-			return [ Session.get('sizeX'), Session.get('sizeY') ];
-		}
+		Template.reactivity.helpers({
+			getSize: function() {
+				return [ Session.get('sizeX'), Session.get('sizeY') ];
+			}
+		});
 
 		// Reactively set/unset a default modifier transition
 		Template.reactivityModState.rendered = function() {
@@ -172,16 +176,18 @@
 
 	{{#snippet lang="javascript"}}
 		// Reactive getSize() helper
-		Template.reactivity.getSize = function() {
-			return {
-				value: [ Session.get('sizeX'), Session.get('sizeY') ],
-				transition: { curve: 'easeIn', duration: 1000 },
-				halt: true,
-				done: function() {
-					console.log('getSize transform finished');
-				}
-			};
-		}
+		Template.reactivity.helpers({
+			getSize: function() {
+				return {
+					value: [ Session.get('sizeX'), Session.get('sizeY') ],
+					transition: { curve: 'easeIn', duration: 1000 },
+					halt: true,
+					done: function() {
+						console.log('getSize transform finished');
+					}
+				};
+			}
+		});
 	{{/snippet}}
 
 	<p>Note, if you're using Session variable's for reactivity, they can't

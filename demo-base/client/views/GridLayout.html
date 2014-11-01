@@ -28,7 +28,7 @@
 
 		{{/GridLayout}}
 
-		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,auto]'}}
+		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,true]'}}
 
 	{{/Scrollview}}
 </template>
@@ -66,9 +66,11 @@
 	{{/snippet}}
 
 	{{#snippet lang="javascript"}}
-		Template.views_GridLayout.items = function() {
-		  return Items.find({}, {sort: {name: 1}, limit: 8});
-		}
+		Template.views_GridLayout.helpers({
+			items: function() {
+			  return Items.find({}, {sort: {name: 1}, limit: 8});
+			}
+		});
 
 		/* Entrance animation code follows */
 		var queue = [];

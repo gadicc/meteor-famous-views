@@ -1,7 +1,7 @@
 <template name="examples_events">
 	{{#Scrollview size="[undefined,undefined]"}}
 
-		{{#Surface size="[undefined,auto]" class="padLeft"}}
+		{{#Surface size="[undefined,true]" class="padLeft"}}
 
 			<h1>Events</h1>
 
@@ -21,20 +21,20 @@
 			</p>
 		{{/Surface}}
 
-		{{#Surface size="[undefined,auto]" class="padLeft"}}
+		{{#Surface size="[undefined,true]" class="padLeft"}}
 			<h2>Three Ways to Accomplish the Same Goal</h2>
 
 			<p>Click the red square to increase the count
 			(all reactive, of course):</p>
 		{{/Surface}}
 
-		{{#View translate="[50,0]" size="[undefined,100]"}}
+		{{#Modifier translate="[50,0]" size="[undefined,100]"}}
 			{{#Surface size="[undefined,undefined]"}}{{/Surface}}
 			{{>Surface template="ev_surface_click" translate="[0,0,10]"
 				 size="[50,50]" origin="[0.5,0.5]" align="[0.1,0.5]"}}
-		{{/View}}
+		{{/Modifier}}
 
-		{{#Surface size="[undefined,auto]" class="padLeft"}}
+		{{#Surface size="[undefined,true]" class="padLeft"}}
 			<h3>Method Agnostic Preparation</h3>
 
 			<p>First, let's set up the template, reactive helper, and
@@ -50,9 +50,11 @@
 			{{/snippet}}
 
 			{{#snippet lang="javascript"}}
-				Template.ev_surface_click.clickCount = function() {
-				  return Session.get('clickCount');
-				}
+				Template.ev_surface_click.helpers({
+					clickCount: function() {
+					  return Session.get('clickCount');
+					}
+				});
 
 				function animateAndIncrement(fview) {
 				  fview.modifier.halt();
@@ -176,7 +178,7 @@
 			this purpose.</p>
 		{{/Surface}}
 
-		{{#Surface size="[undefined,auto]" class="padLeft"}}
+		{{#Surface size="[undefined,true]" class="padLeft"}}
 			<h2>Another Example</h2>
 
 			<p>Here's a small example mixing a Meteor event with a Famous action:</p>
@@ -203,17 +205,17 @@
 		{{> codeButton}}
 	{{/Surface}}
 
-	{{#RenderController id="rc" size=rcSize}}
+	{{#RenderController id="rc" modifier="StateModifier" size=rcSize}}
 		{{#if showCode}}
 			{{>Surface template='ballCode' size="[undefined,undefined]" class="padLeft"}}
 		{{else}}
-			{{#View size="[undefined,undefined]"}}
+			{{#Modifier size="[undefined,undefined]"}}
 				{{#Surface size="[undefined,undefined]"}}
 					<div class="ballBorder"></div>
 				{{/Surface}}
 				{{>Surface template='springBall' size="[100,100]"
 					translate="[50,50,90]"}}
-			{{/View}}
+			{{/Modifier}}
 		{{/if}}
 	{{/RenderController}}
 </template>

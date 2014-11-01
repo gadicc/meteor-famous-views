@@ -1,7 +1,7 @@
 <template name="examples_animate">
 	{{#Scrollview size="[undefined,undefined]"}}
 
-		{{#Surface size="[undefined,auto]" class="pagePad"}}
+		{{#Surface size="[undefined,true]" class="pagePad"}}
 			<h1>Entrance and Exit Animations</h1>
 
 			<p>This is a simple example showing how we can use the <code>rendered</code>
@@ -20,7 +20,7 @@
 			{{/famousEach}}
 		{{/SequentialLayout}}
 
-		{{#Surface size="[undefined,auto]" class="pagePad"}}
+		{{#Surface size="[undefined,true]" class="pagePad"}}
 			<br />
 			<p>This works very well for a View like SequentialLayout, which uses the
 			size of child elements for positioning... so we can grow/shrink children
@@ -34,7 +34,7 @@
 			which could accomodate such cases.</p>
 		{{/Surface}}
 
-		{{>Surface template="examples_uihoooks_source" size="[undefined,auto]"
+		{{>Surface template="examples_uihoooks_source" size="[undefined,true]"
 			class="pagePad"}}
 
 	{{/Scrollview}}

@@ -1,6 +1,6 @@
 <template name="views_Flipper">
 	{{#Scrollview size="[undefined,undefined]"}}
-		{{#Surface size="[undefined,auto]" class="pagePad"}}
+		{{#Surface size="[undefined,true]" class="pagePad"}}
 			<h1>Flipper</h1>
 			<p>Links two renderables back to back that can be flipped along the axis.
 			For this to look really good<br> we need to change the perspective a bit,
@@ -20,7 +20,7 @@
 				class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
 		{{/Flipper}}
 
-		{{#Surface size="[undefined,auto]" class="pagePad"}}
+		{{#Surface size="[undefined,true]" class="pagePad"}}
 			<br />
 			{{#snippet lang="spacebars"}}
 				{{dstache}}#Flipper size="[150,150]" translate="[100,0]"}}

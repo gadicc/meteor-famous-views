@@ -12,9 +12,11 @@ FView.ready(function(require) {
 	FView.registerView('GridLayout', famous.views.GridLayout);
 });
 
-Template.views_GridLayout.items = function() {
-  return Items.find({}, {sort: {name: 1}, limit: 8});
-}
+Template.views_GridLayout.helpers({
+	items: function() {
+	  return Items.find({}, {sort: {name: 1}, limit: 8});
+	}
+});
 
 var queue = [];
 Template.gridItem.rendered = function() {

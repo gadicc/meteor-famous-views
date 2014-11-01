@@ -20,7 +20,7 @@
 				translate=menuTranslate}}
 		{{/ContainerSurface}}
 
-		{{>Surface size="[undefined,auto]" template="timbreSource"}}
+		{{>Surface size="[undefined,true]" template="timbreSource"}}
 
 	{{/Scrollview}}
 </template>
@@ -113,9 +113,11 @@
 		Session.set('menuOpen', false);
 
 		// Translation for "main" page, depending on whether menu is open or not
-		Template.screen.menuTranslate = function() {
-		  return Session.get('menuOpen') ? [300,0,20] : [0,0,20];
-		}
+		Template.screen.helpers({
+			menuTranslate: function() {
+			  return Session.get('menuOpen') ? [300,0,20] : [0,0,20];
+			}
+		});
 
 		// Set the transition to be used when translate= changes reactively
 		Template.timbre_main.rendered = function() {

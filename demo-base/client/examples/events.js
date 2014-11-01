@@ -45,15 +45,19 @@ Template.codeButton.events({
   }
 });
 
-Template.eventsDemo.rcSize = function() {
-  return [undefined, Session.get('showCode') ? 800 : 250];
-}
+Template.eventsDemo.helpers({
+  rcSize: function() {
+    return [undefined, Session.get('showCode') ? 800 : 250];
+  }
+});
 
 /* famous events */
 
-Template.ev_surface_click.clickCount = function() {
-  return Session.get('clickCount');
-}
+Template.ev_surface_click.helpers({
+  clickCount: function() {
+    return Session.get('clickCount');
+  }
+});
 
 Session.setDefault('clickCount', 0);
 

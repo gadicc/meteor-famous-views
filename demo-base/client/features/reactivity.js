@@ -26,12 +26,17 @@ Template.nameSliderValue.events({
 /* GridView */
 
 Session.setDefault('width', 350);
-Template.reactivity.gridSize = function() {
-	return [ Session.get('width'), 100 ];
-}
-Template.reactivity.gridDimensions = function() {
-	return [ Math.ceil(Session.get('width') / 234), 1 ];
-}
+Template.reactivity.helpers({
+	getSize: function() {
+		return [ Session.get('sizeX'), Session.get('sizeY') ];
+	},
+	gridSize: function() {
+		return [ Session.get('width'), 100 ];
+	},
+	gridDimensions: function() {
+		return [ Math.ceil(Session.get('width') / 234), 1 ];
+	}
+});
 
 /* StateModifier + Session stuff used by GridView */
 
@@ -40,7 +45,7 @@ Session.setDefault('sizeX', 100); Session.setDefault('sizeY', 100);
 Session.setDefault('rotateX', 0); Session.setDefault('rotateY', 0);
 Session.setDefault('rotateZ', 0);
 
-Template.reactivity.sess = Template.reactivityModState.sess = {};
+var sess = {};
 var props = [
 	'skewX', 'sizeX', 'skewY', 'sizeY',
 	'rotateX', 'rotateY', 'rotateZ',
@@ -48,12 +53,10 @@ var props = [
 	'width' /* gridLayout */
 ];
 _.each(props, function(prop) {
-	Template.reactivity.sess[prop] = function() { return Session.get(prop); }
+	sess[prop] = function() { return Session.get(prop); }
 });
-
-Template.reactivity.getSize = function() {
-	return [ Session.get('sizeX'), Session.get('sizeY') ];
-}
+Template.reactivity.helpers({sess:sess});
+Template.reactivityModState.helpers({sess:sess});
 
 Template.reactivityModState.events({
 	'change [name=render]': function(event) {
@@ -65,9 +68,12 @@ Template.reactivityModState.events({
 });
 
 Session.setDefault('modRender', 'transition');
-Template.reactivityModState.renderType = function(value) {
-	return Session.get('modRender') == value;
-}
+Template.reactivityModState.helpers({
+	renderType: function(value) {
+		return Session.get('modRender') == value;
+	}
+});
+
 Template.reactivityModState.rendered = function() {
 	this.autorun(function() {
 		if (Session.get('modRender') == 'instant') {

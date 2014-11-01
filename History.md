@@ -9,16 +9,25 @@
   FView._registerables, with { type: "view", constructor: func }, etc.
 
 * BREAKING.  Default to adding `modifier="Modifier"` on transform, translate,
-  align, etc.  Specify modifier=`StateModifier` explicitly if you want reactivity
+  align, etc.  Specify modifier=`StateModifier` explicitly if you want
+  reactivity.
 
-  It seems we used to inadvertantly adding StateModifier to anything
+  It seems we used to inadvertantly add StateModifier to anything
   specifying `size=`.  So if some of your old code break, maybe it's because
-  you need to explicitly specify `modifier="StateModifier"` now.  (We now
+  you now need to explicitly specify `modifier="StateModifier"`.  (We now
   only do this for things that can't have their own size, e.g.
   famous.core.View).
 
-  See also examples/layouts on the site, some of our recommendations have
-  changed.  (TODO)
+  See also `examples/layouts` on the site, some of our recommendations have
+  changed.  Particularly, for position multiple Surfaces in the same area,
+  use `{{#Modifier}}` instead of `{{#View}}`.
+
+* `size="[undefined,true]" (introduced in Famo.us 0.3.0) now works properly
+  in fviews.  As such, we have deprecated `size="[undefined,auto]"`.  You
+  can still use it for now, but you'll get a warning until you change it.
+  All instances of `auto` have been removed from site/demo code (and for
+  the same bother, we now correctly setup `Template.x.helpers()` as required
+  by Meteor 0.9.4+).
 
 ## v0.1.18
 
