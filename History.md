@@ -1,8 +1,6 @@
-## SOON
-
-* auto check for final size and check for screen resize event
-
 ## vNEXT
+
+## v0.1.19
 
 * Support for {{#Modifier}}, etc.
 * Internally, FView.views and FView.modifiers now live in
