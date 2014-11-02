@@ -28,21 +28,10 @@
 
 .full { width: 100%; height: 100%; }
 
-.red-bg {
-	background: red;
-}
-
-.yellow-bg {
-	background: yellow;
-}
-
-.green-bg {
-	background: green;
-}
-
-.blue-bg {
-	background: blue;
-}
+.red-bg {	background: red; }
+.yellow-bg { background: yellow; }
+.green-bg { background: green; }
+.blue-bg { 	background: blue; }
 
 .margin10 {
 	margin: 0 10px 0 10px;
