@@ -1,5 +1,5 @@
 <template name="layouts">
-	{{#Scrollview size="[undefined,undefined]"}}
+	{{#Scrollview}}
 
 		{{#Surface size="[undefined,60]" class="padLeft"}}
 			<h1>Layout Examples</h1>
@@ -17,16 +17,20 @@
 				<li><code>true</code> - auto size (since Famo.us 0.3.0)</li>
 			</ul>
 
-			<p>Not specifying the size is identical to
+			<p>Not specifying the size is (usually) identical to
 			<code>size="[undefined,unedfined]"</code>,
-			i.e. we will inherit our parent's size and fill the container boundaries.
-			Commonly in a Scrollview you might want <code>size="[undefined,true]"</code>
-			to span the full width and use auto height.
+			i.e. we will inherit our parent's size and fill the container boundaries;
+			<i>provided the View supports a size argument</i> (not all Views do).
+			In this case, simply put <code>size="[undefined,undefined]"</code> and we'll
+			automaticaly prepend a Modifier with that size for you.</p>
 
+			<p>Commonly in a Scrollview's children you might want
+			<code>size="[undefined,true]"</code>
+			to span the full width and use auto height.
 			Note: we previously provided a proprietary
 			<code>size="[undefined,auto]"</code> due
 			to problems with "true" sized Surfaces inside a sequence (Scrollview,
-			SequentialLayout, etc).  This was addressed in Famo.us 0.3.0 and you
+			SequentialLayout, etc); this was addressed in Famo.us 0.3.0 and you
 			should no longer use this feature.</p>
 		{{/Surface}}
 
@@ -69,9 +73,9 @@
 		{{#Surface size="[undefined,true]" class="padLeft"}}
 			{{#snippet lang="spacebars"}}
 				{{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
-					{{dstache}}#Surface size="[undefined,undefined]" class="red-bg"}}col1{{dstache}}/Surface}}
-					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}col2{{dstache}}/Surface}}
-					{{dstache}}#Surface size="[undefined,undefined]" class="blue-bg"}}col3{{dstache}}/Surface}}
+					{{dstache}}#Surface class="red-bg"}}col1{{dstache}}/Surface}}
+					{{dstache}}#Surface class="green-bg"}}col2{{dstache}}/Surface}}
+					{{dstache}}#Surface class="blue-bg"}}col3{{dstache}}/Surface}}
 				{{dstache}}/GridLayout}}
 			{{/snippet}}
 			<br />
@@ -85,7 +89,7 @@
 		{{/Surface}}
 
 		{{#Modifier size="[undefined,160]"}}
-			{{#Surface size="[undefined,undefined]" class="green-bg"}}
+			{{#Surface class="green-bg"}}
 				background
 			{{/Surface}}
 
@@ -98,7 +102,7 @@
 		{{#Surface size="[undefined,true]" class="padLeft"}}
 			{{#snippet lang="spacebars"}}
 				{{dstache}}#Modifier size="[undefined,160]"}}
-					{{dstache}}#Surface size="[undefined,undefined]" class="green-bg"}}
+					{{dstache}}#Surface class="green-bg"}}
 						background
 					{{dstache}}/Surface}}
 

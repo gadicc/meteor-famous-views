@@ -5,9 +5,9 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 -->
 
 <template name="views_Scrollview">
-	{{#Scrollview size="[undefined,undefined]" items=items}}
+	{{#Scrollview}}
 
-		{{#Surface size="[undefined,80]" class="margin10" items=items}}
+		{{#Surface size="[undefined,true]" class="margin10"}}
 			<h3>Scrollview Demo</h3>
 			<!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
 			<p>Scroll to bottom to see source</p>
@@ -19,7 +19,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 			{{/Surface}}
 		{{/famousEach}}
 
-		{{>Surface template='Scrollview_source' size="[undefined,430]"}}
+		{{>Surface template='Scrollview_source' size="[undefined,true]"}}
 	{{/Scrollview}}
 </template>
 
@@ -28,9 +28,9 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="Scrollview_source">
 	<div class="code">
 		{{#snippet lang="spacebars"}}
-			{{dstache}}#Scrollview size="[undefined,undefined]"}}
+			{{dstache}}#Scrollview}}
 
-				{{dstache}}#Surface size="[undefined,50]"}}
+				{{dstache}}#Surface size="[undefined,true]"}}
 					Surface above the list (source code at bottom)
 				{{dstache}}/Surface}}
 
@@ -40,7 +40,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 					{{dstache}}/Surface}}
 				{{dstache}}/famousEach}}
 
-				{{dstache}}>Surface template="Scrollview_source" size="[undefined,300]"}}
+				{{dstache}}>Surface template="Scrollview_source" size="[undefined,true]"}}
 
 			{{dstache}}/Scrollview}}
 		{{/snippet}}

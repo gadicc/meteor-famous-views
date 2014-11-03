@@ -16,8 +16,7 @@
 <template name="layout">
   {{#HeaderFooterLayout headerSize="50" footerSize="0"}}
 
-    {{#Surface target="header" 
-        size="[undefined,undefined]" translate="[0,0,100]"}}
+    {{#Surface target="header" translate="[0,0,100]"}}
       <div id="header">{{> yield region="header"}}</div>
     {{/Surface}}
 
@@ -61,7 +60,7 @@
 </template>
 
 <template name="home">
-  {{#Surface size="[undefined,undefined]"}}
+  {{#Surface}}
     <div id="main" role="main">
     	<h1>famous-views (for Meteor)</h1>
 
@@ -100,7 +99,7 @@ or via the Famous CDN if you know what you're doing.
   <h3>Build the Famous Render Tree with Reactive Templates!</h3>
 
   {{#snippet lang="spacebars"}}
-    {{dstache}}#Scrollview size="[undefined,undefined]"}}
+    {{dstache}}#Scrollview}}
 
       {{dstache}}#Surface size="[200,undefined]"}}
         <h1>Scrollview Example</h1>
@@ -141,7 +140,7 @@ or via the Famous CDN if you know what you're doing.
 </template>
 
 <template name="notFound">
-  {{#Surface size="[undefined,undefined]" class="padLeft"}}
+  {{#Surface class="padLeft"}}
     <h1>Not Found</h1>
 
     <p>Explore the navbar above to find the page you're looking for.</p>

@@ -35,7 +35,7 @@
 
     	{{#snippet lang="spacebars"}}
             &lt;head>
-                {{dstache}}!-- this is critical for mobile and emulation to look and work properly --}}
+                &lt;!-- this is critical for mobile and emulation to look and work properly -->
                 &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">            
             &lt;/head>
 
@@ -44,19 +44,19 @@
             &lt;/body>
 
             &lt;template name="famousInit">
-                {{dstache}}#Surface size="[undefined,undefined]"}}
+                {{dstache}}#Surface}}
                     I am a full size Surface
                 {{dstache}}/Surface}}
             &lt;/template>
         {{else}}
             {{#if currentLang "jade"}}
                 head
-                  //- -- this is critical for mobile and emulation to look and work -properly --
+                  // this is critical for mobile and emulation to look and work properly
                   meta(name='viewport', content='width=device-width, maximum-scale=1, user-scalable=no')
                 body
                   //- -- leave this empty or leave it out, dont add famousInit here! --
                 template(name='famousInit')
-                  +Surface size='[undefined,undefined]'
+                  +Surface
                     | I am a full size Surface            
             {{/if}}
     	{{/snippet}}
@@ -74,9 +74,9 @@
     	<p>Here's a more advanced example:</p>
 
         {{#snippet lang="spacebars"}}
-        {{dstache}}#Scrollview size="[200,undefined]"}}
+        {{dstache}}#Scrollview proportions="[.5,1]"}}
 
-          {{dstache}}#Surface size="[undefined,auto]"}}
+          {{dstache}}#Surface size="[undefined,true]"}}
             <h1>Scrollview Example</h1>
           {{dstache}}/Surface}}
 
@@ -105,7 +105,10 @@
 
                 // "Fly in" animation (see examples/animations for more)
                 fview.modifier.setTransform(
-                    Transform.translate(-500,-500),
+                    Transform.translate(-500,-500)
+                );
+                fview.modifier.setTransform(
+                    Transform.translate(0,0),
                     { duration : 1000, curve: 'easeOut' }
                 );
             }

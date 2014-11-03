@@ -1,5 +1,5 @@
 <template name="timbre">
-	{{#Scrollview size="[undefined,undefined]" translate="[20,0]"}}
+	{{#Scrollview translate="[20,0]"}}
 
 		{{#Surface size="[undefined,130]"}}
 			<h1>Timbre Menu Demo</h1>
@@ -16,8 +16,7 @@
 		{{#ContainerSurface size="[450,300]" overflow="hidden" class="timbre-cs special"}}
 			{{> timbre_menu}}
 			{{>Surface template="timbre_main" class="timbre-main"
-				size="[undefined,undefined]" modifier="StateModifier"
-				translate=menuTranslate}}
+				modifier="StateModifier" translate=menuTranslate}}
 		{{/ContainerSurface}}
 
 		{{>Surface size="[undefined,true]" template="timbreSource"}}
@@ -74,8 +73,7 @@
 			{{dstache}}#ContainerSurface size="[450,300]" overflow="hidden" class="timbre-cs"}}
 				{{dstache}}> timbre_menu}}
 				{{dstache}}>Surface template="timbre_main" class="timbre-main"
-					size="[undefined,undefined]" modifier="StateModifier"
-					translate=menuTranslate}}
+					modifier="StateModifier" translate=menuTranslate}}
 			{{dstache}}/ContainerSurface}}
 		&lt;/template>
 
