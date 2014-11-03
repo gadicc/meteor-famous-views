@@ -45,6 +45,18 @@
           </div>
         </li>
 
+        <li>
+          <div class="q">
+            In Meteor Cordova IOS clicks are recorded twice
+          </div>
+          <div class="a">
+            See <a href="https://github.com/gadicc/meteor-famous-views/issues/89">issue #89</a>.
+            In brief you have probably <code>FastClick</code> installed twice
+            (once via Meteor and once via Famous) and you should remove one
+            of them.  See the issue for more info.
+          </div>
+        </li>
+
   		</ol>
 
     </div>

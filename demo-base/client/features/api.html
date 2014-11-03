@@ -1,0 +1,127 @@
+<template name="features_api">
+  {{#Surface}}
+    <div id="main" role="main">
+    	{{#markdown}}
+# API Documentation
+
+## Templates
+
+All of our template helpers can be called either as a block helper, like
+`{{dstache}}#Surface}} ..content.. {{dstache}}/Surface}}` or with template inclusion,
+like `{{dstache}}>Surface template="content"}}`.
+
+* **{{dstache}}#famous}}**
+
+  This is our main wrapper function, and may be called with `view="Scrollview"`, etc.
+  Alternatively, a shortcut is created for every wrapped View and Modifier, so you
+  can simply use `{{dstache}}#Scrollview}}`, etc, directly.  Please see the
+  <a href="/views/README">Views README</a> for the full documentation.
+
+* **{{dstache}}#famousEach items}}**
+
+  Use this inside any view that has a `.sequenceFrom()` method (e.g. `Scrollview`,
+  `SequentialLayout`, etc).  Just like regular `{{dstache}}each}}` - fully reactive,
+  and preserves ordering.  `items` can be an array, a function that reactively
+  returns an array, or a reactive cursor (from minimongo, etc).
+
+* **{{dstache}}#famousIf reactiveBooleanHelper}}**
+
+  Use this inside any view that has a `.sequenceFrom()` method (e.g. `Scrollview`,
+  `SequentialLayout`, etc).  Just like regular `{{dstache}}if}}` - fully reactive,
+  and preserves ordering.  `reactiveBooleanHelper` is a reactive helper that
+  evaluates to `true` or `false`.
+
+* **{{dstache}}#famousContext}}**
+
+  Creates a new Famous Context (different to the `FView.mainCtx` automatically
+  added to the document body).  Useful for embedded Contexts with different
+  `perspective`s, or for putting Famo.us content inside of the regular DOM.
+  Please realize that using the regular DOM model can have big impacts on
+  performance!  You should only do this if you know what you're doing.  In
+  particular, see the CSS section of
+  [Famo.us Pitfalls](http://famo.us/guides/pitfalls).
+
+
+## JavaScript
+
+### FView global
+
+* **FView.from(elementOrTemplateOrBlazeView)**
+
+  Given a DOM element, a
+  [Template Instance](https://docs.meteor.com/#/full/template_inst)
+  (via Template lifecycle callbacks, events and helpers) or a
+  [Blaze View](https://docs.meteor.com/#/full/blaze_view) (in more
+  advanced applications), returns the relevant `MeteorFamousView`
+  instance (more on that below).
+
+  NB: For template instances, probably you only want to use it for
+  inclusion, e.g. for `{{dstache}}#Surface template="mySurface"}}` and then
+  `Template.mySurface.rendered = function() { var fview = FView.from(this); }`
+  returns the `Surface`.
+  If you call it on a regular Template, you'll get the View that contains
+  that template, e.g. `{{dstache}}SequentialLayout}} {{dstache}}> myTemplate}} {{dstache}}/SequentialLayout}}` and then  `Template.myTemplate.rendered =
+  function() { var fview = FView.from(this); }` returns the `SequentialLayout`.
+  For more detailed info, see [issue #88](https://github.com/gadicc/meteor-famous-views/issues/88).
+
+* **FView.byId(id)**
+
+  Returns a MeteorFamousView instance given it's unique `id`.  To define your
+  own, call your View with `{{dstache}}#Surface id="mySurface"}}` (on the
+  assumption that the View will only ever appear once, simultaneously).  Otherwise,
+  every instance gets it's own unique, sequential, numerical id; you can find it
+  in the JavaScript console, and this is very useful for debugging.
+
+### MeteorFamousView ("fview")
+
+For every wrapped Famous view/modifier/node called like `{{dstache}}Surface}}`, etc,
+a new `MeteorFamousView` instance is created.  This is actually a Famo.us
+`RenderNode` and part of the Render Tree, which also tracks some extra info about
+it's use.  When you call `FView.byId()` or `FView.from()`, this is the `fview`
+that you get.
+
+**Properties:**
+
+* `id` - the instance's unique id, as above.  Use with `FView.byId(id)`.
+* `blazeView` - the [Blaze.View](https://docs.meteor.com/#/full/blaze_view)
+used to create this instance
+* `node` - the Famo.us node passed back to Famo.us when rendering the tree
+* `parent` - the `MeteorFamousView` of which this one is a child
+* `children` - any children `MeteorFamousView` of this one
+
+
+* `surface` - exists if the (final) node is a Surface, and points back to it
+* `view` - exists if the node is a View, and points back to it.
+* `_view` - registered metadata for the above view, if it exists
+* `modifier` - a reference to any modifier automatically prepended to the node,
+if it exists.  (e.g. if you specifed `modifier="StateModifier"`)
+* `_modifier` - registered metadata for the above modifier, if it exists
+
+Some even more advanced properties exist for special wrappers, like `famousEach`,
+`famousIf`, etc, and for views which use `.sequenceFrom()` (i.e. the recursive
+`sequencer()` method).  There is also a `pipeChildrenTo` property.  Search the
+source for these properties if you want more info.
+
+**Methods:**
+
+* `preventDestroy(isTemplateDestroy)` - will keep the instance alive in the render
+tree even
+once the template/blazeView that created it is removed/destroyed.  You should
+then, at a later, appropriate time, call `fview.destroy()` on the instance
+for proper cleanup.  Useful for exit animations, render transitions, etc.
+
+  If `isTemplateDestroy` is `true`, the `onDestroy()` callback is run (if it
+  exists), and the `destroyPrevented` property is honored to stop the
+  remaining cleanup.  Currently the `onDestroy` property can set as a single
+  callback, but this might change to be a method to add multipel callbacks!
+  For the rest of the cleanup, `Blaze.remove()` is called on all children
+  blazeViews (which will trigger their destroys), we're removed from any
+  sequence we may be a part of, and all Famo.us references are set to `null`
+  to allow memory to be reclaimed by the garbage collector.
+
+* `getSize()`, `render()` - used by Famo.us.  `setNode()` is used internally
+and should not be called again unless you really know what you're doing.
+    	{{/markdown}}
+    </div>
+  {{/Surface}}
+</template>
