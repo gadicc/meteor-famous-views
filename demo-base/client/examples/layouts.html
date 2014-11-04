@@ -1,152 +1,190 @@
 <template name="layouts">
-	{{#Scrollview}}
+  {{#Scrollview}}
 
-		{{#Surface size="[undefined,60]" class="padLeft"}}
-			<h1>Layout Examples</h1>
-		{{/Surface}}
+    {{#Surface size="[undefined,60]" class="padLeft"}}
+      <h1>Layout Examples</h1>
+    {{/Surface}}
 
-		{{#Surface size="[undefined,true]" class="padLeft"}}
-			<h2>Understanding Sizes in Famo.us</h2>
+    {{#Surface size="[undefined,true]" class="padLeft"}}
+      <h2>Understanding Sizes in Famo.us</h2>
 
-			<p>In short: <code>size="[width, height]"</code>, where width/height
-			are values like:</p>
+      <p>In short: <code>size="[width, height]"</code>, where width/height
+      are values like:</p>
 
-			<ul>
-				<li><code>200</code> or any Number</li>
-				<li><code>undefined</code> - full boundaries of parent container</li>
-				<li><code>true</code> - auto size (since Famo.us 0.3.0)</li>
-			</ul>
+      <ul>
+        <li><code>200</code> or any Number</li>
+        <li><code>undefined</code> - full boundaries of parent container</li>
+        <li><code>true</code> - auto size (since Famo.us 0.3.0)</li>
+      </ul>
 
-			<p>Not specifying the size is (usually) identical to
-			<code>size="[undefined,unedfined]"</code>,
-			i.e. we will inherit our parent's size and fill the container boundaries;
-			<i>provided the View supports a size argument</i> (not all Views do).
-			In this case, simply put <code>size="[undefined,undefined]"</code> and we'll
-			automaticaly prepend a Modifier with that size for you.</p>
+      <p>Not specifying the size is (usually) identical to
+      <code>size="[undefined,unedfined]"</code>,
+      i.e. we will inherit our parent's size and fill the container boundaries;
+      <i>provided the View supports a size argument</i> (not all Views do).
+      In this case, simply put <code>size="[undefined,undefined]"</code> and we'll
+      automaticaly prepend a Modifier with that size for you.</p>
 
-			<p>Commonly in a Scrollview's children you might want
-			<code>size="[undefined,true]"</code>
-			to span the full width and use auto height.
-			Note: we previously provided a proprietary
-			<code>size="[undefined,auto]"</code> due
-			to problems with "true" sized Surfaces inside a sequence (Scrollview,
-			SequentialLayout, etc); this was addressed in Famo.us 0.3.0 and you
-			should no longer use this feature.</p>
-		{{/Surface}}
+      <p>Commonly in a Scrollview's children you might want
+      <code>size="[undefined,true]"</code>
+      to span the full width and use auto height.
+      Note: we previously provided a proprietary
+      <code>size="[undefined,auto]"</code> due
+      to problems with "true" sized Surfaces inside a sequence (Scrollview,
+      SequentialLayout, etc); this was addressed in Famo.us 0.3.0 and you
+      should no longer use this feature.</p>
+    {{/Surface}}
 
-		{{#Surface size="[undefined,90]" class="padLeft"}}
-			<h2>Horizontal SequentialLayout</h2>
-			<p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow
-			horizontally.</p>
-		{{/Surface}}
+    {{#Surface size="[undefined,90]" class="padLeft"}}
+      <h2>Horizontal SequentialLayout</h2>
+      <p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow
+      horizontally.</p>
+    {{/Surface}}
 
-		{{#SequentialLayout direction="X" size="[undefined,110]" translate="[20,0]"}}
-			{{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
-			{{#Surface size="[150,100]" class="green-bg"}}#2{{/Surface}}
-			{{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
-		{{/SequentialLayout}}
+    {{#SequentialLayout direction="X" size="[undefined,110]" translate="[20,0]"}}
+      {{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
+      {{#Surface size="[150,100]" class="green-bg"}}#2{{/Surface}}
+      {{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
+    {{/SequentialLayout}}
 
-		{{#Surface size="[undefined,true]" class="padLeft"}}
-			{{#snippet lang="spacebars"}}
-				{{dstache}}#SequentialLayout direction="X" size="[undefined,160]"}}
-					{{dstache}}#Surface size="[150,100]" class="red-bg"}}#1{{dstache}}/Surface}}
-					{{dstache}}#Surface size="[150,100]" class="green-bg"}}#2{{dstache}}/Surface}}
-					{{dstache}}#Surface size="[150,100]" class="blue-bg"}}#3{{dstache}}/Surface}}
-				{{dstache}}/SequentialLayout}}
-			{{/snippet}}
-			<br />
-		{{/Surface}}
-
-
-		{{#Surface size="[undefined,90]" class="padLeft"}}		
-			<h2>Columns</h2>
-			<p>Use a <i>GridLayout</i> with <i>dimensions="[x,1]"</i>
-			for columns that fill the container (try resize the window)</p>
-		{{/Surface}}
-
-		{{#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
-			{{#Surface size="[undefined,100]" class="red-bg"}}col1{{/Surface}}
-			{{#Surface size="[undefined,100]" class="green-bg"}}col2{{/Surface}}
-			{{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
-		{{/GridLayout}}
-
-		{{#Surface size="[undefined,true]" class="padLeft"}}
-			{{#snippet lang="spacebars"}}
-				{{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
-					{{dstache}}#Surface class="red-bg"}}col1{{dstache}}/Surface}}
-					{{dstache}}#Surface class="green-bg"}}col2{{dstache}}/Surface}}
-					{{dstache}}#Surface class="blue-bg"}}col3{{dstache}}/Surface}}
-				{{dstache}}/GridLayout}}
-			{{/snippet}}
-			<br />
-		{{/Surface}}
+    {{#Surface size="[undefined,true]" class="padLeft"}}
+      {{#snippet lang="spacebars"}}
+        {{dstache}}#SequentialLayout direction="X" size="[undefined,160]"}}
+          {{dstache}}#Surface size="[150,100]" class="red-bg"}}#1{{dstache}}/Surface}}
+          {{dstache}}#Surface size="[150,100]" class="green-bg"}}#2{{dstache}}/Surface}}
+          {{dstache}}#Surface size="[150,100]" class="blue-bg"}}#3{{dstache}}/Surface}}
+        {{dstache}}/SequentialLayout}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +SequentialLayout direction='X' size='[undefined,160]'
+            +Surface size='[150,100]' class='red-bg'
+              | #1
+            +Surface size='[150,100]' class='green-bg'
+              | #2
+            +Surface size='[150,100]' class='blue-bg'
+              | #3
+        {{/if}}
+      {{/snippet}}
+      <br />
+    {{/Surface}}
 
 
-		{{#Surface size="[undefined,90]" class="padLeft"}}	
-			<h2>Centering / Fine-Tuning Layout</h2>
-			<p>Use a plain <i>Modifier</i> to manually position child surfaces with
-				<i>origin</i>, <i>align</i>, <i>size</i> and <i>translate</i>.</p>
-		{{/Surface}}
+    {{#Surface size="[undefined,90]" class="padLeft"}}
+      <h2>Columns</h2>
+      <p>Use a <i>GridLayout</i> with <i>dimensions="[x,1]"</i>
+      for columns that fill the container (try resize the window)</p>
+    {{/Surface}}
 
-		{{#Modifier size="[undefined,160]"}}
-			{{#Surface class="green-bg"}}
-				background
-			{{/Surface}}
+    {{#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
+      {{#Surface size="[undefined,100]" class="red-bg"}}col1{{/Surface}}
+      {{#Surface size="[undefined,100]" class="green-bg"}}col2{{/Surface}}
+      {{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
+    {{/GridLayout}}
 
-			{{#Surface size="[75,75]" align="[0.5,0.5]" origin="[0.5,0.5]" translate='[0,0,1]'
-				class="red-bg"}}
-				block
-			{{/Surface}}
-		{{/Modifier}}
+    {{#Surface size="[undefined,true]" class="padLeft"}}
+      {{#snippet lang="spacebars"}}
+        {{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
+          {{dstache}}#Surface class="red-bg"}}col1{{dstache}}/Surface}}
+          {{dstache}}#Surface class="green-bg"}}col2{{dstache}}/Surface}}
+          {{dstache}}#Surface class="blue-bg"}}col3{{dstache}}/Surface}}
+        {{dstache}}/GridLayout}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +GridLayout dimensions='[3,1]' size='[undefined,100]'
+            +Surface class='red-bg'
+              | col1
+            +Surface class='green-bg'
+              | col2
+            +Surface class='blue-bg'
+              | col3
+        {{/if}}
+      {{/snippet}}
+      <br />
+    {{/Surface}}
 
-		{{#Surface size="[undefined,true]" class="padLeft"}}
-			{{#snippet lang="spacebars"}}
-				{{dstache}}#Modifier size="[undefined,160]"}}
-					{{dstache}}#Surface class="green-bg"}}
-						background
-					{{dstache}}/Surface}}
 
-					{{dstache}}!-- The align="[0.5,0.5]" is required since Famous 0.3 --}}
-					{{dstache}}#Surface size="[50,50]" class='red-bg'
-							origin="[0.5,0.5]" align="[0.5,0.5]" translate='[0,0,1]'}}
-						block
-					{{dstache}}/Surface}}
-				{{dstache}}/Modifier}}
-			{{/snippet}}
-			<br />
-		{{/Surface}}
+    {{#Surface size="[undefined,90]" class="padLeft"}}
+      <h2>Centering / Fine-Tuning Layout</h2>
+      <p>Use a plain <i>Modifier</i> to manually position child surfaces with
+        <i>origin</i>, <i>align</i>, <i>size</i> and <i>translate</i>.</p>
+    {{/Surface}}
 
-		{{#Surface size="[undefined,true]" class="padLeft"}}
-			<p>Reference: needing to
-			<a href="https://github.com/Famous/famous/issues/298">explicitly specify
-			<i>align</i></a> on Famous 0.3.</p>
+    {{#Modifier size="[undefined,160]"}}
+      {{#Surface class="green-bg"}}
+        background
+      {{/Surface}}
 
-			<h2>Proportional Sizing</h2>
-			<p>Since Famous 0.3 sizing can be specified <b>by proportion</b> without
-			needing to do your own calculations.</p>
-		{{/Surface}}
+      {{#Surface size="[75,75]" align="[0.5,0.5]" origin="[0.5,0.5]" translate='[0,0,1]'
+        class="red-bg"}}
+        block
+      {{/Surface}}
+    {{/Modifier}}
 
-		{{#Modifier size="[undefined,100]"}}
-			{{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
-				class="green-bg"}} background {{/Surface}}
-			{{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
-				class="red-bg"}} 30% of parent's width and height {{/Surface}}
-		{{/Modifier}}
+    {{#Surface size="[undefined,true]" class="padLeft"}}
+      {{#snippet lang="spacebars"}}
+        {{dstache}}#Modifier size="[undefined,160]"}}
+          {{dstache}}#Surface class="green-bg"}}
+            background
+          {{dstache}}/Surface}}
 
-		{{#Surface size="[undefined,true]" class="padLeft"}}
-			{{#snippet lang="spacebars"}}
-				{{dstache}}#Modifier size="[undefined,100]" translate="[20,0]"}}
-					{{dstache}}#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
-						class="green-bg"}} background {{dstache}}/Surface}}
-					{{dstache}}#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
-						class="red-bg"}} 30% of parent's width and height {{dstache}}/Surface}}
-				{{dstache}}/Modifier}}
-			{{/snippet}}
+          {{dstache}}!-- The align="[0.5,0.5]" is required since Famous 0.3 --}}
+          {{dstache}}#Surface size="[50,50]" class='red-bg'
+              origin="[0.5,0.5]" align="[0.5,0.5]" translate='[0,0,1]'}}
+            block
+          {{dstache}}/Surface}}
+        {{dstache}}/Modifier}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +Modifier size='[undefined,160]'
+            +Surface class='green-bg'
+               | background
+            // The align="[0.5,0.5]" is required since Famous 0.3
+            +Surface size='[50,50]' class='red-bg' origin='[0.5,0.5]' align='[0.5,0.5]' translate='[0,0,1]'
+              | block
+        {{/if}}
+      {{/snippet}}
+      <br />
+    {{/Surface}}
 
-			<h2>Other</h2>
-			<p>For more complicated layouts, you'll probably want to use a <b>View</b>.
-			See the drop-down menu at the top of this page for more info.</p>
-		{{/Surface}}
+    {{#Surface size="[undefined,true]" class="padLeft"}}
+      <p>Reference: needing to
+      <a href="https://github.com/Famous/famous/issues/298">explicitly specify
+      <i>align</i></a> on Famous 0.3.</p>
 
-	{{/Scrollview}}
+      <h2>Proportional Sizing</h2>
+      <p>Since Famous 0.3 sizing can be specified <b>by proportion</b> without
+      needing to do your own calculations.</p>
+    {{/Surface}}
+
+    {{#Modifier size="[undefined,100]"}}
+      {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
+        class="green-bg"}} background {{/Surface}}
+      {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
+        class="red-bg"}} 30% of parent's width and height {{/Surface}}
+    {{/Modifier}}
+
+    {{#Surface size="[undefined,true]" class="padLeft"}}
+      {{#snippet lang="spacebars"}}
+        {{dstache}}#Modifier size="[undefined,100]" translate="[20,0]"}}
+          {{dstache}}#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
+            class="green-bg"}} background {{dstache}}/Surface}}
+          {{dstache}}#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
+            class="red-bg"}} 30% of parent's width and height {{dstache}}/Surface}}
+        {{dstache}}/Modifier}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +Modifier size='[undefined,100]' translate='[20,0]'
+            +Surface align='[0.5,0.5]' origin='[0.5,0.5]' proportions='[1,1]' class='green-bg'
+               | background
+            +Surface align='[0.5,0.5]' origin='[0.5,0.5]' proportions='[0.3,0.3]'
+    class='red-bg'
+              | 30% of parent's width and height
+        {{/if}}
+      {{/snippet}}
+
+      <h2>Other</h2>
+      <p>For more complicated layouts, you'll probably want to use a <b>View</b>.
+      See the drop-down menu at the top of this page for more info.</p>
+    {{/Surface}}
+
+  {{/Scrollview}}
 </template>
