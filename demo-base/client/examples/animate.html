@@ -1,126 +1,187 @@
 <template name="examples_animate">
-	{{#Scrollview size="[undefined,undefined]"}}
+  {{#Scrollview size="[undefined,undefined]"}}
 
-		{{#Surface size="[undefined,true]" class="pagePad"}}
-			<h1>Entrance and Exit Animations</h1>
+    {{#Surface size="[undefined,true]" class="pagePad"}}
+      <h1>Entrance and Exit Animations</h1>
 
-			<p>This is a simple example showing how we can use the <code>rendered</code>
-			callback to create an entrance animation and setup a destroy animation.
-			</p>
+      <p>This is a simple example showing how we can use the <code>rendered</code>
+      callback to create an entrance animation and setup a destroy animation.
+      </p>
 
-			{{>examples_animate_buttons}}
+      {{>examples_animate_buttons}}
 
-			<br /><br />
-		{{/Surface}}
+      <br /><br />
+    {{/Surface}}
 
-		{{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
-			{{#famousEach items}}
-				{{!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
-				{{>Surface template="examples_animate_item" modifier="StateModifier"}}
-			{{/famousEach}}
-		{{/SequentialLayout}}
+    {{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
+      {{#famousEach items}}
+        {{!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
+        {{>Surface template="examples_animate_item" modifier="StateModifier"}}
+      {{/famousEach}}
+    {{/SequentialLayout}}
 
-		{{#Surface size="[undefined,true]" class="pagePad"}}
-			<br />
-			<p>This works very well for a View like SequentialLayout, which uses the
-			size of child elements for positioning... so we can grow/shrink children
-			as part of the animation and everything works great.</p>
+    {{#Surface size="[undefined,true]" class="pagePad"}}
+      <br />
+      <p>This works very well for a View like SequentialLayout, which uses the
+      size of child elements for positioning... so we can grow/shrink children
+      as part of the animation and everything works great.</p>
 
-			<p>The same is not true of say, GridLayout, which forces a fixed size
-			on each child.  We could spin out an object on removal, but then the
-			resulting gap would disappear very suddenly at the end of the animation.
-			This is not something we can address at the application level, we'd
-			need someone to write a new famous view (say, "GridLayoutTransition")
-			which could accomodate such cases.</p>
-		{{/Surface}}
+      <p>The same is not true of say, GridLayout, which forces a fixed size
+      on each child.  We could spin out an object on removal, but then the
+      resulting gap would disappear very suddenly at the end of the animation.
+      This is not something we can address at the application level, we'd
+      need someone to write a new famous view (say, "GridLayoutTransition")
+      which could accomodate such cases.</p>
+    {{/Surface}}
 
-		{{>Surface template="examples_uihoooks_source" size="[undefined,true]"
-			class="pagePad"}}
+    {{>Surface template="examples_uihoooks_source" size="[undefined,true]"
+      class="pagePad"}}
 
-	{{/Scrollview}}
+  {{/Scrollview}}
 </template>
 
 <template name="examples_animate_buttons">
-	<p>
-		<button id="insert">Insert Random</button>
-		&lt;-- Try pressing quickly & repeatedly.  Click an item to remove it.
-	</p>
+  <p>
+    <button id="insert">Insert Random</button>
+    &lt;-- Try pressing quickly & repeatedly.  Click an item to remove it.
+  </p>
 </template>
 
 <template name="examples_animate_item">
-	<img src="{{picUrl}}" style="width: 100px; height: 100px">
+  <img src="{{picUrl}}" style="width: 100px; height: 100px">
 </template>
 
 <template name="examples_uihoooks_source">
-	{{#snippet lang="spacebars"}}
-		&lt;template name="examples_animate">
-			{{dstache}}#SequentialLayout direction="X" size="[undefined,100]"}}
-				{{dstache}}#famousEach items}}
-					{{dstache}}!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
-					{{dstache}}>Surface template="examples_animate_item" modifier="StateModifier"}}
-				{{dstache}}/famousEach}}
-			{{dstache}}/SequentialLayout}}
-		&lt;/template>
+  {{#snippet lang="spacebars"}}
+    &lt;template name="examples_animate">
+      {{dstache}}#SequentialLayout direction="X" size="[undefined,100]"}}
+        {{dstache}}#famousEach items}}
+          {{dstache}}!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
+          {{dstache}}>Surface template="examples_animate_item" modifier="StateModifier"}}
+        {{dstache}}/famousEach}}
+      {{dstache}}/SequentialLayout}}
+    &lt;/template>
 
-		&lt;template name="examples_animate_item">
-			<img src="{{dstache}}picUrl}}" style="width: 100px; height: 100px">
-		&lt;/template>
-	{{/snippet}}
+    &lt;template name="examples_animate_item">
+      <img src="{{dstache}}picUrl}}" style="width: 100px; height: 100px">
+    &lt;/template>
+  {{else}}
+    {{#if currentLang "jade"}}
+      template(name='examples_animate')
+        +SequentialLayout direction='X' size='[undefined,100]'
+          +famousEach items
+          // we'll setup size/origin/align/scale/rotate in rendered callback
+          +Surface template='examples_animate_item' modifier='StateModifier'
 
-	{{#snippet lang="javascript"}}
-		// Reactive query, sorted by name, for items
-		Template.examples_animate.helpers({
-			'items': function() {
-				return uiItems.find({}, { sort: { name : 1 } });
-			}
-		});
+      template(name='examples_animate_item')
+        img(src="#{picUrl}", style='width: 100px; height: 100px')
+    {{/if}}
+  {{/snippet}}
 
-		// Remove the clicked item from the collection
-		Template.examples_animate_item.events({
-			'click': function(event, tpl) {
-				uiItems.remove(this._id);
-			}
-		});
+  {{#snippet lang="javascript"}}
+    // Reactive query, sorted by name, for items
+    Template.examples_animate.helpers({
+      'items': function() {
+        return uiItems.find({}, { sort: { name : 1 } });
+      }
+    });
 
-		Template.examples_animate_item.rendered = function() {
-			var fview = FView.from(this);
+    // Remove the clicked item from the collection
+    Template.examples_animate_item.events({
+      'click': function(event, tpl) {
+        uiItems.remove(this._id);
+      }
+    });
 
-			// Set origin to center, and align middle left
-			fview.modifier.setOrigin([.5,.5]);
-			fview.modifier.setAlign([0,.5]);
+    Template.examples_animate_item.rendered = function() {
+      var fview = FView.from(this);
 
-			// Start off with width 0, scaled to zero and rotated half a revolution
-			fview.modifier.setSize([0,100]);
-			fview.modifier.setTransform(
-				Transform.multiply(Transform.rotate(0,0,-Math.PI), Transform.scale(0.001,0.001))
-			);
+      // Set origin to center, and align middle left
+      fview.modifier.setOrigin([.5,.5]);
+      fview.modifier.setAlign([0,.5]);
 
-			// Transition back to full size, then full scale and zero rotation
-			fview.modifier.setSize([100,100], { duration: 1000, curve: 'easeOut' }, function() {
-				fview.modifier.setTransform(
-					Transform.multiply(Transform.rotate(0,0,0), Transform.scale(1,1)),
-					{ duration: 1000, curve: 'easeOut' }
-				);
-			});
+      // Start off with width 0, scaled to zero and rotated half a revolution
+      fview.modifier.setSize([0,100]);
+      fview.modifier.setTransform(
+        Transform.multiply(Transform.rotate(0,0,-Math.PI), Transform.scale(0.001,0.001))
+      );
 
-			// Disable auto-cleanup.  Must call fview.destroy() in onDestroy callback.
-			fview.preventDestroy();
+      // Transition back to full size, then full scale and zero rotation
+      fview.modifier.setSize([100,100], { duration: 1000, curve: 'easeOut' }, function() {
+        fview.modifier.setTransform(
+          Transform.multiply(Transform.rotate(0,0,0), Transform.scale(1,1)),
+          { duration: 1000, curve: 'easeOut' }
+        );
+      });
 
-			fview.onDestroy = function() {
-				var fview = this;
-				// First spin and scale to 0
-				fview.modifier.setTransform(
-					Transform.multiply(Transform.scale(0.01,0.01), Transform.rotate(0,0,-Math.PI)),
-					{ duration: 1000, curve: 'easeOut' },
-					function() {
-						// when spin+scale is done, shrink the width
-						fview.modifier.setSize([0,0], { duration: 1000, curve: 'easeOut' }, function() {
-							// Finally after everything, do proper cleanup
-							fview.destroy();
-						});
-					}
-				);
-			}
-		}
-	{{/snippet}}
+      // Disable auto-cleanup.  Must call fview.destroy() in onDestroy callback.
+      fview.preventDestroy();
+
+      fview.onDestroy = function() {
+        var fview = this;
+        // First spin and scale to 0
+        fview.modifier.setTransform(
+          Transform.multiply(Transform.scale(0.01,0.01), Transform.rotate(0,0,-Math.PI)),
+          { duration: 1000, curve: 'easeOut' },
+          function() {
+            // when spin+scale is done, shrink the width
+            fview.modifier.setSize([0,0], { duration: 1000, curve: 'easeOut' }, function() {
+              // Finally after everything, do proper cleanup
+              fview.destroy();
+            });
+          }
+        );
+      }
+    }
+  {{else}}
+    {{#if currentLang "coffeescript"}}
+      # Reactive query, sorted by name, for items
+      Template.examples_animate.helpers
+        items: ->
+          uiItems.find {}, sort: name: 1
+
+      # Remove the clicked item from the collection
+      Template.examples_animate_item.events
+        click: (event, tpl) ->
+          uiItems.remove @_id
+
+      Template.examples_animate_item.rendered = ->
+        fview = FView.from @
+        # Set origin to center, and align middle left
+        fview.modifier
+          .setOrigin [.5, .5]
+          .setAlign [0, .5]
+          # Start off with width 0, scaled to zero and rotated half a revolution
+          .setSize [0, 100]
+          .setTransform (Transform.multiply (Transform.rotate 0, 0, -Math.PI),
+            (Transform.scale 0.001, 0.001))
+          # Transition back to full size, then full scale and zero rotation
+          .setSize [100, 100],
+            duration: 1000
+            curve: 'easeOut'
+          , ->
+            fview.modifier.setTransform (Transform.multiply (Transform.rotate 0, 0, 0),
+              (Transform.scale 1, 1)),
+              duration: 1000
+              curve: "easeOut"
+
+        # Disable auto-cleanup.  Must call fview.destroy() in onDestroy callback.
+        fview.preventDestroy()
+        fview.onDestroy = ->
+          fview = @
+          # First spin and scale to 0
+          fview.modifier.setTransform (Transform.multiply (Transform.scale 0.01, 0.01),
+            (Transform.rotate 0, 0, -Math.PI)),
+            duration: 1000
+            curve: 'easeOut'
+          , ->
+            # when spin+scale is done, shrink the width
+            fview.modifier.setSize [0, 0],
+              duration: 1000
+              curve: 'easeOut'
+            , ->
+              # Finally after everything, do proper cleanup
+              fview.destroy()
+    {{/if}}
+  {{/snippet}}
 </template>
