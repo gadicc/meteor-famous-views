@@ -16,8 +16,10 @@
 
 .ev_surface_click {
 	border: 1px solid black;
+	color: white;
+	font-weight: bold;
 	border-radius: 5px;
-	background: red;
+	background: #FF4136;
 	text-align: center;
 	line-height: 50px;
 	font-family: comic;
