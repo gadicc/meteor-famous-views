@@ -1,5 +1,10 @@
 ## vNEXT
 
+## v0.1.20
+
+* Support `style="background: red; color: blue" etc (alias for `properties`)
+  on Surfaces (#124)
+
 ## v0.1.19
 
 * Support for {{#Modifier}}, etc.
