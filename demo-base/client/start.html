@@ -36,7 +36,7 @@
     	{{#snippet lang="spacebars"}}
             &lt;head>
                 &lt;!-- this is critical for mobile and emulation to look and work properly -->
-                &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">            
+                &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
             &lt;/head>
 
             &lt;body>
@@ -49,7 +49,7 @@
                 {{dstache}}/Surface}}
             &lt;/template>
         {{else}}
-            {{#if currentLang "jade"}}
+          {{#if currentLang "jade"}}
                 head
                   // this is critical for mobile and emulation to look and work properly
                   meta(name='viewport', content='width=device-width, maximum-scale=1, user-scalable=no')
@@ -57,7 +57,7 @@
                   //- -- leave this empty or leave it out, dont add famousInit here! --
                 template(name='famousInit')
                   +Surface
-                    | I am a full size Surface            
+                    | I am a full size Surface
             {{/if}}
     	{{/snippet}}
 
@@ -73,7 +73,7 @@
 
     	<p>Here's a more advanced example:</p>
 
-        {{#snippet lang="spacebars"}}
+      {{#snippet lang="spacebars"}}
         {{dstache}}#Scrollview proportions="[.5,1]"}}
 
           {{dstache}}#Surface size="[undefined,true]"}}
@@ -85,7 +85,15 @@
           {{dstache}}/famousEach}}
 
         {{dstache}}/Scrollview}}
-        {{/snippet}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +Scrollview proportions='[.5,1]'
+            +Surface size='[undefined,true]'
+              h1 Scrollview Example
+            +famousEach items
+              +Surface template="item" size='[undefined,20]'
+        {{/if}}
+      {{/snippet}}
 
 		<p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
 		example of how to setup the <code>items</code> reactive data source
@@ -112,6 +120,16 @@
                     { duration : 1000, curve: 'easeOut' }
                 );
             }
+    {{else}}
+      {{#if currentLang "coffeescript"}}
+        Template.item.rendered = ->
+          fview = FView.from @
+          # "Fly in" animation (see examples/animations for more)
+          fview.modifier.setTransform (Transform.translate -500, -500)
+          fview.modifier.setTransform (Transform.translate 0, 0),
+            duration: 1000
+            curve: 'easeOut'
+      {{/if}}
 		{{/snippet}}
 
         <p><b>That's it!</b>  Explore the nav bar above to see documented

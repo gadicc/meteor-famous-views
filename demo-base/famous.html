@@ -110,6 +110,14 @@ or via the Famous CDN if you know what you're doing.
       {{dstache}}/famousEach}}
 
     {{dstache}}/Scrollview}}
+    {{else}}
+      {{#if currentLang "jade"}}
+        +Scrollview
+          +Surface size='[200,undefined]'
+            h1 Scrollview Example
+          +famousEach items
+            +Surface template='item' size=reactiveSize
+      {{/if}}
   {{/snippet}}
 
   <h3>Additional Features</h3>
