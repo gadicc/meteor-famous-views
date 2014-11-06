@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.1.21
+
 * Defer some manipulations to the render tree to greatly reduce flicker.
 
 ## v0.1.20
