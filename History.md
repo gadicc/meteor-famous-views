@@ -1,9 +1,14 @@
 ## vNEXT
 
+* Defer some manipulations to the render tree to greatly reduce flicker.
+
 ## v0.1.20
 
 * Support `style="background: red; color: blue" etc (alias for `properties`)
   on Surfaces (#124)
+
+* slideWindow transition used to also include opacity.  Changing transitions
+  would leak opacity/translate if only one was used.  Fixed.
 
 ## v0.1.19
 
