@@ -2,11 +2,9 @@ Tinytest.addAsync('Famous - Surface - attribute - properties - static text value
   var root = createTestDIV([200, 200], test);
 
   Template.AttrPropertiesTests_1.rendered = function() {
-    window.requestAnimationFrame(function() {
-      var target = $(root).find('.surface');
-      test.equal(target.css('background-color'), 'rgb(44, 55, 66)');
-      complete();
-    });
+    var properties = FView.byId('AttrPropertiesTests_1').surface.getProperties();
+    test.equal(properties['background-color'], 'rgb(44,55,66)');
+    complete();
   };
 
   Blaze.render(Template.AttrPropertiesTests_1, root);
@@ -15,9 +13,7 @@ Tinytest.addAsync('Famous - Surface - attribute - properties - static text value
 Tinytest.addAsync('Famous - Surface - attribute - properties - reactive helper + updates', function (test, complete) {
   var root = createTestDIV([200, 200], test);
 
-  var props = new ReactiveVar({
-    backgroundColor : 'rgb(44, 55, 66)'
-  });
+  var props = new ReactiveVar({ 'background-color' : 'rgb(44,55,66)' });
 
   Template.AttrPropertiesTests_2.helpers({
     reactiveProperties: function () {
@@ -26,21 +22,14 @@ Tinytest.addAsync('Famous - Surface - attribute - properties - reactive helper +
   });
 
   Template.AttrPropertiesTests_2.rendered = function() {
-    window.requestAnimationFrame(function() {
-      var target = $(root).find('.surface');
+    var surface = FView.byId('AttrPropertiesTests_2').surface;
+    test.equal(surface.getProperties()['background-color'], 'rgb(44,55,66)');
 
-      test.equal(target.css('background-color'), 'rgb(44, 55, 66)');
-
-      props.set({
-        backgroundColor : 'rgb(11, 22, 33)'
-      });
+    _.defer(function() {
+      props.set({ 'background-color' : 'rgb(11,22,33)' });
       Tracker.flush();
-
-      window.requestAnimationFrame(function() {
-        var target = $(root).find('.surface');
-        test.equal(target.css('background-color'), 'rgb(11, 22, 33)');
-        complete();
-      });
+      test.equal(surface.getProperties()['background-color'], 'rgb(11,22,33)');
+      complete();
     });
   };
 

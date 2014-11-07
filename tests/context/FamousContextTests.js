@@ -1,36 +1,29 @@
 Tinytest.addAsync('Famous - Context - context is bound to enclosing dom element', function (test, complete) {
 	var root = createTestDIV([200, 200], test);
 
+	Template.FamousContextTests1.rendered = function() {
+		var container = FView.byId('FamousContextTests1').context.container;
+		test.equal(container.style.width, '100px');
+		test.equal(container.style.height, '133px');
+    complete();
+	};
+
 	Blaze.render(Template.FamousContextTests1, root);
-
-  Meteor.setTimeout(function () {
-      var surface = $('.FamousContextTests1').one();
-
-			test.equal(surface.width(), 100);
-			test.equal(surface.height(), 133);
-
-      complete();
-    },
-    150);
 });
 
 Tinytest.addAsync('Famous - Context - each context is bound to enclosing dom element', function (test, complete) {
 	var root = createTestDIV([200, 200], test);
 
+	Template.FamousContextTests2.rendered = function() {
+		var containerA = FView.byId('FamousContextTests2_A').context.container;
+		test.equal(containerA.style.width, '50px');
+		test.equal(containerA.style.height, '50px');
+
+		var containerB = FView.byId('FamousContextTests2_B').context.container;
+		test.equal(containerB.style.width, '66px');
+		test.equal(containerB.style.height, '66px');
+		complete();
+	};
+
 	Blaze.render(Template.FamousContextTests2, root);
-
-	Meteor.setTimeout(function () {
-			var surfaceA = $('.FamousContextTests2_A').one();
-
-			test.equal(surfaceA.width(), 50);
-			test.equal(surfaceA.height(), 50);
-
-			var surfaceB = $('.FamousContextTests2_B').one();
-
-			test.equal(surfaceB.width(), 66);
-			test.equal(surfaceB.height(), 66);
-
-			complete();
-		},
-		150);
 });

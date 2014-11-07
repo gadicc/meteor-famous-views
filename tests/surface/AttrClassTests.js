@@ -1,12 +1,11 @@
 Tinytest.addAsync('Famous - Surface - attribute - class - static text value', function (test, complete) {
-  var root = createTestDIV([200, 200]);
+  var root = createTestDIV([200, 200], test);
 
   Template.AttrClassTests_1.rendered = function() {
-    window.requestAnimationFrame(function() {
-      test.length($(root).find('.abc'), 1);
-      test.length($(root).find('.def'), 1);
-      complete();
-    });
+    var classes = FView.byId('AttrClassTests_1').surface.getClassList();
+    test.include(classes, 'abc');
+    test.include(classes, 'def');
+    complete();
   };
 
   Blaze.render(Template.AttrClassTests_1, root);
@@ -15,30 +14,27 @@ Tinytest.addAsync('Famous - Surface - attribute - class - static text value', fu
 Tinytest.addAsync('Famous - Surface - attribute - class - reactive helper + updates', function (test, complete) {
   var root = createTestDIV([200, 200], test);
 
-  var classes = new ReactiveVar(['a','b']);
+  var reactiveClasses = new ReactiveVar(['a','b']);
 
   Template.AttrClassTests_2.helpers({
     reactiveClasses: function () {
-      return classes.get();
+      return reactiveClasses.get();
     }
   });
 
   Template.AttrClassTests_2.rendered = function() {
-    window.requestAnimationFrame(function() {
-      // Test initial value
-      test.length($(root).find('.a'), 1);
-      test.length($(root).find('.b'), 1);
+    var classes = FView.byId('AttrClassTests_2').surface.getClassList();
+    test.include(classes, 'a');
+    test.include(classes, 'b');
 
-      classes.set(['a','c']);
+    _.defer(function() {
+      reactiveClasses.set(['a','c']);
       Tracker.flush();
 
-      // Test reactive change
-      window.requestAnimationFrame(function() {
-        test.length($(root).find('.a'), 1);
-        test.length($(root).find('.c'), 1);
-
-        complete();
-      });
+      test.include(classes, 'a');
+      test.ok(classes.indexOf('b') === -1);
+      test.include(classes, 'c');
+      complete();
     });
   };
 

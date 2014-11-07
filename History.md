@@ -1,5 +1,10 @@
 ## vNEXT
 
+* famousContext improvements.  Amongst other changes, you can now pass
+  it an `id` and find it again with `FView.byId()`, like anything else.
+
+* test improvements - faster, more robust
+
 ## v0.1.21
 
 * Defer some manipulations to the render tree to greatly reduce flicker.

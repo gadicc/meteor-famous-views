@@ -85,6 +85,9 @@ Package.on_test(function(api) {
     'tests/famous.html',
     'tests/famous.js',
 
+    'tests/context/FamousContextTests.html',
+    'tests/context/FamousContextTests.js',
+
     'tests/surface/AttrClassTests.html',
     'tests/surface/AttrClassTests.js',
 
@@ -92,9 +95,6 @@ Package.on_test(function(api) {
     'tests/surface/AttrSizeTests.js',
 
     'tests/surface/AttrPropertiesTests.html',
-    'tests/surface/AttrPropertiesTests.js',
-
-    'tests/context/FamousContextTests.html',
-    'tests/context/FamousContextTests.js'
+    'tests/surface/AttrPropertiesTests.js'
   ], 'client');
 });
