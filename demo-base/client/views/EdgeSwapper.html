@@ -1,99 +1,129 @@
 <template name="views_EdgeSwapper">
-	{{#Scrollview size="[undefined,undefined]"}}
-		{{#View size="[undefined,970]"}}
-			{{#Surface size="[undefined,undefined]" class="padLeft"}}
-				<h1>EdgeSwapper demo</h1>
+  {{#Scrollview size="[undefined,undefined]"}}
+    {{#View size="[undefined,970]"}}
+      {{#Surface size="[undefined,undefined]" class="padLeft"}}
+        <h1>EdgeSwapper demo</h1>
 
-				<p>We can wrap any dynamically rendered template inside an
-				EdgeSwapper to transition in/out template create/destroys.</p>
+        <p>We can wrap any dynamically rendered template inside an
+        EdgeSwapper to transition in/out template create/destroys.</p>
 
-				<p>In the example below, we use a "dynamic" template, but
-				we can do the same for a template inclusion surrounded by<br />
-				an <code>{{dstache}}#if}}</code> or iron-routers
-				<code>{{dstache}}>yield}}</code>, just like with RenderController.</p>
+        <p>In the example below, we use a "dynamic" template, but
+        we can do the same for a template inclusion surrounded by<br />
+        an <code>{{dstache}}#if}}</code> or iron-routers
+        <code>{{dstache}}>yield}}</code>, just like with RenderController.</p>
 
-				{{#snippet lang="spacebars"}}
-					{{dstache}}#EdgeSwapper size="[150,150]"}}
-						{{dstache}}>showTemplate name=esTemplate}}
-					{{dstache}}/EdgeSwapper}}
-				{{/snippet}}
+        {{#snippet lang="spacebars"}}
+          {{dstache}}#EdgeSwapper size="[150,150]"}}
+            {{dstache}}>showTemplate name=esTemplate}}
+          {{dstache}}/EdgeSwapper}}
+        {{else}}
+          {{#if currentLang "jade"}}
+            +EdgeSwapper size='[150,150]'
+              +showTemplate name=esTemplate
+          {{/if}}
+        {{/snippet}}
 
-				{{>es_buttons}}
+        {{>es_buttons}}
 
-				{{#snippet lang="javascript"}}
-					Template.views_EdgeSwapper.helpers({
-						'showTemplate': function() {
-							return Template[this.name];
-						}
-					});
+        {{#snippet lang="javascript"}}
+          Template.views_EdgeSwapper.helpers({
+            'showTemplate': function() {
+              return Template[this.name];
+            }
+          });
 
-					Session.setDefault('esTemplate', 'rc_surface1');
-					Template.views_EdgeSwapper.helpers({
-						esTemplate: function() {
-							return Session.get('esTemplate');
-						}
-					});
+          Session.setDefault('esTemplate', 'rc_surface1');
+          Template.views_EdgeSwapper.helpers({
+            esTemplate: function() {
+              return Session.get('esTemplate');
+            }
+          });
 
-					Template.es_buttons.helpers({
-						'buttons': ['es_surface1', 'es_surface2', 'es_surface3'],
-						isSet: function() {
-							return this.valueOf() == Session.get('esTemplate') ? 'set' : '';
-						}
-					});
-					Template.es_buttons.events({
-						'click button': function(event, tpl) {
-							Session.set('esTemplate', this.valueOf());
-						}
-					});
-				{{/snippet}}
+          Template.es_buttons.helpers({
+            'buttons': ['es_surface1', 'es_surface2', 'es_surface3'],
+            isSet: function() {
+              return this.valueOf() == Session.get('esTemplate') ? 'set' : '';
+            }
+          });
+          Template.es_buttons.events({
+            'click button': function(event, tpl) {
+              Session.set('esTemplate', this.valueOf());
+            }
+          });
+        {{else}}
+          {{#if currentLang "coffeescript"}}
+            Template.views_EdgeSwapper.helpers
+              showTemplate: ->
+                Template[@name]
 
-				{{#snippet lang="spacebars"}}
-					&lt;template name="es_surface1"&gt;
-						{{dstache}}#Surface class="red-bg" size="[150,150]"}}
-							<div class="full">#1</div>
-						{{dstache}}/Surface}}
-					&lt;/template&gt;
-				{{/snippet}}
+            Session.setDefault 'esTemplate', 'rc_surface1'
+            Template.views_EdgeSwapper.helpers
+              esTemplate: ->
+                Session.get 'esTemplate'
 
-				<p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see EdgeSwapper.html and EdgeSwapper.js)</p>
-			{{/Surface}}
+            Template.es_buttons.helpers
+              buttons: ['es_surface1', 'es_surface2', 'es_surface3']
+              isSet: ->
+                if @valueOf() is (Session.get 'esTemplate') then 'set' else ''
+            Template.es_buttons.events
+              'click button': (event, tpl) ->
+                Session.set 'esTemplate', @valueOf()
+          {{/if}}
+        {{/snippet}}
 
-			{{#EdgeSwapper size="[150,150]" translate="[450,205,5]"}}
-				{{>showTemplate name=esTemplate}}
-			{{/EdgeSwapper}}
+        {{#snippet lang="spacebars"}}
+          &lt;template name="es_surface1"&gt;
+            {{dstache}}#Surface class="red-bg" size="[150,150]"}}
+              <div class="full">#1</div>
+            {{dstache}}/Surface}}
+          &lt;/template&gt;
+        {{else}}
+          {{#if currentLang "jade"}}
+            template(name='es_surface1')
+              +Surface class='red-bg' size='[150,150]'
+                .full #1
+          {{/if}}
+        {{/snippet}}
 
-		{{/View}}
-	{{/Scrollview}}
+        <p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see EdgeSwapper.html and EdgeSwapper.js)</p>
+      {{/Surface}}
+
+      {{#EdgeSwapper size="[150,150]" translate="[450,205,5]"}}
+        {{>showTemplate name=esTemplate}}
+      {{/EdgeSwapper}}
+
+    {{/View}}
+  {{/Scrollview}}
 </template>
 
 <template name="es_surface1">
-	{{#Surface class="red-bg" size="[150,150]"}}
-		<div class="full">#1</div>
-	{{/Surface}}
+  {{#Surface class="red-bg" size="[150,150]"}}
+    <div class="full">#1</div>
+  {{/Surface}}
 </template>
 
 <template name="es_surface2">
-	{{#Surface class="green-bg" size="[150,150]"}}
-		<div class="full">#2</div>
-	{{/Surface}}
+  {{#Surface class="green-bg" size="[150,150]"}}
+    <div class="full">#2</div>
+  {{/Surface}}
 </template>
 
 <template name="es_surface3">
-	{{#Surface class="blue-bg" size="[150,150]"}}
-		<div class="full">#3</div>
-	{{/Surface}}
+  {{#Surface class="blue-bg" size="[150,150]"}}
+    <div class="full">#3</div>
+  {{/Surface}}
 </template>
 
 <template name="es_buttons">
-	<style type="text/css">
-		button.set { border: 2px solid black; }
-	</style>
-	<p>
-	{{#each buttons}}
-		<button class="{{isSet}}">
-			Session.set('currentTemplate', '{{this}}');
-		</button>
-		<br />
-	{{/each}}
-	</p>
+  <style type="text/css">
+    button.set { border: 2px solid black; }
+  </style>
+  <p>
+  {{#each buttons}}
+    <button class="{{isSet}}">
+      Session.set('currentTemplate', '{{this}}');
+    </button>
+    <br />
+  {{/each}}
+  </p>
 </template>
