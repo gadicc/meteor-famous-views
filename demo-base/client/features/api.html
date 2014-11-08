@@ -41,6 +41,19 @@ like `{{dstache}}>Surface template="content"}}`.
   particular, see the CSS section of
   [Famo.us Pitfalls](http://famo.us/guides/pitfalls).
 
+  Additionally, the new context will be attached to the *containing div*, for
+  absolute control over the context (this might change; keep an eye out on
+  History.md for BREAKING changes, as usual).  In particular, make sure your
+  CSS or `style` attribute ensures that the element's `height` is appropriate
+  for what you have planned.  Example:
+
+  ```handlebars
+  <div style="height: 200px">
+    {{dstache}}#famousContext}}
+      ..
+    {{dstache}}/famousContext}}
+  </div>
+  ```
 
 ## JavaScript
 
