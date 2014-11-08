@@ -4,6 +4,9 @@
   it an `id` and find it again with `FView.byId()`, like anything else.
 
 * test improvements - faster, more robust
+* clarify famousContext usage in API docs
+* improve QuickStart instructions
+* Super QuickStart clone instructions at the beginning
 
 ## v0.1.21
 

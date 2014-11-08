@@ -1,77 +1,80 @@
 <template name="start">
   {{#Surface size="[undefined,undefined]"}}
     <div id="main" role="main">
-    	<h1>Quick Start</h1>
+      <h1>Quick Start</h1>
 
-        {{>meteorpad id="ZGTm3XkR66n62xbZv" text="Get started right now on MeteorPad!"}}
+      {{>meteorpad id="ZGTm3XkR66n62xbZv" text="Get started right now on MeteorPad!"}}
 
-    	<p>
-    		Need Meteor?
-    		<code>curl https://install.meteor.com/ | sh</code>
-    		and then:
-    	</p>
+      <p>
+        Need Meteor?
+        <code>curl https://install.meteor.com/ | sh</code>.
+      </p>
 
-    	{{#prism lang="bash" class="line-numbers"}}
-            $ meteor create app
-            $ cd app
+      <p><b>Super QuickStart?</b>
+      <code>git clone https://github.com/gadicc/fview-quickstart.git</code>
+      or
+      <a href="https://github.com/gadicc/fview-quickstart/releases">download it</a>,
+      and then <code>cd fview-quickstart && meteor</code>.  It comes pre-baked with
+      all the recommendations in this page, iron-router integration, and optional
+      templates for CoffeeScript and Jade.</p>
 
-            # for Meteor >= 0.9.3 (!!)
-            $ meteor add mjn:famous OR raix:famono  # raix:famono since 0.9.14
-            $ meteor add gadicohen:famous-views     # ^__ released 2014-10-28
+      <p>Otherwise, build it from scratch like this:</p>
 
-            # Optional packages
-            $ meteor add mquandalle:jade            # if you want to use Jade
-            $ meteor add coffeescript               # if you want to use CoffeeScript
-    	{{/prism}}
+      {{#prism lang="bash" class="line-numbers"}}
+        $ meteor create app
+        $ cd app
 
-    	<p>
-    		If you want to play with this demo locally,
-    		<code>cd packages/famous-views/demo; mrt update; meteor</code>
-            (requires local package install on 0.9.0+).
-    	</p>
+        # for Meteor >= 0.9.3 (!!)
+        $ meteor add mjn:famous OR raix:famono  # raix:famono since 0.9.14
+        $ meteor add gadicohen:famous-views     # ^__ released 2014-10-28
 
-    	<p>Otherwise, edit <code>app.html</code> as follows, creating a
-        template called <code>famousInit</code>:</p>
+        # Optional packages
+        $ meteor add mquandalle:jade            # if you want to use Jade
+        $ meteor add coffeescript               # if you want to use CoffeeScript
+      {{/prism}}
 
-    	{{#snippet lang="spacebars"}}
-            &lt;head>
-                &lt;!-- this is critical for mobile and emulation to look and work properly -->
-                &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
-            &lt;/head>
+      <p>Edit <code>app.html</code> as follows, creating a template called
+      <code>famousInit</code>:</p>
 
-            &lt;body>
-                {{dstache}}!-- leave this empty or leave it out, dont add famousInit here!  --}}
-            &lt;/body>
+      {{#snippet lang="spacebars"}}
+        &lt;head>
+            &lt;!-- this is critical for mobile and emulation to look and work properly -->
+            &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
+        &lt;/head>
 
-            &lt;template name="famousInit">
-                {{dstache}}#Surface}}
-                    I am a full size Surface
-                {{dstache}}/Surface}}
-            &lt;/template>
-        {{else}}
-          {{#if currentLang "jade"}}
-                head
-                  // this is critical for mobile and emulation to look and work properly
-                  meta(name='viewport', content='width=device-width, maximum-scale=1, user-scalable=no')
-                body
-                  //- -- leave this empty or leave it out, dont add famousInit here! --
-                template(name='famousInit')
-                  +Surface
-                    | I am a full size Surface
-            {{/if}}
-    	{{/snippet}}
+        &lt;body>
+            {{dstache}}!-- leave this empty or leave it out, dont add famousInit here!  --}}
+        &lt;/body>
 
-        <p>The <code>famousInit</code> template is added to your document
-        automatically once famo.us is fully loaded, don't include it yourself.
-        Alternatively, instead of using this template, you can use any
-        template via <a href="/features/iron-router">iron-router integration</a>.
-        </p>
+        &lt;template name="famousInit">
+            {{dstache}}#Surface}}
+                I am a full size Surface
+            {{dstache}}/Surface}}
+        &lt;/template>
+      {{else}}
+        {{#if currentLang "jade"}}
+          head
+            // this is critical for mobile and emulation to look and work properly
+            meta(name='viewport', content='width=device-width, maximum-scale=1, user-scalable=no')
+          body
+            //- -- leave this empty or leave it out, dont add famousInit here! --
+          template(name='famousInit')
+            +Surface
+              | I am a full size Surface
+          {{/if}}
+      {{/snippet}}
 
-    	<p>A number of Views are provided pre-built for instant use (see the
-    	drop down menu above).  There are also instructions to quickly and
-    	easily add your own in the <a href="/views/README">Views README</a>.</p>
+      <p>The <code>famousInit</code> template is added to your document
+      automatically once famo.us is fully loaded, don't include it yourself.
+      Alternatively, instead of using this template, you can use any
+      template via <a href="/features/iron-router">iron-router integration</a>.
+      </p>
 
-    	<p>Here's a more advanced example:</p>
+      <p>A number of Views are provided pre-built for instant use (see the
+      drop down menu above).  There are also instructions to quickly and
+      easily add your own in the <a href="/views/README">Views README</a>.</p>
+
+      <p>Here's a more advanced example:</p>
 
       {{#snippet lang="spacebars"}}
         {{dstache}}#Scrollview proportions="[.5,1]"}}
@@ -95,45 +98,73 @@
         {{/if}}
       {{/snippet}}
 
-		<p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
-		example of how to setup the <code>items</code> reactive data source
-		(hint: it's a templat helper that returns a reactive cursor from a
-		minimongo query, just like you'd expect).</p>
+      <p>See the <a href="/views/Scrollview">Scrollview page</a> for a full
+      example of how to setup the <code>items</code> reactive data source
+      (hint: it's a templat helper that returns a reactive cursor from a
+      minimongo query, just like you'd expect).</p>
 
-		<p>You'll also notice that we used the <b>template inclusion</b>
-        <code>{{dstache}}>Surface template="item"}}</code> instead
-		of specifying the view contents inline with
-		<code>{{dstache}}#Surface}}content{{dstache}}/Surface}}</code>.
-        This let's us setup lifecycle callbacks, events, and helpers on
-        <code>Template.item</code>, just like you'd expect:</p>
+      <p>You'll also notice that we used the <b>template inclusion</b>
+          <code>{{dstache}}>Surface template="item"}}</code> instead
+      of specifying the view contents inline with
+      <code>{{dstache}}#Surface}}content{{dstache}}/Surface}}</code>.
+          This let's us setup lifecycle callbacks, events, and helpers on
+          <code>Template.item</code>, just like you'd expect:</p>
 
-		{{#snippet lang="javascript"}}
-            Template.item.rendered = function() {
-                var fview = FView.from(this);
+      {{#snippet lang="javascript"}}
+        Template.item.rendered = function() {
+          var fview = FView.from(this);
 
-                // "Fly in" animation (see examples/animations for more)
-                fview.modifier.setTransform(
-                    Transform.translate(-500,-500)
-                );
-                fview.modifier.setTransform(
-                    Transform.translate(0,0),
-                    { duration : 1000, curve: 'easeOut' }
-                );
-            }
-    {{else}}
-      {{#if currentLang "coffeescript"}}
-        Template.item.rendered = ->
-          fview = FView.from @
-          # "Fly in" animation (see examples/animations for more)
-          fview.modifier.setTransform (Transform.translate -500, -500)
-          fview.modifier.setTransform (Transform.translate 0, 0),
-            duration: 1000
-            curve: 'easeOut'
-      {{/if}}
-		{{/snippet}}
+          // "Fly in" animation (see examples/animations for more)
+          fview.modifier.setTransform(
+            Transform.translate(-500,-500)
+          );
+          fview.modifier.setTransform(
+            Transform.translate(0,0),
+            { duration : 1000, curve: 'easeOut' }
+          );
+        }
+      {{else}}
+        {{#if currentLang "coffeescript"}}
+          Template.item.rendered = ->
+            fview = FView.from @
+            # "Fly in" animation (see examples/animations for more)
+            fview.modifier.setTransform (Transform.translate -500, -500)
+            fview.modifier.setTransform (Transform.translate 0, 0),
+              duration: 1000
+              curve: 'easeOut'
+        {{/if}}
+      {{/snippet}}
 
-        <p><b>That's it!</b>  Explore the nav bar above to see documented
-        examples on how to other cool stuff.</p>
-   	</div>
+      <p><b>That's it!</b>  Explore the nav bar above to see documented
+      examples on how to other cool stuff.</p>
+
+      <p>Note, this full source of this entire site is downloadable
+      and useable.  Either
+      <code>git clone https://github.com/gadicc/meteor-famous-views.git</code>
+      or
+      <a href="https://github.com/gadicc/meteor-famous-views/releases">download
+      it</a>,
+      and then
+      <code>cd meteor-famous-views/demo-mjn && meteor</code>.</p>
+
+      <h3>General Help</h3>
+
+      <p>It's nice to setup global shortcuts to various Famo.us things, and,
+      if using famono, you need some lines to pull in the Famo.us shims and
+      CSS (as per the famono README).  So, you might want to add something
+      like this to your code too:</p>
+
+      {{#snippet lang="javascript"}}
+        Transform = null;
+
+        FView.ready(function() {
+          Transform = famous.core.Transform;
+
+          // Famono: load famo.us shims and CSS
+          famous.polyfills;
+          famous.core.famous;
+        });
+      {{/snippet}}
+    </div>
   {{/Surface}}
 </template>
