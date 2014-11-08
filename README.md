@@ -1,6 +1,8 @@
-## famous-views (for Meteor) [![Build Status](https://api.travis-ci.org/gadicc/meteor-famous-views.svg?branch=master)](https://travis-ci.org/gadicc/meteor-famous-views)
+## famous-views for Meteor [![Build Status](https://api.travis-ci.org/gadicc/meteor-famous-views.svg?branch=master)](https://travis-ci.org/gadicc/meteor-famous-views)
 
-*Doing Famous the Meteor Way*
+![famous-views-logo](https://raw.githubusercontent.com/gadicc/meteor-famous-views/master/assets/meteor_famous_view_logo.png)
+
+> Doing Famous the Meteor Way
 
 Famous-views (formerly famous-components) is an attempt at a tight integration
 between Blaze and Famous. All the other approaches I've seen so far side step
@@ -232,7 +234,7 @@ for what we keep in a compView instance.
 * `FView.fromElement` -- as above but for a DOM element.  If you're using
 jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
 element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
-containing view in the case of a sequence (need to think about this). 
+containing view in the case of a sequence (need to think about this).
 
 For more examples see the live demo at
 [famous-views.meteor.com](https://famous-views.meteor.com/).
@@ -312,7 +314,7 @@ is a StateModifier.
   (inline)    ("endtext")  (HTML from
  {{#famous}}       |         "page")
                 modifier
-                   |    
+                   |
            SequentialLayout
                    |
                 surface
@@ -322,7 +324,7 @@ is a StateModifier.
 
 ```
                 Context
-                    | 
+                    |
                 compView
               ("scroller")
                     |
@@ -346,7 +348,7 @@ is used to `require` Famous (and anything else for that matter; a super big
 deal for us Meteorites), but more so, for his stellar efforts at super quick
 enhancements to the package for things I needed for this package.  Thanks raix!
 
-* Big props also to sayawan, for his 
+* Big props also to sayawan, for his
 [leaderboard](https://github.com/sayawan/meteor-famous-leaderboard)
 example.  This was the first app written by someone else using famous-views,
 in under 24 hours after it was first made public.
