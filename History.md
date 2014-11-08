@@ -3,6 +3,8 @@
 * famousContext improvements.  Amongst other changes, you can now pass
   it an `id` and find it again with `FView.byId()`, like anything else.
 
+* bugfix: don't use parent's options when no attributes are specified
+
 * test improvements - faster, more robust
 * clarify famousContext usage in API docs
 * improve QuickStart instructions
