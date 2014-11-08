@@ -1,4 +1,4 @@
-<template name="views_README">
+<template name="views_register">
   {{#Surface size="[undefined,undefined]"}}
     <div id="main" role="main">
       <h1>Using Views from Famous</h1>
@@ -133,6 +133,27 @@
           }
 
         });
+      {{else}}
+        {{#if currentLang "coffeescript"}}
+          FView.registerView 'MyView', myViewClass,
+            # If exists, called instead of the view's own add() method
+            add: (child_fview, child_options) ->
+              target = child_options.target
+              unless target
+                throw new Error 'HeaderFooterLayout must specify target="header/footer/content"'
+              # `this` or `@` is the fview for this instance
+              this.view[target].add child_fview
+            # If exists, called when an attribute is reactively updated
+            attrUpdate: (key, value, oldValue, data, firstTime) ->
+              # `this` or `@` is the fview for this instance
+              switch key
+                when 'specialX', 'specialY'
+                  @view.setSpecial key, value
+            # If exists, called after adding the node to the render tree
+            famousCreatedPost: ->
+              # `this` or `@` is the fview for this instance
+              @pipeChildrenTo = if @parent.pipeChildrenTo? then [ @view, @parent.pipeChildrenTo[0] ] else [ @view ]
+        {{/if}}
       {{/snippet}}
 
       <p>See some <a href="https://github.com/gadicc/meteor-famous-components/tree/master/lib/views">actual examples</a> from the source code of our pre-built
