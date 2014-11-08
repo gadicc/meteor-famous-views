@@ -1,95 +1,127 @@
 <template name="views_GridLayout">
-	{{#Scrollview items=items}}
+  {{#Scrollview items=items}}
 
-		{{! size, cellSize, etc all seem to be ignored by famous?? }}
-		{{#GridLayout items=items size="[undefined,undefined]"
-				dimensions="[3,3]"}}
+    {{! size, cellSize, etc all seem to be ignored by famous?? }}
+    {{#GridLayout items=items size="[undefined,undefined]"
+        dimensions="[3,3]"}}
 
-			{{#ContainerSurface size="[undefined,undefined]"}}
-				{{#Surface size="[undefined,undefined]"}}
-					<div style="margin-top: 50px; padding: 20px">
-						Demo of a <code>[3,3]</code> GridLayout (try resize
-						the window).
-						Any <code>{{dstache}}#famous}}</code> node can be placed
-						in a GridLayout, including data from <code>famousEach</code>.
-						Scroll down to see the source.
-					</div>
-				{{/Surface}}
-				{{#Surface class='gridLabel gridLabelHeading'
-						size="[undefined,38]" align="[0,1]" origin="[0,1]"}}
-					GridLayout Example
-				{{/Surface}}
-			{{/ContainerSurface}}
+      {{#ContainerSurface size="[undefined,undefined]"}}
+        {{#Surface size="[undefined,undefined]"}}
+          <div style="margin-top: 50px; padding: 20px">
+            Demo of a <code>[3,3]</code> GridLayout (try resize
+            the window).
+            Any <code>{{dstache}}#famous}}</code> node can be placed
+            in a GridLayout, including data from <code>famousEach</code>.
+            Scroll down to see the source.
+          </div>
+        {{/Surface}}
+        {{#Surface class='gridLabel gridLabelHeading'
+            size="[undefined,38]" align="[0,1]" origin="[0,1]"}}
+          GridLayout Example
+        {{/Surface}}
+      {{/ContainerSurface}}
 
-			{{#famousEach items}}
-				{{>ContainerSurface template='gridItem' modifier="StateModifier"
-					size='[undefined,undefined]'}}
-			{{/famousEach}}
+      {{#famousEach items}}
+        {{>ContainerSurface template='gridItem' modifier="StateModifier"
+          size='[undefined,undefined]'}}
+      {{/famousEach}}
 
-		{{/GridLayout}}
+    {{/GridLayout}}
 
-		{{>famous template='gridLayoutSource' view='Surface' size='[undefined,true]'}}
+    {{>famous template='gridLayoutSource' view='Surface' size='[undefined,true]'}}
 
-	{{/Scrollview}}
+  {{/Scrollview}}
 </template>
 
 <template name="gridItem">
-	{{#Surface class='gridImg' size='[undefined,undefined]'}}
-		<img src="{{picUrl}}" />
-	{{/Surface}}
-	{{#Surface class='gridLabel'
-			size="[undefined,38]" align="[0,1]" origin="[0,1]" translate="[0,0,1]"}}
-		{{name}}
-	{{/Surface}}
+  {{#Surface class='gridImg' size='[undefined,undefined]'}}
+    <img src="{{picUrl}}" />
+  {{/Surface}}
+  {{#Surface class='gridLabel'
+      size="[undefined,38]" align="[0,1]" origin="[0,1]" translate="[0,0,1]"}}
+    {{name}}
+  {{/Surface}}
 </template>
 
 <template name="gridLayoutSource">
-	{{#snippet lang="spacebars"}}
-		&lt;template name="views_GridLayout">
-			{{dstache}}#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]"}}
-				{{dstache}}#famousEach items}}
-					{{dstache}}>View template='gridItem' modifier="StateModifier"
-					  size='[undefined,undefined]'}}
-				{{dstache}}/famousEach}}
-			{{dstache}}/GridLayout}}
-		&lt;/template>
+  {{#snippet lang="spacebars"}}
+    &lt;template name="views_GridLayout">
+      {{dstache}}#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]"}}
+        {{dstache}}#famousEach items}}
+          {{dstache}}>View template='gridItem' modifier="StateModifier"
+            size='[undefined,undefined]'}}
+        {{dstache}}/famousEach}}
+      {{dstache}}/GridLayout}}
+    &lt;/template>
 
-		&lt;template name="gridItem">
-			{{dstache}}#Surface class='gridImg' size='[undefined,undefined]'}}
-				<img src="{{dstache}}picUrl}}" />
-			{{dstache}}/Surface}}
-			{{dstache}}#Surface class='gridLabel'
-					size="[undefined,38]" align="[0,1]" origin="[0,1]" translate="[0,0,1]"}}
-				{{dstache}}name}}
-			{{dstache}}/Surface}}
-		&lt;/template>				
-	{{/snippet}}
+    &lt;template name="gridItem">
+      {{dstache}}#Surface class='gridImg' size='[undefined,undefined]'}}
+        <img src="{{dstache}}picUrl}}" />
+      {{dstache}}/Surface}}
+      {{dstache}}#Surface class='gridLabel'
+          size="[undefined,38]" align="[0,1]" origin="[0,1]" translate="[0,0,1]"}}
+        {{dstache}}name}}
+      {{dstache}}/Surface}}
+    &lt;/template>
+  {{else}}
+    {{#if currentLang "jade"}}
+      template(name='views_GridLayout')
+        +GridLayout items=items size='[undefined,undefined]' dimensions='[3,3]'
+          +famousEach items
+            +View template='gridItem' modifier='StateModifier' size='[undefined,undefined]'
 
-	{{#snippet lang="javascript"}}
-		Template.views_GridLayout.helpers({
-			items: function() {
-			  return Items.find({}, {sort: {name: 1}, limit: 8});
-			}
-		});
+      template(name='gridItem')
+        +Surface class='gridImg' size='[undefined,undefined]'
+          img(src=picUrl)
+        +Surface class='gridLabel' size='[undefined,38]' align='[0,1]' origin='[0,1]' translate='[0,0,1]'
+          |= name
+    {{/if}}
+  {{/snippet}}
 
-		/* Entrance animation code follows */
-		var queue = [];
-		Template.gridItem.rendered = function() {
-			var modifier = FView.from(this).modifier;
+  {{#snippet lang="javascript"}}
+    Template.views_GridLayout.helpers({
+      items: function() {
+        return Items.find({}, {sort: {name: 1}, limit: 8});
+      }
+    });
 
-			modifier.setTransform(Transform.translate(500,500));
+    /* Entrance animation code follows */
+    var queue = [];
+    Template.gridItem.rendered = function() {
+      var modifier = FView.from(this).modifier;
 
-			queue.push(function() {
-				modifier.setTransform(
-					Transform.translate(0,0),
-					{ duration : 1000, curve: 'easeInOut' }
-			  );
-			});
-		}
+      modifier.setTransform(Transform.translate(500,500));
 
-		Meteor.setInterval(function() {
-			if (queue.length)
-				queue.shift()();
-		}, 100);
-	{{/snippet}}
+      queue.push(function() {
+        modifier.setTransform(
+          Transform.translate(0,0),
+          { duration : 1000, curve: 'easeInOut' }
+        );
+      });
+    }
+
+    Meteor.setInterval(function() {
+      if (queue.length)
+        queue.shift()();
+    }, 100);
+  {{else}}
+    {{#if currentLang "coffeescript"}}
+      Template.views_GridLayout.helpers
+        items: ->
+          Items.find {}, limit: 8, sort: name: 1
+
+      # Entrance animation code follows
+      queue = []
+      Template.gridItem.rendered = ->
+        modifier = (FView.from @).modifier
+        modifier.setTransform (Transform.translate 500,500)
+        queue.push ->
+          modifier.setTransform (Transform.translate 0, 0),
+            duration : 1000, curve: 'easeInOut'
+
+      Meteor.setInterval ->
+        queue.shift()() unless queue.length is 0
+      , 100
+    {{/if}}
+  {{/snippet}}
 </template>
