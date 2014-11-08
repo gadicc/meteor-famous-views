@@ -2,63 +2,55 @@
   {{#Surface size="[undefined,undefined]"}}
     <div id="main" role="main">
     	<h1>Frequently Asked Questions</h1>
-
     	<p>Read through these to avoid unnecessary misery :)</p>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5>Views work on desktop but don't (or look weird) on mobile or emulation</h5>
+        </div>
+        <div class="panel-body">
+          Disable user scaling by putting the following in your
+          <code>&lt;head></code>:<br />
+          <code>&lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
+          </code>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5>DOM not updated / <code>$(selector)</code> not working (inside <code>rendered()</code> callback)</h5>
+        </div>
+        <div class="panel-body">
+          It would be great but very inefficient for us to emulate Meteor's
+          behaviour exactly.  Note that as per the
+          <a href="http://famo.us/guides/pitfalls">Famo.us Pitfalls</a>
+          guide, pinging the DOM <i>is really bad practice</i> and can cause
+          performance problems in your app.  Two easy workarounds:
 
-    	<ol class="faq">
+          <ol>
+            <li><b>Use <code>this.$()</code> instead</b> - since although your
+            template is not in the DOM yet, it is part of the DOM range in
+            your template instance.  <i>This is much faster too</i>.</li>
 
-    		<li>
-    			<div class="q">
-    				Views work on desktop but don't (or look weird) on mobile or emulation
-    			</div>
-    			<div class="a">
-    				Disable user scaling by putting the following in your
-    				<code>&lt;head></code>:<br />
-    				<code>&lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
-  					</code>
-  				</div>
-  			</li>
+            <li><b>Wrap your code in
+            <code>window.requestAnimationFrame()</code></b>,
+            if you need your DIV to be "fully rendered", i.e., not just on the
+            DOM, but updated by Famous too.  This is because Famo.us buffers
+            changes for performance, and this way you'll ensure your code runs
+            after the commit.  <i>Avoid if possible.</i></li>
+          </ol>
+        </div>
+      </div>
 
-        <li>
-          <div class="q">
-            DOM not updated / <code>$(selector)</code> not working (inside <code>rendered()</code> callback)
-          </div>
-          <div class="a">
-            It would be great but very inefficient for us to emulate Meteor's
-            behaviour exactly.  Note that as per the
-            <a href="http://famo.us/guides/pitfalls">Famo.us Pitfalls</a>
-            guide, pinging the DOM <i>is really bad practice</i> and can cause
-            performance problems in your app.  Two easy workarounds:
-
-            <ol>
-              <li><b>Use <code>this.$()</code> instead</b> - since although your
-              template is not in the DOM yet, it is part of the DOM range in
-              your template instance.  <i>This is much faster too</i>.</li>
-
-              <li><b>Wrap your code in
-              <code>window.requestAnimationFrame()</code></b>,
-              if you need your DIV to be "fully rendered", i.e., not just on the
-              DOM, but updated by Famous too.  This is because Famo.us buffers
-              changes for performance, and this way you'll ensure your code runs
-              after the commit.  <i>Avoid if possible.</i></li>
-            </ol>
-          </div>
-        </li>
-
-        <li>
-          <div class="q">
-            In Meteor Cordova IOS clicks are recorded twice
-          </div>
-          <div class="a">
-            See <a href="https://github.com/gadicc/meteor-famous-views/issues/89">issue #89</a>.
-            In brief you have probably <code>FastClick</code> installed twice
-            (once via Meteor and once via Famous) and you should remove one
-            of them.  See the issue for more info.
-          </div>
-        </li>
-
-  		</ol>
-
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h5>In Meteor Cordova IOS clicks are recorded twice</h5>
+        </div>
+        <div class="panel-body">
+          See <a href="https://github.com/gadicc/meteor-famous-views/issues/89">issue #89</a>.
+          In brief you have probably <code>FastClick</code> installed twice
+          (once via Meteor and once via Famous) and you should remove one
+          of them.  See the issue for more info.
+        </div>
+      </div>
     </div>
   {{/Surface}}
 </template>

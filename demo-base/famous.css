@@ -1,20 +1,8 @@
-/* CSS declarations go here */
-
-#notice {
-	background: #85144B;
-	border: 1px solid black;
-	padding: 5px;
-	text-align: center;
-	margin-bottom: 5px;
-	font-family: verdana;
-	color: white;
-	font-weight: bold;
+.navbar-brand {
+	padding: 0;
 }
-#notice a { color: #ccf; }
 
 #header {
-	background: black;
-	color: white;
 	padding: 5px;
 }
 
@@ -22,9 +10,7 @@
 .leftPad, .padLeft { padding-left: 20px; }
 .pagePad { padding-left: 20px; padding-right: 20px; }
 
-
 .navbar-fixed-top { z-index: 100; }
-.navbar-brand.active { color: white; background: black; }
 
 .full { width: 100%; height: 100%; }
 
@@ -36,22 +22,6 @@
 .margin10 {
 	margin: 0 10px 0 10px;
 }
-
-/*
-div.code {
-	border: 1px solid #aaa;
-	background: #efefef;
-	padding: 10px;
-	border-radius: 5px;
-	margin: 0 10px 0 10px;
-}
-
-div.code > .syntaxhighlighter {
-	border-radius: 5px;
-	padding: 1em;
-	margin: 0 !important;
-}
-*/
 
 pre[class*="language-"] {
 	overflow-y: hidden;

@@ -24,7 +24,7 @@ Template.views_EdgeSwapper.helpers({
 Template.es_buttons.helpers({
 	'buttons': ['es_surface1', 'es_surface2', 'es_surface3'],
 	isSet: function() {
-		return this.valueOf() == Session.get('esTemplate') ? 'set' : '';
+		return this.valueOf() == Session.get('esTemplate') ? 'disabled' : '';
 	}
 });
 Template.es_buttons.events({

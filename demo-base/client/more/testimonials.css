@@ -1,5 +1,4 @@
 .testimonial {
-	background: #f3f3f3;
 	margin: 20px 0 20px 0;
 	position: relative;
 	padding: 30px 30px 30px 250px;
@@ -41,7 +40,6 @@
 	line-height: 1.45;
 	font-size: 18px;
 	position: relative;
-	color: #333;
 	text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
 
 	/* undo bs3 */
@@ -49,10 +47,9 @@
 	margin: 0;
 }
 
-.testimonial > blockquote:before, 
+.testimonial > blockquote:before,
 .testimonial > blockquote:after {
 	font-size: 80px;
-	color: #7a7a7a;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.7);
 }
 
@@ -73,13 +70,12 @@
 
 
 .testimonial > blockquote > cite {
-	color: #999999;
 	font-size: 18px;
 	display: block;
 	margin-top: 10px;
 	margin-left: 20px;
 }
- 
+
 .testimonial > blockquote > cite:before {
 	content: "\2014 \2009";
 }

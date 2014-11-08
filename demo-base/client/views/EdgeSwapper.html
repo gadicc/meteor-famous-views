@@ -115,15 +115,10 @@
 </template>
 
 <template name="es_buttons">
-  <style type="text/css">
-    button.set { border: 2px solid black; }
-  </style>
-  <p>
   {{#each buttons}}
-    <button class="{{isSet}}">
+    <button class="btn btn-primary" {{isSet}}>
       Session.set('currentTemplate', '{{this}}');
     </button>
     <br />
   {{/each}}
-  </p>
 </template>

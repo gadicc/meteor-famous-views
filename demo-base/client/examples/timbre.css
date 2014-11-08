@@ -16,9 +16,11 @@
 
 .timbre-main {
 	padding: 20px;
-	background: #dfdfdf;
+	background: gainsboro;
+	color: dimgray;
 }
 
 .timbre-cs {
 	border: 1px solid black;
+	background: white;
 }

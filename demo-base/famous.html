@@ -20,10 +20,15 @@
       <div id="header">{{> yield region="header"}}</div>
     {{/Surface}}
 
-    {{#RenderController target="content" transition=getTransition}}
-        {{>yield}}
-    {{/RenderController}}
-
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          {{#RenderController target="content" transition=getTransition}}
+              {{>yield}}
+          {{/RenderController}}
+        </div>
+      </div>
+    </div>
   {{/HeaderFooterLayout}}
 </template>
 
@@ -38,7 +43,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">MeteorFamousViews</a>
+        <a class="navbar-brand" href="/">
+          <img src="/meteor_famous_view_logo.svg" height="75" width="90">
+        </a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -62,13 +69,17 @@
 <template name="home">
   {{#Surface}}
     <div id="main" role="main">
-    	<h1>famous-views (for Meteor)</h1>
-
-    	<div id="notice">
-        Congrats to <b>@splendido</b> on
-        <a href="https://groups.google.com/d/msg/meteor-talk/UnshJRCNTcc/3lmUewcopo4J">winning</a> our competition with
-        <a href="https://github.com/meteor-useraccounts/famous-wrapper">useraccounts:famous-wrapper</a>.
-    	</div>
+      <div class="jumbotron center">
+        <h1 class="text-center"><img src='/meteor_famous_view_logo.svg' width='200px'> famous-views <small>for Meteor</small></h1>
+      </div>
+      <h3 class='text-center'>
+        <label class='label label-primary'>
+          <span class='glyphicon glyphicon-bullhorn'></span>
+          Congrats to <b>@splendido</b> on
+          <a href="https://groups.google.com/d/msg/meteor-talk/UnshJRCNTcc/3lmUewcopo4J">winning</a> our competition with
+          <a href="https://github.com/meteor-useraccounts/famous-wrapper">useraccounts:famous-wrapper</a>.
+        </label>
+      </h3>
 <p>
 Famous-views (formerly famous-components)
 is an attempt at a tight integration between Blaze and Famous. All the other
