@@ -5,71 +5,88 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 -->
 
 <template name="views_Scrollview">
-	{{#Scrollview}}
+  {{#Scrollview}}
 
-		{{#Surface size="[undefined,true]" class="margin10"}}
-			<h3>Scrollview Demo</h3>
-			<!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
-			<p>Scroll to bottom to see source</p>
-		{{/Surface}}
+    {{#Surface size="[undefined,true]" class="margin10"}}
+      <h3>Scrollview Demo</h3>
+      <!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
+      <p>Scroll to bottom to see source</p>
+    {{/Surface}}
 
-		{{#famousEach items}}
-			{{#Surface size='[undefined,50]'}}
-				<div class="listItem">{{name}}</div>
-			{{/Surface}}
-		{{/famousEach}}
+    {{#famousEach items}}
+      {{#Surface size='[undefined,50]'}}
+        <div class="listItem">{{name}}</div>
+      {{/Surface}}
+    {{/famousEach}}
 
-		{{>Surface template='Scrollview_source' size="[undefined,true]"}}
-	{{/Scrollview}}
+    {{>Surface template='Scrollview_source' size="[undefined,true]"}}
+  {{/Scrollview}}
 </template>
 
 <template name="moo">{{> UI.contentBlock}}</template>
 
 <template name="Scrollview_source">
-	<div class="code">
-		{{#snippet lang="spacebars"}}
-			{{dstache}}#Scrollview}}
+  <div class="code">
+    {{#snippet lang="spacebars"}}
+      {{dstache}}#Scrollview}}
 
-				{{dstache}}#Surface size="[undefined,true]"}}
-					Surface above the list (source code at bottom)
-				{{dstache}}/Surface}}
+        {{dstache}}#Surface size="[undefined,true]"}}
+          Surface above the list (source code at bottom)
+        {{dstache}}/Surface}}
 
-				{{dstache}}#famousEach items}}
-					{{dstache}}#Surface size="[undefined,50]"}}
-						<div class="listItem">{{dstache}}name}}</div>
-					{{dstache}}/Surface}}
-				{{dstache}}/famousEach}}
+        {{dstache}}#famousEach items}}
+          {{dstache}}#Surface size="[undefined,50]"}}
+            <div class="listItem">{{dstache}}name}}</div>
+          {{dstache}}/Surface}}
+        {{dstache}}/famousEach}}
 
-				{{dstache}}>Surface template="Scrollview_source" size="[undefined,true]"}}
+        {{dstache}}>Surface template="Scrollview_source" size="[undefined,true]"}}
 
-			{{dstache}}/Scrollview}}
-		{{/snippet}}
-	</div>
+      {{dstache}}/Scrollview}}
+    {{else}}
+      {{#if currentLang "jade"}}
+        +Scrollview
+          +Surface size='[undefined,true]'
+            | Surface above the list (source code at bottom)
+          +famousEach items
+            +Surface size='[undefined,50]'
+              .listItem= name
+          +Surface template='Scrollview_source' size='[undefined,true]'
+            | Default content
+      {{/if}}
+    {{/snippet}}
+  </div>
 
-	<div class="code" style="margin-top: 10px">
-		{{#snippet lang="javascript"}}
-			Template.views_Scrollview.helpers({
-				items: function() {
-				  return Items.find({}, {sort: {name: 1}});
-				}
-			});
-		{{/snippet}}
-	</div>
+  <div class="code" style="margin-top: 10px">
+    {{#snippet lang="javascript"}}
+      Template.views_Scrollview.helpers({
+        items: function() {
+          return Items.find({}, {sort: {name: 1}});
+        }
+      });
+    {{else}}
+      {{#if currentLang "coffeescript"}}
+        Template.views_Scrollview.helpers
+          items: ->
+            Items.find {}, sort: name: 1
+      {{/if}}
+    {{/snippet}}
+  </div>
 </template>
 
 <!-- alternatively could be done like below -->
 
 <!-- router page -->
 <template name="_Scrollview">
-	{{>famous template='list' view='Scrollview' size="undefined,undefined"}}
+  {{>famous template='list' view='Scrollview' size="undefined,undefined"}}
 </template>
 
 <!-- will be loaded as a Scrollview -->
 <template name="list" view="Scrollview (requires PR)">
-	{{>famousEach data=items template='listItem' size='undefined,100'}}
+  {{>famousEach data=items template='listItem' size='undefined,100'}}
 </template>
 
 <!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
 <template name="listItem">
-	<div class="listItem">{{name}}</div>
+  <div class="listItem">{{name}}</div>
 </template>
