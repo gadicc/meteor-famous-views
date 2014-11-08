@@ -22,13 +22,17 @@ if (Meteor.isServer) {
   if (x) Items.update(x._id, { $set: { picUrl: 'http://www.teleread.com/wp-content/uploads/2012/10/Android-Eclair.png' }});
   x = Items.findOne({picUrl: 'http://mandal.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png'});
   if (x) Items.update(x._id, { $set: { picUrl: 'http://www.androidheadlines.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png' }});
-  
+
 }
 
 if (Meteor.isClient) {
 
   // Force debug logging even on production for famous-views.meteor.com
   Logger.setLevel('famous-views', 'debug');
+
+  FView.ready(function() {
+    famous.polyfills;
+  });
 
   navbar = null;
   Template.header.rendered = function() {
