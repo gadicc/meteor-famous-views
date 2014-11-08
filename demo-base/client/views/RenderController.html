@@ -1,117 +1,145 @@
 <template name="views_RenderController">
-	{{#Scrollview size="[undefined,undefined]"}}
-		{{#Modifier size="[undefined,1000]"}}
-			{{#Surface size="[undefined,undefined]" class="padLeft"}}
-				<h1>RenderController demo</h1>
+  {{#Scrollview size="[undefined,undefined]"}}
+    {{#Modifier size="[undefined,1000]"}}
+      {{#Surface size="[undefined,undefined]" class="padLeft"}}
+        <h1>RenderController demo</h1>
 
-				<p>We can wrap any dynamically rendered template inside a
-				RenderController transition in/out template create/destroys.<br />
-				For example, this site wraps iron-router's <code>{{dstache}}>yield}}</code> to fade-in and fade-out each route's page.</p>
+        <p>We can wrap any dynamically rendered template inside a
+        RenderController transition in/out template create/destroys.<br />
+        For example, this site wraps iron-router's <code>{{dstache}}>yield}}</code> to fade-in and fade-out each route's page.</p>
 
-				<p>In the example below, we demonstrate fancier transitions
-				with a dynamic template:</p>
+        <p>In the example below, we demonstrate fancier transitions
+        with a dynamic template:</p>
 
-				{{#snippet lang="spacebars"}}
-					{{dstache}}#RenderController transition=getTransition size="[150,150]"}}
-						{{dstache}}>showTemplate name=currentTemplate}}
-					{{dstache}}/RenderController}}
-				{{/snippet}}
+        {{#snippet lang="spacebars"}}
+          {{dstache}}#RenderController transition=getTransition size="[150,150]"}}
+            {{dstache}}>showTemplate name=currentTemplate}}
+          {{dstache}}/RenderController}}
+        {{else}}
+          {{#if currentLang "jade"}}
+            +RenderController transition=getTransition size='[150,150]'
+              +showTemplate name=currentTemplate
+          {{/if}}
+        {{/snippet}}
 
-				{{>rc_buttons}}
-				{{>rc_transitions}}
-				{{>rc_useForPages}}
+        {{>rc_buttons}}
+        {{>rc_transitions}}
+        {{>rc_useForPages}}
 
-				{{#snippet lang="javascript"}}
-					Template.views_RenderController.helpers({
-						'showTemplate': function() {
-							return Template[this.name];
-						},
-						'getTransition': function() {
-							return Session.get('currentTransition');
-						}
-					});
+        {{#snippet lang="javascript"}}
+          Template.views_RenderController.helpers({
+            'showTemplate': function() {
+              return Template[this.name];
+            },
+            'getTransition': function() {
+              return Session.get('currentTransition');
+            }
+          });
 
-					Session.setDefault('currentTemplate', 'rc_surface1');
-					Template.views_RenderController.helpers({
-						currentTemplate: function() {
-							return Session.get('currentTemplate');
-						}
-					});				
+          Session.setDefault('currentTemplate', 'rc_surface1');
+          Template.views_RenderController.helpers({
+            currentTemplate: function() {
+              return Session.get('currentTemplate');
+            }
+          });
 
-					Template.rc_buttons.events({
-						'click button': function(event, tpl) {
-							Session.set('currentTemplate', this.valueOf());
-						}
-					});
-				{{/snippet}}
+          Template.rc_buttons.events({
+            'click button': function(event, tpl) {
+              Session.set('currentTemplate', this.valueOf());
+            }
+          });
+        {{else}}
+          {{#if currentLang "coffeescript"}}
+            Template.views_RenderController.helpers
+              showTemplate: ->
+                Template[@name]
+              getTransition: ->
+                Session.get 'currentTransition'
 
-				{{#snippet lang="spacebars"}}
-					&lt;template name="rc_surface1"&gt;
-						{{dstache}}#Surface class="red-bg" align="[0,0]" origin="[0,0]" size="[75,150]"}}
-							<div class="full">#1</div>
-						{{dstache}}/Surface}}
-					&lt;/template&gt;
-				{{/snippet}}
+            Session.setDefault 'currentTemplate', 'rc_surface1'
+            Template.views_RenderController.helpers
+              currentTemplate: ->
+                Session.get 'currentTemplate'
 
-				<p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see RenderController.html and
-				RenderController.html)</p>
-			{{/Surface}}
+            Template.rc_buttons.events
+              'click button': (event, tpl) ->
+                Session.set 'currentTemplate', @valueOf()
+          {{/if}}
+        {{/snippet}}
 
-			{{#RenderController transition=getTransition
-					size="[150,150]" translate="[620,175]"}}
-				{{>showTemplate name=currentTemplate}}
-			{{/RenderController}}
+        {{#snippet lang="spacebars"}}
+          &lt;template name="rc_surface1"&gt;
+            {{dstache}}#Surface class="red-bg" align="[0,0]" origin="[0,0]" size="[75,150]"}}
+              <div class="full">#1</div>
+            {{dstache}}/Surface}}
+          &lt;/template&gt;
+          {{else}}
+            {{#if currentLang "jade"}}
+              template(name='rc_surface1')
+                +Surface class='red-bg' align='[0,0]' origin='[0,0]' size='[75,150]'
+                  .full #1
+            {{/if}}
+        {{/snippet}}
 
-		{{/Modifier}}
-	{{/Scrollview}}
+        <p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see RenderController.html and
+        RenderController.html)</p>
+      {{/Surface}}
+
+      {{#RenderController transition=getTransition
+          size="[150,150]" translate="[620,175]"}}
+        {{>showTemplate name=currentTemplate}}
+      {{/RenderController}}
+
+    {{/Modifier}}
+  {{/Scrollview}}
 </template>
 
 <template name="rc_buttons">
-	<style type="text/css">
-		button.set { border: 2px solid black; }
-	</style>
-	<p>
-	{{#each buttons}}
-		<button class="{{isSet}}">
-			Session.set('currentTemplate', '{{this}}');
-		</button>
-		<br />
-	{{/each}}
-	</p>
+  <style type="text/css">
+    button.set { border: 2px solid black; }
+  </style>
+  <p>
+  {{#each buttons}}
+    <button class="{{isSet}}">
+      Session.set('currentTemplate', '{{this}}');
+    </button>
+    <br />
+  {{/each}}
+  </p>
 </template>
 
 <template name="rc_transitions">
-	<p>
-		Transition:
-		{{#each transitions}}
-			<button class="{{isSet}}">{{this}}</button>
-		{{/each}}
-	</p>
+  <p>
+    Transition:
+    {{#each transitions}}
+      <button class="{{isSet}}">{{this}}</button>
+    {{/each}}
+  </p>
 </template>
 
 <template name="rc_useForPages">
-	<p>
-		<label>
-			<input type="checkbox" checked="{{checked}}">
-			Use transition for page changes on the rest of the site too
-		</label>
-	</p>
+  <p>
+    <label>
+      <input type="checkbox" checked="{{checked}}">
+      Use transition for page changes on the rest of the site too
+    </label>
+  </p>
 </template>
 
 <template name="rc_surface1">
-	{{#Surface class="red-bg" origin="[0,0]" align="[0,0]" size="[75,150]"}}
-		<div class="full">#1</div>
-	{{/Surface}}
+  {{#Surface class="red-bg" origin="[0,0]" align="[0,0]" size="[75,150]"}}
+    <div class="full">#1</div>
+  {{/Surface}}
 </template>
 
 <template name="rc_surface2">
-	{{#Surface class="green-bg" origin="[.5,.5]" align="[0.5,0.5]" size="[150,75]"}}
-		<div class="full">#2</div>
-	{{/Surface}}
+  {{#Surface class="green-bg" origin="[.5,.5]" align="[0.5,0.5]" size="[150,75]"}}
+    <div class="full">#2</div>
+  {{/Surface}}
 </template>
 
 <template name="rc_surface3">
-	{{#Surface class="blue-bg" origin="[1,1]" align="[1,1]" size="[75,150]"}}
-		<div class="full">#3</div>
-	{{/Surface}}
+  {{#Surface class="blue-bg" origin="[1,1]" align="[1,1]" size="[75,150]"}}
+    <div class="full">#3</div>
+  {{/Surface}}
 </template>
