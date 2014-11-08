@@ -164,6 +164,17 @@
           famous.polyfills;
           famous.core.famous;
         });
+      {{else}}
+        {{#if currentLang "coffeescript"}}
+          @Transform = null
+
+          FView.ready ->
+            Transform = famous.core.Transform
+
+            # Famono: load famo.us shims and CSS
+            famous.polyfills
+            famous.core.famous
+        {{/if}}
       {{/snippet}}
     </div>
   {{/Surface}}

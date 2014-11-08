@@ -1,0 +1,164 @@
+<template name="views_register">
+  {{#Surface size="[undefined,undefined]"}}
+    <div id="main" role="main">
+      <h1>Using Views from Famous</h1>
+
+      <p>There has been a little confusion about the role of the famous-views
+      package.
+      Famous-views is <b>primarily</b> a low level wrapped around Famous,
+      and <b>secondarily</b> will provide pre-built views for common Famous
+      views (and ultimately, their prebuilt components too).</p>
+
+      <p>To clarify, <b>you don't need to see a view listed in this package
+      to be able to use it</b>.  Famous-views can as easily wrap <b>any
+      famous view</b>, that we haven't added yet, that someone in the community
+      wrote that's not part of official Famo.us and you downloaded, etc, etc.
+        Of course, if you do anything cool, send us a pull request on Github!</p>
+
+      <h2>Registering a new View</h2>
+
+      {{#snippet lang="javascript"}}
+        FView.registerView('Scrollview', famous.views.Scrollview);
+      {{else}}
+        {{#if currentLang "coffeescript"}}
+          FView.registerView 'Scrollview', famous.views.Scrollview
+        {{/if}}
+      {{/snippet}}
+
+      <p>This let's you do:</p>
+
+      {{#snippet lang="spacebars"}}
+        {{dstache}}#ScrollView arg1=blah arg2=etc}}
+          ...
+        {{dstache}}/ScrollView}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +Scrollview arg1=blah arg2=etc
+        {{/if}}
+      {{/snippet}}
+
+      <p>and also:</p>
+
+      {{#snippet lang="spacebars"}}
+        {{dstache}}>Scrollview template=name arg2=etc}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +Scrollview template=name arg2=etc
+        {{/if}}
+      {{/snippet}}
+
+      <h3>Out of the Box</h3>
+
+      <ul>
+        <li><p>Child templates will be added using the view's
+            <code>add()</code> method.  Alternatively, if the view provides
+            a <code>sequenceFrom()</code> method, children will be added to
+            a managed array, and <code>{{dstache}}#famousEach}}</code> may
+            be used (all reactive, of course).</p></li>
+
+        <li><p>Attributes are automatically decoded like in all the view
+        examples; strings like <code>dimensions="[3,3]"</code> are translated
+        to an array of 2 numbers; otherwise functions (i.e. reactive
+            template helpers) may be used instead to provide an exact value.</p></li>
+
+            <li><p>You can also specify values like
+            <code>transform="eval:Transform.rotateZ(Math.PI)"</code>
+            etc, provided you first set <code>FView.attrEvalAllowedKeys = '*'</code>
+            or <code>FView.attrEvalAllowedKeys = ['transform']</code>,            understand the security implications, and have <code>Transform</code>
+            declared in your global scope.  This is safe if you only use
+            it when defining your templates.  For reactive helpers, ensure that
+            they can never return text which may be influenced by the user.  If
+            you're developing a package, bare in mind that many sites completely
+            disable <code>eval</code>.</p></li>
+
+            <li><p>If the view has a <code>setOptions()</code> method,
+            it will be reactively called on any invalidation of any
+            of the above arguments.  For custom methods, see the
+            <code>attrUpdate</code> callback in "Advanced Views", below.
+            </p></li>
+
+            <li><p>If no modifier is specified, but typical arguments for a
+            one are given, e.g.
+            <code>translate="[100,100]"</code>, a Modifier is automatically
+            prepended to the Render Tree as part of the MeteorFamousView.
+            Likewise, for <code>size="[undefined,undefined"]</code>, etc,
+            when using a View which doesn't support sizing.</p></li>
+
+        <li><p>When called like <code>{{dstache}}>View template="x"}}</code>,
+        of course all the regular Meteor template stuff applies, so you can
+        do things in <code>Template.x.rendered = function() { }</code>, setup
+        events, etc.</p></li>
+
+            <li><p>Specifying <code>id="uniqueId"</code> (on the assumption
+            that your view
+            will only ever be rendered once, simultaneously), let's you access
+            the rendered MeteorFamousView with <code>FView.byId("uniqueId")</code>.
+            If you don't
+            specify an id, a unique, sequential numeric id is automatically
+            assigned; look for it in the JavaScript console, very useful for
+            debugging.</p></li>
+      </ul>
+
+      <h3>Advanced Views</h3>
+
+      {{#snippet lang="javascript"}}
+        FView.registerView('MyView', myViewClass, {
+
+          // If exists, called instead of the view's own add() method
+          add: function(child_fview, child_options) {
+            var target = child_options.target;
+            if (!target)
+              throw new Error("HeaderFooterLayout must specify target='header/footer/content'");
+            // `this` is the fview for this instance
+            this.view[target].add(child_fview);
+          },
+
+          // If exists, called when an attribute is reactively updated
+          attrUpdate: function(key, value, oldValue, data, firstTime) {
+                        // `this` is the fview for this instance
+            switch(key) {
+              case "specialX":
+              case "specialY":
+                this.view.setSpecial(key, value);
+                break;
+            }
+          }
+
+          // If exists, called after adding the node to the render tree
+          famousCreatedPost: function() {
+                        // `this` is the fview for this instance
+            this.pipeChildrenTo = this.parent.pipeChildrenTo
+              ? [ this.view, this.parent.pipeChildrenTo[0] ]
+              : [ this.view ];
+          }
+
+        });
+      {{else}}
+        {{#if currentLang "coffeescript"}}
+          FView.registerView 'MyView', myViewClass,
+            # If exists, called instead of the view's own add() method
+            add: (child_fview, child_options) ->
+              target = child_options.target
+              unless target
+                throw new Error 'HeaderFooterLayout must specify target="header/footer/content"'
+              # `this` or `@` is the fview for this instance
+              this.view[target].add child_fview
+            # If exists, called when an attribute is reactively updated
+            attrUpdate: (key, value, oldValue, data, firstTime) ->
+              # `this` or `@` is the fview for this instance
+              switch key
+                when 'specialX', 'specialY'
+                  @view.setSpecial key, value
+            # If exists, called after adding the node to the render tree
+            famousCreatedPost: ->
+              # `this` or `@` is the fview for this instance
+              @pipeChildrenTo = if @parent.pipeChildrenTo? then [ @view, @parent.pipeChildrenTo[0] ] else [ @view ]
+        {{/if}}
+      {{/snippet}}
+
+      <p>See some <a href="https://github.com/gadicc/meteor-famous-components/tree/master/lib/views">actual examples</a> from the source code of our pre-built
+      views.</p>
+
+     </div>
+  {{/Surface}}
+</template>
