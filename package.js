@@ -13,7 +13,8 @@ function configurePackage(api, testing) {
       'blaze@2.0.0',
       'templating@1.0.5',
       'tracker@1.0.2',
-      'observe-sequence@1.0.2'
+      'observe-sequence@1.0.2',
+      'reactive-dict@1.0.4'
     ],
     'client'
   );

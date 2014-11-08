@@ -1,9 +1,19 @@
 ## vNEXT
 
+## v0.1.22
+
 * famousContext improvements.  Amongst other changes, you can now pass
   it an `id` and find it again with `FView.byId()`, like anything else.
 
+* reactive properties in Scrollview, e.g. `fview.properties.get('index')`
+  will reactively invalidate when user changes pages on paginated sview
+
+* early support for `{{#Surface value="{{helper arg}}"}}` :)
+  i.e. putting a spacebars expression as a value for an attribute for
+  inside a view; pseudo-recursive-spacebars
+
 * bugfix: don't use parent's options when no attributes are specified
+* Surfaces: Fix empty text ("") value for reactive classes
 
 * test improvements - faster, more robust
 * clarify famousContext usage in API docs
