@@ -1,16 +1,11 @@
 <template name="layouts">
   {{#Scrollview}}
 
-    {{#Surface size="[undefined,60]" class="pagePad"}}
-      <h1>Layout Examples</h1>
-    {{/Surface}}
-
     {{#Surface size="[undefined,true]" class="pagePad"}}
+      <h1>Layout Examples</h1>
       <h2>Understanding Sizes in Famo.us</h2>
-
       <p>In short: <code>size="[width, height]"</code>, where width/height
       are values like:</p>
-
       <ul>
         <li><code>200</code> or any Number</li>
         <li><code>undefined</code> - full boundaries of parent container</li>
@@ -32,19 +27,20 @@
       to problems with "true" sized Surfaces inside a sequence (Scrollview,
       SequentialLayout, etc); this was addressed in Famo.us 0.3.0 and you
       should no longer use this feature.</p>
-    {{/Surface}}
 
-    {{#Surface size="[undefined,90]" class="pagePad"}}
       <h2>Horizontal SequentialLayout</h2>
       <p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow
       horizontally.</p>
     {{/Surface}}
 
-    {{#SequentialLayout direction="X" size="[undefined,110]" translate="[20,0]"}}
-      {{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
-      {{#Surface size="[150,100]" class="green-bg"}}#2{{/Surface}}
-      {{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
-    {{/SequentialLayout}}
+    {{#View size='[undefined, 110]' class='pagePad'}}
+      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+      {{#SequentialLayout direction="X" size="[undefined,100]" translate="[20,0]"}}
+        {{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
+        {{#Surface size="[150,100]" class="green-bg"}}#2{{/Surface}}
+        {{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
+      {{/SequentialLayout}}
+    {{/View}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
@@ -74,11 +70,13 @@
       for columns that fill the container (try resize the window)</p>
     {{/Surface}}
 
-    {{#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
-      {{#Surface size="[undefined,100]" class="red-bg"}}col1{{/Surface}}
-      {{#Surface size="[undefined,100]" class="green-bg"}}col2{{/Surface}}
-      {{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
-    {{/GridLayout}}
+    {{#ContainerSurface size="[undefined, 100]" class='pagePad'}}
+      {{#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
+        {{#Surface size="[undefined,100]" class="red-bg"}}col1{{/Surface}}
+        {{#Surface size="[undefined,100]" class="green-bg"}}col2{{/Surface}}
+        {{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
+      {{/GridLayout}}
+    {{/ContainerSurface}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
@@ -101,23 +99,24 @@
       <br />
     {{/Surface}}
 
-
-    {{#Surface size="[undefined,90]" class="pagePad"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>Centering / Fine-Tuning Layout</h2>
       <p>Use a plain <i>Modifier</i> to manually position child surfaces with
         <i>origin</i>, <i>align</i>, <i>size</i> and <i>translate</i>.</p>
     {{/Surface}}
 
-    {{#Modifier size="[undefined,160]"}}
-      {{#Surface class="green-bg"}}
-        background
-      {{/Surface}}
+    {{#ContainerSurface size="[undefined, 160]" class='pagePad'}}
+      {{#Modifier size="[undefined,160]"}}
+        {{#Surface class="green-bg"}}
+          background
+        {{/Surface}}
 
-      {{#Surface size="[75,75]" align="[0.5,0.5]" origin="[0.5,0.5]" translate='[0,0,1]'
-        class="red-bg"}}
-        block
-      {{/Surface}}
-    {{/Modifier}}
+        {{#Surface size="[75,75]" align="[0.5,0.5]" origin="[0.5,0.5]" translate='[0,0,1]'
+          class="red-bg"}}
+          block
+        {{/Surface}}
+      {{/Modifier}}
+    {{/ContainerSurface}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
@@ -155,12 +154,14 @@
       needing to do your own calculations.</p>
     {{/Surface}}
 
-    {{#Modifier size="[undefined,100]" class="pagePad"}}
-      {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
-        class="green-bg"}} background {{/Surface}}
-      {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
-        class="red-bg"}} 30% of parent's width and height {{/Surface}}
-    {{/Modifier}}
+    {{#ContainerSurface size="[undefined, 100]" class='pagePad'}}
+      {{#Modifier size="[undefined,100]" class="pagePad"}}
+        {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
+          class="green-bg"}} background {{/Surface}}
+        {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]" translate='[0,0,1]'
+          class="red-bg"}} 30% of parent's width and height {{/Surface}}
+      {{/Modifier}}
+    {{/ContainerSurface}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
