@@ -100,7 +100,7 @@
   </style>
   <p>
   {{#each buttons}}
-    <button class="{{isSet}}">
+    <button class="btn btn-primary {{isSet}}">
       Session.set('currentTemplate', '{{this}}');
     </button>
     <br />
@@ -112,7 +112,7 @@
   <p>
     Transition:
     {{#each transitions}}
-      <button class="{{isSet}}">{{this}}</button>
+      <button class="btn btn-primary {{isSet}}">{{this}}</button>
     {{/each}}
   </p>
 </template>
