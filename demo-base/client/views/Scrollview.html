@@ -7,15 +7,19 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="views_Scrollview">
   {{#Scrollview}}
 
-    {{#Surface size="[undefined,true]" class="margin10"}}
+    {{#Surface size="[undefined,true]" class="padLeft"}}
       <h3>Scrollview Demo</h3>
       <!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
       <p>Scroll to bottom to see source</p>
     {{/Surface}}
 
     {{#famousEach items}}
-      {{#Surface size='[undefined,50]'}}
-        <div class="listItem">{{name}}</div>
+      {{#Surface size='[undefined,50]' class='padLeft'}}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {{name}}
+          </div>
+        </div>
       {{/Surface}}
     {{/famousEach}}
 
@@ -26,7 +30,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="moo">{{> UI.contentBlock}}</template>
 
 <template name="Scrollview_source">
-  <div class="code">
+  <div class="code padLeft">
     {{#snippet lang="spacebars"}}
       {{dstache}}#Scrollview}}
 
@@ -57,7 +61,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
     {{/snippet}}
   </div>
 
-  <div class="code" style="margin-top: 10px">
+  <div class="code padLeft" style="margin-top: 10px">
     {{#snippet lang="javascript"}}
       Template.views_Scrollview.helpers({
         items: function() {
@@ -88,5 +92,9 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 
 <!-- used to generate surfaces, passed to Scrollview.sequenceFrom -->
 <template name="listItem">
-  <div class="listItem">{{name}}</div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      {{name}}
+    </div>
+  </div>
 </template>
