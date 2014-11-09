@@ -1,13 +1,13 @@
 <template name="reactivity">
   {{#Scrollview size="[undefined,undefined]"}}
-    {{#Surface size="[undefined,true]" class="leftPad"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h1>Reactivity</h1>
       <p>Famous-views fully embraces the principle of Meteor reactivity,
       bringing you all these benefits to Famous for rapid prototyping
       and generally awesome code.</p>
     {{/Surface}}
 
-    {{#Surface size="[undefined,true]" class="leftPad"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>GridView</h2>
       <p>Here's an example changing the number of columns based on
       the screen size:</p>
@@ -17,7 +17,7 @@
       <br>
     {{/Surface}}
 
-    {{#View size='[undefined, 100]' class='padLeft'}}
+    {{#View size='[undefined, 100]' class='pagePad'}}
       {{#Surface size='[undefined, undefined]'}}{{/Surface}}
       {{#StateModifier size=gridSize translate="[20,0]"}}
         {{#GridLayout dimensions=gridDimensions}}
@@ -29,9 +29,9 @@
     {{/View}}
 
     {{>Surface template="reactiveGridLayoutSource"
-      class="leftPad" size="[undefined,true]"}}
+      class="pagePad" size="[undefined,true]"}}
 
-    {{#Surface size="[undefined,true]" class="leftPad"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>StateModifier</h2>
       <p>Most commonly we probably want to change things like size,
       opacity, transforms, etc, and this is very easily handled with
@@ -40,7 +40,7 @@
       all the Session variables are preserved)</p>
     {{/Surface}}
 
-    {{#View size='[undefined, 230]' class='padLeft'}}
+    {{#View size='[undefined, 230]' class='pagePad'}}
       {{#Surface size='[undefined, undefined]'}}{{/Surface}}
       {{#SequentialLayout direction="X" size="[undefined,230]"}}
         {{>Surface template="reactivityModState" size="[400,undefined]"}}
@@ -53,7 +53,7 @@
       {{/SequentialLayout}}
     {{/View}}
     {{>Surface template="reactivityModStateSource"
-      size="[undefined,true]" class="leftPad"}}
+      size="[undefined,true]" class="pagePad"}}
   {{/Scrollview}}
 </template>
 

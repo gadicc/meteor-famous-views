@@ -7,14 +7,14 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="views_Scrollview">
   {{#Scrollview}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h3>Scrollview Demo</h3>
       <!-- {{#each items}}{{#moo}}{{#moo}}{{name}}{{/moo}}{{/moo}}{{/each}} -->
       <p>Scroll to bottom to see source</p>
     {{/Surface}}
 
     {{#famousEach items}}
-      {{#Surface size='[undefined,50]' class='padLeft'}}
+      {{#Surface size='[undefined,50]' class='pagePad'}}
         <div class="panel panel-default">
           <div class="panel-heading">
             {{name}}
@@ -30,7 +30,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
 <template name="moo">{{> UI.contentBlock}}</template>
 
 <template name="Scrollview_source">
-  <div class="code padLeft">
+  <div class="code pagePad">
     {{#snippet lang="spacebars"}}
       {{dstache}}#Scrollview}}
 
@@ -61,7 +61,7 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
     {{/snippet}}
   </div>
 
-  <div class="code padLeft" style="margin-top: 10px">
+  <div class="code pagePad" style="margin-top: 10px">
     {{#snippet lang="javascript"}}
       Template.views_Scrollview.helpers({
         items: function() {

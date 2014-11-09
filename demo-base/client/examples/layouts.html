@@ -1,11 +1,11 @@
 <template name="layouts">
   {{#Scrollview}}
 
-    {{#Surface size="[undefined,60]" class="padLeft"}}
+    {{#Surface size="[undefined,60]" class="pagePad"}}
       <h1>Layout Examples</h1>
     {{/Surface}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>Understanding Sizes in Famo.us</h2>
 
       <p>In short: <code>size="[width, height]"</code>, where width/height
@@ -34,7 +34,7 @@
       should no longer use this feature.</p>
     {{/Surface}}
 
-    {{#Surface size="[undefined,90]" class="padLeft"}}
+    {{#Surface size="[undefined,90]" class="pagePad"}}
       <h2>Horizontal SequentialLayout</h2>
       <p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow
       horizontally.</p>
@@ -46,7 +46,7 @@
       {{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
     {{/SequentialLayout}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
         {{dstache}}#SequentialLayout direction="X" size="[undefined,160]"}}
           {{dstache}}#Surface size="[150,100]" class="red-bg"}}#1{{dstache}}/Surface}}
@@ -68,7 +68,7 @@
     {{/Surface}}
 
 
-    {{#Surface size="[undefined,90]" class="padLeft"}}
+    {{#Surface size="[undefined,90]" class="pagePad"}}
       <h2>Columns</h2>
       <p>Use a <i>GridLayout</i> with <i>dimensions="[x,1]"</i>
       for columns that fill the container (try resize the window)</p>
@@ -80,7 +80,7 @@
       {{#Surface size="[undefined,100]" class="blue-bg"}}col3{{/Surface}}
     {{/GridLayout}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
         {{dstache}}#GridLayout dimensions="[3,1]" size="[undefined,100]"}}
           {{dstache}}#Surface class="red-bg"}}col1{{dstache}}/Surface}}
@@ -102,7 +102,7 @@
     {{/Surface}}
 
 
-    {{#Surface size="[undefined,90]" class="padLeft"}}
+    {{#Surface size="[undefined,90]" class="pagePad"}}
       <h2>Centering / Fine-Tuning Layout</h2>
       <p>Use a plain <i>Modifier</i> to manually position child surfaces with
         <i>origin</i>, <i>align</i>, <i>size</i> and <i>translate</i>.</p>
@@ -119,7 +119,7 @@
       {{/Surface}}
     {{/Modifier}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
         {{dstache}}#Modifier size="[undefined,160]"}}
           {{dstache}}#Surface class="green-bg"}}
@@ -145,7 +145,7 @@
       <br />
     {{/Surface}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <p>Reference: needing to
       <a href="https://github.com/Famous/famous/issues/298">explicitly specify
       <i>align</i></a> on Famous 0.3.</p>
@@ -155,14 +155,14 @@
       needing to do your own calculations.</p>
     {{/Surface}}
 
-    {{#Modifier size="[undefined,100]" class="padLeft"}}
+    {{#Modifier size="[undefined,100]" class="pagePad"}}
       {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"
         class="green-bg"}} background {{/Surface}}
       {{#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[0.3,0.3]"
         class="red-bg"}} 30% of parent's width and height {{/Surface}}
     {{/Modifier}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
         {{dstache}}#Modifier size="[undefined,100]" translate="[20,0]"}}
           {{dstache}}#Surface align="[0.5,0.5]" origin="[0.5,0.5]" proportions="[1,1]"

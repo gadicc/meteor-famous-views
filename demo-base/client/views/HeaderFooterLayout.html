@@ -1,6 +1,6 @@
 <template name="views_HeaderFooterLayout">
   {{#Scrollview}}
-    {{#Surface size="[undefined,130]"  class='padLeft'}}
+    {{#Surface size="[undefined,130]"  class='pagePad'}}
       <h1>HeaderFooterLayout</h1>
       <p>A View with 3 surfaces, where the outer surfaces have a fixed size
         and the interior surface will expand to fill all the remaining space.</p>
@@ -11,10 +11,10 @@
       </p>
     {{/Surface}}
 
-    {{#View size='[undefined, 200]' class='padLeft'}}
+    {{#View size='[undefined, 200]' class='pagePad'}}
       {{#Surface size='[undefined, undefined]'}}{{/Surface}}
       {{#Modifier translate='[20, 0]'}}
-        {{#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50" class='padLeft'}}
+        {{#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50" class='pagePad'}}
           {{#Surface target="header" class="red-bg"}}
             Header
           {{/Surface}}
@@ -27,7 +27,7 @@
         {{/HeaderFooterLayout}}
       {{/Modifier}}
     {{/View}}
-    {{#Surface size="[undefined,true]" class='padLeft'}}
+    {{#Surface size="[undefined,true]" class='pagePad'}}
       {{#snippet lang="spacebars"}}
         {{dstache}}#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50"}}
           {{dstache}}#Surface target="header" class="red-bg"}}
@@ -54,12 +54,12 @@
       <br />
     {{/Surface}}
 
-    {{#Surface size="[undefined,30]" class='padLeft'}}
+    {{#Surface size="[undefined,30]" class='pagePad'}}
       <p>You can also specify <code>direction="X"</code> for a horizontal
       setup.</p>
     {{/Surface}}
 
-    {{#View size='[undefined, 200]' class='padLeft'}}
+    {{#View size='[undefined, 200]' class='pagePad'}}
       {{#Surface size='[undefined, undefined]'}}{{/Surface}}
       {{#Modifier translate='[20, 0]'}}
         {{#HeaderFooterLayout direction="X" size="[500,200]" headerSize="50" footerSize="50"}}

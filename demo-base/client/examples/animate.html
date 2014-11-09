@@ -3,23 +3,22 @@
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <h1>Entrance and Exit Animations</h1>
-
       <p>This is a simple example showing how we can use the <code>rendered</code>
       callback to create an entrance animation and setup a destroy animation.
       </p>
-
       {{>examples_animate_buttons}}
-
-      <br /><br />
+      <br><br>
     {{/Surface}}
 
-    {{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
-      {{#famousEach items}}
-        {{!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
-        {{>Surface template="examples_animate_item" modifier="StateModifier"}}
-      {{/famousEach}}
-    {{/SequentialLayout}}
-
+    {{#View size='[undefined, 150]' class='pagePad'}}
+      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+      {{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
+        {{#famousEach items}}
+          {{!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
+          {{>Surface template="examples_animate_item" modifier="StateModifier"}}
+        {{/famousEach}}
+      {{/SequentialLayout}}
+    {{/View}}
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <br />
       <p>This works very well for a View like SequentialLayout, which uses the

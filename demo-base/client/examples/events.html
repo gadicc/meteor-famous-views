@@ -1,7 +1,7 @@
 <template name="examples_events">
   {{#Scrollview size="[undefined,undefined]"}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
 
       <h1>Events</h1>
 
@@ -21,7 +21,7 @@
       </p>
     {{/Surface}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>Three Ways to Accomplish the Same Goal</h2>
 
       <p>Click the red square to increase the count
@@ -34,7 +34,7 @@
          size="[50,50]" origin="[0.5,0.5]" align="[0.1,0.5]"}}
     {{/Modifier}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h3>Method Agnostic Preparation</h3>
 
       <p>First, let's set up the template, reactive helper, and
@@ -220,7 +220,7 @@
       this purpose.</p>
     {{/Surface}}
 
-    {{#Surface size="[undefined,true]" class="padLeft"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>Another Example</h2>
 
       <p>Here's a small example mixing a Meteor event with a Famous action:</p>
@@ -240,7 +240,7 @@
 </template>
 
 <template name="eventsDemo">
-  {{#Surface size="[undefined,80]" class="padLeft"}}
+  {{#Surface size="[undefined,80]" class="pagePad"}}
     <b>Catch the ball!</b>
     <p>Note also the use of <code>{{dstache}}#if}}</code> in the code to render
      the appropriate surface reactively.</p>
@@ -249,7 +249,7 @@
 
   {{#RenderController id="rc" modifier="StateModifier" size=rcSize}}
     {{#if showCode}}
-      {{>Surface template='ballCode' size="[undefined,undefined]" class="padLeft"}}
+      {{>Surface template='ballCode' size="[undefined,undefined]" class="pagePad"}}
     {{else}}
       {{#Modifier size="[undefined,undefined]"}}
         {{#Surface size="[undefined,undefined]"}}

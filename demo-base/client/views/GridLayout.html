@@ -2,34 +2,25 @@
   {{#Scrollview items=items}}
 
     {{! size, cellSize, etc all seem to be ignored by famous?? }}
-    {{#GridLayout items=items size="[undefined,undefined]"
-        dimensions="[3,3]"}}
-
-      {{#ContainerSurface size="[undefined,undefined]"}}
-        {{#Surface size="[undefined,undefined]"}}
-          <div style="margin-top: 50px; padding: 20px">
-            Demo of a <code>[3,3]</code> GridLayout (try resize
-            the window).
-            Any <code>{{dstache}}#famous}}</code> node can be placed
-            in a GridLayout, including data from <code>famousEach</code>.
-            Scroll down to see the source.
-          </div>
-        {{/Surface}}
-        {{#Surface class='gridLabel gridLabelHeading'
-            size="[undefined,38]" align="[0,1]" origin="[0,1]"}}
-          GridLayout Example
-        {{/Surface}}
-      {{/ContainerSurface}}
-
+      {{#GridLayout items=items size="[undefined,undefined]" dimensions="[3,3]" class='pagePad'}}
+        {{#ContainerSurface size="[undefined,undefined]"}}
+          {{#Surface size="[undefined,undefined]"}}
+            <div style="margin-top: 50px; padding: 20px">
+              Demo of a <code>[3,3]</code> GridLayout (try resize the window).
+              Any <code>{{dstache}}#famous}}</code> node can be placed
+              in a GridLayout, including data from <code>famousEach</code>.
+              Scroll down to see the source.
+            </div>
+          {{/Surface}}
+          {{#Surface class='gridLabel gridLabelHeading' size="[undefined,38]" align="[0,1]" origin="[0,1]"}}
+            GridLayout Example
+          {{/Surface}}
+        {{/ContainerSurface}}
       {{#famousEach items}}
-        {{>ContainerSurface template='gridItem' modifier="StateModifier"
-          size='[undefined,undefined]'}}
+        {{>ContainerSurface template='gridItem' modifier="StateModifier" size='[undefined,undefined]'}}
       {{/famousEach}}
-
     {{/GridLayout}}
-
-    {{>famous template='gridLayoutSource' view='Surface' size='[undefined,true]'}}
-
+    {{>famous template='gridLayoutSource' view='Surface' size='[undefined,true]' class='pagePad'}}
   {{/Scrollview}}
 </template>
 
