@@ -33,7 +33,7 @@
       horizontally.</p>
     {{/Surface}}
 
-    {{#View size='[undefined, 110]' class='pagePad'}}
+    {{#View size='[undefined, 100]' class='pagePad'}}
       {{#Surface size='[undefined, undefined]'}}{{/Surface}}
       {{#SequentialLayout direction="X" size="[undefined,100]" translate="[20,0]"}}
         {{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
@@ -64,7 +64,7 @@
     {{/Surface}}
 
 
-    {{#Surface size="[undefined,90]" class="pagePad"}}
+    {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>Columns</h2>
       <p>Use a <i>GridLayout</i> with <i>dimensions="[x,1]"</i>
       for columns that fill the container (try resize the window)</p>
@@ -148,7 +148,6 @@
       <p>Reference: needing to
       <a href="https://github.com/Famous/famous/issues/298">explicitly specify
       <i>align</i></a> on Famous 0.3.</p>
-
       <h2>Proportional Sizing</h2>
       <p>Since Famous 0.3 sizing can be specified <b>by proportion</b> without
       needing to do your own calculations.</p>
