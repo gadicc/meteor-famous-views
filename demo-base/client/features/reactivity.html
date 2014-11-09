@@ -1,37 +1,38 @@
 <template name="reactivity">
   {{#Scrollview size="[undefined,undefined]"}}
-    {{#Surface size="[undefined,80]" class="leftPad"}}
+    {{#Surface size="[undefined,true]" class="leftPad"}}
       <h1>Reactivity</h1>
-
       <p>Famous-views fully embraces the principle of Meteor reactivity,
       bringing you all these benefits to Famous for rapid prototyping
       and generally awesome code.</p>
     {{/Surface}}
 
-    {{#Surface size="[undefined,130]" class="leftPad"}}
+    {{#Surface size="[undefined,true]" class="leftPad"}}
       <h2>GridView</h2>
-
       <p>Here's an example changing the number of columns based on
       the screen size:</p>
 
       {{>nameSliderValue name="width" value=sess.width label="Width:"
         min="30" max="700" step="1"}}
+      <br>
     {{/Surface}}
 
-    {{#StateModifier size=gridSize translate="[20,0]"}}
-      {{#GridLayout dimensions=gridDimensions}}
-        {{#Surface class="red-bg"}}{{/Surface}}
-        {{#Surface class="green-bg"}}{{/Surface}}
-        {{#Surface class="blue-bg"}}{{/Surface}}
-      {{/GridLayout}}
-    {{/StateModifier}}
+    {{#View size='[undefined, 100]' class='padLeft'}}
+      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+      {{#StateModifier size=gridSize translate="[20,0]"}}
+        {{#GridLayout dimensions=gridDimensions}}
+          {{#Surface class="red-bg"}}{{/Surface}}
+          {{#Surface class="green-bg"}}{{/Surface}}
+          {{#Surface class="blue-bg"}}{{/Surface}}
+        {{/GridLayout}}
+      {{/StateModifier}}
+    {{/View}}
 
     {{>Surface template="reactiveGridLayoutSource"
       class="leftPad" size="[undefined,true]"}}
 
-    {{#Surface size="[undefined,140]" class="leftPad"}}
+    {{#Surface size="[undefined,true]" class="leftPad"}}
       <h2>StateModifier</h2>
-
       <p>Most commonly we probably want to change things like size,
       opacity, transforms, etc, and this is very easily handled with
       <code>StateModifier</code>, which includes transition support.
@@ -39,17 +40,18 @@
       all the Session variables are preserved)</p>
     {{/Surface}}
 
-    {{#SequentialLayout direction="X"
-        size="[undefined,230]" translate="[20,0,0]"}}
-      {{>Surface template="reactivityModState" size="[400,undefined]"}}
-      {{#View size="[400,undefined]"}}
-        {{>Surface id="block" template="reactiveBlock" modifier="StateModifier"
-          origin="[.5,.5]" align="[.5,.5]" class="red-bg"
-          size=getSize skewX=sess.skewX skewY=sess.skewY
-          rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateZ}}
-      {{/View}}
-    {{/SequentialLayout}}
-
+    {{#View size='[undefined, 230]' class='padLeft'}}
+      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+      {{#SequentialLayout direction="X" size="[undefined,230]"}}
+        {{>Surface template="reactivityModState" size="[400,undefined]"}}
+        {{#View size="[400,undefined]"}}
+          {{>Surface id="block" template="reactiveBlock" modifier="StateModifier"
+            origin="[.5,.5]" align="[.5,.5]" class="red-bg"
+            size=getSize skewX=sess.skewX skewY=sess.skewY
+            rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateZ}}
+        {{/View}}
+      {{/SequentialLayout}}
+    {{/View}}
     {{>Surface template="reactivityModStateSource"
       size="[undefined,true]" class="leftPad"}}
   {{/Scrollview}}
