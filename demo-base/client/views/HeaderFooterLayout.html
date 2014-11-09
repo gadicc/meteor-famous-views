@@ -1,6 +1,6 @@
 <template name="views_HeaderFooterLayout">
-  {{#Scrollview translate="[20,0]"}}
-    {{#Surface size="[undefined,130]"}}
+  {{#Scrollview}}
+    {{#Surface size="[undefined,130]"  class='padLeft'}}
       <h1>HeaderFooterLayout</h1>
       <p>A View with 3 surfaces, where the outer surfaces have a fixed size
         and the interior surface will expand to fill all the remaining space.</p>
@@ -11,19 +11,23 @@
       </p>
     {{/Surface}}
 
-    {{#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50"}}
-      {{#Surface target="header" class="red-bg"}}
-        Header
-      {{/Surface}}
-      {{#Surface target="content" class="blue-bg"}}
-        Content
-      {{/Surface}}
-      {{#Surface target="footer" class="green-bg"}}
-        Footer
-      {{/Surface}}
-    {{/HeaderFooterLayout}}
-
-    {{#Surface size="[undefined,true]"}}
+    {{#View size='[undefined, 200]' class='padLeft'}}
+      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+      {{#Modifier translate='[20, 0]'}}
+        {{#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50" class='padLeft'}}
+          {{#Surface target="header" class="red-bg"}}
+            Header
+          {{/Surface}}
+          {{#Surface target="content" class="blue-bg"}}
+            Content
+          {{/Surface}}
+          {{#Surface target="footer" class="green-bg"}}
+            Footer
+          {{/Surface}}
+        {{/HeaderFooterLayout}}
+      {{/Modifier}}
+    {{/View}}
+    {{#Surface size="[undefined,true]" class='padLeft'}}
       {{#snippet lang="spacebars"}}
         {{dstache}}#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50"}}
           {{dstache}}#Surface target="header" class="red-bg"}}
@@ -50,22 +54,26 @@
       <br />
     {{/Surface}}
 
-    {{#Surface size="[undefined,30]"}}
+    {{#Surface size="[undefined,30]" class='padLeft'}}
       <p>You can also specify <code>direction="X"</code> for a horizontal
       setup.</p>
     {{/Surface}}
 
-    {{#HeaderFooterLayout direction="X" size="[500,200]" headerSize="50" footerSize="50"}}
-      {{#Surface target="header" class="red-bg"}}
-        Header
-      {{/Surface}}
-      {{#Surface target="content" class="blue-bg"}}
-        Content
-      {{/Surface}}
-      {{#Surface target="footer" class="green-bg"}}
-        Footer
-      {{/Surface}}
-    {{/HeaderFooterLayout}}
-
+    {{#View size='[undefined, 200]' class='padLeft'}}
+      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+      {{#Modifier translate='[20, 0]'}}
+        {{#HeaderFooterLayout direction="X" size="[500,200]" headerSize="50" footerSize="50"}}
+          {{#Surface target="header" class="red-bg"}}
+            Header
+          {{/Surface}}
+          {{#Surface target="content" class="blue-bg"}}
+            Content
+          {{/Surface}}
+          {{#Surface target="footer" class="green-bg"}}
+            Footer
+          {{/Surface}}
+        {{/HeaderFooterLayout}}
+      {{/Modifier}}
+    {{/View}}
   {{/Scrollview}}
 </template>
