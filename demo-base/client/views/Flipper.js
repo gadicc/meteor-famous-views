@@ -1,5 +1,3 @@
-// http://www.famo.us/docs/0.2.0/views/HeaderFooterLayout/
-
 Menu.add({name:'Flipper',route:'views/Flipper'}, 'Views');
 
 Router.map(function() {
@@ -8,27 +6,23 @@ Router.map(function() {
   });
 });
 
-// TODO, put flipper in it's own context
-function perspectiveZero() {
-	FView.mainCtx.setPerspective(0);
+Template.flipper.rendered = function() {
+  var flipperWorld = FView.byId('flipperWorld');
+  flipperWorld.view.context.setPerspective(500);
 }
 
 Template.views_Flipper_front.events({
 	'click': function(event, tpl) {
 		var fview = FView.from(tpl);
-		FView.mainCtx.setPerspective(500);
 		fview.parent.view
-			.setAngle(Math.PI, { curve : 'easeOutBounce', duration : 500},
-				perspectiveZero);
+			.setAngle(Math.PI, { curve : 'easeOutBounce', duration : 500});
 	}
 });
 
 Template.views_Flipper_back.events({
 	'click': function(event, tpl) {
 		var fview = FView.from(tpl);
-		FView.mainCtx.setPerspective(500);
 		fview.parent.view
-			.setAngle(0, { curve : 'easeOutBounce', duration : 500},
-				perspectiveZero);
+			.setAngle(0, { curve : 'easeOutBounce', duration : 500});
 	}
 });
