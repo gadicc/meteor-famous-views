@@ -273,30 +273,21 @@
 <template name="ballCode">
   {{#snippet lang="spacebars"}}
     &lt;template name="eventsDemo">
-      {{dstache}}#Surface size="[undefined,130]" translate="[20,0]"}}
-        <h3>Catch the ball!</h3>
-        {{dstache}}> codeButton}}
-      {{dstache}}/Surface}}
-
-      {{dstache}}#RenderController size="[undefined,700]"}}
-        {{dstache}}#if showCode}}
-          {{dstache}}>Surface template='ballCode' size="[undefined,undefined]"}}
-        {{dstache}}else}}
-          {{dstache}}>Surface template='springBall' translate="[50,700]"}}
-        {{dstache}}/if}}
-      {{dstache}}/RenderController}}
+      {{dstache}}#Modifier size="[undefined,undefined]"}}
+        {{dstache}}#Surface size="[undefined,undefined]"}}
+          <div class="ballBorder"></div>
+        {{dstache}}/Surface}}
+        {{dstache}}>Surface template='springBall' size="[100,100]" translate="[50,50,90]"}}
+      {{dstache}}/Modifier}}
     &lt;/template>
   {{else}}
     {{#if currentLang "jade"}}
       template(name='eventsDemo')
-        +Surface size='[undefined,130]' translate='[20,0]'
-          h3 Catch the ball!
-          +codeButton
-        +RenderController size="[undefined,700]"
-          if showCode
-            +Surface template='ballCode' size='[undefined,undefined]'
-          else
-            +Surface template='springBall' translate='[50,700]'
+        +Modifier size='[undefined,undefined]'
+          +Surface size='[undefined,undefined]'
+            .ballBorder
+          +Surface template='springBall' size='[100,100]' translate='[50,50,90]'
+            | Ball
     {{/if}}
   {{/snippet}}
 
@@ -311,7 +302,7 @@
       velocity: 0.005
     }
 
-    Template.blockSpring.events({
+    Template.springBall.events({
       'mouseover': function(event, tpl) {
         var fview = FView.from(tpl);
         fview.modifier.halt();
@@ -335,7 +326,7 @@
         dampingRatio: .1
         velocity: .005
 
-      Template.blockSpring.events
+      Template.springBall.events
         mouseover: (event, tpl) ->
           fview = FView.from(tpl)
           fview.modifier.halt()
