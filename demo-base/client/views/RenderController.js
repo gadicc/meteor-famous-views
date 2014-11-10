@@ -26,7 +26,7 @@ Template.views_RenderController.helpers({
 Template.rc_buttons.helpers({
 	'buttons': ['rc_surface1', 'rc_surface2', 'rc_surface3'],
 	isSet: function() {
-		return this.valueOf() == Session.get('currentTemplate') ? 'set' : '';
+		return this.valueOf() == Session.get('currentTemplate') ? 'disabled' : '';
 	}
 });
 Template.rc_buttons.events({

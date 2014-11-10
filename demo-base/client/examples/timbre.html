@@ -1,5 +1,6 @@
 <template name="timbre">
   {{#Scrollview}}
+
     {{#Surface size="[undefined,true]" class='pagePad'}}
       <h1>Timbre Menu Demo</h1>
       <p>This example shows how you could do a Timbre Menu using famous-views.</p>
@@ -7,15 +8,18 @@
       to reactively move the main app view and trigger the entrance animations.
       </p>
     {{/Surface}}
-    {{#View size='[undefined, 300]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+
+    {{#Modifier size='[undefined, 300]'}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
       {{#ContainerSurface size="[450,undefined]" overflow="hidden" class="timbre-cs special" translate='[20,0]'}}
         {{> timbre_menu}}
         {{>Surface template="timbre_main" class="timbre-main"
           modifier="StateModifier" translate=menuTranslate}}
       {{/ContainerSurface}}
-    {{/View}}
+    {{/Modifier}}
+
     {{>Surface size="[undefined,true]" template="timbreSource"  class='pagePad'}}
+
   {{/Scrollview}}
 </template>
 

@@ -47,7 +47,7 @@ Template.codeButton.events({
 
 Template.eventsDemo.helpers({
   rcSize: function() {
-    return [undefined, Session.get('showCode') ? 800 : 250];
+    return [undefined, Session.get('showCode') ? 700 : 250];
   }
 });
 

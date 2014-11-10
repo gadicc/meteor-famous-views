@@ -11,22 +11,21 @@
       </p>
     {{/Surface}}
 
-    {{#View size='[undefined, 200]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
-      {{#Modifier translate='[20, 0]'}}
-        {{#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50" class='pagePad'}}
-          {{#Surface target="header" class="red-bg"}}
-            Header
-          {{/Surface}}
-          {{#Surface target="content" class="blue-bg"}}
-            Content
-          {{/Surface}}
-          {{#Surface target="footer" class="green-bg"}}
-            Footer
-          {{/Surface}}
-        {{/HeaderFooterLayout}}
-      {{/Modifier}}
-    {{/View}}
+    {{#Modifier size='[undefined, 205]'}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
+      {{#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50" translate="[20,0]"}}
+        {{#Surface target="header" class="red-bg"}}
+          Header
+        {{/Surface}}
+        {{#Surface target="content" class="blue-bg"}}
+          Content
+        {{/Surface}}
+        {{#Surface target="footer" class="green-bg"}}
+          Footer
+        {{/Surface}}
+      {{/HeaderFooterLayout}}
+    {{/Modifier}}
+
     {{#Surface size="[undefined,true]" class='pagePad'}}
       {{#snippet lang="spacebars"}}
         {{dstache}}#HeaderFooterLayout size="[500,200]" headerSize="50" footerSize="50"}}
@@ -59,10 +58,9 @@
       setup.</p>
     {{/Surface}}
 
-    {{#View size='[undefined, 200]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
-      {{#Modifier translate='[20, 0]'}}
-        {{#HeaderFooterLayout direction="X" size="[500,200]" headerSize="50" footerSize="50"}}
+    {{#Modifier size='[undefined, 200]'}}
+      {{#Surface}}{{/Surface}}
+        {{#HeaderFooterLayout direction="X" size="[500,200]" headerSize="50" footerSize="50" translate="[20,0]"}}
           {{#Surface target="header" class="red-bg"}}
             Header
           {{/Surface}}
@@ -73,7 +71,6 @@
             Footer
           {{/Surface}}
         {{/HeaderFooterLayout}}
-      {{/Modifier}}
-    {{/View}}
+    {{/Modifier}}
   {{/Scrollview}}
 </template>

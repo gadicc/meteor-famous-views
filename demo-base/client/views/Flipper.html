@@ -13,10 +13,12 @@
       </p>
       <br />
     {{/Surface}}
-    {{#View size='[undefined, 150]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+
+    {{#Modifier size='[undefined, 150]' class='pagePad'}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
       {{>flipper}}
-    {{/View}}
+    {{/Modifier}}
+
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <br />
       {{#snippet lang="spacebars"}}

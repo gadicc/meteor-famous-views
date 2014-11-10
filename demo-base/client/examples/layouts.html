@@ -33,14 +33,14 @@
       horizontally.</p>
     {{/Surface}}
 
-    {{#View size='[undefined, 100]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+    {{#Modifier size='[undefined, 100]'}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
       {{#SequentialLayout direction="X" size="[undefined,100]" translate="[20,0]"}}
         {{#Surface size="[150,100]" class="red-bg"}}#1{{/Surface}}
         {{#Surface size="[150,100]" class="green-bg"}}#2{{/Surface}}
         {{#Surface size="[150,100]" class="blue-bg"}}#3{{/Surface}}
       {{/SequentialLayout}}
-    {{/View}}
+    {{/Modifier}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       {{#snippet lang="spacebars"}}
@@ -62,7 +62,6 @@
       {{/snippet}}
       <br />
     {{/Surface}}
-
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <h2>Columns</h2>

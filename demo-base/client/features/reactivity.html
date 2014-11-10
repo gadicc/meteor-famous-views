@@ -1,5 +1,5 @@
 <template name="reactivity">
-  {{#Scrollview size="[undefined,undefined]"}}
+  {{#Scrollview}}
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <h1>Reactivity</h1>
       <p>Famous-views fully embraces the principle of Meteor reactivity,
@@ -17,8 +17,8 @@
       <br>
     {{/Surface}}
 
-    {{#View size='[undefined, 100]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+    {{#Modifier size='[undefined, 100]'}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
       {{#StateModifier size=gridSize translate="[20,0]"}}
         {{#GridLayout dimensions=gridDimensions}}
           {{#Surface class="red-bg"}}{{/Surface}}
@@ -26,7 +26,7 @@
           {{#Surface class="blue-bg"}}{{/Surface}}
         {{/GridLayout}}
       {{/StateModifier}}
-    {{/View}}
+    {{/Modifier}}
 
     {{>Surface template="reactiveGridLayoutSource"
       class="pagePad" size="[undefined,true]"}}
@@ -40,25 +40,28 @@
       all the Session variables are preserved)</p>
     {{/Surface}}
 
-    {{#View size='[undefined, 230]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
-      {{#SequentialLayout direction="X" size="[undefined,230]"}}
-        {{>Surface template="reactivityModState" size="[400,undefined]"}}
-        {{#View size="[400,undefined]"}}
+    {{#Modifier size='[undefined, 210]' class='pagePad'}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
+      {{#SequentialLayout direction="X"}}
+        {{>Surface template="reactivityModState" size="[400,undefined]"
+          class="pagePad"}}
+        {{#Modifier size="[400,undefined]"}}
           {{>Surface id="block" template="reactiveBlock" modifier="StateModifier"
             origin="[.5,.5]" align="[.5,.5]" class="red-bg"
             size=getSize skewX=sess.skewX skewY=sess.skewY
             rotateX=sess.rotateX rotateY=sess.rotateY rotateZ=sess.rotateZ}}
-        {{/View}}
+        {{/Modifier}}
       {{/SequentialLayout}}
-    {{/View}}
+    {{/Modifier}}
+
     {{>Surface template="reactivityModStateSource"
       size="[undefined,true]" class="pagePad"}}
   {{/Scrollview}}
 </template>
 
 <template name="reactiveGridLayoutSource">
-  <br />
+  <br /><br />
+  
   <p><b>Template:</b></p>
 
   {{#snippet lang="spacebars"}}

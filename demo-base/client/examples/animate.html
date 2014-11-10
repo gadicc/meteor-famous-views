@@ -1,5 +1,5 @@
 <template name="examples_animate">
-  {{#Scrollview size="[undefined,undefined]"}}
+  {{#Scrollview}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <h1>Entrance and Exit Animations</h1>
@@ -10,15 +10,16 @@
       <br><br>
     {{/Surface}}
 
-    {{#View size='[undefined, 150]' class='pagePad'}}
-      {{#Surface size='[undefined, undefined]'}}{{/Surface}}
+    {{#Modifier size='[undefined, 150]'}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
       {{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
         {{#famousEach items}}
           {{!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
           {{>Surface template="examples_animate_item" modifier="StateModifier"}}
         {{/famousEach}}
       {{/SequentialLayout}}
-    {{/View}}
+    {{/Modifier}}
+
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <br />
       <p>This works very well for a View like SequentialLayout, which uses the

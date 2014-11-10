@@ -1,5 +1,5 @@
 <template name="examples_events">
-  {{#Scrollview size="[undefined,undefined]"}}
+  {{#Scrollview}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
 
@@ -29,7 +29,7 @@
     {{/Surface}}
 
     {{#Modifier translate="[50,0]" size="[undefined,100]"}}
-      {{#Surface size="[undefined,undefined]"}}{{/Surface}}
+      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
       {{>Surface template="ev_surface_click" translate="[0,0,10]"
          size="[50,50]" origin="[0.5,0.5]" align="[0.1,0.5]"}}
     {{/Modifier}}
@@ -229,6 +229,7 @@
 
     {{! Original Meteor Event demo ball code }}
     {{>eventsDemo}}
+
   {{/Scrollview}}
 </template>
 
@@ -247,19 +248,19 @@
     {{> codeButton}}
   {{/Surface}}
 
-  {{#RenderController id="rc" modifier="StateModifier" size=rcSize}}
+  {{#RenderController modifier="StateModifier" size=rcSize}}
     {{#if showCode}}
-      {{>Surface template='ballCode' size="[undefined,undefined]" class="pagePad"}}
+      {{>Surface template='ballCode' class="pagePad"}}
     {{else}}
-      {{#Modifier size="[undefined,undefined]"}}
-        {{#Surface size="[undefined,undefined]"}}
-          <div class="ballBorder"></div>
-        {{/Surface}}
+      {{#Modifier}}
+        {{#Surface}}<div class="ballBorder"></div>{{/Surface}}
         {{>Surface template='springBall' size="[100,100]"
           translate="[50,50,90]"}}
       {{/Modifier}}
     {{/if}}
   {{/RenderController}}
+
+  {{#Surface size="[undefined,30]"}}{{/Surface}}
 </template>
 
 <template name="codeButton">
