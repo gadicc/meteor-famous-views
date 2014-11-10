@@ -30,10 +30,6 @@ if (Meteor.isClient) {
   // Force debug logging even on production for famous-views.meteor.com
   Logger.setLevel('famous-views', 'debug');
 
-  FView.ready(function() {
-    famous.polyfills;
-  });
-
   navbar = null;
   Template.header.rendered = function() {
     navbar = this.$('.navbar');
@@ -80,6 +76,10 @@ if (Meteor.isClient) {
   Transform=null;
   FView.ready(function(require) {
     Transform        = famous.core.Transform;
+
+    // Famono: load famo.us shims and CSS
+    famous.polyfills;
+    famous.core.famous;  // CSS
   });
 
   // within the demo app, but famous-components will use this global too

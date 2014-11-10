@@ -1,5 +1,12 @@
 ## vNEXT
 
+* BREAKING/famono.  We used to pull in famo.us pollyfills and CSS for you,
+  with `famous.polyfills` and `famous.core.famous`, respectively.  This
+  should really be done app-level, and you would have done this anyway
+  if you followed the famono README.  If you didn't, you need to do it
+  now, see the bottom of http://famous-views.meteor.com/start
+
+
 ## v0.1.22
 
 * famousContext improvements.  Amongst other changes, you can now pass
