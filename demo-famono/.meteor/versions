@@ -48,7 +48,7 @@ nemo64:bootstrap-data@3.3.0_1
 nemo64:bootstrap@3.3.0_1
 observe-sequence@1.0.3
 ordered-dict@1.0.1
-raix:famono@0.9.14
+raix:famono@0.9.16
 random@1.0.1
 reactive-dict@1.0.4
 reactive-var@1.0.3

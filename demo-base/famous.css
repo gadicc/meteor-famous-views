@@ -30,6 +30,7 @@ pre[class*="language-"] {
 
 /* in Chrome at least, matrix3d translateZ are all above css z-index */
 
+/*
 #velocity-status-widget {
 	-webkit-transform-origin: 0% 0%;
 	-webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 2147483647, 1);
@@ -44,3 +45,5 @@ pre[class*="language-"] {
 #velocityOverlay .container {
 
 }
+
+*/

@@ -6,7 +6,7 @@
 standard-app-packages
 autopublish
 insecure
-iron:router
+iron:router@=0.9.4
 #raix:famono
 mjn:famous
 gadicohen:famous-views
@@ -14,6 +14,8 @@ natestrauser:font-awesome
 #sanjo:jasmine
 #velocity:core
 #velocity:html-reporter
+#numtel:velocity-tinytest
+#gadicohen:fview-lagometer
 gadicohen:snippets
 chuangbo:marked
 nemo64:bootstrap

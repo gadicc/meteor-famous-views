@@ -58,9 +58,7 @@ if (Meteor.isClient) {
       layoutTemplate: 'layout'
     });
 
-  Router.map(function() {
-    this.route('home', { path: '/' });
-  });
+  Router.route('home', { path: '/' });
 
   /*
   UI.registerHelper('items', function() {
