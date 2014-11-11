@@ -35,15 +35,26 @@ Template.rc_buttons.events({
 	}
 });
 
-Template.rc_transitions.helpers({
-	'transitions': _.keys(FView.transitions),
+Template.rc_transitionModifiers.helpers({
+	'transitions': _.keys(FView.transitionModifiers),
 	isSet: function() {
 		return this.valueOf() == Session.get('currentTransition') ? 'set' : '';
 	}
 });
-Template.rc_transitions.events({
+Template.rc_transitionModifiers.events({
 	'click button': function() {
 		Session.set('currentTransition', this.valueOf());
+	}
+});
+
+Template.rc_transitionOnceOffs.events({
+	'click button': function(event, tpl) {
+		var what = event.target.getAttribute('data-what');
+		if (what == 'spring') {
+  		var fview = FView.byId("demoRC");
+		  var SpringTransition = famous.transitions.SpringTransition;
+			fview._transitionOnce = { method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01 };
+		}
 	}
 });
 

@@ -25,15 +25,16 @@
 
     {{#Modifier size="[undefined,110]"}}
       {{>Surface template="rc_buttons" class="pagePad"}}
-      {{#RenderController transition=getTransition 
+      {{#RenderController id="demoRC" transition=getTransition 
           size="[150,150]" translate="[500,-50]"}}
         {{>showTemplate name=currentTemplate}}
       {{/RenderController}}
     {{/Modifier}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
-      {{>rc_transitions}}
+      {{>rc_transitionModifiers}}
       {{>rc_useForPages}}
+      {{>rc_transitionOnceOffs}}
 
       {{#snippet lang="javascript"}}
         Template.views_RenderController.helpers({
@@ -92,6 +93,53 @@
 
       <p><a href="https://github.com/gadicc/meteor-famous-components/tree/master/demo/client/views">Full Source</a> (see RenderController.html and
       RenderController.html)</p>
+
+      <h2>More Fun</h2>
+
+      <h3>Once off Transitions</h3>
+
+      <p>Sometimes we want to queue a transitio or transition modifier to be
+      used only on the next change, but make sure changes after this use the
+      default again.
+      This very useful for <b>per-route transitions in iron-router</b>.  For
+      this to work, make sure to give your RenderController a <b>unique ID</b>.</p>
+
+      {{#snippet lang="spacebars"}}
+        {{dstache}}>RenderController id="mainRC" ...}}
+      {{/snippet}}
+
+      {{#snippet lang="javascript"}}
+        Router.route('mySpecialRoute', {
+          onBeforeAction: function() {
+            var fview = FView.byId("mainRC");
+            if (fview) {  // don't run on initial page render before setup
+              // Optional; change to a name from FView.transitionModifiers
+              fview._transitionModifierOnce = 'slideWindow';
+
+              // Optional; null to use the default transition (linear)
+              var SpringTransition = famous.transitions.SpringTransition;
+              fview._transitionOnce =
+                { method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01 };
+            }
+          }
+        });
+      {{/snippet}}
+
+      <h3>Change the Transition (not Modifier) itself</h3>
+
+      <p>Below example assumes <code>{{dstache}}>RenderController
+      template="rcTemplate"}}</code>.  If you want inline content,
+      just work by ID, like in the above example.</p>
+
+      {{#snippet lang="javascript"}}
+        Template.rcTemplate.rendered = function() {
+          var fview = FView.from(this);
+
+          var SpringTransition = famous.transitions.SpringTransition;          
+          fview._transition = { method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01 };
+        }
+      {{/snippet}}
+
     {{/Surface}}
 
   {{/Scrollview}}
@@ -108,12 +156,20 @@
   </p>
 </template>
 
-<template name="rc_transitions">
+<template name="rc_transitionModifiers">
   <p>
-    Transition:
+    TransitionModifier:
     {{#each transitions}}
       <button class="btn btn-primary" {{isSet}}>{{this}}</button>
     {{/each}}
+  </p>
+</template>
+
+<template name="rc_transitionOnceOffs">
+  <p>
+    Queue once-off transition:
+      <button class="btn btn-primary" data-what="spring">Spring</button>
+    - try this with slideWindow :)  More info below.
   </p>
 </template>
 
@@ -121,7 +177,7 @@
   <p>
     <label>
       <input type="checkbox" checked="{{checked}}">
-      Use transition for page changes on the rest of the site too
+      Use above transition modifier for page changes on the rest of the site too
     </label>
   </p>
 </template>

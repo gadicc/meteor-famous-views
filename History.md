@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.1.23
+
 * BREAKING/famono.  We used to pull in famo.us pollyfills and CSS for you,
   with `famous.polyfills` and `famous.core.famous`, respectively.  This
   should really be done app-level, and you would have done this anyway
@@ -7,7 +9,24 @@
   now, see the bottom of http://famous-views.meteor.com/start
 
 * Bugfix, avoid leak/mutation in some cases where no arguments/attributes
-  given, e.g. `{{#Surface}} with no args {{/Surface}}`.
+  given, e.g. `{{#Surface}} with no args {{/Surface}}`. (#135)
+
+* BREAKING, `FView.transitions`, in case you use it directly, is now
+  more correctly named `FView.transitionModifiers` (currently used
+  for `transition="slideWindow"` etc in `RenderController`.
+
+* RenderController now supports setting of transition (as opposed to
+  transition modifier, e.g. a curve or physics transition), by setting
+  `fview._transition`. (#93)
+
+* RenderController now supports once-off transition and transition
+  modifiers (useful for per-route transitions in iron-router), using
+  `fview._transitionOnce` and `fview.transitionModifierOnce`.  See
+  the RenderController page in the demo for more info. (#93)
+
+* You can now set `FView.mainCtx = null` to avoid famous-views creating
+  a main context.  Useful for using `#famousContext` in regular
+  apps.
 
 ## v0.1.22
 
