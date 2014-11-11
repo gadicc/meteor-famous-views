@@ -6,6 +6,8 @@
   if you followed the famono README.  If you didn't, you need to do it
   now, see the bottom of http://famous-views.meteor.com/start
 
+* Bugfix, avoid leak/mutation in some cases where no arguments/attributes
+  given, e.g. `{{#Surface}} with no args {{/Surface}}`.
 
 ## v0.1.22
 

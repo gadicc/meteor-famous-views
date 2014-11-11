@@ -1,4 +1,4 @@
-Tinytest.add('famous-views - famous.js', function(test) {
+Tinytest.add('famous-views - famous.js - famousEvents', function(test) {
 
 	/* Preparation */
 
@@ -27,3 +27,32 @@ Tinytest.add('famous-views - famous.js', function(test) {
 	test.equal(famousEvents, {a:'a',b:'b'});
 
 });
+
+/* --- data context tests and helper functions --- */
+
+var myData = { a:1, b:2, c:3 };
+
+function dataTest(tNum, test, complete) {
+	var tpl = Template['tests_famous_data' + tNum];
+	var div = document.createElement('div');
+
+	Template.tests_famous_dataContextCheck.rendered = function() {
+		test.equal(this.data, myData);
+		complete();
+	}
+
+	tpl.helpers({ myData: _.clone(myData) });
+	Blaze.render(tpl, div);
+}
+
+Tinytest.addAsync('famous-views - famous.js - dataContext - with args, template=',
+	dataTest.bind(null, 1));
+
+Tinytest.addAsync('famous-views - famous.js - dataContext - with args, inline',
+	dataTest.bind(null, 2));
+
+Tinytest.addAsync('famous-views - famous.js - dataContext - without args, inline',
+	dataTest.bind(null, 3));
+
+Tinytest.addAsync('famous-views - famous.js - dataContext - nested',
+	dataTest.bind(null, 4));

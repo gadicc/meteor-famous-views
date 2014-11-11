@@ -5,3 +5,44 @@
 <template name="tests_famous_surface">
 	Hello
 </template>
+
+<!-- we'll check the data context on the rendered callback -->
+<template name="tests_famous_dataContextCheck">
+</template>
+
+
+<!-- famous-views - famous.js - dataContext - with args, template= -->
+<template name="tests_famous_data1">
+	{{#with myData}}
+		{{>Surface template="tests_famous_dataContextCheck"}}
+	{{/with}}
+</template>
+
+<!-- famous-views - famous.js - dataContext - with args, inline -->
+<template name="tests_famous_data2">
+	{{#with myData}}
+		{{#Surface arg1=1}}
+			{{> tests_famous_dataContextCheck}}
+		{{/Surface}}
+	{{/with}}		
+</template>
+
+<!-- famous-views - famous.js - dataContext - without args, inline -->
+<template name="tests_famous_data3">
+	{{#with myData}}
+		{{#Surface}}
+			{{> tests_famous_dataContextCheck}}
+		{{/Surface}}
+	{{/with}}		
+</template>
+
+<!-- famous-views - famous.js - dataContext - nested -->
+<template name="tests_famous_data4">
+	{{#with myData}}
+		{{#Modifier}}
+			{{#Surface}}
+				{{> tests_famous_dataContextCheck}}
+			{{/Surface}}
+		{{/Modifier}}
+	{{/with}}		
+</template>
