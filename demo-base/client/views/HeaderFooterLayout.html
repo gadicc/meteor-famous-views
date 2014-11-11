@@ -1,6 +1,6 @@
 <template name="views_HeaderFooterLayout">
   {{#Scrollview}}
-    {{#Surface size="[undefined,130]"  class='pagePad'}}
+    {{#Surface size="[undefined,true]"  class='pagePad'}}
       <h1>HeaderFooterLayout</h1>
       <p>A View with 3 surfaces, where the outer surfaces have a fixed size
         and the interior surface will expand to fill all the remaining space.</p>
@@ -53,7 +53,7 @@
       <br />
     {{/Surface}}
 
-    {{#Surface size="[undefined,30]" class='pagePad'}}
+    {{#Surface size="[undefined,true]" class='pagePad'}}
       <p>You can also specify <code>direction="X"</code> for a horizontal
       setup.</p>
     {{/Surface}}
