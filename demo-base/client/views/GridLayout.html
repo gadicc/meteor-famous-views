@@ -1,33 +1,36 @@
 <template name="views_GridLayout">
-  {{#Scrollview}}
+  {{#Modifier}}
+    {{#Surface properties="background: white"}}{{/Surface}}
+    {{#Scrollview translate="[0,0,1]"}}
 
-    {{! size, cellSize, etc all seem to be ignored by famous?? }}
-    {{#GridLayout size="[undefined,undefined]" dimensions="[3,3]"}}
+      {{! size, cellSize, etc all seem to be ignored by famous?? }}
+      {{#GridLayout size="[undefined,undefined]" dimensions="[3,3]"}}
 
-      {{#ContainerSurface overflow="hidden"}}
-        {{#Surface size="[undefined,undefined]"}}
-          <div style="margin-top: 50px; padding: 20px">
-            Demo of a <code>[3,3]</code> GridLayout (try resize the window).
-            Any <code>{{dstache}}#famous}}</code> node can be placed
-            in a GridLayout, including data from <code>famousEach</code>.
-            Scroll down to see the source.
-          </div>
-        {{/Surface}}
-        {{#Surface class='gridLabel gridLabelHeading' size="[undefined,38]" align="[0,1]" origin="[0,1]"}}
-          GridLayout Example
-        {{/Surface}}
-      {{/ContainerSurface}}
+        {{#ContainerSurface overflow="hidden"}}
+          {{#Surface size="[undefined,undefined]"}}
+            <div style="margin-top: 50px; padding: 20px">
+              Demo of a <code>[3,3]</code> GridLayout (try resize the window).
+              Any <code>{{dstache}}#famous}}</code> node can be placed
+              in a GridLayout, including data from <code>famousEach</code>.
+              Scroll down to see the source.
+            </div>
+          {{/Surface}}
+          {{#Surface class='gridLabel gridLabelHeading' size="[undefined,38]" align="[0,1]" origin="[0,1]"}}
+            GridLayout Example
+          {{/Surface}}
+        {{/ContainerSurface}}
 
-      {{#famousEach items}}
-        {{>ContainerSurface template='gridItem'
-          overflow="hidden" modifier="StateModifier"}}
-      {{/famousEach}}
+        {{#famousEach items}}
+          {{>ContainerSurface template='gridItem'
+            overflow="hidden" modifier="StateModifier"}}
+        {{/famousEach}}
 
-    {{/GridLayout}}
+      {{/GridLayout}}
 
-    {{>famous template='gridLayoutSource' view='Surface' size='[undefined,true]' class='pagePad'}}
+      {{>famous template='gridLayoutSource' view='Surface' size='[undefined,true]' class='pagePad'}}
 
-  {{/Scrollview}}
+    {{/Scrollview}}
+  {{/Modifier}}
 </template>
 
 <template name="gridItem">
