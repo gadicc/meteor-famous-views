@@ -27,14 +27,31 @@ Template.nameSliderValue.events({
 
 Session.setDefault('width', 350);
 Template.reactivity.helpers({
-	getSize: function() {
-		return [ Session.get('sizeX'), Session.get('sizeY') ];
-	},
 	gridSize: function() {
+		/*
+		return {
+			value: [ Session.get('width'), 100 ],
+			transition: { duration: 1000, curve: 'easeOut' }
+		}
+		*/
+
+		/*
+		var SpringTransition = famous.transitions.SpringTransition;
+		return {
+			value: [ Session.get('width'), 100 ],
+			transition: { method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01 }
+		};
+		*/
+
 		return [ Session.get('width'), 100 ];
 	},
 	gridDimensions: function() {
 		return [ Math.ceil(Session.get('width') / 234), 1 ];
+	},
+
+	// StateModifier
+	getSize: function() {
+		return [ Session.get('sizeX'), Session.get('sizeY') ];
 	}
 });
 
