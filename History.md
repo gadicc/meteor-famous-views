@@ -1,5 +1,17 @@
 ## vNEXT
 
+## v0.1.24
+
+* POTENTIALLY BREAKING, FView.ready() functions now run AFTER the main
+  context is created (and at least after Meteor.startup()).  This is more
+  useful, and quite unlikely to cause problems with existing code.
+
+* `FView.log` is now available for other packages to use without needing
+  to include pince, etc.
+
+* The demo now includes the fview-lagometer package, in production only.
+  Click to focus on the app window and press alt-L to toggle.
+
 ## v0.1.23
 
 * BREAKING/famono.  We used to pull in famo.us pollyfills and CSS for you,

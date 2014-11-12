@@ -15,6 +15,7 @@ natestrauser:font-awesome
 #velocity:core
 #velocity:html-reporter
 #numtel:velocity-tinytest
+gadicohen:fview-lagometer
 gadicohen:snippets
 chuangbo:marked
 nemo64:bootstrap
