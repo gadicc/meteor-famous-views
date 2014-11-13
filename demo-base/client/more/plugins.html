@@ -24,6 +24,14 @@
         sizing strategies such as **AspectFit** and **AspectFill** for displaying
         images with famo.us. It uses a `div` with a background-image rather than
         a `img` tag.  Can be used as a drop-in replacement for ImageSurface, in case the size of the div is not derived from the image.
+      {{else}}
+        <div style="width: 100px; height: 100px; position: relative">
+          {{#famousContext}}
+            {{#Surface size="[100,100]" class="green-bg"}}
+              hello
+            {{/Surface}}
+          {{/famousContext}}
+        </div>
       {{/plugin}}
 
       {{#plugin}}
@@ -56,6 +64,9 @@
         <img src="{{image}}">
       {{/if}}
       {{{desc}}}
+      {{#if Template.elseBlock}}
+        {{> Template.elseBlock}}
+      {{/if}}
     </div>
   </div>
 </template>
