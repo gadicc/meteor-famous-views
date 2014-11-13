@@ -18,7 +18,6 @@ Router.route('plugins', {
 	}
 });
 
-
 Blaze.registerHelper('plugin', new Blaze.Template(function() {
 	var view = this;
 

@@ -28,11 +28,22 @@
         images with famo.us. It uses a `div` with a background-image rather than
         a `img` tag.  Can be used as a drop-in replacement for ImageSurface, in case the size of the div is not derived from the image.
       {{else}}
-        <div style="width: 100px; height: 100px; position: relative">
+        <div style="width: 430px; height: 100px; position: relative">
           {{#famousContext}}
-            {{#Surface size="[100,100]" class="green-bg"}}
-              hello
-            {{/Surface}}
+            {{#SequentialLayout direction="X" size="[320,100] gutterSize='[10,0]'"}}
+              {{#Surface size="[100,100]" class="green-bg"}}
+                hello
+              {{/Surface}}
+              {{#Surface size="[100,100]" class="green-bg"}}
+                hello
+              {{/Surface}}
+              {{#Surface size="[100,100]" class="green-bg"}}
+                hello
+              {{/Surface}}
+              {{#Surface size="[100,100]" class="green-bg"}}
+                hello
+              {{/Surface}}
+            {{/SequentialLayout}}
           {{/famousContext}}
         </div>
       {{/plugin}}
