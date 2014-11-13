@@ -1,0 +1,61 @@
+<template name="plugins">
+  {{#Surface size="[undefined,undefined]"}}
+    <div id="main" role="main">
+
+    	<h1>FView Plugins</h1>
+
+      <p>Famous-views makes it very easy to wrap famo.us components to work great
+      with Meteor.  We encourage anyone to publish "plugins" that 1) wrap
+      community components, 2) works great with both raix:famono and mjn:famous,
+      and 3) tweaks as necessary to introduce reactivity, play nice, etc.  For more
+      info on building plugins, for now, see
+      <a href="https://github.com/gadicc/meteor-famous-views/issues/136">issue
+      #136</a>.  Want your plugin to show up here?  Add it to this list with a
+      pull request.</p>
+
+      {{#plugin}}
+        name=pierreeric:fview-bksurfaceimage
+        href=https://atmospherejs.com/pierreeric/fview-bksurfaceimage
+        Adaptive Images!  Need your images to fit how you want them?
+        This is
+        [@IjzerenHein's
+        BkSurfaceImage](https://github.com/IjzerenHein/famous-bkimagesurface)
+        packaged for famous-views: BkImageSurface adds support for
+        sizing strategies such as **AspectFit** and **AspectFill** for displaying
+        images with famo.us. It uses a `div` with a background-image rather than
+        a `img` tag.  Can be used as a drop-in replacement for ImageSurface, in case the size of the div is not derived from the image.
+      {{/plugin}}
+
+      {{#plugin}}
+        name=gadicohen:fview-lagometer
+        href=https://atmospherejs.com/gadicohen/fview-lagometer
+        image=https://github.com/IjzerenHein/famous-lagometer/raw/master/lagometer.png
+        A developer must!  Want a live FPS count and chart showing computation
+        times?  This is
+        [@IjzerenHein's
+        Lagometer](https://github.com/IjzerenHein/famous-lagometer)
+        packaged for famous-views.  Since the meter itself uses quite a lot
+        of CPU, it's disabled by default, but available whenever you need it
+        by pressing ALT-L (for lag).  This `debugOnly` package is never
+        bundled/deployed.
+      {{/plugin}}
+    </div>
+  {{/Surface}}
+</template>
+
+<template name="plugin_template">
+  <div class="plugin panel panel-default">
+    <div class="panel-heading">
+      <h4>
+        &nbsp; <i class="fa fa-puzzle-piece"></i> &nbsp;
+        <a href="{{href}}">{{{name}}}</a>
+      </h4>
+    </div>
+    <div class="panel-body">
+      {{#if image}}
+        <img src="{{image}}">
+      {{/if}}
+      {{{desc}}}
+    </div>
+  </div>
+</template>
