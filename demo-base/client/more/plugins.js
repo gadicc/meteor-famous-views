@@ -41,7 +41,7 @@ Blaze.registerHelper('plugin', new Blaze.Template(function() {
 	data.desc = marked(data.desc);
 
 	data.name = data.name.replace(/fview-(\w+)/,
-		'fview-<span class="pluginNameMain">$1</span');
+		'fview-<span class="text-primary">$1</span');
 
 	return Blaze.With(data, function() {
 		var newView = Template.plugin_template.constructView();
