@@ -8,4 +8,3 @@ Router.route('more_testimonials', {
 	path: '/more/testimonials'
 });
 Router.route('faq');
-Router.route('plugins');

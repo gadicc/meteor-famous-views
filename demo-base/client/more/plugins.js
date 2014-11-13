@@ -1,3 +1,24 @@
+atmosphere = {
+	subs: [],
+	col: {}
+};
+window.atmosphere = atmosphere; // debug
+
+Router.route('plugins', {
+	onBeforeAction: function() {
+		return; // d'oh, https://github.com/percolatestudio/atmosphere-beta/issues/299
+		atmosphere.con = DDP.connect('https://atmospherejs.com/');
+		atmosphere.col.daiyscores = new Mongo.Collection('package/dailyScores',
+			{ connection: atmosphere.con });
+		var names = ['gadicohen:famous-views', 'pierreeric:fview-bksurfaceimage'];
+		_.each(names, function(name) {
+			atmosphere.subs.push(
+				atmosphere.con.subscribe('package/dailyScores', name));
+		});
+	}
+});
+
+
 Blaze.registerHelper('plugin', new Blaze.Template(function() {
 	var view = this;
 
