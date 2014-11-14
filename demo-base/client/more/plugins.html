@@ -28,21 +28,12 @@
         images with famo.us. It uses a `div` with a background-image rather than
         a `img` tag.  Can be used as a drop-in replacement for ImageSurface, in case the size of the div is not derived from the image.
       {{else}}
-        <div style="width: 430px; height: 100px; position: relative">
+        <div style="width: 430px; height: 120px; position: relative">
           {{#famousContext}}
-            {{#SequentialLayout direction="X" size="[320,100] gutterSize='[10,0]'"}}
-              {{#Surface size="[100,100]" class="green-bg"}}
-                hello
-              {{/Surface}}
-              {{#Surface size="[100,100]" class="green-bg"}}
-                hello
-              {{/Surface}}
-              {{#Surface size="[100,100]" class="green-bg"}}
-                hello
-              {{/Surface}}
-              {{#Surface size="[100,100]" class="green-bg"}}
-                hello
-              {{/Surface}}
+            {{#SequentialLayout direction="X" size="[320,100]" itemSpacing='10'}}
+              {{#famousEach sizeModes}}
+                {{>bkitems}}
+              {{/famousEach}}
             {{/SequentialLayout}}
           {{/famousContext}}
         </div>
@@ -105,4 +96,18 @@
       {{/if}}
     </div>
   </div>
+</template>
+
+<template name='bkitems'>
+  {{#StateModifier size='[100, 120]'}}
+    {{#Surface size='[100,20]'
+      origin='[.5, 0]' align='[.5, 0]' properties='eval:{textAlign: "center"}'}}
+      <p class='text-center'><span class='label label-primary'>{{sizeMode}}</span></p>
+    {{/Surface}}
+    {{#BkImageSurface content='/meteor_famous_view_logo.png'
+      origin='[.5, 1]' align='[.5, 1]' size='[100, 100]'
+      sizemode=sizeMode
+    }}
+    {{/BkImageSurface}}
+  {{/StateModifier}}
 </template>

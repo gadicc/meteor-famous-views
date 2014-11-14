@@ -49,3 +49,12 @@ Blaze.registerHelper('plugin', new Blaze.Template(function() {
 		return newView;
 	});
 }));
+
+Template.plugins.helpers({
+  sizeModes: [
+    { sizeMode: 'AUTO' },
+    { sizeMode: 'FILL' },
+    { sizeMode: 'ASPECTFILL' },
+    { sizeMode: 'ASPECTFIT' }
+  ]
+});
