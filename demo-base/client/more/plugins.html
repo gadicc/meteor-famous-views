@@ -86,6 +86,26 @@
           {{/famousContext}}
         </div>
       {{/plugin}}
+
+      {{#plugin}}
+        name=pierreeric:fview-dotloader
+        href=https://atmospherejs.com/pierreeric/fview-dotloader
+        This plugin brings an animated loader that could be used when a long
+        task is requested. It is inspired from the
+        work of [LeXXiK](https://github.com/LeXXik) and
+        [Tony Alves](https://github.com/talves) in
+        [Famousco.de](http://famousco.de/2014/07/animated-dots-icon/).
+      {{else}}
+        <br>
+        <div style="width: 90px; height: 50px; position: relative; padding-left: 40px;">
+          {{#famousContext}}
+            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
+              {{#DotLoader height='50' dotD='10'}}
+              {{/DotLoader}}
+            {{/StateModifier}}
+          {{/famousContext}}
+        </div>
+      {{/plugin}}
     </div>
   {{/Surface}}
 </template>

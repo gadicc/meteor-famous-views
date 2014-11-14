@@ -14,3 +14,11 @@
   border-radius: 5px;
   pointer-events: none;
 }
+
+.dotloader-background {
+  background-color: #85144B;
+  border-radius: 5px;
+}
+.dotloader-dots {
+  background-color: #F012BE;
+}
