@@ -58,3 +58,12 @@ Template.plugins.helpers({
     { sizeMode: 'ASPECTFIT' }
   ]
 });
+
+Template.plugins.rendered = function() {
+  var button = FView.byId('animatedicon'),
+      buttonState = true;
+  button.children[0].view.on('click', function() {
+    button.children[1].view.setShape(Number(buttonState));
+    return buttonState = !buttonState;
+  });
+};

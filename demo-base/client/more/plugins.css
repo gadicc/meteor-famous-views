@@ -3,3 +3,14 @@
 	height: 80px;
 	margin-left: 10px;
 }
+
+.red-button {
+  background-color: #FF4136;
+  border-radius: 5px;
+}
+
+.line {
+  background-color: #FFDC00;
+  border-radius: 5px;
+  pointer-events: none;
+}

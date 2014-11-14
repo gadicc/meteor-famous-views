@@ -28,6 +28,7 @@
         images with famo.us. It uses a `div` with a background-image rather than
         a `img` tag.  Can be used as a drop-in replacement for ImageSurface, in case the size of the div is not derived from the image.
       {{else}}
+        <br>
         <div style="width: 430px; height: 120px; position: relative">
           {{#famousContext}}
             {{#SequentialLayout direction="X" size="[320,100]" itemSpacing='10'}}
@@ -67,13 +68,24 @@
       {{#plugin}}
         name=pierreeric:fview-animatedicon
         href=https://atmospherejs.com/pierreeric/fview-animatedicon
-        image=https://github.com/IjzerenHein/famous-animatedIcon/raw/master/screenshot.gif
-        This is
-        [@IjzerenHein's
+        This is [@IjzerenHein's
         Animated icon](https://github.com/IjzerenHein/famous-animatedIcon)
         packaged for famous-views: A handy hamburger menu.
+      {{else}}
+        <br>
+        <div style="width: 100%; height: 32px; position: relative; padding-left: 40px;">
+          {{#famousContext}}
+            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
+              {{#StateModifier id='animatedicon'
+                align='[.5, .5]' origin='[.5, .5]' size='[32, 32]'
+              }}
+                {{#Surface class='red-button'}}{{/Surface}}
+                {{#AnimatedIcon translate='[-12,0,0]'}}{{/AnimatedIcon}}
+              {{/StateModifier}}
+            {{/StateModifier}}
+          {{/famousContext}}
+        </div>
       {{/plugin}}
-
     </div>
   {{/Surface}}
 </template>
@@ -99,7 +111,7 @@
 </template>
 
 <template name='bkitems'>
-  {{#StateModifier size='[100, 120]'}}
+  {{#StateModifier size='[100, 120]' origin='[.5, .5]' align='[.5, .5]'}}
     {{#Surface size='[100,20]'
       origin='[.5, 0]' align='[.5, 0]' properties='eval:{textAlign: "center"}'}}
       <p class='text-center'><span class='label label-primary'>{{sizeMode}}</span></p>
