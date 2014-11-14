@@ -15,6 +15,8 @@ createTestDIV = function (dim, test) {
   return contentDIV;
 };
 
+FView.mainCtx = null;
+
 // Make sure we can see our tests :)
 Meteor.startup(function() {
 	window.setTimeout(function() {
