@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v0.1.25
+
+* More data context tests and fixes.  The last time, I think.
+
 ## v0.1.24
 
 * POTENTIALLY BREAKING, FView.ready() functions now run AFTER the main
