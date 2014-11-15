@@ -1,10 +1,10 @@
 {
-    "famous": {
-        "git": "https://github.com/Famous/famous.git",
-        "branch": "v0.3.0",
-        "root": "src"
-    },
-    "famous.polyfills": {
-        "git": "https://github.com/Famous/polyfills.git"
-    }
+  "famous": {
+      "git": "https://github.com/Famous/famous.git",
+      "branch": "v0.3.0",
+      "root": "src"
+  },
+  "famous.polyfills": {
+      "git": "https://github.com/Famous/polyfills.git"
+  }
 }
