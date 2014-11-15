@@ -9,15 +9,13 @@ Router.map(function() {
 Template.views_Flipper_front.events({
 	'click': function(event, tpl) {
 		var fview = FView.from(tpl);
-		fview.parent.view
-			.setAngle(Math.PI, { curve : 'easeOutBounce', duration : 500});
+		fview.parent.view.flip({ curve : 'easeOutBounce', duration : 500});
 	}
 });
 
 Template.views_Flipper_back.events({
 	'click': function(event, tpl) {
 		var fview = FView.from(tpl);
-		fview.parent.view
-			.setAngle(0, { curve : 'easeOutBounce', duration : 500});
+		fview.parent.view.flip({ curve : 'easeOutBounce', duration : 500});
 	}
 });
