@@ -22,7 +22,7 @@
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <br />
       {{#snippet lang="spacebars"}}
-        {{dstache}}#ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]'}}
+        {{dstache}}#ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]' perspective=500}}
           {{dstache}}#Flipper size="[150,150]"}}
             {{dstache}}>Surface target="front" template="views_Flipper_front"
               class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
@@ -32,7 +32,7 @@
         {{dstache}}/ContainerSurface}}
       {{else}}
         {{#if currentLang "jade"}}
-          +ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]'
+          +ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]' perspective=500
             +Flipper size='[150,150]' translate='[100,0]'
               +Surface target='front' template='views_Flipper_front' class='red-bg' size='[150,150]' align='[.5,.5]' origin='[.5,.5]'
                 | Default front content
@@ -42,11 +42,6 @@
       {{/snippet}}
 
       {{#snippet lang="javascript"}}
-        Template.flipper.rendered = function() {
-          var flipperWorld = FView.byId('flipperWorld');
-          flipperWorld.view.context.setPerspective(500);
-        }
-
         Template.views_Flipper_front.events({
           'click': function(event, tpl) {
             var fview = FView.from(tpl);
@@ -64,10 +59,6 @@
         });
       {{else}}
         {{#if currentLang "coffeescript"}}
-          Template.flipper.rendered = ->
-            flipperWorld = FView.byId 'flipperWorld'
-            flipperWorld.view.context.setPerspective 500
-
           Template.views_Flipper_front.events
             'click': (event, tpl) ->
               fview = FView.from tpl
@@ -88,7 +79,7 @@
 </template>
 
 <template name="flipper">
-  {{#ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]'}}
+  {{#ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]' perspective=500}}
     {{#Flipper size="[150,150]"}}
       {{>Surface target="front" template="views_Flipper_front"
         class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
@@ -97,7 +88,6 @@
     {{/Flipper}}
   {{/ContainerSurface}}
 </template>
-
 
 <template name="views_Flipper_front"><div class="full">Front</div></template>
 <template name="views_Flipper_back"><div class="full">Back</div></template>

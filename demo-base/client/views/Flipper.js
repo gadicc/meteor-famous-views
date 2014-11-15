@@ -6,11 +6,6 @@ Router.map(function() {
   });
 });
 
-Template.flipper.rendered = function() {
-  var flipperWorld = FView.byId('flipperWorld');
-  flipperWorld.view.context.setPerspective(500);
-}
-
 Template.views_Flipper_front.events({
 	'click': function(event, tpl) {
 		var fview = FView.from(tpl);
