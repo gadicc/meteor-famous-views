@@ -20,72 +20,68 @@
     {{/Modifier}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
-      <br />
+      <br>
+
       {{#snippet lang="spacebars"}}
-        {{dstache}}#ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]' perspective=500}}
-          {{dstache}}#Flipper size="[150,150]"}}
-            {{dstache}}>Surface target="front" template="views_Flipper_front"
-              class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
-            {{dstache}}>Surface target="back" template="views_Flipper_back"
-              class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
-          {{dstache}}/Flipper}}
-        {{dstache}}/ContainerSurface}}
+        &lt;template name="flipper_front">Front&lt;/template>
+        &lt;template name="flipper_back">Back&lt;/template>
+
+        &lt;template name="flipper">
+          {{dstache}}#ContainerSurface size='[150, 150]' perspective=500}}
+            {{dstache}}#Flipper}}
+              {{dstache}}>Surface target="front" template="flipper_front"
+                class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
+              {{dstache}}>Surface target="back" template="flipper_back"
+                class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
+            {{dstache}}/Flipper}}
+          {{dstache}}/ContainerSurface}}
+        &lt;/template>
       {{else}}
         {{#if currentLang "jade"}}
-          +ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]' perspective=500
-            +Flipper size='[150,150]' translate='[100,0]'
-              +Surface target='front' template='views_Flipper_front' class='red-bg' size='[150,150]' align='[.5,.5]' origin='[.5,.5]'
-                | Default front content
-              +Surface target='back' template='views_Flipper_back' class='blue-bg' size='[150,150]' align='[.5,.5]' origin='[.5,.5]'
-                | Default back content
+          template(name="flipper_front") Front
+          template(name="flipper_back") Back
+          template(name="flipper")
+            +ContainerSurface size='[150, 150]' perspective=500
+              +Flipper
+                +Surface target="front" template="flipper_front" class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"
+                +Surface target="back" template="flipper_back"
+                  class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"
         {{/if}}
       {{/snippet}}
 
       {{#snippet lang="javascript"}}
-        Template.views_Flipper_front.events({
-          'click': function(event, tpl) {
-            var fview = FView.from(tpl);
-            fview.parent.view.flip({ curve : 'easeOutBounce', duration : 500});
-          }
-        });
-
-        Template.views_Flipper_back.events({
-          'click': function(event, tpl) {
-            var fview = FView.from(tpl);
-            fview.parent.view.flip({ curve : 'easeOutBounce', duration : 500});
-          }
-        });
+        function flipSurface(event, fview) {
+          fview.parent.view.flip({ curve : 'easeOutBounce', duration : 500});
+        }
+        Template.flipper_front.famousEvents({ 'click': flipSurface });
+        Template.flipper_back.famousEvents({ 'click': flipSurface });
       {{else}}
         {{#if currentLang "coffeescript"}}
-          Template.views_Flipper_front.events
-            'click': (event, tpl) ->
-              fview = FView.from tpl
-              fview.parent.view.flip
-                curve : 'easeOutBounce'
-                duration : 500
-
-          Template.views_Flipper_back.events
-            'click': (event, tpl) ->
-              fview = FView.from tpl
-              fview.parent.view.flip
-                curve : 'easeOutBounce'
-                duration : 500
+          flipSurface = (event, fview) ->
+            view.parent.view.flip
+              curve: "easeOutBounce"
+              duration: 500
+          Template.flipper_front.famousEvents click: flipSurface
+          Template.flipper_back.famousEvents click: flipSurface
         {{/if}}
       {{/snippet}}
+
+      <p>See <a href="/examples/events">/examples/events</a> for alternative
+      methods and more info on event handling.</p>
     {{/Surface}}
   {{/Scrollview}}
 </template>
 
+<template name="flipper_front">Front</template>
+<template name="flipper_back">Back</template>
+
 <template name="flipper">
-  {{#ContainerSurface id='flipperWorld' size='[150, 150]' translate='[20,0]' perspective=500}}
-    {{#Flipper size="[150,150]"}}
-      {{>Surface target="front" template="views_Flipper_front"
+  {{#ContainerSurface size='[150, 150]' translate='[20,0]' perspective=500}}
+    {{#Flipper}}
+      {{>Surface target="front" template="flipper_front"
         class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
-      {{>Surface target="back" template="views_Flipper_back"
+      {{>Surface target="back" template="flipper_back"
         class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"}}
     {{/Flipper}}
   {{/ContainerSurface}}
 </template>
-
-<template name="views_Flipper_front"><div class="full">Front</div></template>
-<template name="views_Flipper_back"><div class="full">Back</div></template>
