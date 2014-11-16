@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v0.1.26
+
+* ContainerSurface now has a reactive `perspective=500` attribute.
+
 ## v0.1.25
 
 * More data context tests and fixes.  The last time, I think.
