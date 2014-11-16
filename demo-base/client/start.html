@@ -113,6 +113,7 @@
       {{#snippet lang="javascript"}}
         Template.item.rendered = function() {
           var fview = FView.from(this);
+          var Transform = famous.core.Transform; // see shortcut help below
 
           // "Fly in" animation (see examples/animations for more)
           fview.modifier.setTransform(
@@ -127,6 +128,7 @@
         {{#if currentLang "coffeescript"}}
           Template.item.rendered = ->
             fview = FView.from @
+            Transform = famous.core.Transform; # see shortcut help below
             # "Fly in" animation (see examples/animations for more)
             fview.modifier.setTransform (Transform.translate -500, -500)
             fview.modifier.setTransform (Transform.translate 0, 0),
