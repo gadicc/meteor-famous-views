@@ -43,8 +43,8 @@
           template(name="flipper")
             +ContainerSurface size='[150, 150]' perspective=500
               +Flipper
-                +Surface target="front" template="flipper_front" class="red-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"
-                +Surface target="back" template="flipper_back" class="blue-bg" size="[150,150]" align="[.5,.5]" origin="[.5,.5]"
+                +Surface target='front' template='flipper_front' class='red-bg' size='[150,150]' align='[.5,.5]' origin='[.5,.5]'
+                +Surface target='back' template='flipper_back' class='blue-bg' size='[150,150]' align='[.5,.5]' origin='[.5,.5]'
         {{/if}}
       {{/snippet}}
 
@@ -57,9 +57,7 @@
       {{else}}
         {{#if currentLang "coffeescript"}}
           flipSurface = (event, fview) ->
-            view.parent.view.flip
-              curve: "easeOutBounce"
-              duration: 500
+            view.parent.view.flip curve: 'easeOutBounce', duration: 500
           Template.flipper_front.famousEvents click: flipSurface
           Template.flipper_back.famousEvents click: flipSurface
         {{/if}}
