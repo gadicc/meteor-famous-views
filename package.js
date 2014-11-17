@@ -1,7 +1,7 @@
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.26",
+  version: "0.1.27-pre.1",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
@@ -31,6 +31,7 @@ function configurePackage(api, testing) {
       'lib/famousEach.js',
       'lib/famousIf.js',
       'lib/famousContext.js',
+      'lib/famousContext.css',
       'lib/modifiers.js',
       'lib/views.js'
     ],
