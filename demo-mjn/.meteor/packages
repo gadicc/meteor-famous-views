@@ -6,20 +6,30 @@
 standard-app-packages
 autopublish
 insecure
+
 iron:router@=0.9.4
-#raix:famono
-mjn:famous
-gadicohen:famous-views
+
+# layout + helpers
+less
+nemo64:bootstrap
 natestrauser:font-awesome
+chuangbo:marked@=0.3.2_4
+gadicohen:snippets
+
+# testing
 #sanjo:jasmine
 #velocity:core
 #velocity:html-reporter
 #numtel:velocity-tinytest
-gadicohen:fview-lagometer
-gadicohen:snippets
-chuangbo:marked
-nemo64:bootstrap
-less
-pierreeric:fview-animatedicon
+
+# famous
+#raix:famono
+mjn:famous
+gadicohen:famous-views
+
+# fview plugins
+#gadicohen:fview-lagometer
 pierreeric:fview-bksurfaceimage
+pierreeric:fview-animatedicon
 pierreeric:fview-dotloader
+

@@ -1,5 +1,17 @@
 ## vNEXT
 
+* BREAKING.  #famousContext now creates it's own div, you can specify
+  id/class/style as attributes.  For the old behaviour, use `useParent=1`.
+
+* POTENTIALLY BREAKING.  We completely changed the way the main context
+  is created, but are quite sure it's all backwards compatible.  Let us
+  know if anything breaks for you on this upgrade.  We also have new
+  recommended app patterns that will be online on the website soon.
+
+* BREAKING.  FView.mainCtx is no longer ready in FView.ready().  In any
+  case, the existence of this variable is no longer guaranteed, and
+  depends how the app is setup (appMode or not).
+
 ## v0.1.26
 
 * ContainerSurface now has a reactive `perspective=500` attribute.
