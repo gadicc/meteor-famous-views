@@ -29,15 +29,13 @@
         a `img` tag.  Can be used as a drop-in replacement for ImageSurface, in case the size of the div is not derived from the image.
       {{else}}
         <br>
-        <div style="width: 430px; height: 120px; position: relative">
-          {{#famousContext}}
-            {{#SequentialLayout direction="X" size="[320,100]" itemSpacing='10'}}
-              {{#famousEach sizeModes}}
-                {{>bkitems}}
-              {{/famousEach}}
-            {{/SequentialLayout}}
-          {{/famousContext}}
-        </div>
+        {{#famousContext size="[undefined,120]"}}
+          {{#SequentialLayout direction="X" size="[320,120]" itemSpacing='10'}}
+            {{#famousEach sizeModes}}
+              {{>bkitems}}
+            {{/famousEach}}
+          {{/SequentialLayout}}
+        {{/famousContext}}
       {{/plugin}}
 
       {{#plugin}}
@@ -74,7 +72,7 @@
       {{else}}
         <br>
         <div style="width: 100%; height: 32px; position: relative; padding-left: 40px;">
-          {{#famousContext}}
+          {{#famousContext useParent=1}}
             {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
               {{#StateModifier id='animatedicon'
                 align='[.5, .5]' origin='[.5, .5]' size='[32, 32]'
@@ -98,7 +96,7 @@
       {{else}}
         <br>
         <div style="width: 90px; height: 50px; position: relative; padding-left: 40px;">
-          {{#famousContext}}
+          {{#famousContext useParent=1}}
             {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
               {{#DotLoader height='50' dotD='10'}}
               {{/DotLoader}}
