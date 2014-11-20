@@ -137,7 +137,13 @@
     <div class="panel-heading">
       <h4>
         &nbsp; <i class="fa fa-puzzle-piece"></i> &nbsp;
-        <a href="{{href}}">{{{name}}}</a>
+        <a href="{{href}}">{{{name}}}</a> &nbsp;
+        {{#if starCount}}
+          <i class="fa fa-star"></i> {{starCount}} &nbsp;
+        {{/if}}
+        {{#if installCount}}
+          <i class="fa fa-download"></i>&nbsp; {{installCount}}
+        {{/if}}
       </h4>
     </div>
     <div class="panel-body">

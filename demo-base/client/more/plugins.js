@@ -1,22 +1,42 @@
 atmosphere = {
 	subs: [],
-	col: {}
+	cols: {}
 };
 window.atmosphere = atmosphere; // debug
 
 Router.route('plugins', {
 	onBeforeAction: function() {
-		return; // d'oh, https://github.com/percolatestudio/atmosphere-beta/issues/299
 		atmosphere.con = DDP.connect('https://atmospherejs.com/');
-		atmosphere.col.daiyscores = new Mongo.Collection('package/dailyScores',
-			{ connection: atmosphere.con });
-		var names = ['gadicohen:famous-views', 'pierreeric:fview-bksurfaceimage'];
-		_.each(names, function(name) {
+
+		if (!atmosphere.cols.packages)
+			atmosphere.cols.packages = new Mongo.Collection('packages',
+				{ connection: atmosphere.con });
+		atmosphere.subs.push(atmosphere.con.subscribe('packages/search', 'fview-', 20));
+
+		if (!atmosphere.cols.installCounts)
+			atmosphere.cols.installCounts = new Mongo.Collection('installCounts',
+				{ connection: atmosphere.con });
+		_.each(pluginNames, function(name) {
 			atmosphere.subs.push(
-				atmosphere.con.subscribe('package/dailyScores', name));
+				atmosphere.con.subscribe('package/installs', name));
 		});
+	},
+	onStop: function() {
+		while (atmosphere.subs.length)
+			atmosphere.subs.shift().stop();
 	}
 });
+
+var pluginNames = [
+	'gadicohen:fview-kenburns',
+	'gadicohen:fview-lagometer',
+	'pierreeric:fview-animatedicon',
+	'pierreeric:fview-devices',
+	'pierreeric:fview-bksurfaceimage',
+	'pierreeric:fview-dotloader',
+	'pierreeric:fview-slidedeck',
+];
+
 
 Blaze.registerHelper('plugin', new Blaze.Template(function() {
 	var view = this;
@@ -39,6 +59,11 @@ Blaze.registerHelper('plugin', new Blaze.Template(function() {
 	data.desc = content.substr(last.index + last[0].length + 1 /* \n */);
 	data.desc = marked(data.desc);
 
+	data.nameOrig = data.name;
+	data.authorName = data.name.split(':', 2);
+	data.packageName = data.authorName[1];
+	data.authorName = data.authorName[0];
+
 	data.name = data.name.replace(/fview-(\w+)/,
 		'fview-<span class="text-primary">$1</span');
 
@@ -49,6 +74,18 @@ Blaze.registerHelper('plugin', new Blaze.Template(function() {
 		return newView;
 	});
 }));
+
+Template.plugin_template.helpers({
+	starCount: function() {
+		var doc = atmosphere.cols.packages.findOne(
+			{ authorName: this.authorName, baseName: this.packageName });
+		return doc && doc.starCount;
+	},
+	installCount: function() {
+		var doc = atmosphere.cols.installCounts.findOne({ name: this.nameOrig });
+		return doc && doc.count;
+	}
+});
 
 Template.plugins.helpers({
   sizeModes: [
