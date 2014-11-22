@@ -17,6 +17,36 @@
       pull request.</p>
 
       {{#plugin}}
+        name=mjn:fview-animate
+        href=https://atmospherejs.com/mjn/fview-animate
+        Super easy entrance and exit animations.  Just wrap any `{{dstache}}#Surface}}`
+        with `{{dstache}}#Animate}}`, even inside a `{{dstache}}#famousEach}}`, and have their
+        entrance and exits controlled by pre-baked or custom animations.
+      {{/plugin}}
+
+      {{#plugin}}
+        name=pierreeric:fview-animatedicon
+        href=https://atmospherejs.com/pierreeric/fview-animatedicon
+        This is [@IjzerenHein's
+        Animated icon](https://github.com/IjzerenHein/famous-animatedIcon)
+        packaged for famous-views: A handy hamburger menu.
+      {{else}}
+        <br>
+        <div style="width: 100%; height: 32px; position: relative; padding-left: 40px;">
+          {{#famousContext useParent=1}}
+            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
+              {{#StateModifier id='animatedicon'
+                align='[.5, .5]' origin='[.5, .5]' size='[32, 32]'
+              }}
+                {{#Surface class='red-button'}}{{/Surface}}
+                {{#AnimatedIcon translate='[-12,0,0]'}}{{/AnimatedIcon}}
+              {{/StateModifier}}
+            {{/StateModifier}}
+          {{/famousContext}}
+        </div>
+      {{/plugin}}
+
+      {{#plugin}}
         name=pierreeric:fview-bksurfaceimage
         href=https://atmospherejs.com/pierreeric/fview-bksurfaceimage
         Adaptive Images!  Need your images to fit how you want them?
@@ -36,6 +66,36 @@
             {{/famousEach}}
           {{/SequentialLayout}}
         {{/famousContext}}
+      {{/plugin}}
+
+      {{#plugin}}
+        name=pierreeric:fview-devices
+        href=https://atmospherejs.com/pierreeric/fview-devices
+        image=https://raw.githubusercontent.com/PEM--/fview-devices/master/private/doc/tablet.png
+        This plugin brings easy to embed devices picture with active screen letting
+        you demonstrate your apps into a smartphone, a tablet or a desktop. This
+        makes the perfect case for a landing page. The styles of each device is
+        customizable.
+      {{/plugin}}
+
+      {{#plugin}}
+        name=pierreeric:fview-dotloader
+        href=https://atmospherejs.com/pierreeric/fview-dotloader
+        This plugin brings an animated loader that could be used when a long
+        task is requested. It is inspired from the
+        work of [LeXXiK](https://github.com/LeXXik) and
+        [Tony Alves](https://github.com/talves) in
+        [Famousco.de](http://famousco.de/2014/07/animated-dots-icon/).
+      {{else}}
+        <br>
+        <div style="width: 90px; height: 50px; position: relative; padding-left: 40px;">
+          {{#famousContext useParent=1}}
+            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
+              {{#DotLoader height='50' dotD='10'}}
+              {{/DotLoader}}
+            {{/StateModifier}}
+          {{/famousContext}}
+        </div>
       {{/plugin}}
 
       {{#plugin}}
@@ -64,47 +124,6 @@
       {{/plugin}}
 
       {{#plugin}}
-        name=pierreeric:fview-animatedicon
-        href=https://atmospherejs.com/pierreeric/fview-animatedicon
-        This is [@IjzerenHein's
-        Animated icon](https://github.com/IjzerenHein/famous-animatedIcon)
-        packaged for famous-views: A handy hamburger menu.
-      {{else}}
-        <br>
-        <div style="width: 100%; height: 32px; position: relative; padding-left: 40px;">
-          {{#famousContext useParent=1}}
-            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
-              {{#StateModifier id='animatedicon'
-                align='[.5, .5]' origin='[.5, .5]' size='[32, 32]'
-              }}
-                {{#Surface class='red-button'}}{{/Surface}}
-                {{#AnimatedIcon translate='[-12,0,0]'}}{{/AnimatedIcon}}
-              {{/StateModifier}}
-            {{/StateModifier}}
-          {{/famousContext}}
-        </div>
-      {{/plugin}}
-
-      {{#plugin}}
-        name=pierreeric:fview-dotloader
-        href=https://atmospherejs.com/pierreeric/fview-dotloader
-        This plugin brings an animated loader that could be used when a long
-        task is requested. It is inspired from the
-        work of [LeXXiK](https://github.com/LeXXik) and
-        [Tony Alves](https://github.com/talves) in
-        [Famousco.de](http://famousco.de/2014/07/animated-dots-icon/).
-      {{else}}
-        <br>
-        <div style="width: 90px; height: 50px; position: relative; padding-left: 40px;">
-          {{#famousContext useParent=1}}
-            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
-              {{#DotLoader height='50' dotD='10'}}
-              {{/DotLoader}}
-            {{/StateModifier}}
-          {{/famousContext}}
-        </div>
-      {{/plugin}}
-      {{#plugin}}
         name=pierreeric:fview-slidedeck
         href=https://atmospherejs.com/pierreeric/fview-slidedeck
         This plugin brings a slide deck engine. It takes its inspiration on
@@ -117,15 +136,7 @@
           <iframe width="400" height="225" src="https://www.youtube.com/embed/YuYvCzHzvSs" frameborder="0" allowfullscreen></iframe>
         </div>
       {{/plugin}}
-      {{#plugin}}
-        name=pierreeric:fview-devices
-        href=https://atmospherejs.com/pierreeric/fview-devices
-        image=https://raw.githubusercontent.com/PEM--/fview-devices/master/private/doc/tablet.png
-        This plugin brings easy to embed devices picture with active screen letting
-        you demonstrate your apps into a smartphone, a tablet or a desktop. This
-        makes the perfect case for a landing page. The styles of each device is
-        customizable.
-      {{/plugin}}
+
     </div>
   {{/Surface}}
 </template>

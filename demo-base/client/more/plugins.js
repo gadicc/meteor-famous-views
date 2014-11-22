@@ -20,6 +20,8 @@ Router.route('plugins', {
       atmosphere.subs.push(
         atmosphere.con.subscribe('package/installs', name));
     });
+
+    this.next();
   },
   onStop: function() {
     while (atmosphere.subs.length)
@@ -28,13 +30,14 @@ Router.route('plugins', {
 });
 
 var pluginNames = [
+  'mjn:fview-animate',
+  'pierreeric:fview-animatedicon',
+  'pierreeric:fview-bksurfaceimage',
+  'pierreeric:fview-devices',
+  'pierreeric:fview-dotloader',
   'gadicohen:fview-kenburns',
   'gadicohen:fview-lagometer',
-  'pierreeric:fview-animatedicon',
-  'pierreeric:fview-devices',
-  'pierreeric:fview-bksurfaceimage',
-  'pierreeric:fview-dotloader',
-  'pierreeric:fview-slidedeck',
+  'pierreeric:fview-slidedeck'
 ];
 
 
