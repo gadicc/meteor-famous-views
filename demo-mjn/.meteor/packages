@@ -7,7 +7,7 @@ standard-app-packages
 autopublish
 insecure
 
-iron:router@=0.9.4
+iron:router
 
 # layout + helpers
 less

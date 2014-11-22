@@ -17,7 +17,8 @@ deps@1.0.5
 ejson@1.0.4
 fastclick@1.0.1
 follower-livedata@1.0.2
-gadicohen:famous-views@0.1.27-pre.4
+gadicohen:famous-views@0.1.28-rc.1
+gadicohen:fview-lagometer@1.0.2
 gadicohen:prism@1.0.3
 gadicohen:snippets@0.0.4-pre.1
 geojson-utils@1.0.1

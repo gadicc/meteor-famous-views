@@ -1,5 +1,8 @@
 ## vNEXT
 
+* Fix regression with auto-famousContext and queue node added to famousContext
+  until it's really ready.
+
 ## v0.1.27
 
 * BREAKING.  #famousContext now creates it's own div, you can specify
