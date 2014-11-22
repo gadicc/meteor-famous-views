@@ -5,6 +5,6 @@ Menu.add({name:'GitHub',route:'https://github.com/gadicc/meteor-famous-component
 
 // Static pages don't need their own JS
 Router.route('more_testimonials', {
-	path: '/more/testimonials'
+  path: '/more/testimonials'
 });
 Router.route('faq');
