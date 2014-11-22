@@ -113,8 +113,8 @@ git push -u origin master
 ```bash
 meteor publish --create
 ```
-
   > For your next plugin version, just use `meteor publish` as your package is now known by Atmosphere.
+  
 * **Make a good case**! For making your plugin visible on [**famous-view** demo site](http://famous-views.meteor.com/plugins), create a little demonstration and make a PR on the [Github repository](http://famous-views.meteor.com/plugins).
 
 ## Setting up a project for hacking famous-views
