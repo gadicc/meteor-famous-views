@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.1.28
+
 * Fix regression with auto-famousContext and queue node added to famousContext
   until it's really ready.
 
