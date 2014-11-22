@@ -20,7 +20,12 @@ function configurePackage(api, testing) {
   );
 
   // Community Packages
-  api.use("jag:pince@0.0.5", 'client');
+  api.use(
+    [
+      "jag:pince@0.0.5",
+      "pierreeric:cssc@1.0.4"
+    ],
+    'client');
 
   api.add_files(
     [
@@ -31,7 +36,6 @@ function configurePackage(api, testing) {
       'lib/famousEach.js',
       'lib/famousIf.js',
       'lib/famousContext.js',
-      'lib/famousContext.css',
       'lib/modifiers.js',
       'lib/views.js'
     ],
