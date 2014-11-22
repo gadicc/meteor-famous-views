@@ -72,10 +72,34 @@ mkdir packages
 cd packages
 ln -s ../../../fview-blablabla
 ```
-* Now include your package in your example app as it was a regular package. We also use this step to include the necessary packages:
+* Include your package in your example app as it was a regular package. We also use this step to include the necessary packages:
 ```bash
 cd ..
 meteor add gadicohen:famous-views raix:famono YOUR_METEOR_LOGIN:fview-blablabla
+```
+* In the former step, we have used `raix:famono` to import famo.us. It comes out of the box with a configuration that request the last release of famo.us as well as some other helpers. This package is also able to grab other web packages as well. You could also use `mnj:famous`. If you have chosen, `raix:famono`, you can tweak its behavior by modifying the `lib/smart.require` file. Here is a default one:
+```json
+{
+  "famous": {
+      "git": "https://github.com/Famous/famous.git",
+      "branch": "v0.3.1",
+      "root": "src"
+  },
+  "famous.polyfills": {
+      "git": "https://github.com/Famous/polyfills.git"
+  }
+}
+```
+
+* If you have chosen `raix:famono`, note that there is one extra step to perform. This package only import what you are using in your apps by analysing your code and performing all the `define` and `require` for you. To orient `raix:famono` just add the following code in your example app, as stated in our [Quickstart guide](http://famous-views.meteor.com/start):
+```javascript
+Transform = null;
+FView.ready(function() {
+  Transform = famous.core.Transform;
+  // Famono: load famo.us shims and CSS
+  famous.polyfills;
+  famous.core.famous; // CSS
+});
 ```
 
 Now, you are ready to make the best plugin ever.
@@ -132,4 +156,4 @@ the unit tests as regression checks.
 meteor --port 2500 test-packages ./
 ```
 
-Now you can check the test results in your browser at http://localhost:2500.
+Now you can check the test results in your browser at [http://localhost:2500](http://localhost:2500).
