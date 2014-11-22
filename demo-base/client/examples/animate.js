@@ -4,7 +4,7 @@ Router.map(function() {
   this.route('examples_animate', { path: '/examples/animate' });
 });
 
-var uiItems = new Meteor.Collection();
+var uiItems = new Meteor.Collection(null);
 
 Template.examples_animate_buttons.events({
 	'click #insert': function() {

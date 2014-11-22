@@ -51,6 +51,7 @@ if (Meteor.isClient) {
       'header': {to: 'header'}
     }
   });
+  Router.setTemplateNameConverter(_.identity);
 
   // haha, for CDN loads :)
   if (typeof(dontSetLayoutYet) === 'undefined')

@@ -7,7 +7,7 @@ standard-app-packages
 autopublish
 insecure
 
-iron:router@=0.9.4
+iron:router
 
 # layout + helpers
 less
@@ -28,7 +28,7 @@ raix:famono
 gadicohen:famous-views
 
 # fview plugins
-#gadicohen:fview-lagometer
+gadicohen:fview-lagometer
 pierreeric:fview-bksurfaceimage
 pierreeric:fview-animatedicon
 pierreeric:fview-dotloader

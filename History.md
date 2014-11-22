@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.1.27
+
 * BREAKING.  #famousContext now creates it's own div, you can specify
   id/class/style as attributes.  For the old behaviour, use `useParent=1`.
 
@@ -11,6 +13,13 @@
 * BREAKING.  FView.mainCtx is no longer ready in FView.ready().  In any
   case, the existence of this variable is no longer guaranteed, and
   depends how the app is setup (appMode or not).
+
+* We now defer code via Famous' defer queue.  Should get rid of some
+  flicker and jitter.
+
+* If you need it, FView.postFirstAdd() will queue functions to run after
+  the render tree has it's first node.  Useful for plugins who want to
+  check for the existence of FView.mainCtx / appMode, etc.
 
 ## v0.1.26
 
