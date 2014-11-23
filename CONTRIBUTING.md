@@ -1,8 +1,29 @@
 # Contributing
-:warning: This documentation section is work in progress. :warning:
+
+## Issues
+
+Thanks for submitting an issue.  Letting us know what's going on helps us make
+famous-views better for you and for everyone else too.  To help us help you:
+
+* Before opening a new issue:
+  * Have you read the [FAQ](http://famous-views.meteor.com/faq) ?
+  * Have you looked at the code samples and documentation on the site?
+  e.g. [API](http://famous-views.meteor.com/features/api),
+  [Views](http://famous-views.meteor.com/views/README),
+  [Events](http://famous-views.meteor.com/examples/events), etc.
+  * Did you [search](https://github.com/gadicc/meteor-famous-views/issues) for similar issues by others?
+  * Do you have the latest version of famous-views and famo.us?
+* When opening a new issue:
+  * Consider including a minimalist reproduction on [meteorpad](meteorpad.com).
+  * Always mention what version of famous-views, and famo.us, you're using.
 
 ## Description
+
 **famous-views** merges Meteor's Blaze approach with Famo.us, a library for layouting and animating visual components on screens.
+
+## Plugins
+
+:warning: This documentation section is work in progress. :warning:
 
 ### Naming convention
 All plugins for **famous-views** have their name starts with `fview-` following with an unique name. If your plugin is intended to be used as a template name in Blaze or Jade, the convention is to use the template name in lower case.
@@ -138,7 +159,7 @@ git push -u origin master
 meteor publish --create
 ```
   > For your next plugin version, just use `meteor publish` as your package is now known by Atmosphere.
-  
+
 * **Make a good case**! For making your plugin visible on [**famous-view** demo site](http://famous-views.meteor.com/plugins), create a little demonstration and make a PR on the [Github repository](http://famous-views.meteor.com/plugins).
 
 ## Setting up a project for hacking famous-views
