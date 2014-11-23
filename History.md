@@ -1,5 +1,10 @@
 ## vNEXT
 
+## v0.1.29
+
+* For those still using the (deprecated) autoHeight, fixes a serious regression
+  where this would cause an infinite loop and freeze the browser.
+
 ## v0.1.28
 
 * Fix regression with auto-famousContext and queue node added to famousContext
