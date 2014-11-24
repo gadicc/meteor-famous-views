@@ -2,7 +2,6 @@ atmosphere = {
   subs: [],
   cols: {}
 };
-window.atmosphere = atmosphere; // debug
 
 Router.route('plugins', {
   onBeforeAction: function() {
@@ -35,9 +34,10 @@ var pluginNames = [
   'pierreeric:fview-bksurfaceimage',
   'pierreeric:fview-devices',
   'pierreeric:fview-dotloader',
+  'wenape:fview-infinitescrollview',
   'gadicohen:fview-kenburns',
   'gadicohen:fview-lagometer',
-  'pierreeric:fview-slidedeck'
+  'pierreeric:fview-slidedeck',
 ];
 
 
