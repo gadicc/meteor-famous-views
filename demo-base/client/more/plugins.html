@@ -16,134 +16,9 @@
       #136</a>.  Want your plugin to show up here?  Add it to this list with a
       pull request.</p>
 
-      {{#plugin}}
-        name=mjn:fview-animate
-        href=https://atmospherejs.com/mjn/fview-animate
-        Super easy entrance and exit animations.  Just wrap any `{{dstache}}#Surface}}`
-        with `{{dstache}}#Animate}}`, even inside a `{{dstache}}#famousEach}}`, and have their
-        entrance and exits controlled by pre-baked or custom animations.
-      {{/plugin}}
-
-      {{#plugin}}
-        name=pierreeric:fview-animatedicon
-        href=https://atmospherejs.com/pierreeric/fview-animatedicon
-        This is [@IjzerenHein's
-        Animated icon](https://github.com/IjzerenHein/famous-animatedIcon)
-        packaged for famous-views: A handy hamburger menu.
-      {{else}}
-        <br>
-        <div style="width: 100%; height: 32px; position: relative; padding-left: 40px;">
-          {{#famousContext useParent=1}}
-            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
-              {{#StateModifier id='animatedicon'
-                align='[.5, .5]' origin='[.5, .5]' size='[32, 32]'
-              }}
-                {{#Surface class='red-button'}}{{/Surface}}
-                {{#AnimatedIcon translate='[-12,0,0]'}}{{/AnimatedIcon}}
-              {{/StateModifier}}
-            {{/StateModifier}}
-          {{/famousContext}}
-        </div>
-      {{/plugin}}
-
-      {{#plugin}}
-        name=pierreeric:fview-bksurfaceimage
-        href=https://atmospherejs.com/pierreeric/fview-bksurfaceimage
-        Adaptive Images!  Need your images to fit how you want them?
-        This is
-        [@IjzerenHein's
-        BkSurfaceImage](https://github.com/IjzerenHein/famous-bkimagesurface)
-        packaged for famous-views: BkImageSurface adds support for
-        sizing strategies such as **AspectFit** and **AspectFill** for displaying
-        images with famo.us. It uses a `div` with a background-image rather than
-        a `img` tag.  Can be used as a drop-in replacement for ImageSurface, in case the size of the div is not derived from the image.
-      {{else}}
-        <br>
-        {{#famousContext size="[undefined,120]"}}
-          {{#SequentialLayout direction="X" size="[320,120]" itemSpacing='10'}}
-            {{#famousEach sizeModes}}
-              {{>bkitems}}
-            {{/famousEach}}
-          {{/SequentialLayout}}
-        {{/famousContext}}
-      {{/plugin}}
-
-      {{#plugin}}
-        name=pierreeric:fview-devices
-        href=https://atmospherejs.com/pierreeric/fview-devices
-        image=https://raw.githubusercontent.com/PEM--/fview-devices/master/private/doc/tablet.png
-        This plugin brings easy to embed devices picture with active screen letting
-        you demonstrate your apps into a smartphone, a tablet or a desktop. This
-        makes the perfect case for a landing page. The styles of each device is
-        customizable.
-      {{/plugin}}
-
-      {{#plugin}}
-        name=pierreeric:fview-dotloader
-        href=https://atmospherejs.com/pierreeric/fview-dotloader
-        This plugin brings an animated loader that could be used when a long
-        task is requested. It is inspired from the
-        work of [LeXXiK](https://github.com/LeXXik) and
-        [Tony Alves](https://github.com/talves) in
-        [Famousco.de](http://famousco.de/2014/07/animated-dots-icon/).
-      {{else}}
-        <br>
-        <div style="width: 90px; height: 50px; position: relative; padding-left: 40px;">
-          {{#famousContext useParent=1}}
-            {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
-              {{#DotLoader height='50' dotD='10'}}
-              {{/DotLoader}}
-            {{/StateModifier}}
-          {{/famousContext}}
-        </div>
-      {{/plugin}}
-
-      {{#plugin}}
-        name=wenape:fview-infinitescrollview
-        href=https://atmospherejs.com/wenape/fview-infinitescrollview
-        Scroll to infinity like a Zen Monk!  This is
-        [JonnyBGod's famous-infinitescroll](https://github.com/JonnyBGod/famous-infinitescroll)
-        packaged for famous-views.
-      {{/plugin}}
-
-      {{#plugin}}
-        name=gadicohen:fview-kenburns
-        href=https://atmospherejs.com/gadicohen/fview-kenburns
-        image=https://github.com/IjzerenHein/famous-kenburnscontainer/raw/master/screenshot.gif
-        For the photo pro!  Want to zoom and pan your photos like Ken Burns?
-        This is
-        [@IjzerenHein's
-        KenBurnsContainer](https://github.com/IjzerenHein/famous-kenburnscontainer)
-        packaged for famous-views.
-      {{/plugin}}
-
-      {{#plugin}}
-        name=gadicohen:fview-lagometer
-        href=https://atmospherejs.com/gadicohen/fview-lagometer
-        image=https://github.com/IjzerenHein/famous-lagometer/raw/master/lagometer.png
-        A developer must!  Want a live FPS count and chart showing computation
-        times?  This is
-        [@IjzerenHein's
-        Lagometer](https://github.com/IjzerenHein/famous-lagometer)
-        packaged for famous-views.  You can enable/disable the lagometer with
-        ALT-L (for lag).  Starts disabled by default - there when you need it,
-        not in your way otherwise.  This `debugOnly` package is never
-        bundled/deployed to production
-      {{/plugin}}
-
-      {{#plugin}}
-        name=pierreeric:fview-slidedeck
-        href=https://atmospherejs.com/pierreeric/fview-slidedeck
-        This plugin brings a slide deck engine. It takes its inspiration on
-        Reveal.js, Bespoke.js and Impress.js. Using Meteor and Famous, it has
-        never been that easy to create imerssive and collaborative slides within
-        minutes or seconds.
-      {{else}}
-        <div style="width: 100%; height: 225px; position: relative" class='text-center'>
-          <iframe width="400" height="225" src="https://www.youtube.com/embed/boIyXISuwoM" frameborder="0" allowfullscreen></iframe>
-          <iframe width="400" height="225" src="https://www.youtube.com/embed/YuYvCzHzvSs" frameborder="0" allowfullscreen></iframe>
-        </div>
-      {{/plugin}}
+      {{#each plugins}}
+        {{> plugin}}
+      {{/each}}
 
     </div>
   {{/Surface}}
@@ -154,7 +29,7 @@
     <div class="panel-heading">
       <h4>
         &nbsp; <i class="fa fa-puzzle-piece"></i> &nbsp;
-        <a href="{{href}}">{{{name}}}</a> &nbsp;
+        <a href="{{href}}">{{{prettyName}}}</a> &nbsp;
         {{#if starCount}}
           <i class="fa fa-star"></i> {{starCount}} &nbsp;
         {{/if}}
@@ -167,12 +42,43 @@
       {{#if image}}
         <img src="{{image}}">
       {{/if}}
-      {{{desc}}}
+      {{#markdown}}{{desc}}{{/markdown}}
+      {{#if extra}}
+        {{> extra}}
+      {{/if}}
       {{#if Template.elseBlock}}
         {{> Template.elseBlock}}
       {{/if}}
     </div>
   </div>
+</template>
+
+<!-- per plugin "extra" stuff goes here -->
+
+<template name="plugin:pierreeric:fview-animatedicon">
+  <br>
+  <div style="width: 100%; height: 32px; position: relative; padding-left: 40px;">
+    {{#famousContext useParent=1}}
+      {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
+        {{#StateModifier id='animatedicon'
+            align='[.5, .5]' origin='[.5, .5]' size='[32, 32]'}}
+          {{#Surface class='red-button'}}{{/Surface}}
+          {{#AnimatedIcon translate='[-12,0,0]'}}{{/AnimatedIcon}}
+        {{/StateModifier}}
+      {{/StateModifier}}
+    {{/famousContext}}
+  </div>
+</template>
+
+<template name="plugin:pierreeric:bksurfaceimage">
+  <br>
+  {{#famousContext size="[undefined,120]"}}
+    {{#SequentialLayout direction="X" size="[320,120]" itemSpacing='10'}}
+      {{#famousEach sizeModes}}
+        {{>bkitems}}
+      {{/famousEach}}
+    {{/SequentialLayout}}
+  {{/famousContext}}
 </template>
 
 <template name='bkitems'>
@@ -187,4 +93,23 @@
     }}
     {{/BkImageSurface}}
   {{/StateModifier}}
+</template>
+
+<template name="plugin:pierreeric:fview-dotloader">
+  <br>
+  <div style="width: 90px; height: 50px; position: relative; padding-left: 40px;">
+    {{#famousContext useParent=1}}
+      {{#StateModifier origin='[.5, .5]' align='[.5, .5]'}}
+        {{#DotLoader height='50' dotD='10'}}
+        {{/DotLoader}}
+      {{/StateModifier}}
+    {{/famousContext}}
+  </div>
+</template>
+
+<template name="plugin:pierreeric:fview-slidedeck">
+  <div style="width: 100%; height: 225px; position: relative" class='text-center'>
+    <iframe width="400" height="225" src="https://www.youtube.com/embed/boIyXISuwoM" frameborder="0" allowfullscreen></iframe>
+    <iframe width="400" height="225" src="https://www.youtube.com/embed/YuYvCzHzvSs" frameborder="0" allowfullscreen></iframe>
+  </div>
 </template>
