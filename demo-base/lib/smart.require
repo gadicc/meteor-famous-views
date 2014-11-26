@@ -1,7 +1,6 @@
 {
   "famous": {
       "git": "https://github.com/Famous/famous.git",
-      "branch": "v0.3.1",
       "root": "src"
   },
   "famous.polyfills": {

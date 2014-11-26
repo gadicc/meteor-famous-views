@@ -164,6 +164,12 @@ var plugins = [
       'on Reveal.js, Bespoke.js and Impress.js. Using Meteor and Famous, it ' +
       'has never been that easy to create imerssive and collaborative slides ' +
       'within minutes or seconds.'
+  },
+  {
+    name: 'pierreeric:fview-flexgrid',
+    href: 'https://atmospherejs.com/pierreeric/fview-flexgrid',
+    desc: 'This plugin brings a flexible grid layout adapting the number of ' +
+      'cards on each row depending on the size of the container.'
   }
 ];
 
