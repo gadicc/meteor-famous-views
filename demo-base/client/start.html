@@ -38,18 +38,18 @@
 
       {{#snippet lang="spacebars"}}
         &lt;head>
-            &lt;!-- this is critical for mobile and emulation to look and work properly -->
-            &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
+          &lt;!-- this is critical for mobile and emulation to look and work properly -->
+          &lt;meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
         &lt;/head>
 
         &lt;body>
-            {{dstache}}!-- leave this empty or leave it out, dont add famousInit here!  --}}
+          {{dstache}}!-- leave this empty or leave it out, dont add famousInit here!  --}}
         &lt;/body>
 
         &lt;template name="famousInit">
-            {{dstache}}#Surface}}
-                I am a full size Surface
-            {{dstache}}/Surface}}
+          {{dstache}}#Surface}}
+            I am a full size Surface
+          {{dstache}}/Surface}}
         &lt;/template>
       {{else}}
         {{#if currentLang "jade"}}
@@ -104,11 +104,11 @@
       minimongo query, just like you'd expect).</p>
 
       <p>You'll also notice that we used the <b>template inclusion</b>
-          <code>{{dstache}}>Surface template="item"}}</code> instead
+      <code>{{dstache}}>Surface template="item"}}</code> instead
       of specifying the view contents inline with
       <code>{{dstache}}#Surface}}content{{dstache}}/Surface}}</code>.
-          This let's us setup lifecycle callbacks, events, and helpers on
-          <code>Template.item</code>, just like you'd expect:</p>
+      This let's us setup lifecycle callbacks, events, and helpers on
+      <code>Template.item</code>, just like you'd expect:</p>
 
       {{#snippet lang="javascript"}}
         Template.item.rendered = function() {
