@@ -4,17 +4,18 @@
       {{#markdown}}
 # API Documentation
 
-## Templates
-
-All of our template helpers can be called either as a block helper, like
-`{{dstache}}#Surface}} ..content.. {{dstache}}/Surface}}` or with template inclusion,
-like `{{dstache}}>Surface template="content"}}`.
+## Template Helpers
 
 * **{{dstache}}#famous}}**
 
-  This is our main wrapper function, and may be called with `view="Scrollview"`, etc.
-  Alternatively, a shortcut is created for every wrapped View and Modifier, so you
-  can simply use `{{dstache}}#Scrollview}}`, etc, directly.  Please see the
+  This is our main wrapper function, and may be called with
+  `view="Scrollview"`, etc.  Alternatively, a shortcut is created for every
+  wrapped View and Modifier, so you can simply use `{{dstache}}#Scrollview}}`,
+  etc, directly.  Every view can be called as either a **block helper**, like
+  `{{dstache}}#Surface}} ..content.. {{dstache}}/Surface}}` or with **template
+  inclusion**, like `{{dstache}}>Surface template="content"}}`.  Inclusion
+  is necessary to set up life-cycle callbacks, like `rendered`, and
+  [famousEvents](/examples/events), on the template.  Please see the
   <a href="/views/README">Views README</a> for the full documentation.
 
 * **{{dstache}}#famousContext}}**
