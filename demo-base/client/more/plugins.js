@@ -183,7 +183,7 @@ for (var i=0; i < plugins.length; i++) {
   'fview-<span class="text-primary">$1</span');
 
   var tpl = Template['plugin:'+data.name];
-  if (tpl) tpl.extra = tpl;
+  if (tpl) data.extra = tpl;
 }
 
 /* Per plugin JS (sorted alphabetically) */
