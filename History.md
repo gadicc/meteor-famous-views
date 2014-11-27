@@ -7,7 +7,7 @@
 
 ## v0.1.28
 
-* Fix regression with auto-famousContext and queue node added to famousContext
+* Fix regression with auto-famousContext and queue nodes added to famousContext
   until it's really ready.
 
 ## v0.1.27

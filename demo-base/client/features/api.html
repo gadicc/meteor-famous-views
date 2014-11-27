@@ -17,6 +17,22 @@ like `{{dstache}}>Surface template="content"}}`.
   can simply use `{{dstache}}#Scrollview}}`, etc, directly.  Please see the
   <a href="/views/README">Views README</a> for the full documentation.
 
+* **{{dstache}}#famousContext}}**
+
+  Creates a new Famous Context.  If called with `id="mainCtx"`, a "main"
+  context is created: famo.us runs in "appMode" and controls rendering for
+  the entire viewport; appropriate CSS classes are added to `html` and `body`.
+  Additionally, plugins depend on this name.
+
+  If called with any other `id`, or without one, the context is created in
+  an isolated div.  You can use this in a "regular" web page where you only
+  want famo.us to run in parts of it.  You can also embed a famousContext
+  inside a `Surface`, which is particularly useful for setting different
+  `perspective`'s'.
+
+  The optional arguments `id`, `class` and `style` are all used to create
+  the container div.
+
 * **{{dstache}}#famousEach items}}**
 
   Use this inside any view that has a `.sequenceFrom()` method (e.g. `Scrollview`,
@@ -30,30 +46,6 @@ like `{{dstache}}>Surface template="content"}}`.
   `SequentialLayout`, etc).  Just like regular `{{dstache}}if}}` - fully reactive,
   and preserves ordering.  `reactiveBooleanHelper` is a reactive helper that
   evaluates to `true` or `false`.
-
-* **{{dstache}}#famousContext}}**
-
-  Creates a new Famous Context (different to the `FView.mainCtx` automatically
-  added to the document body).  Useful for embedded Contexts with different
-  `perspective`s, or for putting Famo.us content inside of the regular DOM.
-  Please realize that using the regular DOM model can have big impacts on
-  performance!  You should only do this if you know what you're doing.  In
-  particular, see the CSS section of
-  [Famo.us Pitfalls](http://famo.us/guides/pitfalls).
-
-  Additionally, the new context will be attached to the *containing div*, for
-  absolute control over the context (this might change; keep an eye out on
-  History.md for BREAKING changes, as usual).  In particular, make sure your
-  CSS or `style` attribute ensures that the element's `height` is appropriate
-  for what you have planned.  Example:
-
-  ```handlebars
-  <div style="height: 200px">
-    {{dstache}}#famousContext}}
-      ..
-    {{dstache}}/famousContext}}
-  </div>
-  ```
 
 ## JavaScript
 

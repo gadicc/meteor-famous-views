@@ -43,31 +43,45 @@
         &lt;/head>
 
         &lt;body>
-          {{dstache}}!-- leave this empty or leave it out, dont add famousInit here!  --}}
+          {{dstache}}#famousContext id="mainCtx"}}
+            {{dstache}}#Surface}}
+              I am a full size Surface
+            {{dstache}}/Surface}}
+          {{dstache}}/famousContext}}
         &lt;/body>
-
-        &lt;template name="famousInit">
-          {{dstache}}#Surface}}
-            I am a full size Surface
-          {{dstache}}/Surface}}
-        &lt;/template>
       {{else}}
         {{#if currentLang "jade"}}
           head
             // this is critical for mobile and emulation to look and work properly
             meta(name='viewport', content='width=device-width, maximum-scale=1, user-scalable=no')
           body
-            //- -- leave this empty or leave it out, dont add famousInit here! --
-          template(name='famousInit')
-            +Surface
-              | I am a full size Surface
+            +famousContext id="mainCtx"
+              +Surface
+                | I am a full size Surface
           {{/if}}
       {{/snippet}}
 
-      <p>The <code>famousInit</code> template is added to your document
-      automatically once famo.us is fully loaded, don't include it yourself.
-      Alternatively, instead of using this template, you can use any
-      template via <a href="/features/iron-router">iron-router integration</a>.
+      <p>
+        <ul>
+          <li>
+            <code>id="mainCtx"</code> is a special property.  It runs Famo.us
+            in "appMode", where Famo.us controls the entire page and sets
+            appropriate CSS classes.  The name is also relied on by plugin
+            developers.
+          </li>
+          <li>
+            With a different <code>id</code> (or if none is specified), the
+            context will be greated in an isolated div and can be used for just
+            a part of "regular" web application.  The <code>id</code>,
+            <code>style</code> and <code>class</code> attributes are used to
+            create the div.
+          </li>
+          <li>
+            The old pattern of using a <code>famousInit</code> template has
+            been been deprecated, but stil works as expected.  In the future,
+            a warning will be given, and eventually support will be removed.
+          </li>
+        </ul>
       </p>
 
       <p>A number of Views are provided pre-built for instant use (see the

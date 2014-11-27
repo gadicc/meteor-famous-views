@@ -46,27 +46,30 @@
 
       {{#snippet lang="spacebars"}}
         &lt;template name="layout">
-          {{dstache}}#HeaderFooterLayout headerSize="50" footerSize="0"}}
+          {{dstache}}#famousContext id="mainCtx"}}
+            {{dstache}}#HeaderFooterLayout headerSize="50" footerSize="0"}}
 
-            {{dstache}}#Surface target="header" translate="[0,0,100]"}}
-              <div id="header">{{dstache}}>yield region="header"}}</div>
-            {{dstache}}/Surface}}
+              {{dstache}}#Surface target="header" translate="[0,0,100]"}}
+                <div id="header">{{dstache}}>yield region="header"}}</div>
+              {{dstache}}/Surface}}
 
-            {{dstache}}#RenderController target="content"}}
-              {{dstache}}>yield}}
-            {{dstache}}/RenderController}}
+              {{dstache}}#RenderController target="content"}}
+                {{dstache}}>yield}}
+              {{dstache}}/RenderController}}
 
-          {{dstache}}/HeaderFooterLayout}}
+            {{dstache}}/HeaderFooterLayout}}
+          {{dstache}}/#famousContext}}
         &lt;/template>
       {{else}}
         {{#if currentLang "jade"}}
           template(name='layout')
-            +HeaderFooterLayout headerSize='50' footerSize='0'
-              +Surface target='header' translate='[0,0,100]'
-                #header
-                  +yield region='header'
-              +RenderController target='content'
-                +yield
+            +famousContext id="mainCtx"
+              +HeaderFooterLayout headerSize='50' footerSize='0'
+                +Surface target='header' translate='[0,0,100]'
+                  #header
+                    +yield region='header'
+                +RenderController target='content'
+                  +yield
         {{/if}}
       {{/snippet}}
 
