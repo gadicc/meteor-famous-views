@@ -75,7 +75,7 @@
           Session.set('clickCount', Session.get('clickCount')+1);
         }
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           animateAndIncrement = (fview) ->
             fview.modifier.halt()
             fview.modifier.setTransform (Transform.translate 0, 0),
@@ -107,7 +107,7 @@
           }
         });
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           Template.ev_surface_click.famousEvents
             click: (event, fview) ->
             # event.type is 'click'
@@ -131,7 +131,7 @@
           });
         }
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           Template.ev_surface_click.rendered = ->
             fview = FView.from @
             target = fview.surface or fview.view
@@ -172,7 +172,7 @@
           }
         });
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           Template.ev_surface_click.events
             click: (event, tpl) ->
               fview = FView.from tpl
@@ -322,7 +322,7 @@
       }
     });
   {{else}}
-    {{#if currentLang "coffeescript"}}
+    {{#if currentLang "coffee"}}
       SpringTransition = require 'famous/transitions/SpringTransition'
       Transitionable.registerMethod 'spring', SpringTransition
       springTransition =

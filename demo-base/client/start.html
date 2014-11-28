@@ -139,7 +139,7 @@
           );
         }
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           Template.item.rendered = ->
             fview = FView.from @
             Transform = famous.core.Transform; # see shortcut help below
@@ -181,7 +181,7 @@
           famous.core.famous; // CSS
         });
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           @Transform = null
 
           FView.ready ->

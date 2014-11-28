@@ -98,7 +98,7 @@
       }
     });
   {{else}}
-    {{#if currentLang "coffeescript"}}
+    {{#if currentLang "coffee"}}
       Session.setDefault 'width', 350
       Template.reactivity.helpers
         gridSize: ->
@@ -190,7 +190,7 @@
       });
     }
   {{else}}
-    {{#if currentLang "coffeescript"}}
+    {{#if currentLang "coffee"}}
       Template.reactivity.helpers
         getSize: ->
           [ (Session.get 'sizeX'), (Session.get 'sizeY') ]
@@ -231,7 +231,7 @@
       }
     });
   {{else}}
-    {{#if currentLang "coffeescript"}}
+    {{#if currentLang "coffee"}}
       # Reactive getSize() helper
       Template.reactivity.helpers
         getSize: ->

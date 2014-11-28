@@ -104,7 +104,7 @@
         queue.shift()();
     }, 100);
   {{else}}
-    {{#if currentLang "coffeescript"}}
+    {{#if currentLang "coffee"}}
       Template.views_GridLayout.helpers
         items: ->
           Items.find {}, limit: 8, sort: name: 1

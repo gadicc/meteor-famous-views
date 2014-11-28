@@ -17,10 +17,10 @@ deps@1.0.5
 ejson@1.0.4
 fastclick@1.0.1
 follower-livedata@1.0.2
-gadicohen:famous-views@0.1.28-rc.1
+gadicohen:famous-views@0.1.29
 gadicohen:fview-lagometer@1.0.2
-gadicohen:prism@1.0.3
-gadicohen:snippets@0.0.4-pre.1
+gadicohen:prism@1.0.4
+gadicohen:snippets@0.0.4
 geojson-utils@1.0.1
 html-tools@1.0.2
 htmljs@1.0.2
@@ -58,6 +58,7 @@ pierreeric:cssc@1.0.4
 pierreeric:fview-animatedicon@0.1.0
 pierreeric:fview-bksurfaceimage@0.1.0
 pierreeric:fview-dotloader@0.1.0
+pierreeric:fview-flexgrid@0.1.0
 random@1.0.1
 reactive-dict@1.0.4
 reactive-var@1.0.3

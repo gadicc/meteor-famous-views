@@ -55,7 +55,7 @@
         Template.flipper_front.famousEvents({ 'click': flipSurface });
         Template.flipper_back.famousEvents({ 'click': flipSurface });
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           flipSurface = (event, fview) ->
             view.parent.view.flip curve: 'easeOutBounce', duration: 500
           Template.flipper_front.famousEvents click: flipSurface

@@ -20,7 +20,7 @@
       {{#snippet lang="javascript"}}
         FView.registerView('Scrollview', famous.views.Scrollview);
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           FView.registerView 'Scrollview', famous.views.Scrollview
         {{/if}}
       {{/snippet}}
@@ -146,7 +146,7 @@
 
         });
       {{else}}
-        {{#if currentLang "coffeescript"}}
+        {{#if currentLang "coffee"}}
           FView.registerView 'MyView', myViewClass,
             # If exists, called instead of the view's own add() method
             add: (child_fview, child_options) ->
