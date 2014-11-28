@@ -4,7 +4,6 @@ Menu.add({name:'HeaderFooterLayout',route:'views/HeaderFooterLayout'}, 'Views');
 
 Router.map(function() {
   this.route('views_HeaderFooterLayout', {
-  	path: '/views/HeaderFooterLayout'
+    path: '/views/HeaderFooterLayout'
   });
 });
-

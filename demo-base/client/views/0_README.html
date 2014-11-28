@@ -13,7 +13,7 @@
       to be able to use it</b>.  Famous-views can as easily wrap <b>any
       famous view</b>, that we haven't added yet, that someone in the community
       wrote that's not part of official Famo.us and you downloaded, etc, etc.
-        Of course, if you do anything cool, send us a pull request on Github!</p>
+      Of course, if you do anything cool, send us a pull request on Github!</p>
 
       <h2>Registering a new View</h2>
 
@@ -51,52 +51,52 @@
 
       <ul>
         <li><p>Child templates will be added using the view's
-            <code>add()</code> method.  Alternatively, if the view provides
-            a <code>sequenceFrom()</code> method, children will be added to
-            a managed array, and <code>{{dstache}}#famousEach}}</code> may
-            be used (all reactive, of course).</p></li>
+          <code>add()</code> method.  Alternatively, if the view provides
+          a <code>sequenceFrom()</code> method, children will be added to
+          a managed array, and <code>{{dstache}}#famousEach}}</code> may
+          be used (all reactive, of course).</p></li>
 
         <li><p>Attributes are automatically decoded like in all the view
         examples; strings like <code>dimensions="[3,3]"</code> are translated
         to an array of 2 numbers; otherwise functions (i.e. reactive
-            template helpers) may be used instead to provide an exact value.</p></li>
+        template helpers) may be used instead to provide an exact value.</p></li>
 
-            <li><p>You can also specify values like
-            <code>transform="eval:Transform.rotateZ(Math.PI)"</code>
-            etc, provided you first set <code>FView.attrEvalAllowedKeys = '*'</code>
-            or <code>FView.attrEvalAllowedKeys = ['transform']</code>,            understand the security implications, and have <code>Transform</code>
-            declared in your global scope.  This is safe if you only use
-            it when defining your templates.  For reactive helpers, ensure that
-            they can never return text which may be influenced by the user.  If
-            you're developing a package, bare in mind that many sites completely
-            disable <code>eval</code>.</p></li>
+        <li><p>You can also specify values like
+        <code>transform="eval:Transform.rotateZ(Math.PI)"</code>
+        etc, provided you first set <code>FView.attrEvalAllowedKeys = '*'</code>
+        or <code>FView.attrEvalAllowedKeys = ['transform']</code>,            understand the security implications, and have <code>Transform</code>
+        declared in your global scope.  This is safe if you only use
+        it when defining your templates.  For reactive helpers, ensure that
+        they can never return text which may be influenced by the user.  If
+        you're developing a package, bare in mind that many sites completely
+        disable <code>eval</code>.</p></li>
 
-            <li><p>If the view has a <code>setOptions()</code> method,
-            it will be reactively called on any invalidation of any
-            of the above arguments.  For custom methods, see the
-            <code>attrUpdate</code> callback in "Advanced Views", below.
-            </p></li>
+        <li><p>If the view has a <code>setOptions()</code> method,
+        it will be reactively called on any invalidation of any
+        of the above arguments.  For custom methods, see the
+        <code>attrUpdate</code> callback in "Advanced Views", below.
+        </p></li>
 
-            <li><p>If no modifier is specified, but typical arguments for a
-            one are given, e.g.
-            <code>translate="[100,100]"</code>, a Modifier is automatically
-            prepended to the Render Tree as part of the MeteorFamousView.
-            Likewise, for <code>size="[undefined,undefined"]</code>, etc,
-            when using a View which doesn't support sizing.</p></li>
+        <li><p>If no modifier is specified, but typical arguments for a
+        one are given, e.g.
+        <code>translate="[100,100]"</code>, a Modifier is automatically
+        prepended to the Render Tree as part of the MeteorFamousView.
+        Likewise, for <code>size="[undefined,undefined"]</code>, etc,
+        when using a View which doesn't support sizing.</p></li>
 
         <li><p>When called like <code>{{dstache}}>View template="x"}}</code>,
         of course all the regular Meteor template stuff applies, so you can
         do things in <code>Template.x.rendered = function() { }</code>, setup
         events, etc.</p></li>
 
-            <li><p>Specifying <code>id="uniqueId"</code> (on the assumption
-            that your view
-            will only ever be rendered once, simultaneously), let's you access
-            the rendered MeteorFamousView with <code>FView.byId("uniqueId")</code>.
-            If you don't
-            specify an id, a unique, sequential numeric id is automatically
-            assigned; look for it in the JavaScript console, very useful for
-            debugging.</p></li>
+        <li><p>Specifying <code>id="uniqueId"</code> (on the assumption
+        that your view
+        will only ever be rendered once, simultaneously), let's you access
+        the rendered MeteorFamousView with <code>FView.byId("uniqueId")</code>.
+        If you don't
+        specify an id, a unique, sequential numeric id is automatically
+        assigned; look for it in the JavaScript console, very useful for
+        debugging.</p></li>
       </ul>
 
       <h3>Advanced Views</h3>

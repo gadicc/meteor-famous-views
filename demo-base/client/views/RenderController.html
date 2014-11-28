@@ -29,7 +29,7 @@
 
     {{#Modifier size="[undefined,110]"}}
       {{>Surface template="rc_buttons" class="pagePad"}}
-      {{#RenderController id="demoRC" transition=getTransition 
+      {{#RenderController id="demoRC" transition=getTransition
           size="[150,150]" translate="[500,-50]"}}
         {{>showTemplate name=currentTemplate}}
       {{/RenderController}}
@@ -139,7 +139,7 @@
         Template.rcTemplate.rendered = function() {
           var fview = FView.from(this);
 
-          var SpringTransition = famous.transitions.SpringTransition;          
+          var SpringTransition = famous.transitions.SpringTransition;
           fview._transition = { method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01 };
         }
       {{/snippet}}
