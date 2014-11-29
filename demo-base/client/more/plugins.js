@@ -88,6 +88,12 @@ Template.plugin_template.helpers({
 
 var plugins = [
   {
+    name: 'oorabona:fview-boxlayout',
+    href: 'https://atmospherejs.com/oorabona/fview-boxlayout',
+    image: 'https://github.com/IjzerenHein/famous-boxlayout/raw/master/BoxLayout.png',
+    desc: 'Layout-view for quickly setting margins or creating flexible layouts.'
+  },
+  {
     name: 'mjn:fview-animate',
     href: 'https://atmospherejs.com/mjn/fview-animate',
     desc: 'Super easy entrance and exit animations.  Just wrap any ' +
@@ -118,7 +124,9 @@ var plugins = [
     name: 'pierreeric:fview-devices',
     href: 'https://atmospherejs.com/pierreeric/fview-devices',
     image: 'https://raw.githubusercontent.com/PEM--/fview-devices/master/private/doc/tablet.png',
-
+    desc: 'Customizable SVG containers creating a `ContainerSurface` for demoing ' +
+      'your apps. Available containers are: `{{#desktopSvg}}`, `{{#smartphoneSvg}}` ' +
+      'and `{{#tabletSvg}}`.'
   },
   {
     name: 'pierreeric:fview-dotloader',
