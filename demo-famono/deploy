@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# This file is purposefully only in demo-famono, we only deploy from here.
+
+meteor deploy famous-views.meteor.com —settings config/settings.json
