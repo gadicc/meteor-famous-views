@@ -47,6 +47,7 @@ if (Meteor.isClient) {
   Router.configure({
     onAfterAction: navbarActive,
     notFoundTemplate: 'notFound',
+    trackPageView: true,
     yieldTemplates: {
       'header': {to: 'header'}
     }
