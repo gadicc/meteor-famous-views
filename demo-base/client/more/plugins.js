@@ -108,7 +108,8 @@ var plugins = [
     href: 'https://atmospherejs.com/pierreeric/fview-animatedicon',
     desc: 'This is [@IjzerenHein\'s Animated icon]' +
       '(https://github.com/IjzerenHein/famous-animatedIcon) packaged for ' +
-      'famous-views: A handy hamburger menu.'
+      'famous-views: A handy hamburger menu.' +
+      '\n\n**demo**: [fview-dotloader](http://fview-dotloader.meteor.com).'
   },
   {
     name: 'pierreeric:fview-bksurfaceimage',
