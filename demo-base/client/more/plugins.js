@@ -128,7 +128,8 @@ var plugins = [
     image: 'https://raw.githubusercontent.com/PEM--/fview-devices/master/private/doc/tablet.png',
     desc: 'Customizable SVG containers creating a `ContainerSurface` for demoing ' +
       'your apps. Available containers are: `{{#desktopSvg}}`, `{{#smartphoneSvg}}` ' +
-      'and `{{#tabletSvg}}`.'
+      'and `{{#tabletSvg}}`.' +
+      '\n\n**demo**: [fview-devices](http://fview-devices.meteor.com/).'
   },
   {
     name: 'pierreeric:fview-dotloader',
