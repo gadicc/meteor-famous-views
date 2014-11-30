@@ -65,7 +65,7 @@
         var SpringTransition = famous.transitions.SpringTransition;
         var Transitionable = famous.transitions.Transitionable;
         Transitionable.registerMethod('spring', SpringTransition);
-        
+
         function animateAndIncrement(fview) {
           fview.modifier.halt();
           fview.modifier.setTransform(
@@ -233,6 +233,12 @@
 
     {{! Original Meteor Event demo ball code }}
     {{>eventsDemo}}
+
+    {{#Surface size="[undefined,true]" class="pagePad"}}
+      <p>You can find the full source to this page in the <a target="_TOP"
+        href="https://github.com/gadicc/meteor-famous-views/tree/master/demo-base/client/examples"
+        >examples</a> directory (on GitHub).</p>
+    {{/Surface}}
 
   {{/Scrollview}}
 </template>
