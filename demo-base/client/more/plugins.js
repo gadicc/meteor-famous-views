@@ -91,7 +91,8 @@ var plugins = [
     name: 'oorabona:fview-boxlayout',
     href: 'https://atmospherejs.com/oorabona/fview-boxlayout',
     image: 'https://github.com/IjzerenHein/famous-boxlayout/raw/master/BoxLayout.png',
-    desc: 'Layout-view for quickly setting margins or creating flexible layouts.'
+    desc: 'Layout-view for quickly setting margins or creating flexible layouts.' +
+      '\n\n**demo**: [fview-boxlayout](http://fview-boxlayout.meteor.com/).'
   },
   {
     name: 'mjn:fview-animate',
@@ -99,7 +100,8 @@ var plugins = [
     desc: 'Super easy entrance and exit animations.  Just wrap any ' +
       '`{{#Surface}}` with `{{#Animate}}`, even inside a `{{#famousEach}}`, ' +
       'and have their entrance and exits controlled by pre-baked or custom ' +
-      'animations.'
+      'animations.' +
+      '\n\n**demo**: [fview-animate](http://meteorpad.com/pad/rXrmAYnMtuP7rnFeD/#Animate).'
   },
   {
     name: 'pierreeric:fview-animatedicon',
@@ -142,7 +144,8 @@ var plugins = [
     href: 'https://atmospherejs.com/wenape/fview-infinitescrollview',
     desc: 'Scroll to infinity like a Zen Monk!  This is [JonnyBGod\'s famous-' +
       'infinitescroll](https://github.com/JonnyBGod/famous-infinitescroll) ' +
-      'packaged for famous-views.'
+      'packaged for famous-views.' +
+      '\n\n**demo**: [fview-infinitescrollview](http://infinitescroll.meteor.com/).'
   },
   {
     name: 'gadicohen:fview-kenburns',
@@ -160,10 +163,11 @@ var plugins = [
     desc: 'A developer must!  Want a live FPS count and chart showing ' +
     'computation times?  This is [@IjzerenHein\'s Lagometer]' +
     '(https://github.com/IjzerenHein/famous-lagometer) packaged for ' +
-    'famous-views.  You can enable/disable the lagometer with ALT-L (for ' +
-    'lag).  Starts disabled by default - there when you need it, not in ' +
+    'famous-views.  You can enable/disable the lagometer with **ALT**+**l** ' +
+    '(`l`, for lag).  Starts disabled by default - there when you need it, not in ' +
     'your way otherwise.  This `debugOnly` package is never ' +
-    'bundled/deployed to production'
+    'bundled/deployed to production' +
+    '\n\n**demo**: **ALT**+**l** on this site.'
   },
   {
     name: 'pierreeric:fview-slidedeck',
@@ -171,7 +175,8 @@ var plugins = [
     desc: 'This plugin brings a slide deck engine. It takes its inspiration ' +
       'on Reveal.js, Bespoke.js and Impress.js. Using Meteor and Famous, it ' +
       'has never been that easy to create imerssive and collaborative slides ' +
-      'within minutes or seconds.'
+      'within minutes or seconds.' +
+      '\n\n**demo**: [fview-slidedeck](http://meetupfamousslides.meteor.com/).'
   },
   {
     name: 'pierreeric:fview-flexgrid',
