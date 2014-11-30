@@ -19,6 +19,10 @@
         <b>Failure to understand the difference</b> will
         result in events working correctly but <b>not how you expect</b>.
       </p>
+
+      <p><span style="background: #ff9999; padding: 2px 5px 2px 5px;">
+        Make sure to read the section on Meteor events below.
+      </span></p>
     {{/Surface}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
@@ -190,8 +194,9 @@
 
       <ol>
         <li>
-          Be a Surface (or inside a surface), and be setup with inclusion so
-          we can use <code>Template.x.events()</code>.  e.g.
+          <i>Must</i> <b>be a Surface</b> (or <b>be <i>inside</i> a
+          surface</b>), and be setup via <b>inclusion</b> so
+          we can use <code>Template.x.events()</code>.  So either:
           <code>{{dstache}}>Surface template='x'}}</code> or
           <code>{{dstache}}Surface}} {{dstache}}>x}} {{dstache}}/Surface}}</code>.
         </li>
@@ -209,6 +214,48 @@
         </li>
       </ol>
 
+      <p>
+        One other critical point to remember is that <i>the famo.us Render
+        Tree is not the DOM</i>.  <b>Events do not propogate ("bubble")
+        up</b> (out of a Surface).  As long as you remember the simple
+        point #1 above, you'll be fine: to use Meteor events on a template,
+        that template must <b><i>be</i> a surface, or be <i>inside</i>
+        an Surface, and be added via <i>inclusion</i></b>.  The following
+        <b>will not work</b>:
+      </p>
+
+      {{#snippet lang='spacebars'}}
+        &lt;!-- this won't work!! -->
+        &lt;template name="outerTemplate">
+          {{dstache}}#Surface}}
+            {{dstache}}!-- there are no event handlers on/in this Surface, and
+              the event will not propogate up / bubble out of the Surface--}}
+            &lt;button>&lt;/button>
+          {{dstache}}/Surface}}
+        &lt;/template>
+      {{else}}
+        {{#if currentLang 'jade'}}
+          // this, won't work!
+          template(name="outerTemplate")
+            +Surface
+              // there are no event handlers on/in this Surface, and
+              // the event will not propogate up / bubble out of the Surface
+              button
+        {{/if}}
+      {{/snippet}}
+      {{#snippet lang='javascript'}}
+        // This won't work!!  There is no DOM element to listen on.
+        Template.outerTemplate.events({
+          'click button': function() { alert('click!'); }
+        });
+      {{else}}
+        {{#if currentLang 'coffee'}}
+          # This won't work!!  There is no DOM element to listen on.
+          Template.outerTemplate.events "click button": ->
+            alert "click!"
+        {{/if}}
+      {{/snippet}}
+
       <h3>When to use what?</h3>
 
       <p>When in doubt, use this guideline:</p>
@@ -221,7 +268,8 @@
       <p>To be clear, <b>Meteor events work like normal</b>.  You don't need
       to put any extra thought into using them <i>unless you want to affect
       an entire Surface</i>.  For that reason, rather use Famous events for
-      this purpose.</p>
+      this purpose.  And when using Meteor events, <b>stick inside a
+      Surface</b>, events cannot propogate/bubble up/out.</p>
     {{/Surface}}
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
@@ -251,7 +299,7 @@
 </template>
 
 <template name="eventsDemo">
-  {{#Surface size="[undefined,80]" class="pagePad"}}
+  {{#Surface size="[undefined,true]" class="pagePad"}}
     <b>Catch the ball!</b>
     <p>Note also the use of <code>{{dstache}}#if}}</code> in the code to render
      the appropriate surface reactively.</p>
@@ -284,8 +332,8 @@
 <template name="ballCode">
   {{#snippet lang="spacebars"}}
     &lt;template name="eventsDemo">
-      {{dstache}}#Modifier size="[undefined,undefined]"}}
-        {{dstache}}#Surface size="[undefined,undefined]"}}
+      {{dstache}}#Modifier}}
+        {{dstache}}#Surface}}
           <div class="ballBorder"></div>
         {{dstache}}/Surface}}
         {{dstache}}>Surface template='springBall' size="[100,100]" translate="[50,50,90]"}}
@@ -294,8 +342,8 @@
   {{else}}
     {{#if currentLang "jade"}}
       template(name='eventsDemo')
-        +Modifier size='[undefined,undefined]'
-          +Surface size='[undefined,undefined]'
+        +Modifier
+          +Surface
             .ballBorder
           +Surface template='springBall' size='[100,100]' translate='[50,50,90]'
             | Ball
@@ -303,8 +351,8 @@
   {{/snippet}}
 
   {{#snippet lang="javascript"}}
-    SpringTransition = require("famous/transitions/SpringTransition");
-    Transitionable.registerMethod('spring', SpringTransition);
+    Transitionable.registerMethod('spring',
+      famous.transitions.SpringTransition);
 
     var springTransition = {
       method: "spring",
@@ -329,8 +377,7 @@
     });
   {{else}}
     {{#if currentLang "coffee"}}
-      SpringTransition = require 'famous/transitions/SpringTransition'
-      Transitionable.registerMethod 'spring', SpringTransition
+      Transitionable.registerMethod 'spring', famous.transitions.SpringTransition
       springTransition =
         method: 'spring'
         period: 100
