@@ -108,8 +108,7 @@ var plugins = [
     href: 'https://atmospherejs.com/pierreeric/fview-animatedicon',
     desc: 'This is [@IjzerenHein\'s Animated icon]' +
       '(https://github.com/IjzerenHein/famous-animatedIcon) packaged for ' +
-      'famous-views: A handy hamburger menu.' +
-      '\n\n**demo**: [fview-dotloader](http://fview-dotloader.meteor.com).'
+      'famous-views: A handy hamburger menu.'
   },
   {
     name: 'pierreeric:fview-bksurfaceimage',
@@ -138,7 +137,8 @@ var plugins = [
       'long task is requested. It is inspired from the work of ' +
       '[LeXXiK](https://github.com/LeXXik) and ' +
       '[Tony Alves](https://github.com/talves) in ' +
-      '[Famousco.de](http://famousco.de/2014/07/animated-dots-icon/).'
+      '[Famousco.de](http://famousco.de/2014/07/animated-dots-icon/).'  +
+      '\n\n**demo**: [fview-dotloader](http://fview-dotloader.meteor.com).'
   },
   {
     name: 'wenape:fview-infinitescrollview',
