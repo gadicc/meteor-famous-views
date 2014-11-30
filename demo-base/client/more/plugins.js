@@ -168,8 +168,7 @@ var plugins = [
     'famous-views.  You can enable/disable the lagometer with **ALT**+**l** ' +
     '(`l`, for lag).  Starts disabled by default - there when you need it, not in ' +
     'your way otherwise.  This `debugOnly` package is never ' +
-    'bundled/deployed to production' +
-    '\n\n**demo**: **ALT**+**l** on this site.'
+    'bundled/deployed to production.'
   },
   {
     name: 'pierreeric:fview-slidedeck',
@@ -184,7 +183,8 @@ var plugins = [
     name: 'pierreeric:fview-flexgrid',
     href: 'https://atmospherejs.com/pierreeric/fview-flexgrid',
     desc: 'This plugin brings a flexible grid layout adapting the number of ' +
-      'cards on each row depending on the size of the container.'
+      'cards on each row depending on the size of the container.' +
+      '\n\n**demo**: [fview-flexgrid](http://fview-flexgrid.meteor.com).'
   }
 ];
 
