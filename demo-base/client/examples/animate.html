@@ -1,43 +1,47 @@
 <template name="examples_animate">
-  {{#Scrollview}}
+  {{#Modifier}}
+    {{#Surface properties="background: white"}}{{/Surface}}
 
-    {{#Surface size="[undefined,true]" class="pagePad"}}
-      <h1>Entrance and Exit Animations</h1>
-      <p>This is a simple example showing how we can use the <code>rendered</code>
-      callback to create an entrance animation and setup a destroy animation.
-      </p>
-      {{>examples_animate_buttons}}
-      <br><br>
-    {{/Surface}}
+    {{#Scrollview}}
 
-    {{#Modifier size='[undefined, 150]'}}
-      {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
-      {{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
-        {{#famousEach items}}
-          {{!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
-          {{>Surface template="examples_animate_item" modifier="StateModifier"}}
-        {{/famousEach}}
-      {{/SequentialLayout}}
-    {{/Modifier}}
+      {{#Surface size="[undefined,true]" class="pagePad"}}
+        <h1>Entrance and Exit Animations</h1>
+        <p>This is a simple example showing how we can use the <code>rendered</code>
+        callback to create an entrance animation and setup a destroy animation.
+        </p>
+        {{>examples_animate_buttons}}
+        <br><br>
+      {{/Surface}}
 
-    {{#Surface size="[undefined,true]" class="pagePad"}}
-      <br />
-      <p>This works very well for a View like SequentialLayout, which uses the
-      size of child elements for positioning... so we can grow/shrink children
-      as part of the animation and everything works great.</p>
+      {{#Modifier size='[undefined, 150]'}}
+        {{#Surface}}{{/Surface}} {{!- To ensure continuous scrolling --}}
+        {{#SequentialLayout direction="X" size="[undefined,100]" translate="[80,0]"}}
+          {{#famousEach items}}
+            {{!-- we'll setup size/origin/align/scale/rotate in rendered callback --}}
+            {{>Surface template="examples_animate_item" modifier="StateModifier"}}
+          {{/famousEach}}
+        {{/SequentialLayout}}
+      {{/Modifier}}
 
-      <p>The same is not true of say, GridLayout, which forces a fixed size
-      on each child.  We could spin out an object on removal, but then the
-      resulting gap would disappear very suddenly at the end of the animation.
-      This is not something we can address at the application level, we'd
-      need someone to write a new famous view (say, "GridLayoutTransition")
-      which could accomodate such cases.</p>
-    {{/Surface}}
+      {{#Surface size="[undefined,true]" class="pagePad"}}
+        <br />
+        <p>This works very well for a View like SequentialLayout, which uses the
+        size of child elements for positioning... so we can grow/shrink children
+        as part of the animation and everything works great.</p>
 
-    {{>Surface template="examples_uihoooks_source" size="[undefined,true]"
-      class="pagePad"}}
+        <p>The same is not true of say, GridLayout, which forces a fixed size
+        on each child.  We could spin out an object on removal, but then the
+        resulting gap would disappear very suddenly at the end of the animation.
+        This is not something we can address at the application level, we'd
+        need someone to write a new famous view (say, "GridLayoutTransition")
+        which could accomodate such cases.</p>
+      {{/Surface}}
 
-  {{/Scrollview}}
+      {{>Surface template="examples_uihoooks_source" size="[undefined,true]"
+        class="pagePad"}}
+
+    {{/Scrollview}}
+  {{/Modifier}}
 </template>
 
 <template name="examples_animate_buttons">

@@ -22,7 +22,10 @@ if (Meteor.isServer) {
   if (x) Items.update(x._id, { $set: { picUrl: 'http://www.teleread.com/wp-content/uploads/2012/10/Android-Eclair.png' }});
   x = Items.findOne({picUrl: 'http://mandal.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png'});
   if (x) Items.update(x._id, { $set: { picUrl: 'http://www.androidheadlines.com/wp-content/uploads/2011/01/honeycomb-bee-550x550-540x540.png' }});
-
+  x = Items.findOne({picUrl: 'http://cdn.oxwordsblog.wpfuel.co.uk/wpcms/wp-content/uploads/apple-e1382039006457.jpg'});
+  if (x) Items.update(x._id, { $set: { picUrl: 'http://myjobsin1.files.wordpress.com/2010/02/red-apple12.jpg' }});
+  x = Items.findOne({picUrl: 'http://dreamatico.com/data_images/apple/apple-3.jpg'});
+  if (x) Items.update(x._id, { $set: { picUrl: 'http://myjobsin1.files.wordpress.com/2010/02/red-apple12.jpg' }});
 }
 
 if (Meteor.isClient) {
