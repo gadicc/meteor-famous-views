@@ -86,6 +86,17 @@
       }
     });
 
+    // Insert a random doc from the "Items" collection (everything)
+    // into our "uiItems" used in this example for #famousEach
+    Template.examples_animate_buttons.events({
+      'click #insert': function() {
+        var allItems = Items.find().fetch();
+        var idx = Math.round((allItems.length-1) * Math.random());
+        delete allItems[idx]._id;
+        uiItems.insert(allItems[idx]);
+      }
+    });
+
     // Remove the clicked item from the collection
     Template.examples_animate_item.events({
       'click': function(event, tpl) {
@@ -139,6 +150,14 @@
       Template.examples_animate.helpers
         items: ->
           uiItems.find {}, sort: name: 1
+
+      # Insert a random doc from the "Items" collection (everything)
+      # into our "uiItems" used in this example for #famousEach
+      Template.examples_animate_buttons.events "click #insert": ->
+        allItems = Items.find().fetch()
+        idx = Math.round((allItems.length - 1) * Math.random())
+        delete allItems[idx]._id
+        uiItems.insert allItems[idx]
 
       # Remove the clicked item from the collection
       Template.examples_animate_item.events
