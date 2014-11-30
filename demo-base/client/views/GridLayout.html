@@ -84,6 +84,16 @@
   {{/snippet}}
 
   {{#snippet lang="javascript"}}
+    /*
+     * famous-views doesn't provide any special wrappers on GridLayout, you
+     * should register it at an application level.  This is a perfect example of
+     * how easily vanilla any famo.us view can be integrated into Meteor and
+     * used in an intuitive way.
+     */
+    FView.ready(function(require) {
+      FView.registerView('GridLayout', famous.views.GridLayout);
+    });
+
     Template.views_GridLayout.helpers({
       items: function() {
         return Items.find({}, {sort: {name: 1}, limit: 8});
@@ -111,6 +121,13 @@
     }, 100);
   {{else}}
     {{#if currentLang "coffee"}}
+      # famous-views doesn't provide any special wrappers on GridLayout, you
+      # should register it at an application level.  This is a perfect example of
+      # how easily vanilla any famo.us view can be integrated into Meteor and
+      # used in an intuitive way.
+      FView.ready (require) ->
+        FView.registerView "GridLayout", famous.views.GridLayout
+
       Template.views_GridLayout.helpers
         items: ->
           Items.find {}, limit: 8, sort: name: 1
