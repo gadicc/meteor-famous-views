@@ -133,3 +133,19 @@
     <iframe width="400" height="225" src="https://www.youtube.com/embed/O3iTpqSpjqU" frameborder="0" allowfullscreen></iframe>
   </div>
 </template>
+
+<template name="plugin:mjn:fview-animate">
+    <div style="width: 100%; height: 32px; position: relative; padding-left: 40px;">
+      {{#famousContext useParent=1}}
+        {{#SequentialLayout direction="X" itemSpacing='1'}}
+        {{#famousEach letters}}
+          {{#Animate size='[32, 32]' onEnter='in:crazy.fast' onLeave='out:crazy.fast' }}
+          {{#Surface class='letter' style=letterStyle}}
+            {{name}}
+          {{/Surface}}
+          {{/Animate}}
+        {{/famousEach}}
+        {{/SequentialLayout}}
+        {{/famousContext}}
+    </div>
+</template>
