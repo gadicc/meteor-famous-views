@@ -120,7 +120,8 @@ var plugins = [
       'as **AspectFit** and **AspectFill** for displaying images with ' +
       'famo.us. It uses a `div` with a background-image rather than a `img` ' +
       'tag.  Can be used as a drop-in replacement for ImageSurface, in case ' +
-      'the size of the div is not derived from the image.'
+      'the size of the div is not derived from the image.' +
+      '\n\n**demo**: [fview-bksurfaceimage](http://fview-bksurfaceimage.meteor.com/).'
   },
   {
     name: 'pierreeric:fview-devices',
@@ -168,8 +169,7 @@ var plugins = [
     'famous-views.  You can enable/disable the lagometer with **ALT**+**l** ' +
     '(`l`, for lag).  Starts disabled by default - there when you need it, not in ' +
     'your way otherwise.  This `debugOnly` package is never ' +
-    'bundled/deployed to production' +
-    '\n\n**demo**: **ALT**+**l** on this site.'
+    'bundled/deployed to production.'
   },
   {
     name: 'pierreeric:fview-slidedeck',
@@ -184,7 +184,8 @@ var plugins = [
     name: 'pierreeric:fview-flexgrid',
     href: 'https://atmospherejs.com/pierreeric/fview-flexgrid',
     desc: 'This plugin brings a flexible grid layout adapting the number of ' +
-      'cards on each row depending on the size of the container.'
+      'cards on each row depending on the size of the container.' +
+      '\n\n**demo**: [fview-flexgrid](http://fview-flexgrid.meteor.com).'
   }
 ];
 
