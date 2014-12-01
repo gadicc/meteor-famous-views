@@ -120,7 +120,8 @@ var plugins = [
       'as **AspectFit** and **AspectFill** for displaying images with ' +
       'famo.us. It uses a `div` with a background-image rather than a `img` ' +
       'tag.  Can be used as a drop-in replacement for ImageSurface, in case ' +
-      'the size of the div is not derived from the image.'
+      'the size of the div is not derived from the image.' +
+      '\n\n**demo**: [fview-bksurfaceimage](http://fview-bksurfaceimage.meteor.com/).'
   },
   {
     name: 'pierreeric:fview-devices',
