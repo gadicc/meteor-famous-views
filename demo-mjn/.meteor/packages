@@ -7,7 +7,9 @@ standard-app-packages
 autopublish
 insecure
 
+# routing + analytics
 iron:router
+reywood:iron-router-ga
 
 # layout + helpers
 less
@@ -28,11 +30,9 @@ mjn:famous
 gadicohen:famous-views
 
 # fview plugins
-gadicohen:fview-lagometer
-pierreeric:fview-bksurfaceimage
+mjn:fview-animate
 pierreeric:fview-animatedicon
+pierreeric:fview-bksurfaceimage
 pierreeric:fview-dotloader
 pierreeric:fview-flexgrid
-reywood:iron-router-ga
-mjn:fview-animate
-
+gadicohen:fview-lagometer
