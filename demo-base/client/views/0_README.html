@@ -28,43 +28,39 @@
       <p>This let's you do:</p>
 
       {{#snippet lang="spacebars"}}
-        {{dstache}}#ScrollView arg1=blah arg2=etc}}
+        {{dstache}}#ScrollView arg1="string" arg2=reactiveHelper}}
           ...
         {{dstache}}/ScrollView}}
       {{else}}
         {{#if currentLang "jade"}}
-          +Scrollview arg1=blah arg2=etc
+          +Scrollview arg1="string" arg2=reactiveHelper
         {{/if}}
       {{/snippet}}
 
       <p>and also:</p>
 
       {{#snippet lang="spacebars"}}
-        {{dstache}}>Scrollview template=name arg2=etc}}
+        {{dstache}}>Scrollview template="name" arg2=etc}}
       {{else}}
         {{#if currentLang "jade"}}
-          +Scrollview template=name arg2=etc
+          +Scrollview template="name" arg2=etc
         {{/if}}
       {{/snippet}}
 
       <h3>Out of the Box</h3>
 
       <ul>
-        <li><p><b>Child templates</b> will be added using the view's
-        <code>add()</code> method.  Alternatively, if the view provides
-        a <code>sequenceFrom()</code> method, children will be added to
-        a managed array, and <code>{{dstache}}#famousEach}}</code> may
-        be used (all reactive, of course).  Can be overriden, see below.
-        </p></li>
-
         <li>
-          <p><b>Attributes</b> are automatically decoded like in all the view
+          <p><b>String attributes</b> are automatically decoded like in all our
           examples; strings like <code>dimensions="[3,3]"</code> are translated
-          to an array of 2 numbers; otherwise functions (i.e. reactive
-          template helpers) may be used instead to provide an exact value.
-          If the view has a <code>setOptions()</code> method,
-          it will be reactively called on any invalidation of any
-          of attribute.  For custom methods, see the
+          to an array of two Numbers; otherwise functions (i.e. reactive
+          template helpers) may be used instead to provide an <b>exact value</b>
+          (i.e., a Number, Array, Object, Function, etc).</p>
+
+          <p><b>Reacive helpers</b> <i>should always provide exact values -
+          and not strings -</i> to avoid unnecessary overhead. If the view has
+          a <code>setOptions()</code> method, it will be reactively called on
+          any invalidation of any attribute.  For custom methods, see the
           <code>attrUpdate</code> callback in "Advanced Views", below.</p>
 
           <p>You can also specify values like
@@ -104,6 +100,13 @@
         specify an id, a unique, sequential numeric id is automatically
         assigned; look for it in the JavaScript console, very useful for
         debugging.</p></li>
+
+        <li><p><b>Child templates</b> will be added using the view's
+        <code>add()</code> method.  Alternatively, if the view provides
+        a <code>sequenceFrom()</code> method, children will be added to
+        a managed array, and <code>{{dstache}}#famousEach}}</code> may
+        be used (all reactive, of course).  Can be overriden, see below.
+        </p></li>
       </ul>
 
       <h3>Advanced Views</h3>

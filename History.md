@@ -1,6 +1,15 @@
 ## vNEXT
 
-* Fix some flicker that snuck back (use Engine.nextTick instead of .defer)
+* ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
+
+* Introduce `FView.registerTransition(name, func)`, which stores the transition
+  func in `FView.transitions[name]` and may be used by other parts of this
+  package and plugins.  `Func(modifier, done)` acts on `modifier` and calls
+  `done` when the animation is finished.  `this` will be the fview, if
+  available.
+
+* The special direction="X" (taking a string instead of integer) now works
+  on reactive updates too. (#170)
 
 ## v0.1.29
 
