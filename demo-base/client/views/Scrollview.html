@@ -14,7 +14,8 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
       <p>
         Famous:
         <a href="http://www.famo.us/docs/views/Scrollview">Docs</a> |
-        <a href="http://rawgit.com/Famous/famous/master/examples/views/Scrollview/example.html">Example</a>
+        <a href="http://rawgit.com/Famous/famous/master/examples/views/Scrollview/example.html">Example</a> |
+        FViews API at the bottom of this page.
       </p>
     {{/Surface}}
 
@@ -34,6 +35,37 @@ https://github.com/Famous/examples/blob/master/src/examples/views/Scrollview/exa
       <p>You can find the full source to this page in the <a target="_TOP"
         href="https://github.com/gadicc/meteor-famous-views/tree/master/demo-base/client/views"
         >views</a> directory (on GitHub).</p>
+    {{/Surface}}
+
+    {{#Surface size="[undefined,true]" class="pagePad"}}
+      {{#markdown}}
+## Methods
+
+`fview.view` is the Scrollview instance.  As per the famo.us docs, you have
+methods like `getCurrentIndex()`, `goToPreviousPage()`, `goToNextPage()`,
+`goToPage()`, `getPosition(node)`, `getAbsolutePosition()`, `getOffset(node)`,
+`setPosition(x)`, `getVelocity()`, `setVolicty(v)`, and `getSize()`.  The
+methods `setOptions` and `sequenceFrom` are controlled by famous-views.
+
+## Reactive Properties
+
+`fview.properties` contains a number of reactive properties that you can
+depend on.  As you would expect, when these properties change, any reactive
+computations that depend on them will be invalidated and rerun.
+
+* `fview.properties.get('index')` - the current page, if setup with `paginated=true`
+* `fview.properties.get('direction')` - the direction the user is scrolling, if they
+changed pages.
+
+We found the `pageChange` event that the above rely on to be a bit buggy, so
+currently we use the `settle` event to update `index` too (which runs a bit
+later, but at least gets the correct value).
+
+Currently, the above properties are read-only, but we will consider making
+them settable too, e.g. `fview.properties.set('index', 1)` will scroll to
+that page.
+
+      {{/markdown}}
     {{/Surface}}
 
   {{/Scrollview}}

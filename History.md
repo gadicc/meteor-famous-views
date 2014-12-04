@@ -11,6 +11,8 @@
 * The special direction="X" (taking a string instead of integer) now works
   on reactive updates too. (#170)
 
+* Docs: update Scrollview.
+
 ## v0.1.29
 
 * For those still using the (deprecated) autoHeight, fixes a serious regression
