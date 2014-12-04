@@ -13,6 +13,10 @@
 
 * Docs: update Scrollview.
 
+* Generally using `{{#famousContext}}` in `<body>` these days is considered
+  safe and reliable.  However, as a precaution for weird situations, we now
+  insert a wrapper view and only roll once FView.ready() is true.
+
 ## v0.1.29
 
 * For those still using the (deprecated) autoHeight, fixes a serious regression
