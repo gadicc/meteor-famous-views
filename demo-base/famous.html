@@ -7,9 +7,9 @@
 
 <!-- Template.famousInit auto added to body when helpers are ready -->
 <template name="famousInit">
-	{{! > famous template='test'}}
-	{{! >famous template='incoming' modifier='pageTransition'}}
-	{{! >famous template='list' view='Scrollview'}}
+  {{! > famous template='test'}}
+  {{! >famous template='incoming' modifier='pageTransition'}}
+  {{! >famous template='list' view='Scrollview'}}
 </template>
 
 <!-- we want each yield to be on a different surface -->
@@ -54,12 +54,12 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{cat}} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-            	{{#each items}}
-	              <li><a href="{{route}}">{{name}}</a></li>
-  	          {{/each}}
+              {{#each items}}
+                <li><a href="{{route}}">{{name}}</a></li>
+              {{/each}}
             </ul>
           </li>
-         	{{/each}}
+           {{/each}}
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -147,15 +147,15 @@ or via the Famous CDN if you know what you're doing.
 
       <h3>WIP</h3>
 
-    	<p>Not much here yet, I'll be working on this next.</p>
+      <p>Not much here yet, I'll be working on this next.</p>
       <p><b>Explore the navbar</b> above to see what's done so far.
       Particularly the GridLayout and RenderController are pretty
       cool.</p>
-    	<p>For anything using data (like the GridLayout and Scrollview),
+      <p>For anything using data (like the GridLayout and Scrollview),
       try manipulating the <code>Items</code> collection, e.g.
       <code>Items.update(Items.findOne({name:'Apple'})._id, {$set: {name:'Capple'}});</code>
-    	in the console.  If you're on a desktop, use the mouse scrollwheel
-    	to simulate 'flicks'.  Scroll up to see the bounce.</p>
+      in the console.  If you're on a desktop, use the mouse scrollwheel
+      to simulate 'flicks'.  Scroll up to see the bounce.</p>
     </div>
   {{/Surface}}
 </template>

@@ -1,7 +1,7 @@
 Items = new Meteor.Collection('items');
 if (Meteor.isServer) {
 
-  if (Items.find().count() == 0)
+  if (!Items.findOne())
     _.each([
       { name: 'Apple', type: 'fruit', picUrl: 'http://cdn.oxwordsblog.wpfuel.co.uk/wpcms/wp-content/uploads/apple-e1382039006457.jpg' },
       { name: 'Banana', type: 'fruit', picUrl: 'http://statfaking2.firstpost.in/wp-content/uploads/2014/01/Banana.jpeg' },
@@ -37,7 +37,7 @@ if (Meteor.isClient) {
   Template.header.rendered = function() {
     navbar = this.$('.navbar');
     navbarActive(Router.current().path);
-  }
+  };
   var navbarActive = function(path) {
     if (!navbar) return;
     if (this.path) path = this.path;
@@ -45,7 +45,7 @@ if (Meteor.isClient) {
     navbar.find('a.active').removeClass('active');  // brand-header
     navbar.find('a[href="'+path+'"]').parent().addClass('active');
     navbar.find('a[href="'+path+'"]').addClass('active');  // brand-header
-  }
+  };
 
   Router.configure({
     onAfterAction: navbarActive,
@@ -81,8 +81,8 @@ if (Meteor.isClient) {
     Transform        = famous.core.Transform;
 
     // Famono: load famo.us shims and CSS
-    famous.polyfills;
-    famous.core.famous;  // CSS
+    famous.polyfills; // jshint ignore:line
+    famous.core.famous; // jshint ignore:line
   });
 
   // within the demo app, but famous-components will use this global too
@@ -100,7 +100,7 @@ if (Meteor.isClient) {
       utilities: Famous.Utilities,
       views: Famous.Views,
       widgets: Famous.Widgets
-    }
+    };
   }
 
   Template.header.helpers({
