@@ -85,24 +85,6 @@ if (Meteor.isClient) {
     famous.core.famous; // jshint ignore:line
   });
 
-  // within the demo app, but famous-components will use this global too
-  if (Package['famous-compiled']) {
-    // @famono ignore
-    famous = {
-      core: Famous.Core,
-      events: Famous.Events,
-      inputs: Famous.Inputs,
-      math: Famous.Math,
-      modifiers: Famous.Modifiers,
-      physics: Famous.Physics,
-      surfaces: Famous.Surfaces,
-      transitions: Famous.Transitions,
-      utilities: Famous.Utilities,
-      views: Famous.Views,
-      widgets: Famous.Widgets
-    };
-  }
-
   Template.header.helpers({
     menu: function(issues) {
       var out = [];
