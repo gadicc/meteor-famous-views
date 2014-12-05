@@ -92,6 +92,9 @@ Package.on_test(function(api) {
     'tests/famous.html',
     'tests/famous.js',
 
+    'tests/famousIf/famousIf.html',
+    'tests/famousIf/famousIf.js',
+
     'tests/context/FamousContextTests.html',
     'tests/context/FamousContextTests.js',
 

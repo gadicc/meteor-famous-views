@@ -17,6 +17,10 @@
   safe and reliable.  However, as a precaution for weird situations, we now
   insert a wrapper view and only roll once FView.ready() is true.
 
+* **famousIf**, previously, was used to maintain the correct position inside
+  of a sequence.  Now, it can be used inside of a regular renderNode too,
+  and cleans up children when the condition changes.
+
 ## v0.1.29
 
 * For those still using the (deprecated) autoHeight, fixes a serious regression

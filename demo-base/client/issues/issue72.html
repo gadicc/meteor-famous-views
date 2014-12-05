@@ -7,6 +7,14 @@
 
 			{{>Surface template="issue72_buttons" size="[undefined,30]"}}
 
+			{{#Modifier id="ifModifier" size="[200,50]"}}
+				{{#famousIf show 'A'}}
+					{{#Surface id="aTrue" class="red-bg"}}A true{{/Surface}}
+				{{else}}
+					{{#Surface id="aFalse" class="purple-bg"}}A false{{/Surface}}
+				{{/famousIf}}
+			{{/Modifier}}
+
 			{{#if showIf}}
 	    	{{#famousIf show 'A'}}
 	        {{>Surface template="issue72_surfaceA" size="[300,30]" class="red-bg"}}

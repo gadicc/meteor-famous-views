@@ -34,19 +34,19 @@
   The optional arguments `id`, `class` and `style` are all used to create
   the container div.
 
-* **{{dstache}}#famousEach items}}**
+* **{{dstache}}#famousIf reactiveBooleanHelper}}**
+
+  Use this between Famo.us nodes (as opposed to inside of Surfaces).  Just like
+  regular `{{dstache}}if}}` - fully reactive, preserves ordering, and cleans
+  up children when the condition changes.  `reactiveBooleanHelper` is a
+  reactive helper that evaluates to `true` or `false`.
+
+  * **{{dstache}}#famousEach items}}**
 
   Use this inside any view that has a `.sequenceFrom()` method (e.g. `Scrollview`,
   `SequentialLayout`, etc).  Just like regular `{{dstache}}each}}` - fully reactive,
   and preserves ordering.  `items` can be an array, a function that reactively
   returns an array, or a reactive cursor (from minimongo, etc).
-
-* **{{dstache}}#famousIf reactiveBooleanHelper}}**
-
-  Use this inside any view that has a `.sequenceFrom()` method (e.g. `Scrollview`,
-  `SequentialLayout`, etc).  Just like regular `{{dstache}}if}}` - fully reactive,
-  and preserves ordering.  `reactiveBooleanHelper` is a reactive helper that
-  evaluates to `true` or `false`.
 
 ## JavaScript
 
