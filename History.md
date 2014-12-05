@@ -1,6 +1,6 @@
 ## vNEXT
 
-* ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
+* Fix some flicker that snuck back (use Engine.nextTick instead of .defer)
 
 * Introduce `FView.registerTransition(name, func)`, which stores the transition
   func in `FView.transitions[name]` and may be used by other parts of this
@@ -11,7 +11,7 @@
 * The special direction="X" (taking a string instead of integer) now works
   on reactive updates too. (#170)
 
-* Docs: update Scrollview.
+* Docs: updated Scrollview to reflect reactive properties.
 
 * Generally using `{{#famousContext}}` in `<body>` these days is considered
   safe and reliable.  However, as a precaution for weird situations, we now
@@ -22,6 +22,9 @@
   and cleans up children when the condition changes.
 
 * Document `StateModifier`.  Add missing `origin` reactivity.
+
+* Speed increase.  Do our own materialization of non-Surface templates to
+  avoid some unnecessary DOM stuff.  (And cleanup famous.js)
 
 ## v0.1.29
 
