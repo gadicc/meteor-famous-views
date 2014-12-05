@@ -26,6 +26,11 @@
 * Speed increase.  Do our own materialization of non-Surface templates to
   avoid some unnecessary DOM stuff.  (And cleanup famous.js)
 
+* For registerables, add a onDestroy() callback to be fired just before
+  the fview is completely destroyed.
+
+* Add support for `watchSize=true` on Surfaces.  Document Surfaces.
+
 ## v0.1.29
 
 * For those still using the (deprecated) autoHeight, fixes a serious regression

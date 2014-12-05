@@ -1,0 +1,49 @@
+<template name="comps_Surface">
+  {{#Scrollview}}
+    {{#Surface size="[undefined,true]" class='pagePad'}}
+      {{#markdown}}
+# Surface
+
+A lead node of the Famous render tree, the only place where you can put
+HTML and the DOM works as usual.
+
+Famo.us docs [here](http://famo.us/docs/core/Surface).
+
+## Reactive Attributes
+
+* `size`
+* `class`, `classes` - *either* an array of class names, *or* a markup-style
+string like "class1 class2 etc".
+* `properties`, `style` - *either* an key-value dictionary of properties, *or*
+a mark-up style string like "background: red; color: #fff;"
+* `watchSize` - a famous-views extension to set up a mutation observer on
+the content to trigger resizing on true-sized surfaces (see below).
+
+## Sizing
+
+Make sure you've read [examples/layouts](examples/layouts).
+
+Regarding `true`-sized surfaces, the sizing only happens once.  If the
+content is updated and you want to trigger a resize, you need to do
+something like:
+      {{/markdown}}
+
+      {{#snippet lang="javascript"}}
+        FView.from(this).surface._contentDirty = true;
+      {{else}}
+        {{#if currentLang 'coffee'}}
+          FView.from(this).surface._contentDirty = true
+        {{/if}}
+      {{/snippet}}
+
+      {{#markdown}}
+If you're lazy and don't care about performance, we provide a special
+`watchSize=true` attribute that will set up a mutation observer on the
+Surface contents (on supported browsers).  Any any DOM change we'll
+retrigger the size calculations, and when the Surface is destroyed,
+we'll stop the observe.
+      {{/markdown}}
+
+    {{/Surface}}
+  {{/Scrollview}}
+</template>
