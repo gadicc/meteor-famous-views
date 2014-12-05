@@ -1,0 +1,19 @@
+<template name="famousIfTests1">
+  {{#famousContext id="famousIfTests"}}
+
+    {{#famousIf startFalse}}
+      {{#Surface id="startFalse"}}{{/Surface}}
+    {{/famousIf}}
+
+    {{#famousIf startTrue}}
+      {{#Surface id="startTrue"}}{{/Surface}}
+    {{/famousIf}}
+
+    {{#famousIf ifElseCondition}}
+      {{register key="ifelse" value=true}}
+    {{else}}
+      {{register key="ifelse" value=false}}
+    {{/famousIf}}
+
+  {{/famousContext}}
+</template>
