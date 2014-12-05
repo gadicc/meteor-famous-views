@@ -57,6 +57,13 @@ function configurePackage(api, testing) {
     'client'
   );
 
+  api.add_files(
+    [
+      'lib/modifiers/StateModifier.js'
+    ],
+    'client'
+  );
+
   api.export('FView', 'client');
 }
 

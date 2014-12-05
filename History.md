@@ -21,6 +21,8 @@
   of a sequence.  Now, it can be used inside of a regular renderNode too,
   and cleans up children when the condition changes.
 
+* Document `StateModifier`.  Add missing `origin` reactivity.
+
 ## v0.1.29
 
 * For those still using the (deprecated) autoHeight, fixes a serious regression
