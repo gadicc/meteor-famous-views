@@ -11,7 +11,8 @@ Menu = {
     }
     this.list[cat].push({
       name: name,
-      route: route.substr(0,4) == 'http' ? route : '/'+route
+      route: route.substr(0,4) == 'http' ? route : '/'+route,
+      target: route.substr(0,4) == 'http' ? '_TOP' : undefined
     });
   }
 };
