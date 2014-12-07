@@ -4,6 +4,8 @@
   margin-left: 10px;
 }
 
+.plugin .releasedAt { float: right; margin-right: 7px; };
+
 .red-button {
   background-color: #FF4136;
   border-radius: 5px;

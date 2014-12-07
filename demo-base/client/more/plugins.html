@@ -16,6 +16,11 @@
       #136</a>.  Want your plugin to show up here?  Add it to this list with a
       pull request.</p>
 
+      <p>
+        Sort by:
+        {{> pluginButtons}}
+      </p>
+
       {{#each plugins}}
         {{> plugin}}
       {{/each}}
@@ -32,10 +37,18 @@
   --}}
 </template>
 
-<template name="plugin_template">
+<template name="pluginButtons">
+  <button class="btn btn-default" data-sort="releasedAt" disabled={{sortBy 'releasedAt'}}>ReleaseDate</button>
+  <button class="btn btn-default" data-sort="packageName" disabled={{sortBy 'packageName'}}>Name</button>
+  <button class="btn btn-default" data-sort="starCount" disabled={{sortBy 'starCount'}}>Stars</button>
+  <button class="btn btn-default" data-sort="installCount" disabled={{sortBy 'installCount'}}>Installs</button>
+</template>
+
+<template name="plugin">
   <div class="plugin panel panel-default">
     <div class="panel-heading">
       <h4>
+        <span class="releasedAt">{{releasedAt}}</span>
         &nbsp; <i class="fa fa-puzzle-piece"></i> &nbsp;
         <a href="{{href}}">{{{prettyName}}}</a> &nbsp;
         {{#if starCount}}
@@ -53,9 +66,6 @@
       {{#markdown}}{{desc}}{{/markdown}}
       {{#if extra}}
         {{> extra}}
-      {{/if}}
-      {{#if Template.elseBlock}}
-        {{> Template.elseBlock}}
       {{/if}}
     </div>
   </div>

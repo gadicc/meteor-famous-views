@@ -1,95 +1,57 @@
-/* Atmosphere integration */
+/* Atmosphere integration moved to server/atmosphere.js */
 
-atmosphere = {
-  subs: [],
-  cols: {}
-};
+Router.route('plugins', {});
 
-Router.route('plugins', {
-  onBeforeAction: function() {
-    atmosphere.con = DDP.connect('https://atmospherejs.com/');
-
-    if (!atmosphere.cols.packages)
-      atmosphere.cols.packages = new Mongo.Collection('packages',
-        { connection: atmosphere.con });
-    atmosphere.subs.push(atmosphere.con.subscribe('packages/search', 'fview-', 20));
-
-    if (!atmosphere.cols.installCounts)
-      atmosphere.cols.installCounts = new Mongo.Collection('installCounts',
-        { connection: atmosphere.con });
-    _.each(_.pluck(plugins, 'name'), function(name) {
-      atmosphere.subs.push(
-        atmosphere.con.subscribe('package/installs', name));
-    });
-
-    this.next();
-  },
-  onStop: function() {
-    while (atmosphere.subs.length)
-      atmosphere.subs.shift().stop();
-  }
-});
+// Preload
+Packages = new Mongo.Collection('packages');
+InstallCounts = new Mongo.Collection('installCounts');
+//autopublish
+//Meteor.subscribe('packages');
+//Meteor.subscribe('installCounts');
 
 /* Plugin display code */
 
+function zeroPad(num) {
+  return ("0" + num).substr(-2);
+}
+
 Template.plugins.helpers({
-  plugins: function() { return plugins; }
+  plugins: function() {
+    var options = { sort: {} };
+    var sortBy = Session.get('sortBy');
+    options.sort[sortBy] = sortBy === 'packageName' ? 1 : -1;
+    return Plugins.find({}, options);
+  },
+  extra: function() { return Template['plugin:'+this.name]; }
 });
 
-Blaze.registerHelper('plugin', new Blaze.Template(function() {
-  var view = this;
+Template.pluginButtons.helpers({
+  sortBy: function(what) { return Session.get('sortBy') === what; }
+});
 
-  if (!view.templateContentBlock) {
-    return Template.plugin_template;
+Session.setDefault('sortBy', 'releaseDate');
+Template.pluginButtons.events({
+  'click button': function(event, tpl) {
+    Session.set('sortBy', $(event.target).attr('data-sort'));
   }
+});
 
-  var content = Blaze._toText(view.templateContentBlock, HTML.TEXTMODE.STRING);
-
-  // Remove initial newlines and initial indent
-  content = content.replace(/^\n*/, '');
-  var initialIndent = content.match(/^([\t ]*)/);
-  content = content.replace(new RegExp('^' + initialIndent[0], 'gm'), '');
-
-  var match, data={}, re=/^([A-Za-z]+)=(.*)$/gm, last;
-  while((match = re.exec(content)) !== null) {
-    data[match[1]] = match[2];
-    last = match;
-  }
-  data.desc = content.substr(last.index + last[0].length + 1 /* \n */);
-
-  data.authorName = data.name.split(':', 2);
-  data.packageName = data.authorName[1];
-  data.authorName = data.authorName[0];
-
-  data.prettyName = data.name.replace(/fview-(\w+)/,
-    'fview-<span class="text-primary">$1</span');
-
-  return Blaze.With(data, function() {
-    var newView = Template.plugin_template.constructView();
-    if (view.templateElseBlock)
-      newView.templateElseBlock = view.templateElseBlock;
-    return newView;
-  });
-}));
-
-Template.plugin_template.helpers({
-  starCount: function() {
-    var doc = atmosphere.cols.packages.findOne(
-      { authorName: this.authorName, baseName: this.packageName });
-    return doc && doc.starCount;
-  },
-  installCount: function() {
-    var doc = atmosphere.cols.installCounts.findOne({ name: this.name });
-    return doc && doc.count;
+Template.plugin.helpers({
+  releasedAt: function() {
+    var d = this.releasedAt;
+    return d.getFullYear()+'-'+zeroPad(d.getMonth())+'-'+zeroPad(d.getDate());
   }
 });
 
 /* Plugin data */
 
-var plugins = [
+Plugins = new Meteor.Collection(null);
+
+plugins = [
   {
     name: 'oorabona:fview-boxlayout',
     href: 'https://atmospherejs.com/oorabona/fview-boxlayout',
+    releasedAt: new Date(2014,11,29),
     image: 'https://github.com/IjzerenHein/famous-boxlayout/raw/master/BoxLayout.png',
     desc: 'Layout-view for quickly setting margins or creating flexible layouts.' +
       '\n\n**demo**: [fview-boxlayout](http://fview-boxlayout.meteor.com/).'
@@ -97,6 +59,7 @@ var plugins = [
   {
     name: 'mjn:fview-animate',
     href: 'https://atmospherejs.com/mjn/fview-animate',
+    releasedAt: new Date(2014,11,19),
     desc: 'Super easy entrance and exit animations.  Just wrap any ' +
       '`{{#Surface}}` with `{{#Animate}}`, even inside a `{{#famousEach}}`, ' +
       'and have their entrance and exits controlled by pre-baked or custom ' +
@@ -106,6 +69,7 @@ var plugins = [
   {
     name: 'pierreeric:fview-animatedicon',
     href: 'https://atmospherejs.com/pierreeric/fview-animatedicon',
+    releasedAt: new Date(2014,11,13),
     desc: 'This is [@IjzerenHein\'s Animated icon]' +
       '(https://github.com/IjzerenHein/famous-animatedIcon) packaged for ' +
       'famous-views: A handy hamburger menu.'
@@ -113,6 +77,7 @@ var plugins = [
   {
     name: 'pierreeric:fview-bksurfaceimage',
     href: 'https://atmospherejs.com/pierreeric/fview-bksurfaceimage',
+    releasedAt: new Date(2014,11,13),
     desc: 'Adaptive Images!  Need your images to fit how you want them? ' +
       'This is [@IjzerenHein\'s BkSurfaceImage]' +
       '(https://github.com/IjzerenHein/famous-bkimagesurface) packaged for ' +
@@ -126,6 +91,7 @@ var plugins = [
   {
     name: 'pierreeric:fview-devices',
     href: 'https://atmospherejs.com/pierreeric/fview-devices',
+    releasedAt: new Date(2014,11,16),
     image: 'https://raw.githubusercontent.com/PEM--/fview-devices/master/private/doc/tablet.png',
     desc: 'Customizable SVG containers creating a `ContainerSurface` for demoing ' +
       'your apps. Available containers are: `{{#desktopSvg}}`, `{{#smartphoneSvg}}` ' +
@@ -135,6 +101,7 @@ var plugins = [
   {
     name: 'pierreeric:fview-dotloader',
     href: 'href=https://atmospherejs.com/pierreeric/fview-dotloader',
+    releasedAt: new Date(2014,11,14),
     desc: 'This plugin brings an animated loader that could be used when a ' +
       'long task is requested. It is inspired from the work of ' +
       '[LeXXiK](https://github.com/LeXXik) and ' +
@@ -145,6 +112,7 @@ var plugins = [
   {
     name: 'wenape:fview-infinitescrollview',
     href: 'https://atmospherejs.com/wenape/fview-infinitescrollview',
+    releasedAt: new Date(2014,11,23),
     desc: 'Scroll to infinity like a Zen Monk!  This is [JonnyBGod\'s famous-' +
       'infinitescroll](https://github.com/JonnyBGod/famous-infinitescroll) ' +
       'packaged for famous-views.' +
@@ -153,6 +121,7 @@ var plugins = [
   {
     name: 'gadicohen:fview-kenburns',
     href: 'https://atmospherejs.com/gadicohen/fview-kenburns',
+    releasedAt: new Date(2014,11,13),
     image: 'https://github.com/IjzerenHein/famous-kenburnscontainer/raw/master/screenshot.gif',
     desc: 'For the photo pro!  Want to zoom and pan your photos like Ken ' +
       'Burns? This is [@IjzerenHein\'s KenBurnsContainer]' +
@@ -162,6 +131,7 @@ var plugins = [
   {
     name: 'gadicohen:fview-lagometer',
     href: 'https://atmospherejs.com/gadicohen/fview-lagometer',
+    releasedAt: new Date(2014,11,12),
     image: 'https://github.com/IjzerenHein/famous-lagometer/raw/master/lagometer.png',
     desc: 'A developer must!  Want a live FPS count and chart showing ' +
     'computation times?  This is [@IjzerenHein\'s Lagometer]' +
@@ -173,6 +143,7 @@ var plugins = [
   },
   {
     name: 'pierreeric:fview-slidedeck',
+    releasedAt: new Date(2014,11,15),
     href: 'https://atmospherejs.com/pierreeric/fview-slidedeck',
     desc: 'This plugin brings a slide deck engine. It takes its inspiration ' +
       'on Reveal.js, Bespoke.js and Impress.js. Using Meteor and Famous, it ' +
@@ -182,6 +153,7 @@ var plugins = [
   },
   {
     name: 'pierreeric:fview-flexgrid',
+    releasedAt: new Date(2014,11,25),
     href: 'https://atmospherejs.com/pierreeric/fview-flexgrid',
     desc: 'This plugin brings a flexible grid layout adapting the number of ' +
       'cards on each row depending on the size of the container.' +
@@ -198,9 +170,37 @@ for (var i=0; i < plugins.length; i++) {
   data.prettyName = data.name.replace(/fview-(\w+)/,
   'fview-<span class="text-primary">$1</span');
 
+  /*
   var tpl = Template['plugin:'+data.name];
   if (tpl) data.extra = tpl;
+  */
+
+  Plugins.insert(data);
 }
+
+function updateByName(name, field, value) {
+  for (var i=0; i < plugins.length; i++)
+    if (plugins[i].name == name) {
+      plugins[i][field] = value;
+      break;
+    }
+}
+
+Packages.find().observeChanges({
+  added: function(id, fields) {
+    Plugins.update({ name: fields.name }, { $set: { starCount: fields.starCount }});
+  }, changed: function(id, fields) {
+    Plugins.update({ name: fields.name }, { $set: { starCount: fields.starCount }});
+  }
+});
+
+InstallCounts.find().observeChanges({
+  added: function(id, fields) {
+    Plugins.update({ name: fields.name }, { $set: { installCount: fields.count }});
+  }, changed: function(id, fields) {
+    Plugins.update({ name: fields.name }, { $set: { installCount: fields.count }});
+  }
+});
 
 /* Per plugin JS (sorted alphabetically) */
 
