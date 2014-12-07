@@ -29,7 +29,7 @@ Template.pluginButtons.helpers({
   sortBy: function(what) { return Session.get('sortBy') === what; }
 });
 
-Session.setDefault('sortBy', 'releaseDate');
+Session.setDefault('sortBy', 'releasedAt');
 Template.pluginButtons.events({
   'click button': function(event, tpl) {
     Session.set('sortBy', $(event.target).attr('data-sort'));
