@@ -1,6 +1,6 @@
 ## vNEXT
 
-* Fix some flicker that snuck back (use Engine.nextTick instead of .defer)
+* ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
 
 * Introduce `FView.registerTransition(name, func)`, which stores the transition
   func in `FView.transitions[name]` and may be used by other parts of this
