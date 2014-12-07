@@ -102,7 +102,7 @@
 
       <h3>Once off Transitions</h3>
 
-      <p>Sometimes we want to queue a transitio or transition modifier to be
+      <p>Sometimes we want to queue a transition or transition modifier to be
       used only on the next change, but make sure changes after this use the
       default again.
       This very useful for <b>per-route transitions in iron-router</b>.  For
@@ -110,6 +110,10 @@
 
       {{#snippet lang="spacebars"}}
         {{dstache}}>RenderController id="mainRC" ...}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +RenderController id='mainRC' ...
+        {{/if}}
       {{/snippet}}
 
       {{#snippet lang="javascript"}}
@@ -127,6 +131,20 @@
             }
           }
         });
+      {{else}}
+        {{#if currentLang "coffeescript"}}
+          Router.route 'mySpecialRoute',
+            onBeforeAction: ->
+              fview = FView.byId 'mainRC'
+              # don't run on initial page render before setup
+              if fview
+                # Optional; change to a name from FView.transitionModifiers
+                fview._transitionModifierOnce = 'slideWindow'
+
+                # Optional; null to use the default transition (linear)
+                SpringTransition = famous.transitions.SpringTransition
+                fview._transitionOnce = method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01
+        {{/if}}
       {{/snippet}}
 
       <h3>Change the Transition (not Modifier) itself</h3>
@@ -142,6 +160,13 @@
           var SpringTransition = famous.transitions.SpringTransition;
           fview._transition = { method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01 };
         }
+      {{else}}
+        {{#if currentLang "coffeescript"}}
+          Template.rcTemplate.rendered = ->
+            fview = FView.from @
+            SpringTransition = famous.transitions.SpringTransition
+            fview._transition = method: SpringTransition, period: 800, dampingRatio: 0.2, velocity: 0.01
+        {{/if}}
       {{/snippet}}
 
     {{/Surface}}

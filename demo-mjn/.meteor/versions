@@ -17,7 +17,7 @@ deps@1.0.5
 ejson@1.0.4
 fastclick@1.0.1
 follower-livedata@1.0.2
-gadicohen:famous-views@0.1.29
+gadicohen:famous-views@0.1.30-rc.3
 gadicohen:fview-lagometer@1.0.2
 gadicohen:prism@1.0.4
 gadicohen:snippets@0.0.4
@@ -47,7 +47,7 @@ meteor@1.1.3
 minifiers@1.1.2
 minimongo@1.0.5
 mjn:famous@0.3.1_2
-mjn:fview-animate@0.0.10
+mjn:fview-animate@0.0.14
 mobile-status-bar@1.0.1
 mongo@1.0.8
 natestrauser:font-awesome@4.2.0

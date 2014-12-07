@@ -32,7 +32,7 @@ something like:
         FView.from(this).surface._contentDirty = true;
       {{else}}
         {{#if currentLang 'coffee'}}
-          FView.from(this).surface._contentDirty = true
+          (FView.from @).surface._contentDirty = true
         {{/if}}
       {{/snippet}}
 
