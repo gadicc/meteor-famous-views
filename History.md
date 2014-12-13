@@ -31,6 +31,12 @@
 
 * Add support for `watchSize=true` on Surfaces.  Document Surfaces.
 
+* XXX finalize names before release
+  registerables: onRenderTree() callback (not used in the end)
+  views: postRender() callback (only for modifiers until now)
+  surfaces: Template.x.onDocumentDom() callback
+  internal: when called with inclusion, store fview.template
+
 ## v0.1.29
 
 * For those still using the (deprecated) autoHeight, fixes a serious regression
