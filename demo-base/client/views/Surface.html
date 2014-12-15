@@ -42,6 +42,20 @@ If you're lazy and don't care about performance, we provide a special
 Surface contents (on supported browsers).  Any any DOM change we'll
 retrigger the size calculations, and when the Surface is destroyed,
 we'll stop the observe.
+
+## ChangeLog
+
+### v0.1.30
+
+* Template.x.rendered now runs after the template has
+  been rendered *and added to the document*.  This is later than before,
+  but more in line with how Meteor does things and allows for more
+  intuitive use.
+
+* Surfaces now store a `fview.surfaceBlazeView` for the blazeView used
+  to render the Surface's contents.
+
+* Support for `watchSize=true` (see docs above).
       {{/markdown}}
 
     {{/Surface}}

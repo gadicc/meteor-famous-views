@@ -1,6 +1,7 @@
 ## vNEXT
 
 * ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
+  (not yet; was in some of the .rc releases)
 
 * Introduce `FView.registerTransition(name, func)`, which stores the transition
   func in `FView.transitions[name]` and may be used by other parts of this
@@ -19,23 +20,41 @@
 
 * **famousIf**, previously, was used to maintain the correct position inside
   of a sequence.  Now, it can be used inside of a regular renderNode too,
-  and cleans up children when the condition changes.
+  and cleans up children when the condition changes (#179)
 
 * Document `StateModifier`.  Add missing `origin` reactivity.
 
 * Speed increase.  Do our own materialization of non-Surface templates to
-  avoid some unnecessary DOM stuff.  (And cleanup famous.js)
+  avoid some unnecessary DOM stuff.  (And cleaned-up `lib/famous.js`)
 
-* For registerables, add a onDestroy() callback to be fired just before
+* For registerables, add an `onDestroy()` callback to be fired just before
   the fview is completely destroyed.
 
 * Add support for `watchSize=true` on Surfaces.  Document Surfaces.
+  Document pattern to retrigger `true`-sized Surface size calculations.
+  (#163)
 
 * XXX finalize names before release
   registerables: onRenderTree() callback (not used in the end)
-  views: postRender() callback (only for modifiers until now)
+  views: postRender() callback (was only for modifiers until now)
   surfaces: Template.x.onDocumentDom() callback
   internal: when called with inclusion, store fview.template
+
+* `FView.from()` and `FView.fromBlazeView()` now return an fview on the
+  given blazeView if it exists, and not only from it's ancestors.
+
+* Surfaces now store a `fview.surfaceBlazeView` for the blazeView used
+  to render the Surface's contents.
+
+* For **Surfaces**, Template.x.rendered now runs after the template has
+  been rendered *and added to the document*.  This is later than before,
+  but more in line with how Meteor does things and allows for more
+  intuitive use.  XXX should get rid of Template.x.onDocumentDom and
+  store elsewhere before release. (#192)
+
+* Start recording ChangeLog on View pages too (e.g. Surfaces, Views README)
+
+* Bugfix: don't try "decode" the `id` attribute (#100)
 
 ## v0.1.29
 

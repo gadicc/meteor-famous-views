@@ -145,6 +145,12 @@
             this.pipeChildrenTo = this.parent.pipeChildrenTo
               ? [ this.view, this.parent.pipeChildrenTo[0] ]
               : [ this.view ];
+          },
+
+          // If exists, called just before an fview is completely destroyed
+          onDestroy: function() {
+            if (this.mutationObserver)
+              this.mutationObserver.disconnect();
           }
 
         });
@@ -171,11 +177,24 @@
             famousCreatedPost: ->
               # `this` or `@` is the fview for this instance
               @pipeChildrenTo = if @parent.pipeChildrenTo? then [ @view, @parent.pipeChildrenTo[0] ] else [ @view ]
+            # If exists, called just before an fview is completely destroyed
+            onDestroy: ->
+              # `this` or `@` is the fview for this instance
+              @mutationObserver.disconnect() if @mutationObserver
         {{/if}}
       {{/snippet}}
 
       <p>See some <a href="https://github.com/gadicc/meteor-famous-components/tree/master/lib/views">actual examples</a> from the source code of our pre-built
       views.</p>
+
+      {{#markdown}}
+## Changelog
+
+### v0.1.30
+
+* Add an `onDestroy()` callback to be fired just before the fview is completely
+  destroyed.
+      {{/markdown}}
 
      </div>
   {{/Surface}}
