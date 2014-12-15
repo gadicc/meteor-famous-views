@@ -4,8 +4,8 @@ Tinytest.addAsync('famous-views - famous.js - famousEvents', function(test, comp
 	var famousEvents = {};
 
 	Template.tests_famous_surface.famousEvents({
-		'a': function() { famousEvents.a = 'a' },
-		'b': function() { famousEvents.b = 'b' }
+		'a': function() { famousEvents.a = 'a'; },
+		'b': function() { famousEvents.b = 'b'; }
 	});
 
 	Template.tests_famous_surface.rendered = function() {
@@ -29,10 +29,9 @@ function dataTest(tNum, test, complete) {
 	var div = document.createElement('div');
 
 	Template.tests_famous_dataContextCheck.rendered = function() {
-		console.log(this);
 		test.equal(this.data, myData);
 		complete();
-	}
+	};
 
 	tpl.helpers({ myData: _.clone(myData) });
 	Blaze.render(tpl, div);

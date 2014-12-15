@@ -14,21 +14,23 @@ Tinytest.addAsync('famous-views - famousIf - not in a sequence, i.e. via add()',
   });
 
   Template.famousIfTests1.rendered = function() {
-    Engine.nextTick(function() {
-      test.isUndefined(FView.byId("startFalse"));
-      test.isTrue(!!FView.byId("startTrue"));
-
-      startFalse.set(true);
-      startTrue.set(false);
+    Engine.defer(function() {
+      Tracker.flush();
       Engine.defer(function() {
-        Tracker.flush();
-        Engine.nextTick(function() {
-          test.isTrue(!!FView.byId("startFalse"));
-          test.isUndefined(FView.byId("startTrue"));
-          complete();
+        test.isUndefined(FView.byId("startFalse"));
+        test.isTrue(!!FView.byId("startTrue"));
+
+        startFalse.set(true);
+        startTrue.set(false);
+        Engine.defer(function() {
+          Tracker.flush();
+          Engine.defer(function() {
+            test.isTrue(!!FView.byId("startFalse"));
+            test.isUndefined(FView.byId("startTrue"));
+            complete();
+          });
         });
       });
-
       // TODO, tests for swapping if/else
       // TODO, tests to make sure only one child of
       //   container.children, fview.children, fview.node.children

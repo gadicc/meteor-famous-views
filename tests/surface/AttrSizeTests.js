@@ -27,11 +27,13 @@ Tinytest.addAsync('Famous - Surface - attribute - size - reactive helper update 
 
     test.equal(surface.getSize(), [101, 102]);
 
-    _.defer(function() {
+    Engine.defer(function() {
       reactiveSize.set([87, 86]);
       Tracker.flush();
-      test.equal(surface.getSize(), reactiveSize.get());
-      complete();
+      Engine.defer(function() {
+        test.equal(surface.getSize(), reactiveSize.get());
+        complete();
+      });
     });
   };
 
