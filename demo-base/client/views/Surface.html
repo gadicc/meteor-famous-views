@@ -48,9 +48,11 @@ we'll stop the observe.
 ### v0.1.30
 
 * Template.x.rendered now runs after the template has
-  been rendered *and added to the document*.  This is later than before,
+  been rendered **and added to the document**.  This is later than before,
   but more in line with how Meteor does things and allows for more
-  intuitive use.
+  intuitive use.  E.g. jQuery plugins work better.  Note, even though
+  `$()` will work here now, you should **always** use `this.$()` when
+  possible, for performance.
 
 * Surfaces now store a `fview.surfaceBlazeView` for the blazeView used
   to render the Surface's contents.

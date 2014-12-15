@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.1.30
+
 * ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
   (not yet; was in some of the .rc releases)
 
@@ -34,11 +36,13 @@
   Document pattern to retrigger `true`-sized Surface size calculations.
   (#163)
 
-* XXX finalize names before release
-  registerables: onRenderTree() callback (not used in the end)
-  views: postRender() callback (was only for modifiers until now)
-  surfaces: Template.x.onDocumentDom() callback
-  internal: when called with inclusion, store fview.template
+* Registerables: onRenderTree() callback (not used for anything yet)
+  Views: postRender() callback (was only available for modifiers until now)
+  ~~Surfaces: Template.x.onDocumentDom() callback, but this is now the
+  default behaviour for .rendered() - so rather use that~~
+
+* Internal: when called with inclusion, store a link to the used template
+  in `fview.template`.
 
 * `FView.from()` and `FView.fromBlazeView()` now return an fview on the
   given blazeView if it exists, and not only from it's ancestors.
@@ -49,8 +53,9 @@
 * For **Surfaces**, Template.x.rendered now runs after the template has
   been rendered *and added to the document*.  This is later than before,
   but more in line with how Meteor does things and allows for more
-  intuitive use.  XXX should get rid of Template.x.onDocumentDom and
-  store elsewhere before release. (#192)
+  intuitive use.  E.g. jQuery plugins work better.  Note, even though
+  `$()` will work here now, you should **always** use `this.$()` when
+  possible, for performance.  (#192)
 
 * Start recording ChangeLog on View pages too (e.g. Surfaces, Views README)
 
