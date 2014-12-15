@@ -1,5 +1,7 @@
 ## vNEXT
 
+* Defer running of Surface rendered callbacks.
+
 ## v0.1.30
 
 * ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
