@@ -2,6 +2,9 @@
 
 * Defer running of Surface rendered callbacks.
 
+* Revert back to Blaze.render (for non-Surfaces) to ensure rendered callbacks
+  of nested templates are correctly run (#199)
+
 ## v0.1.30
 
 * ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
