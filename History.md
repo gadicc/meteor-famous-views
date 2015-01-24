@@ -5,6 +5,9 @@
 * Revert back to Blaze.render (for non-Surfaces) to ensure rendered callbacks
   of nested templates are correctly run (#199)
 
+* Allow overrides on all famousEach observe within the containing fview.
+  See Views README for details. (#201) TODO docs+tests XXX
+
 ## v0.1.30
 
 * ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
