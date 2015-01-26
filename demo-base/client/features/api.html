@@ -41,12 +41,14 @@
   up children when the condition changes.  `reactiveBooleanHelper` is a
   reactive helper that evaluates to `true` or `false`.
 
-  * **{{dstache}}#famousEach items}}**
+* **{{dstache}}#famousEach items}}**
 
   Use this inside any view that has a `.sequenceFrom()` method (e.g. `Scrollview`,
   `SequentialLayout`, etc).  Just like regular `{{dstache}}each}}` - fully reactive,
   and preserves ordering.  `items` can be an array, a function that reactively
-  returns an array, or a reactive cursor (from minimongo, etc).
+  returns an array, or a reactive cursor (from minimongo, etc).  See **Events**
+  below for how to extend or override the default observe events (`addedAt`,
+  `removedAt`, `changedAt`, `movedTo`).
 
 ## JavaScript
 
@@ -127,6 +129,89 @@ for proper cleanup.  Useful for exit animations, render transitions, etc.
 
 * `getSize()`, `render()` - used by Famo.us.  `setNode()` is used internally
 and should not be called again unless you really know what you're doing.
+
+
+## Events
+
+### famousEach
+
+  The *containing view* may register functions that extend the default *observe*
+  events handled.  `addedAt`, `changedAt`, `removedAt` and `movedTo` fire at
+  the same times and with the same arguments as a regular Meteor observe, in
+  addition to two more arguments, `_super()` and `eachView`.  Additionally,
+  `this` will be the View's `fview`.  Example:
+
+    {{/markdown}}
+
+    <p style="margin-left: 40px">
+
+      {{#snippet lang="spacebars"}}
+        {{dstache}}#CustomView}}
+          {{dstache}}#famousEach items}}
+            {{dstache}}#Surface size="[undefined,true]"}}
+              {{dstache}}name}}
+            {{dstache}}/Surface}}
+          {{dstache}}/famousEach}}
+        {{dstache}}/CustomView}}
+      {{else}}
+        {{#if currentLang "jade"}}
+          +CustomView
+            +famousEach items
+              +Surface size="[undefined,true]"
+                #{name}
+        {{/if}}
+      {{/snippet}}
+
+      {{#snippet lang="javascript"}}
+        FView.registerView('CustomView', famous.views.SequentialLayout, {
+          addedAt: function(id, item, index, _super, eachView) {
+            // Extend the default functionality
+            _super();
+            this.view.update();
+          },
+          movedTo: function(id, doc, fromIndex, toIndex, _super, eachView) {
+            // Override the default functionality (don't call `_swap()`)
+            this.view.swap(fromIndex, toIndex);
+          },
+          movedTo: function(id, doc, fromIndex, toIndex, _super, eachView) {
+            // Override/adapt the default functionality
+            var fview = eachView.fview;  // see lib/famousEach.js
+
+            var item = fview.sequence.splice(fromIndex, 1)[0];
+            fview.sequence.splice(toIndex, 0, item);
+            item = fview.children.splice(fromIndex, 1)[0];
+            fview.children.splice(toIndex, 0, item);
+          }
+        });
+      {{else}}
+        {{#if currentLang "coffee"}}
+        {{/if}}
+      {{/snippet}}
+
+    </p>
+
+    {{#markdown}}
+
+  instead of registering a new view, you can also simply added these
+  functions to View instance's `fview`, e.g:
+
+    {{/markdown}}
+    {{#snippet lang="javascript"}}
+      Template.myView.rendered = function() {
+        var fview = FView.from(this);
+        fview.addedAt = function() {
+          _super();
+        };
+      }
+    {{/snippet}}
+    {{#markdown}}
+
+## ChangeLog
+
+### v0.1.31
+
+* Allow the *containing View* to override/extend famousEach's observe
+events (addedAt, removedAt, movedTo, updatedAt).
       {{/markdown}}
     </div>
   {{/Surface}}

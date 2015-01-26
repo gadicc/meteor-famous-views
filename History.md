@@ -6,7 +6,7 @@
   of nested templates are correctly run (#199)
 
 * Allow overrides on all famousEach observe within the containing fview.
-  See Views README for details. (#201) TODO docs+tests XXX
+  See Views README for details. (#201)
 
 ## v0.1.30
 
