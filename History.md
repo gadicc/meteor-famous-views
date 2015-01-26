@@ -8,6 +8,8 @@
 * Allow overrides on all famousEach observe within the containing fview.
   See Views README for details. (#201)
 
+* Bugfix: RenderController fview._transition is now properly honoured (#193)
+
 ## v0.1.30
 
 * ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
