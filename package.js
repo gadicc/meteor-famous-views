@@ -101,8 +101,8 @@ Package.on_test(function(api) {
 
     'tests/famousIf/famousIf.html',
     'tests/famousIf/famousIf.js',
-//    'tests/famousEach/famousEach.html',
-//    'tests/famousEach/famousEach.js',
+    'tests/famousEach/famousEach.html',
+    'tests/famousEach/famousEach.js',
 
     'tests/context/FamousContextTests.html',
     'tests/context/FamousContextTests.js',
