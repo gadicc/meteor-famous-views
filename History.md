@@ -10,6 +10,9 @@
 
 * Bugfix: RenderController fview._transition is now properly honoured (#193)
 
+* Bugfix: fview.destroy() now correctly removes children from
+  child sequences (#153)
+
 ## v0.1.30
 
 * ~~Fix some flicker that snuck back (use Engine.nextTick instead of .defer)~~
