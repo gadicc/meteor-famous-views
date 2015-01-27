@@ -23,7 +23,8 @@ function configurePackage(api, testing) {
   api.use(
     [
       "jag:pince@0.0.5",
-      "pierreeric:cssc@1.0.4"
+      "pierreeric:cssc@1.0.4",
+      "sdecima:javascript-detect-element-resize@0.5.3"
     ],
     'client');
 
@@ -114,6 +115,8 @@ Package.on_test(function(api) {
     'tests/surface/AttrPropertiesTests.html',
     'tests/surface/AttrPropertiesTests.js',
     'tests/surface/Rendered.html',
-    'tests/surface/Rendered.js'
+    'tests/surface/Rendered.js',
+    'tests/surface/watchSize.html',
+    'tests/surface/watchSize.js'
   ], 'client');
 });
