@@ -109,11 +109,11 @@ Package.on_test(function(api) {
 
     'tests/surface/AttrClassTests.html',
     'tests/surface/AttrClassTests.js',
-
     'tests/surface/AttrSizeTests.html',
     'tests/surface/AttrSizeTests.js',
-
     'tests/surface/AttrPropertiesTests.html',
-    'tests/surface/AttrPropertiesTests.js'
+    'tests/surface/AttrPropertiesTests.js',
+    'tests/surface/Rendered.html',
+    'tests/surface/Rendered.js'
   ], 'client');
 });
