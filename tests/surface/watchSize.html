@@ -1,0 +1,10 @@
+<template name="surfaceWatchSize">
+  {{#FamousContext}}
+    {{>Surface size="[undefined,true]" style="background: blue"
+      template="surfaceWatchSize_inner" watchSize=true}}
+  {{/FamousContext}}
+</template>
+
+<template name="surfaceWatchSize_inner">
+  <div>line 1</div>
+</template>
