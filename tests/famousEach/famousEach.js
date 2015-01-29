@@ -54,7 +54,6 @@ FView.registerView('feTestView', famous.views.SequentialLayout, {
 
   changedAt: function(id, newItem, oldItem, index, _super, eachView) {
     _super();
-    console.log('changedAt', runs, arguments);
     if (runs !== 4) return;
 
     test.equal(Array.prototype.slice.call(arguments, 0, 4), [
@@ -63,7 +62,6 @@ FView.registerView('feTestView', famous.views.SequentialLayout, {
       { _id: "C", name: "cat" },    // oldItem
       1                             // index
     ]);
-    console.log('c');
     complete();
   }
 });
