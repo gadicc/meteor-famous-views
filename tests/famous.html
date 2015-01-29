@@ -39,7 +39,7 @@
 			{{#Surface}}
 				{{> tests_famous_dataContextCheck}}
 			{{/Surface}}
-		{{/with}}		
+		{{/with}}
 	{{/famousContext}}
 </template>
 
@@ -54,4 +54,13 @@
 			{{/Modifier}}
 		{{/with}}
 	{{/famousContext}}
+</template>
+
+<template name="tests_famous_options">
+	{{#famousContext}}
+		{{>SequentialLayout template="tests_famous_options_SeqLayout" direction=DIR}}
+	{{/famousContext}}
+</template>
+
+<template name="tests_famous_options_SeqLayout">
 </template>

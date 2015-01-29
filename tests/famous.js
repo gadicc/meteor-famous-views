@@ -48,3 +48,39 @@ Tinytest.addAsync('famous-views - famous.js - dataContext - without args, inline
 
 Tinytest.addAsync('famous-views - famous.js - dataContext - nested',
 	dataTest.bind(null, 4));
+
+/* --- options --- */
+
+Tinytest.addAsync('famous-views - famous.js - direction', function(test, complete) {
+	var tpl = Template.tests_famous_options;
+	var div = document.createElement('div');
+
+	var optionView = null;
+	var optionCount = 0;
+	var optionTests = [
+		{ given: "Y", expect: famous.utilities.Utility.Direction.Y }, // key name
+		{ given: "1", expect: famous.utilities.Utility.Direction.Y }, // string numeral
+		{ given: 1, expect: famous.utilities.Utility.Direction.Y }    // number
+	];
+
+	Template.tests_famous_options.helpers({
+		DIR: function() {
+			return optionTests[optionCount].given;
+		}
+	});
+
+	Template.tests_famous_options_SeqLayout.rendered = function() {
+		var fview = FView.from(this);
+		console.log(fview.view.options.direction, optionTests[optionCount].expect);
+		test.equal(fview.view.options.direction, optionTests[optionCount].expect);
+		if (++optionCount < optionTests.length) {
+			Blaze.remove(optionView);
+			optionView = Blaze.render(tpl, div);
+		} else {
+			complete();
+		}
+	};
+
+	tpl.helpers({ myData: _.clone(myData) });
+	optionView = Blaze.render(tpl, div);
+});
