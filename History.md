@@ -1,17 +1,25 @@
 ## vNEXT
 
-* Defer running of Surface rendered callbacks.
+## v0.1.31
 
-* Revert back to Blaze.render (for non-Surfaces) to ensure rendered callbacks
-  of nested templates are correctly run (#199)
+* Bugfix (#famous regression): Revert back to Blaze.render (for non-Surfaces)
+  to ensure rendered callbacks of nested templates are correctly run (#199)
 
-* Allow overrides on all famousEach observe within the containing fview.
-  See Views README for details. (#201)
+* Bugfix (#famous regression): direction="1" now works again (#207)
 
-* Bugfix: RenderController fview._transition is now properly honoured (#193)
+* Bugfix (#RenderController): fview._transition is now properly honoured (#193)
 
-* Bugfix: fview.destroy() now correctly removes children from
+* Bugfix: `fview.destroy()` now correctly removes children from
   child sequences (#153)
+
+* Enhancement (#famousEach): Allow overrides on all famousEach observe within
+  the containing fview.  See Views README for details. (#201)
+
+* Enhancement (#Surface): watchSize now uses javascript-detect-element-resize
+  lib to detect size changes on
+
+* Enhancement (#Surface): Defer running of Surface rendered callbacks for
+  smoother performance.
 
 ## v0.1.30
 
