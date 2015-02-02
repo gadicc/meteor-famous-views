@@ -58,6 +58,7 @@ Tinytest.addAsync('famous-views - famous.js - direction', function(test, complet
 	var optionView = null;
 	var optionCount = 0;
 	var optionTests = [
+		{ given: "X", expect: famous.utilities.Utility.Direction.X }, // key name (value 0)
 		{ given: "Y", expect: famous.utilities.Utility.Direction.Y }, // key name
 		{ given: "1", expect: famous.utilities.Utility.Direction.Y }, // string numeral
 		{ given: 1, expect: famous.utilities.Utility.Direction.Y }    // number

@@ -10,7 +10,7 @@ ddp@1.0.14
 deps@1.0.6
 ejson@1.0.5
 follower-livedata@1.0.3
-gadicohen:famous-views@0.1.31-pre.3
+gadicohen:famous-views@0.1.32
 geojson-utils@1.0.2
 html-tools@1.0.3
 htmljs@1.0.3
@@ -19,7 +19,7 @@ jag:pince@0.0.5
 jquery@1.11.3
 json@1.0.2
 less@1.0.12
-local-test:gadicohen:famous-views@0.1.31-pre.3
+local-test:gadicohen:famous-views@0.1.32
 logging@1.0.6
 meteor@1.1.4
 minifiers@1.1.3

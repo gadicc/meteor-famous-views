@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v0.1.32
+
+* Bugfix (#famous regression): direction="X" now works again
+
 ## v0.1.31
 
 * Bugfix (#famous regression): Revert back to Blaze.render (for non-Surfaces)
