@@ -158,6 +158,16 @@ plugins = [
     desc: 'This plugin brings a flexible grid layout adapting the number of ' +
       'cards on each row depending on the size of the container.' +
       '\n\n**demo**: [fview-flexgrid](http://fview-flexgrid.meteor.com).'
+  },
+  {
+    name: 'gadicohen:fview-flex',
+    releasedAt: new Date(2015,02,05),
+    image: 'https://github.com/IjzerenHein/famous-flex/raw/master/screenshot.gif',
+    href: 'https://atmospherejs.com/gadicc/fview-flex',
+    desc: 'A Scroll and Layout engine like you never imagined possible. ' +
+      'This is [@IjzerenHein\'s famous-flex]' +
+      '(https://github.com/IjzerenHein/famous-flex) packaged for ' +
+      'famous-views.\n\n**demo**: [fview-flex](http://fview-flex.meteor.com).'
   }
 ];
 
