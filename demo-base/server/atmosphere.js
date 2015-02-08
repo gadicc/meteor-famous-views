@@ -1,53 +1,68 @@
 /* Atmosphere integration */
 
-Packages = new Mongo.Collection('packages');
-InstallCounts = new Mongo.Collection('installCounts');
-
-// comment out if working on this
-if (process.env.NODE_ENV === 'development') return;
-
-Packages.remove({});
-InstallCounts.remove({});
-
-atmosphere = {
-  subs: [],
-  cols: {}
+Atmosphere = {
+  MIN_INTERVAL: undefined,  // at most, a gap of...  TODO
+  MAX_INTERVAL: 3600 * 10   // at least, once every 10 mins
 };
 
-atmosphere.con = DDP.connect('https://atmospherejs.com/');
-
-atmosphere.cols.packages = new Mongo.Collection('packages',
-  { connection: atmosphere.con });
-
-atmosphere.cols.installCounts = new Mongo.Collection('installCounts',
-  { connection: atmosphere.con });
-
-atmosphere.subs.push(atmosphere.con.subscribe('packages/search', 'fview-', 20));
+Atmosphere.Packages = new Mongo.Collection("AtmospherePackages");
 
 /*
-    _.each(_.pluck(plugins, 'name'), function(name) {
-      atmosphere.subs.push(
-        atmosphere.con.subscribe('package/installs', name));
-    });
+ * By default, don't retrieve updates in devel environment.
+ * Override with Atmosphere.disableUpdates = false;
+ */
+Atmosphere.disableUpdates = process.env.NODE_ENV === 'development';
+
+/*
+Sample object got from the response (thanks @splendido)
+{
+  "installs-per-year": 385,
+  "latestVersion": {
+    "published": {
+      "$date": 1422485989711
+    },
+    "version": "1.6.1",
+    "git": "https://github.com/meteor-useraccounts/core.git",
+    "description": "Meteor sign up and sign in templates core package.",
+    "readme": "https://warehouse.meteor.com/readme/u8BPj5eWZzHQiFM6q/1422485987517/AnhA9SZLf3/useraccounts:core-1.6.1-readme.md",
+    "unmigrated": false
+  },
+  "name": "useraccounts:core",
+  "score": 1.7110424750212552,
+  "starCount": 35
+}
 */
 
-atmosphere.cols.packages.find().observeChanges({
-  added: function(id, fields) {
-    Packages.insert(_.extend(fields, { _id: id }));
-    atmosphere.con.subscribe('package/installs', fields.name);
-  },
-  changed: function(id, fields) { Packages.update(id, { $set: fields }); },
-  removed: function(id) {
-    Packages.remove(id);
-    // TODO, could index and remove names that are removed
-  }
-});
-atmosphere.cols.installCounts.find().observeChanges({
-  added: function(id, fields) { InstallCounts.insert(_.extend(fields, { _id: id })); },
-  changed: function(id, fields) { InstallCounts.update(id, { $set: fields }); },
-  removed: function(id) { InstallCounts.remove(id); }
-});
+Atmosphere.updatePackages = function() {
+  console.log(new Date(), 'update');
 
-//autopublish
-//Meteor.publish('packages', function() { return Packages.find(); });
-//Meteor.publish('installCounts', function() { return InstallCounts.find(); });
+  var packages = Atmosphere.pkgList;
+  if (!packages)
+    packages = _.pluck(this.Packages.find().fetch(), 'name');
+  else if (typeof packages === 'function')
+    packages = packages();
+
+  // thanks @splendido
+  HTTP.get(
+    "https://atmospherejs.com/a/packages/findByNames?names="+packages.join(","),
+    { headers: {'Accept': 'application/json'} },
+    function(error, response) {
+      if (error) {
+        console.warn('Atmosphere retrieve error', error);
+      } else {
+        _.each(response.data, function(pkg) {
+          Atmosphere.Packages.upsert({name: pkg.name}, pkg);
+        });
+        // TODO, removed packages?
+      }
+    }
+  );
+};
+
+Meteor.startup(function() {
+  if (Atmosphere.disableUpdates)
+    return;
+
+  Atmosphere.updatePackages();
+  Meteor.setInterval(Atmosphere.updatePackages, Atmosphere.MAX_INTERVAL);
+});

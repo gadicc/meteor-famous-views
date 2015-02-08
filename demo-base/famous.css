@@ -18,6 +18,16 @@
 .green-bg { background: #2ECC40; color: white; }
 .blue-bg { 	background: #0074D9; color: white; }
 
+.jumbotron h1 { text-shadow: 0 0 5px #FFB800; }
+.jumbotron h1 small { text-shadow: 1px 1px 3px #f8f8f8; }
+
+#starsAndInstalls {
+	position: relative;
+	margin-top: -1.5em;
+	font-size: 65%;
+	color: #BD8200;
+}
+
 .margin10 {
 	margin: 0 10px;
 }

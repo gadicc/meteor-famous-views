@@ -70,7 +70,20 @@
   {{#Surface}}
     <div id="main" role="main">
       <div class="jumbotron center">
-        <h1 class="text-center"><img src='/meteor_famous_view_logo.svg' width='200px'> famous-views <small>for Meteor</small></h1>
+        <h1 class="text-center">
+          <img src='/meteor_famous_view_logo.svg' width='200px'>
+          famous-views
+          <small>
+              for Meteor
+              <div id="starsAndInstalls">
+                <i class="fa fa-download"></i>
+                <span>&nbsp;{{my.installs}}</span>
+                <span>&nbsp;&nbsp;</span>
+                <i class="fa fa-star"></i>
+                <span>&nbsp;{{my.stars}}</span>
+              </div>
+          </small>
+        </h1>
       </div>
       <h3 class='text-center'>
         <label class='label label-primary'>

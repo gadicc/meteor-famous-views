@@ -26,9 +26,30 @@ if (Meteor.isServer) {
   if (x) Items.update(x._id, { $set: { picUrl: 'http://myjobsin1.files.wordpress.com/2010/02/red-apple12.jpg' }});
   x = Items.findOne({picUrl: 'http://dreamatico.com/data_images/apple/apple-3.jpg'});
   if (x) Items.update(x._id, { $set: { picUrl: 'http://myjobsin1.files.wordpress.com/2010/02/red-apple12.jpg' }});
+
+  Meteor.publish('starsAndInstalls', function() {
+    return Atmosphere.Packages.find(
+      { name: 'gadicohen:famous-views' },
+      { fields: { name: 1, starCount: 1, 'installs-per-year': 1 } }
+    );
+  });
+
+  Meteor.publish('items', function() {
+    return Items.find();
+  });
+
+  Items.allow({
+    // for now let people play around with each other
+    insert: function() { return true; },
+    update: function() { return true; },
+    remove: function() { return true; }
+  });
 }
 
 if (Meteor.isClient) {
+  Meteor.subscribe('items');
+  Meteor.subscribe('starsAndInstalls');
+  AtmospherePackages = new Mongo.Collection('AtmospherePackages');
 
   // Force debug logging even on production for famous-views.meteor.com
   Logger.setLevel('famous-views', 'debug');
@@ -93,6 +114,13 @@ if (Meteor.isClient) {
         out.push({ cat: cat, items: Menu.list[cat] });
       });
       return out;
+    }
+  });
+
+  Template.home.helpers({
+    my: function() {
+      var me = AtmospherePackages.findOne({name:'gadicohen:famous-views'});
+      return me ? { stars: me.starCount, installs: me['installs-per-year'] } : {};
     }
   });
 
