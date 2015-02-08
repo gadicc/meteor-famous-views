@@ -11,6 +11,15 @@ function zeroPad(num) {
   return ("0" + num).substr(-2);
 }
 
+// TODO, improve in famous-views, ascend watchSize etc
+Template.plugins.rendered = function() {
+  Meteor.setTimeout(function() {
+    var fview = FView.byId("pluginList");
+    fview.getSize = _.bind(fview.view.getSize, fview.view);
+    fview.view._isDirty = true;
+  }, 1000);
+};
+
 Template.plugins.helpers({
   plugins: function() {
     var options = { sort: {} };
