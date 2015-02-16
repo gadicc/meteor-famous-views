@@ -49,6 +49,7 @@ mongo@1.0.11
 natestrauser:font-awesome@4.2.0_1
 nemo64:bootstrap@3.3.1_1
 nemo64:bootstrap-data@3.3.1_1
+numeral:numeral@1.5.3
 observe-sequence@1.0.4
 ordered-dict@1.0.2
 pierreeric:cssc@1.0.4

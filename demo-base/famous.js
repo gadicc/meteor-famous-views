@@ -120,7 +120,10 @@ if (Meteor.isClient) {
   Template.home.helpers({
     my: function() {
       var me = AtmospherePackages.findOne({name:'gadicohen:famous-views'});
-      return me ? { stars: me.starCount, installs: me['installs-per-year'] } : {};
+      return me ? {
+        stars: numeral(me.starCount).format('0,0'),
+        installs: numeral(me['installs-per-year']).format('0,0')
+      } : {};
     }
   });
 

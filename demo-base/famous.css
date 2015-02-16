@@ -24,6 +24,7 @@
 #starsAndInstalls {
 	position: relative;
 	margin-top: -1.5em;
+	margin-left: 180px;
 	font-size: 65%;
 	color: #BD8200;
 }
