@@ -160,7 +160,10 @@ Atmosphere.pkgList = _.union(
   [ 'gadicohen:famous-views' ]
 );
 
+Plugins.remove({name:null});
+
 var updatePlugin = function(id, fields) {
+  if (fields.name)
   Plugins.upsert({ name: fields.name }, { $set: {
     starCount: fields.starCount,
     installCount: fields['installs-per-year']
