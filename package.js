@@ -1,7 +1,7 @@
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.32",
+  version: "0.1.33-flushPreview.1",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
@@ -12,7 +12,7 @@ function configurePackage(api, testing) {
     [
       'blaze@2.0.0',
       'templating@1.0.5',
-      'tracker@1.0.2',
+      'tracker@1.0.5',
       'observe-sequence@1.0.2',
       'reactive-dict@1.0.4'
     ],
@@ -31,6 +31,7 @@ function configurePackage(api, testing) {
   api.add_files(
     [
       'lib/famous-views.js',
+      'lib/tracker.js',
       'lib/meteorFamousView.js',
       'lib/sequencer.js',
       'lib/famous.js',

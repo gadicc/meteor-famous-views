@@ -1,5 +1,11 @@
 ## vNEXT
 
+* MAJOR.  We now override Tracker with our own modified version to make sure
+  recomputations don't result in skipped frames.  Shouldn't cause any
+  change in behaviour (except for buttery smoothness), but let us know if
+  anything breaks.  Look out for "Tracker.flush" fview debug messages in
+  the console.
+
 ## v0.1.32
 
 * Bugfix (#famous regression): direction="X" now works again

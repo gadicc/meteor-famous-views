@@ -16,6 +16,7 @@ nemo64:bootstrap
 natestrauser:font-awesome
 chuangbo:marked@=0.3.2_4
 gadicohen:snippets
+numeral:numeral
 
 # testing
 #sanjo:jasmine

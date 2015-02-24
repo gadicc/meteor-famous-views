@@ -14,8 +14,8 @@ deps@1.0.6
 ejson@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3
-gadicohen:famous-views@0.1.32
-gadicohen:fview-flex@0.0.2
+gadicohen:famous-views@0.1.33-flushPreview.1
+gadicohen:fview-flex@0.0.3
 gadicohen:fview-lagometer@1.0.2
 gadicohen:prism@1.0.4
 gadicohen:snippets@0.0.5
@@ -49,6 +49,7 @@ mongo@1.0.11
 natestrauser:font-awesome@4.2.0_1
 nemo64:bootstrap@3.3.1_1
 nemo64:bootstrap-data@3.3.1_1
+numeral:numeral@1.5.3
 observe-sequence@1.0.4
 ordered-dict@1.0.2
 pierreeric:cssc@1.0.4
