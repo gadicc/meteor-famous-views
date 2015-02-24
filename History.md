@@ -6,6 +6,13 @@
   anything breaks.  Look out for "Tracker.flush" fview debug messages in
   the console.
 
+* Some early code to automatically handle a case where a parent contains
+  children with destroyPrevented, and to defer the parent's destroy() until
+  all children are cleaned up.
+
+* Bug fix (invisible) - internal; properly cleanup children from parents.
+  Minor memory leak since most data was cleaned up anyway.
+
 ## v0.1.32
 
 * Bugfix (#famous regression): direction="X" now works again

@@ -1,4 +1,4 @@
-Tinytest.add('famous-views - sequencer', function(test) {
+Tinytest.add('famous-views - sequencer - push/splice/child', function(test) {
 
 	var parent = new sequencer();
 
@@ -43,4 +43,22 @@ Tinytest.add('famous-views - sequencer', function(test) {
 	child = parent.child();
 	child.splice(0, 0, 'c1');
 	test.equal(parent._sequence, ['p1', 'c1']);
+});
+
+Tinytest.add('famous-views - sequencer - removeFromParent', function(test) {
+
+	var parent = new sequencer();
+	parent.push('p1');
+
+	var child = parent.child();
+	child.push('c1');
+	child.push('c2');
+	parent.push('p2');
+	test.equal(parent._sequence, ['p1', 'c1', 'c2', 'p2']);
+
+	child.remove('c1');
+	child.remove('c2');
+	child.removeFromParent();
+	test.equal(parent._sequence, ['p1', 'p2']);
+
 });
