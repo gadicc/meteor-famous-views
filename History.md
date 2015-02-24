@@ -13,6 +13,8 @@
 * Bug fix (invisible) - internal; properly cleanup children from parents.
   Minor memory leak since most data was cleaned up anyway.
 
+* fview.on(event, callback) like node, supporting: "destroy", "cleanup"
+
 ## v0.1.32
 
 * Bugfix (#famous regression): direction="X" now works again

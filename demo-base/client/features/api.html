@@ -112,24 +112,30 @@ source for these properties if you want more info.
 
 **Methods:**
 
-* `preventDestroy(isTemplateDestroy)` - will keep the instance alive in the render
-tree even
-once the template/blazeView that created it is removed/destroyed.  You should
-then, at a later, appropriate time, call `fview.destroy()` on the instance
-for proper cleanup.  Useful for exit animations, render transitions, etc.
+* `preventDestroy()` - will keep the instance alive in the render tree even
+  once the template/blazeView that created it is removed/destroyed.  You should
+  then, at a later, appropriate time, call `fview.destroy()` on the instance
+  for proper cleanup.  Useful for exit animations, render transitions, etc.
 
-  If `isTemplateDestroy` is `true`, the `onDestroy()` callback is run (if it
-  exists), and the `destroyPrevented` property is honored to stop the
-  remaining cleanup.  Currently the `onDestroy` property can set as a single
-  callback, but this might change to be a method to add multipel callbacks!
-  For the rest of the cleanup, `Blaze.remove()` is called on all children
+* `destroy(isTemplateDestroy)` -
+  If `isTemplateDestroy` is `true`, the `destroy` event is fired,
+  and the `destroyPrevented` property is honored to stop the
+  remaining cleanup.  Otherwise, `Blaze.remove()` is called on all children
   blazeViews (which will trigger their destroys), we're removed from any
-  sequence we may be a part of, and all Famo.us references are set to `null`
-  to allow memory to be reclaimed by the garbage collector.
+  sequence or parent we belong to, and all Famo.us references are set to `null`
+  to allow memory to be reclaimed by the garbage collector.  Finally, the
+  `cleanup` event is fired for anything extra that might be needed.
 
 * `getSize()`, `render()` - used by Famo.us.  `setNode()` is used internally
-and should not be called again unless you really know what you're doing.
+  and should not be called again unless you really know what you're doing.
 
+**Events:**
+
+Usage: `fview.on("event", callback)` - similar to node EventEmitter API.
+listeners(event), removeListener(event, callback) exist too.
+
+* `destroy` - fires when fview.destoy() is called *by Blaze*, see above.
+* `cleanup` - fires during a complete destroy(), to nullify references, etc.
 
 ## Events
 
@@ -207,6 +213,10 @@ and should not be called again unless you really know what you're doing.
     {{#markdown}}
 
 ## ChangeLog
+
+### v0.1.32
+
+* * fview.on(event, callback) like node, supporting: "destroy", "cleanup"
 
 ### v0.1.31
 
