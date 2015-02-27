@@ -129,6 +129,13 @@ plugins = [
     href: 'https://atmospherejs.com/pierreeric/fview-svg',
     desc: 'Encapsulate SVG in Surface\n\n' +
       '**demo**: [fview-svg](http://fview-svg.meteor.com/).'
+  },
+  {
+    name: 'gadicohen:fview-sizeconstraint',
+    releasedAt: new Date(2015,1,27),
+    href: 'https://atmospherejs.com/gadicohen/fview-sizeconstraint',
+    desc: 'set renderable scale, padding, max-size, min-size and aspect-ratio\n\n' +
+      '**demo**: [fview-sizecontraint](http://fview-sizeconstraint.meteor.com/).'
   }
 ];
 
