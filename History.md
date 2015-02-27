@@ -13,7 +13,14 @@
 * Bug fix (invisible) - internal; properly cleanup children from parents.
   Minor memory leak since most data was cleaned up anyway.
 
-* fview.on(event, callback) like node, supporting: "destroy", "cleanup"
+* fview.on(event, callback) like node, supporting: "destroy", "cleanup".
+  .listeners(event) and .removeListener(event, callback) work too.
+
+* famousEach observe events, now run inside the same Engine.defer as the
+  _super() code.  Note, you'll still want to defer any layout code in here
+  to make sure any rendering (which is also deferred) is run beforehand.
+
+* Bugfix: StateModifier scaleX,Y,Z now work properly.
 
 ## v0.1.32
 
