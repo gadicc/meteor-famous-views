@@ -1,0 +1,34 @@
+div.playlive {
+  display: inline-block;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  font-family: comic sans ms;
+  color: #563e0a;
+  background-color: #ffc200;
+  border-color: #c89017;
+}
+
+div.playlive > * {
+  display: inline-block;
+  padding: 10px 15px 10px 15px;
+}
+
+div.playlive > *:last-child {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+div.playlive > a {
+  color: #563e0a;
+  text-align: center;
+}
+
+div.playlive > a:hover
+/* , div.playlive:hover i */ {
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(249, 255, 0);
+  font-weight: bold;
+  text-shadow: 0 0 10px rgb(29, 25, 3);
+}

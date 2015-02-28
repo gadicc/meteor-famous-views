@@ -6,6 +6,22 @@
   anything breaks.  Look out for "Tracker.flush" fview debug messages in
   the console.
 
+* Some early code to automatically handle a case where a parent contains
+  children with destroyPrevented, and to defer the parent's destroy() until
+  all children are cleaned up.
+
+* Bug fix (invisible) - internal; properly cleanup children from parents.
+  Minor memory leak since most data was cleaned up anyway.
+
+* fview.on(event, callback) like node, supporting: "destroy", "cleanup".
+  .listeners(event) and .removeListener(event, callback) work too.
+
+* famousEach observe events, now run inside the same Engine.defer as the
+  _super() code.  Note, you'll still want to defer any layout code in here
+  to make sure any rendering (which is also deferred) is run beforehand.
+
+* Bugfix: StateModifier scaleX,Y,Z now work properly.
+
 ## v0.1.32
 
 * Bugfix (#famous regression): direction="X" now works again
