@@ -1,5 +1,7 @@
 ## famous-views for Meteor [![Build Status](https://api.travis-ci.org/gadicc/meteor-famous-views.svg?branch=master)](https://travis-ci.org/gadicc/meteor-famous-views)
 
+[![Join the chat at https://gitter.im/gadicc/meteor-famous-views](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gadicc/meteor-famous-views?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![famous-views-logo](https://raw.githubusercontent.com/gadicc/meteor-famous-views/master/assets/meteor_famous_view_logo.png)
 
 > Doing Famous the Meteor Way
