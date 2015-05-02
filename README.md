@@ -74,6 +74,9 @@ $ mrt update
 $ meteor
 ```
 
+### Asking questions?
+Github issues are for... issues. Let us talk with a more appropriate mean: https://gitter.im/gadicc/meteor-famous-views
+
 ## Template API
 
 All components may be used either inline or to include another template:
