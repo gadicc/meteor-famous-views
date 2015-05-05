@@ -1,5 +1,20 @@
 ## vNEXT
 
+* Modifier can't handle true size, so let Surface handle that (#214)
+  (thanks @ShawnOceanHu)
+
+* Fix for new Event() failure on browsers that do not support it, e.g.
+  IE.  (#239)  (thanks @chaosmaster99)
+
+* Update to use latest Tracker.  Log long computations by default.
+  Tracker.warnOnLongComputations = true;
+  Tracker.showFullFuncsInWarnings = false;
+  Tracker.showComputationsInWarnings = false;  
+
+* Override Meteor.setImmediate() to use famous.core.Engine.defer();
+
+**v0.1.33-preview.1**
+
 * MAJOR.  We now override Tracker with our own modified version to make sure
   recomputations don't result in skipped frames.  Shouldn't cause any
   change in behaviour (except for buttery smoothness), but let us know if
