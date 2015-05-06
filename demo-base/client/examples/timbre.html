@@ -128,10 +128,10 @@
         +StateModifier size='[undefined,50]'
           // Background and text
           +Surface class='timbre-strip' size='[undefined,50]' modifier='StateModifier' rotateZ='-10' skewZ='-10'
-            +text
+            | #{text}
           // Icon (which is not rotated/skewed)
           +Surface class='timbre-icon' size='[50,50]' translate='[30,-2]'
-            i(class="fa, fa-#{icon}")
+            i(class="fa fa-#{icon}")
     {{/if}}
   {{/snippet}}
 
