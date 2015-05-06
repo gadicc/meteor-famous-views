@@ -298,7 +298,7 @@
   // Firefox
   &::-moz-placeholder {
     color: @color;
-    opacity: 1; // See https://github.com/twbs/bootstrap/pull/11526
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
   }
   &:-ms-input-placeholder { color: @color; } // Internet Explorer 10+
   &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
@@ -896,7 +896,7 @@
 
 .make-grid-columns() {
   // Common styles for all sizes of grid columns, widths 1-12
-  .col(@index) when (@index = 1) { // initial
+  .col(@index) { // initial
     @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
     .col((@index + 1), @item);
   }
@@ -918,7 +918,7 @@
 }
 
 .float-grid-columns(@class) {
-  .col(@index) when (@index = 1) { // initial
+  .col(@index) { // initial
     @item: ~".col-@{class}-@{index}";
     .col((@index + 1), @item);
   }

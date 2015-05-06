@@ -1,3 +1,5 @@
+<template name="resizeHack"></template>
+
 <template name="plugins">
   {{#Scrollview size="[undefined,undefined]"}}
     {{#Surface size="[undefined,true]" class="pagePad"}}
@@ -31,7 +33,7 @@
         layout="ListLayout" size="[undefined,true]"
         layoutOptions='{ "margins": [10,10,10,10], "spacing": 2}' }}
       {{#famousEach plugins}}
-        {{#Surface size="[undefined,true]" watchSize=true}}{{> plugin}}{{/Surface}}
+        {{#Surface size="[undefined,true]" watchSize=true}}{{> plugin}}{{>resizeHack}}{{/Surface}}
       {{/famousEach}}
     {{/FlexLayoutController}}
 

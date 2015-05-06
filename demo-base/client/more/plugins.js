@@ -67,3 +67,15 @@ Template['plugin:pierreeric:bksurfaceimage'].helpers({
     { sizeMode: 'ASPECTFIT' }
   ]
 });
+
+Template.resizeHack.onRendered(function() {
+  var surface = FView.from(this);
+  var flex = surface.parent.parent.parent.view;
+  _.defer(function() {
+    surface._contentDirty = true;
+    surface._sizeDirty = true;
+    surface._isDirty = true;
+    flex.reflowLayout();
+    console.log('reszehack');
+  });
+});
