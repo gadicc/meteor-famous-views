@@ -13,8 +13,8 @@ Tinytest.addAsync('Famous - Surface - watchSize', function (test, complete) {
         var curHeight = surface.getSize()[1];
         test.isTrue(curHeight > origHeight);
         complete();
-      }, 50);
-    }, 50);  // 2 frames?
+      }, 100);
+    }, 100);  // ~8 frames?
   };
 
   Blaze.render(Template.surfaceWatchSize, root);

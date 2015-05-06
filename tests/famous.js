@@ -72,7 +72,7 @@ Tinytest.addAsync('famous-views - famous.js - direction', function(test, complet
 
 	Template.tests_famous_options_SeqLayout.rendered = function() {
 		var fview = FView.from(this);
-		console.log(fview.view.options.direction, optionTests[optionCount].expect);
+		// console.log(fview.view.options.direction, optionTests[optionCount].expect);
 		test.equal(fview.view.options.direction, optionTests[optionCount].expect);
 		if (++optionCount < optionTests.length) {
 			Blaze.remove(optionView);
