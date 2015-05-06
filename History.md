@@ -13,6 +13,9 @@
 
 * Override Meteor.setImmediate() to use famous.core.Engine.defer();
 
+* Make optionString() stricter about handing off to parseFloat (#220)
+  thanks @fredevery.
+
 **v0.1.33-preview.1**
 
 * MAJOR.  We now override Tracker with our own modified version to make sure
