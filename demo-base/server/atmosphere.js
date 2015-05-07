@@ -12,6 +12,7 @@ Atmosphere.Packages = new Mongo.Collection("AtmospherePackages");
  * Override with Atmosphere.disableUpdates = false;
  */
 Atmosphere.disableUpdates = process.env.NODE_ENV === 'development';
+// Atmosphere.disableUpdates = false; // Uncomment this line to do dev work
 
 /*
 Sample object got from the response (thanks @splendido)
@@ -51,6 +52,7 @@ Atmosphere.updatePackages = function() {
         console.warn('Atmosphere retrieve error', error);
       } else {
         _.each(response.data, function(pkg) {
+          pkg.latestVersion.published = new Date(pkg.latestVersion.published.$date);
           Atmosphere.Packages.upsert({name: pkg.name}, pkg);
         });
         // TODO, removed packages?
