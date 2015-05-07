@@ -23,7 +23,7 @@ Copyright (c) 2014 Gadi Cohen, released under the LGPL v3.
 ### Build the Famous Render Tree with Reactive Blaze Views
 
 ```html
-{{#Scrollview size="[undefined,undefined]"}}
+{{#Scrollview}}
 
   {{#Surface size="[200,undefined]"}}
     <h1>Scrollview Example</h1>
@@ -69,15 +69,13 @@ up to date, but still an important read until it makes it online :)
 
 ## Contributing
 
-```bash
-$ git clone https://github.com/gadicc/meteor-famous-views
-$ cd meteor-famous-views/demo
-$ mrt update
-$ meteor
-```
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Asking questions?
-Github issues are for... issues. Let us talk with a more appropriate mean: https://gitter.im/gadicc/meteor-famous-views
+
+Github issues are for... issues.
+
+Let us talk with a more appropriate mean: https://gitter.im/gadicc/meteor-famous-views.
 
 ## Template API
 
@@ -102,9 +100,16 @@ Commonly used Views like `SequentialLayout`, `View` and the explicit
 `Surface` are all built in.  Anything else you need should be explicitly
 registered, to avoid unnecessary code being send down to the client:
 
-`FView.registerView('View', require("famous/core/View"));`
+```js
+FView.ready(function() {
+  FView.registerView('SpecialView', famous.views.SpecialView));
+});
+```
 
-For more examples see the live demo at
+The `Fview.ready()` is only required in some cases.  But if you're unsure,
+rather put it in to be safe.
+
+For more examples and the full docs, please see the live demo at
 [famous-views.meteor.com](https://famous-views.meteor.com/).
 
 **Template Attributes:**
@@ -113,22 +118,17 @@ Any attributes passed to the template will be passed through to the surface,
 modifier, view, etc.  Using a template helper, you can pass actual JavaScript
 objects.  Alternatively, you can specify e.g. `{{famous attribute="value"}}`.
 The value will be decoded for you, so `"[150,true]"` will become an array
-with number `150` and boolean `true`.  (Helpers currently only provide
-an initial value, but will be fully reactive in a future release).
+with number `150` and boolean `true`.
 
-Certain attribute names are handled especially for you, e.g. `direction="X"`
-will map to `Utility.Direction.Y`, the `translate` attribute is instantiated
-into a `Transform.translate` for you, etc.  [**TODO**: Since attributes are
-passed to the surface, modifier and view, should you want to specify different
-values for the same key, use the appropriate prefix, e.g. `surfaceSize`,
-`viewSize`, `modifierSize`, etc.]
+For more info see the [Views README](views/README).
 
 Don't forget, components are fully coupled to the render tree.  If you have
 a template with `translate="[100,100]"`, that has a child template with
 `translate="[50,50]"`, the final template's surface will be translated to
 `[150,150]`, which of course is very useful.
 
-Available but not recommended (yet): `data` is a special attribute name.  It specifies the data context for
+Available but not recommended (yet): `data` is a special attribute name.
+It specifies the data context for
 rendered children.  Basically, you'll need this if you specify any other
 attributes.  e.g. `{{#famous}}` gets the same data context as
 `{{#famous data=this attr1='one'}}`.  Without `data`, the data context
@@ -143,36 +143,14 @@ If people share this belief, I'll submit a PR to Meteor to allow this in the fut
 
 **Template Properties:**
 
-The template component instance gets given a **`.famous` property** which
-references the compView instance (see Render Tree below), which the following
-properties:
+To get an `fview` from a template Instance or blaze View, use:
 
-* `parent` - parent compView or an object with `node: context`
-* `node` - the modifier, if one is specified, otherwise the view/surface
-* `view` - SequentialView, Surface, etc, regardless of modifier
-* `_view` - the registered View info.  name, class, options
-* `modifier` - the modifier, if one was specified
-* `_modifier` - the registered Modifier info.  name, class, options
-* `sequencer` - for any view that uses a sequence
-
-This allows you to interact directly with Famous objects
-from e.g. **Template.events, Template.rendered, helpers, etc**.
-`FView.fromTemplate` or `FView.fromBlazeView` will help
-you retrieve the compView from descendent template instances.
-`FView.fromElement` acts on a DOM element (useful for drag &
-drop, etc).  See the Sample Render Tree at the  bottom of this doc.
-
-
-```html
-<!-- Template.famousInit is auto added to body/mainCtx when helpers are ready -->
-<template name="famousInit">
-  {{>famous template='test'}}
-</template>
-
+```js
+var fview = FView.from(templateInstanceOrView);  // usually the "this" object
 ```
 
-For more examples see the live demo at
-[famous-views.meteor.com](https://famous-views.meteor.com/).
+For more info including the list of properties and methods on the
+fview object, please see the [API docs](http://famous-views.meteor.com/features/api).
 
 ### Surfaces and Events
 
@@ -182,6 +160,8 @@ are DOM events.  As such, you can only setup events on **Surfaces**
 you wrap it in a `<div>` or `<span>`.  This also only works with inclusion,
 e.g. `{{>Surface template='x'}}`, since with inline blocks, there is
 nothing to attach to.
+
+**It's imperative that you read http://famous-views.meteor.com/examples/events.**
 
 ### A note on comments
 
@@ -193,94 +173,14 @@ comment out components, use Blaze's comment syntax `{{! like this}}`.
 
 ## JS API
 
-* `FView.mainCtx = yourMainContext` else one will be generated for you and made available here.
-
-* `FView.registerView('View', require("famous/core/View") [,options]);`
-allows you
-to use a `{{#View}}` inline and `{{>View template='name'}}` inclusion
-component.  The raw famous View is available as `Fview.views.View`.
-You can also manually specify `{{#famous view='View'}}`.  See the next
-sectoin for available options.
-
-* `FView.fromTemplate` and `FView.fromBlazeView` -- use these functions in
-Template created, rendered, events, helpers, to get the compView object, which
-contains a `node` property to the actual Famous node (view, surface, etc).  Feel
-free to use these functions in descendent templates, they'll climb the component
-tree until they find the enclosing compView.  See *template properties* above
-for what we keep in a compView instance.
-
-  ```js
-    // Event callbacks
-    Template.blockSpring.events({
-      'click': function(event, tpl) {
-        var fview = FView.fromTemplate(tpl);
-        fview.modifier.setTransform(
-          Transform.translate(Math.random()*500,Math.random()*300),
-          springTransition
-        );
-      }
-    });
-  ```
-
-  ```js
-    // Lifecycle callbacks (including `created` and `destroyed`)
-    Template.example.rendered = function() {
-      var fview = FView.fromTemplate(this);
-      // Use this.$() to find DOM elements here
-      // (since the template is rendered before it's added to the document)
-    }
-  ```
-
-  Note for lifecycle callbacks, just like with Meteor, you need to have
-  a real template.  So if you want to use these, don't define your data
-  inline with `{{#View}}`, but rather like `{{>View template="x"}}` and
-  then use `Template.x.rendered`, etc.
-
-* `FView.fromElement` -- as above but for a DOM element.  If you're using
-jQuery, be sure to put `[0]` at the end, e.g. `$('#el')[0]` to get an actual DOM
-element and not a jQuery object.  Useful for drag & drog, etc.  Returns the
-containing view in the case of a sequence (need to think about this).
+Please see http://famous-views.meteor.com/features/api.
 
 For more examples see the live demo at
 [famous-views.meteor.com](https://famous-views.meteor.com/).
-
-### CompView methods
-
-* `preventDestroy()` will prevent a compView from being
-automatically destroyed when it's template is reactively removed.  You
-can then call `destroy()` at a later time (like after a transition;
-we do this in the RenderController helper).
-
-For more examples see the live demo at
-[famous-views.meteor.com](https://famous-views.meteor.com/).
-
-### registerView options
-
-* `add` overrides what happens when children are initialized.  By default,
-they are added to a sequence if one exists, or the renderable's native
-`add` method is called.  See the `RenderController` source for an example
-of where this is useful.
-
-## TODO
-
-* ~~Allow placing of surfaces before and after a `famousEach` (currently
-it overwrites the entire sequence).  This will also allow multiple
-famousEach's in the same template.~~
-
-* ~~Allow update of StateModifiers from template attributes / data, e.g.
-`{{>famous template='name' rotateX=rotateX}}` and enclosing template's
-`rotateX` helper is reactive.  (Depends on
-[Meteor issue #2010](https://github.com/meteor/meteor/issues/2010))~~
-
-* Help for things like
-[responsive layouts](http://stackoverflow.com/questions/23140046/what-is-the-best-pattern-for-responsive-apps-in-famo-us)
-
-* Allow e.g. size="50%,100%" and create necessary functions to calculate this
-on each tick from window size or containing compView.  [ref](http://stackoverflow.com/questions/23021796/is-it-possible-to-set-surface-sizes-based-on-percentages-in-famo-us)
 
 ## Behind the scenes
 
-1. When a template instance is **created**, a `compView` wrapper is added
+1. When a template instance is **created**, a `meteorFamousView` wrapper is added
 to the render tree, which wraps the template's renderable so it can
 be removed when the template instance is destroyed.
 

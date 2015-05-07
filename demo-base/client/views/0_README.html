@@ -47,67 +47,65 @@
         {{/if}}
       {{/snippet}}
 
-      <h3>Out of the Box</h3>
+      {{#markdown}}
+### Out of the Box
 
-      <ul>
-        <li>
-          <p><b>String attributes</b> are automatically decoded like in all our
-          examples; strings like <code>dimensions="[3,3]"</code> are translated
-          to an array of two Numbers; otherwise functions (i.e. reactive
-          template helpers) may be used instead to provide an <b>exact value</b>
-          (i.e., a Number, Array, Object, Function, etc).</p>
+* **String attributes** automatically decoded like in all our
+  examples; strings like `dimensions="[3,3]"` are translated
+  to *an array of two Numbers*; otherwise functions (i.e. reactive
+  template helpers) may be used instead to provide an **exact value**
+  (i.e., a Number, Array, Object, Function, etc).
+  Certain **attribute names** are handled especially for you, e.g. `direction="X"`
+  ➙ `Utility.Direction.X` and `translate="[10,10,10]` ➙ `Transform.translate(10,10,10)`.
 
-          <p><b>Reacive helpers</b> <i>should always provide exact values -
-          and not strings -</i> to avoid unnecessary overhead. If the view has
-          a <code>setOptions()</code> method, it will be reactively called on
-          any invalidation of any attribute.  For custom methods, see the
-          <code>attrUpdate</code> callback in "Advanced Views", below.</p>
+  You can also specify values like
+  `transform="eval:Transform.rotateZ(Math.PI)"`
+  etc, provided you first set `FView.attrEvalAllowedKeys = '*'`
+  or `FView.attrEvalAllowedKeys = ['transform']`,
+  understand the security implications, and have `Transform`
+  declared in your global scope.  This is safe if you only use
+  it when defining your templates.  For reactive helpers, ensure that
+  they can never return text which may be influenced by the user.  If
+  you're developing a package, bare in mind that many sites completely
+  disable `eval`.
 
-          <p>You can also specify values like
-          <code>transform="eval:Transform.rotateZ(Math.PI)"</code>
-          etc, provided you first set <code>FView.attrEvalAllowedKeys = '*'</code>
-          or <code>FView.attrEvalAllowedKeys = ['transform']</code>,
-          understand the security implications, and have <code>Transform</code>
-          declared in your global scope.  This is safe if you only use
-          it when defining your templates.  For reactive helpers, ensure that
-          they can never return text which may be influenced by the user.  If
-          you're developing a package, bare in mind that many sites completely
-          disable <code>eval</code>.</p>
+  **Reacive helpers** *should always provide exact values -
+  and not strings -* to avoid unnecessary overhead. If the view has
+  a `setOptions()` method, it will be reactively called on
+  any invalidation of any attribute.  For custom methods, see the
+  `attrUpdate` callback in "Advanced Views", below.
 
-          <p>The (famo.us) <b>class is instantiated</b> using these
-          parsed attributes.  A custom <code>create()</code>
-          method may be specified, see below.</p>
-        </li>
+  The **famo.us class is instantiated** using these
+  parsed attributes.  A custom `create()`
+  method may be specified, see below.
 
-        <li><p>If no <b>modifier</b> is specified, but typical arguments for a
-        one are given, e.g.
-        <code>translate="[100,100]"</code>, a Modifier is automatically
-        prepended to the Render Tree as part of the MeteorFamousView.
-        Likewise, for <code>size="[undefined,undefined"]</code>, etc,
-        <i>when using a View which doesn't support sizing.</i></p></li>
+* If no **modifier** is specified, but typical arguments for a
+  one are given, e.g.
+  `translate="[100,100]"`, a Modifier is automatically
+  prepended to the Render Tree as part of the MeteorFamousView.
+  Likewise, for `size="[undefined,undefined"]`, etc,
+  *when using a View which doesn't support sizing*.
 
-        <li><p>When called via <b>template inclusion</b>,
-        like <code>{{dstache}}>View template="x"}}</code>,
-        all the regular Meteor template stuff applies, so you can
-        do things in <code>Template.x.rendered = function() { }</code>, setup
-        <a href="/examples/events">events</a>, etc.</p></li>
+* When called via **template inclusion** (like `{{dstache}}>View template="x"}}`),
+  all the regular Meteor template stuff applies, so you can
+  do things in `Template.x.rendered = function() { }`, setup
+  [events](/examples/events), etc.
 
-        <li><p><b>IDs</b>: Specifying <code>id="uniqueId"</code> (on the
-        assumption that your view
-        will only ever be rendered once, simultaneously), let's you access
-        the rendered MeteorFamousView with <code>FView.byId("uniqueId")</code>.
-        If you don't
-        specify an id, a unique, sequential numeric id is automatically
-        assigned; look for it in the JavaScript console, very useful for
-        debugging.</p></li>
+* **IDs**: Specifying `id="uniqueId"` (on the
+  assumption that your view
+  will only ever be rendered once, simultaneously), let's you access
+  the rendered MeteorFamousView with `FView.byId("uniqueId")`.
+  If you don't
+  specify an id, a unique, sequential numeric id is automatically
+  assigned; look for it in the JavaScript console, very useful for
+  debugging.
 
-        <li><p><b>Child templates</b> will be added using the view's
-        <code>add()</code> method.  Alternatively, if the view provides
-        a <code>sequenceFrom()</code> method, children will be added to
-        a managed array, and <code>{{dstache}}#famousEach}}</code> may
-        be used (all reactive, of course).  Can be overriden, see below.
-        </p></li>
-      </ul>
+* **Child templates** will by default be added using the view's
+  `add()` method.  Alternatively, if the view provides
+  a `sequenceFrom()` method, children will be added to
+  a managed array, and `{{dstache}}#famousEach}}` may
+  be used (all reactive, of course).  Can be overriden, see below.
+      {{/markdown}}
 
       <h3>Advanced Views</h3>
 
