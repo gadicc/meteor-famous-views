@@ -8,6 +8,8 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
+  Template.registerHelper('isDev', Injected.obj('server').NODE_ENV === 'development');
+
   Items = new Meteor.Collection(null);
 
   _.each([
@@ -88,9 +90,11 @@ if (Meteor.isClient) {
   Template.header.helpers({
     menu: function(issues) {
       var out = [];
-      _.each(['Features', 'Views', 'Examples', 'Issues', 'More'], function(cat) {
-        //if (!issues && cat != 'Issues' || issues && cat == 'Issues')
-        out.push({ cat: cat, items: Menu.list[cat] });
+      _.each(['Features', 'Views', 'Examples', 'Issues', 'Support', 'More'], function(cat) {
+        if (cat === 'Support')
+          out.push({ cat: 'Support', route: '/support', name: 'Support' });
+        else if (!(cat === 'Issues' && Injected.obj('server').NODE_ENV !== 'development'))
+          out.push({ cat: cat, items: Menu.list[cat] });
       });
       return out;
     }

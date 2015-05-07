@@ -3,13 +3,14 @@
 
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <h1>Layout Examples</h1>
+
       <h2>Understanding Sizes in Famo.us</h2>
       <p>In short: <code>size="[width, height]"</code>, where width/height
       are values like:</p>
       <ul>
         <li><code>200</code> or any Number</li>
         <li><code>undefined</code> - full boundaries of parent container</li>
-        <li><code>true</code> - auto size (since Famo.us 0.3.0)</li>
+        <li><code>true</code> - auto size / fit contents (since Famo.us 0.3.0)</li>
       </ul>
 
       <p>Not specifying the size is (usually) identical to
@@ -27,6 +28,18 @@
       to problems with "true" sized Surfaces inside a sequence (Scrollview,
       SequentialLayout, etc); this was addressed in Famo.us 0.3.0 and you
       should no longer use this feature.</p>
+
+      <h2>Understanding Positioning in Famous</h2>
+
+      <p>It's super important to understand how <code>origin</code> and
+      <code>align</code> work.
+      Check out the FView University lesson
+      <a href="https://fview-lab.meteor.com/pads/KpCGFEtBmACS6YP6b">101b -
+      Positioning Elements</a> and
+      <a href="http://www.tutas-labs.com/famous-meteor-integration-part-4/">Part
+      4</a> of the Tutas-Labs Tutorial ("The relationship between Alignment
+      and Origin" near the bottom, especially the interactive demo at the
+      very bottom).</p>
 
       <h2>Horizontal SequentialLayout</h2>
       <p>Use the <i>direction</i> attribute to allow a <i>SequentialLayout</i> to flow

@@ -9,6 +9,7 @@ http
 # routing + analytics
 iron:router
 reywood:iron-router-ga
+meteorhacks:inject-initial
 
 # layout + helpers
 less
