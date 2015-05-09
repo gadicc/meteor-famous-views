@@ -69,3 +69,25 @@ Template.rc_useForPages.helpers({
     return Session.get('transitionPages');
   }
 });
+
+/* --- prerender demo --- */
+
+Session.setDefault('showId', 'preSurface1');
+
+Template.preRenderDemo.helpers({
+  showId: function() {
+    return Session.get('showId');
+  }
+});
+
+Template.preRC_buttons.helpers({
+  'buttons': ['preSurface1', 'preSurface2', 'preSurface3'],
+  isSet: function() {
+    return this.valueOf() == Session.get('showId') ? 'disabled' : '';
+  }
+});
+Template.preRC_buttons.events({
+  'click button': function(event, tpl) {
+    Session.set('showId', this.valueOf());
+  }
+});

@@ -1,5 +1,7 @@
 ## vNEXT
 
+* RenderController: prerender mode for better performance (see docs).
+
 * fixed Blaze.remove not called on all children; our own forEach.
 
 * Modifier can't handle true size, so let Surface handle that (#214)

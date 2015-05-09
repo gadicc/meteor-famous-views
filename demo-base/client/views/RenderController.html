@@ -30,7 +30,7 @@
     {{#Modifier size="[undefined,110]"}}
       {{>Surface template="rc_buttons" class="pagePad"}}
       {{#RenderController id="demoRC" transition=getTransition
-          size="[150,150]" translate="[500,-50]"}}
+          size="[150,150]" translate="[500,-50,50]"}}
         {{>showTemplate name=currentTemplate}}
       {{/RenderController}}
     {{/Modifier}}
@@ -171,6 +171,8 @@
 
     {{/Surface}}
 
+    {{>preRenderDemo}}
+
     {{#Surface size="[undefined,true]" class="pagePad"}}
       <p>You can find the full source to this page in the <a target="_TOP"
         href="https://github.com/gadicc/meteor-famous-views/tree/master/demo-base/client/views"
@@ -178,6 +180,10 @@
 
       {{#markdown}}
 # ChangeLog
+
+## v0.1.33
+
+* Enhancement: `prerender=true` mode.
 
 ## v0.1.31
 
@@ -241,4 +247,98 @@
   {{#Surface class="blue-bg" origin="[1,1]" align="[1,1]" size="[75,150]"}}
     <div class="full">#3</div>
   {{/Surface}}
+</template>
+
+<!-- pre-render stuff -->
+
+<template name="preRenderDemo">
+  {{#Surface size="[undefined,true]" class="pagePad"}}
+    <h2>Prerender Mode</h2>
+
+    <p>Using dynamic templates that are created/destroyed as needed is very convenient,
+    but not the most performant.  For complicated layouts, you're better off having all
+    the templates constructed already and shown/hidden as necessary without creating /
+    destroying on demand.</p>
+
+    <p>To do this, call <code>RenderController</code> with a <code>prerender=true</code> attribute (see example code below), make sure all you name all child
+    templates with an <code>id</code> attribute.  You can then call the RenderController's
+    <code>fview.showId(id)</code>.  As a shortcut, you can (instead) give the RC an
+    attribute with a reactive helper, which calls this automatically for you, e.g.
+    <code>showId=getSessionVariable</code> - there's an example below.</p>
+  {{/Surface}}
+
+  {{#Modifier size="[undefined,110]"}}
+    {{>Surface template="preRC_buttons" class="pagePad"}}
+    {{#RenderController id="preRenderRC" prerender=true showId=showId
+        transition=getTransition size="[150,150]" translate="[500,0,50]"}}
+      {{#Surface id="preSurface1" class="red-bg" origin="[0,0]" align="[0,0]" size="[75,100]"}}
+        <div class="full">#1</div>
+      {{/Surface}}
+      {{#Surface id="preSurface2" class="green-bg" origin="[.5,.5]" align="[0.5,0.5]" size="[100,75]"}}
+        <div class="full">#2</div>
+      {{/Surface}}
+      {{#Surface id="preSurface3" class="blue-bg" origin="[1,1]" align="[1,1]" size="[75,100]"}}
+        <div class="full">#3</div>
+      {{/Surface}}
+    {{/RenderController}}
+  {{/Modifier}}
+
+  {{>Surface template="preRC_source" size="[undefined,true]" class="pagePad"}}
+</template>
+
+<template name="preRC_buttons">
+  <p>
+    {{#each buttons}}
+      <button style="display: block; margin-bottom: 2px;"
+        class="btn btn-primary" {{isSet}}>
+        Session.set('showId', '{{this}}');
+      </button>
+    {{/each}}
+  </p>
+</template>
+
+<template name="preRC_source">
+  {{#snippet lang="spacebars"}}
+    &lt;template name="preRenderDemo">
+      {{|>Surface template="preRC_buttons" class="pagePad"}}
+      {{|#RenderController id="preRenderRC" prerender=true showId=showId
+          transition=getTransition size="[150,150]" translate="[500,0,50]"}}
+        {{|#Surface id="preSurface1" class="red-bg" origin="[0,0]" align="[0,0]" size="[75,100]"}}
+          <div class="full">#1</div>
+        {{|/Surface}}
+        {{|#Surface id="preSurface2" class="green-bg" origin="[.5,.5]" align="[0.5,0.5]" size="[100,75]"}}
+          <div class="full">#2</div>
+        {{|/Surface}}
+        {{|#Surface id="preSurface3" class="blue-bg" origin="[1,1]" align="[1,1]" size="[75,100]"}}
+          <div class="full">#3</div>
+        {{|/Surface}}
+      {{|/RenderController}}
+    &lt;/template>
+  {{else}}
+    {{#if currentLang "jade"}}
+      template(name="prerenderDemo")
+        +Surface template="preRC_buttons" class="pagePad"
+        +RenderController id="preRenderRC" prerender=true showId=showId transition=getTransition size="[150,150]" translate="[500,0,50]"
+          +Surface id="preSurface1" class="red-bg" origin="[0,0]" align="[0,0]" size="[75,100]"
+            div.full #1
+          +Surface id="preSurface2" class="green-bg" origin="[.5,.5]" align="[0.5,0.5]" size="[100,75]"
+            div.full #2
+          +Surface id="preSurface3" class="blue-bg" origin="[1,1]" align="[1,1]" size="[75,100]"
+            div.full #3
+    {{/if}}
+  {{/snippet}}
+
+  {{#snippet lang="javascript"}}
+    Template.preRenderDemo.helpers({
+      showId: function() {
+        return Session.get('showId');
+      }
+    });
+  {{else}}
+    {{#if currentLang "coffee"}}
+      Template.preRenderDemo.helpers showId: ->
+        Session.get 'showId'
+    {{/if}}
+  {{/snippet}}
+
 </template>
