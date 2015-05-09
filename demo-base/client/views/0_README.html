@@ -137,12 +137,18 @@
             return new this._view.constructor(options);
           },
 
-          // If exists, called after adding the node to the render tree
+          // If exists, called after instantiating the famo.us class
           famousCreatedPost: function() {
             // `this` is the fview for this instance
             this.pipeChildrenTo = this.parent.pipeChildrenTo
               ? [ this.view, this.parent.pipeChildrenTo[0] ]
               : [ this.view ];
+          },
+
+          // If exists, called after calling parent's add() method,
+          // and after our children have been add()'d to us.
+          onRenderTree: function() {
+            // `this` is the fview for this instance
           },
 
           // If exists, called just before an fview is completely destroyed
@@ -171,10 +177,14 @@
             # If exists, called to instantiate the famo.us class
             create: (options) ->
               new @_view.constructor(options)
-            # If exists, called after adding the node to the render tree
+            # If exists, called after insantiating the famo.us class
             famousCreatedPost: ->
               # `this` or `@` is the fview for this instance
               @pipeChildrenTo = if @parent.pipeChildrenTo? then [ @view, @parent.pipeChildrenTo[0] ] else [ @view ]
+            # If exists, called after calling our parent's add() method
+            # and after our children have been add()'d to us
+            onRenderTree: ->
+              # `this` or `@` is the fview for this instance
             # If exists, called just before an fview is completely destroyed
             onDestroy: ->
               # `this` or `@` is the fview for this instance
@@ -187,6 +197,11 @@
 
       {{#markdown}}
 ## Changelog
+
+### v0.1.33
+
+* Docs: Add `onRenderTree` (which existed already)
+* Docs: Fixed description of `famousCreatedPost`.
 
 ### v0.1.30
 
