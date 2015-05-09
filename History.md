@@ -1,5 +1,7 @@
 ## vNEXT
 
+**v0.1.33-pre.3**
+
 * RenderController: prerender mode for better performance (see docs).
 
 * fixed Blaze.remove not called on all children; our own forEach.
@@ -20,7 +22,7 @@
 * Make optionString() stricter about handing off to parseFloat (#220)
   thanks @fredevery.
 
-**v0.1.33-preview.1**
+**v0.1.33-pre.1**
 
 * MAJOR.  We now override Tracker with our own modified version to make sure
   recomputations don't result in skipped frames.  Shouldn't cause any
