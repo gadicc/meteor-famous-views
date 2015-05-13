@@ -1,5 +1,8 @@
 ## vNEXT
 
+* Experimental `_onRender` attribute, to define `onRender` callbacks
+  via template helpers.  `this` is the blazeView, like usual.
+
 **v0.1.33-pre.3**
 
 * RenderController: prerender mode for better performance (see docs).

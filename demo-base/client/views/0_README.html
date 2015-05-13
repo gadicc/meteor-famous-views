@@ -75,6 +75,10 @@
   any invalidation of any attribute.  For custom methods, see the
   `attrUpdate` callback in "Advanced Views", below.
 
+  `_onRender="quotedHelperName"` - a pseudo-helper shortcut to let
+  you define onRender callbacks via the containing template's helpers.
+  *Experimental*.
+
   The **famo.us class is instantiated** using these
   parsed attributes.  A custom `create()`
   method may be specified, see below.
@@ -200,6 +204,7 @@
 
 ### v0.1.33
 
+* The `_onRender` attribute for an experimental "helper" shortcut.
 * Docs: Add `onRenderTree` (which existed already)
 * Docs: Fixed description of `famousCreatedPost`.
 

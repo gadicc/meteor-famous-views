@@ -1,7 +1,7 @@
 Package.describe({
   name: "gadicohen:famous-views",
   summary: 'Blaze Views for Famous; doing Famous Meteor-style',
-  version: "0.1.33-pre.3",
+  version: "0.1.33-pre.4",
   git: "https://github.com/gadicc/meteor-famous-views.git"
 });
 
