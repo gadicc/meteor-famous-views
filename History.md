@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v0.2.0
+
 * Experimental `_onRender` attribute, to define `onRender` callbacks
   via template helpers.  `this` is the blazeView, like usual.
 
