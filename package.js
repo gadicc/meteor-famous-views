@@ -32,6 +32,7 @@ function configurePackage(api, testing) {
     [
       'lib/famous-views.js',
       'lib/tracker.js',
+      'lib/timers.js',
       'lib/meteorFamousView.js',
       'lib/sequencer.js',
       'lib/famous.js',

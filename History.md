@@ -3,6 +3,10 @@
 * Experimental `_onRender` attribute, to define `onRender` callbacks
   via template helpers.  `this` is the blazeView, like usual.
 
+* Override Meteor's `setInterval`, `setTimer`, `defer` too.
+
+* Make new Tracker code work with older versions of Meteor too.
+
 **v0.1.33-pre.3**
 
 * RenderController: prerender mode for better performance (see docs).
