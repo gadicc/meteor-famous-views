@@ -78,30 +78,7 @@
           <h5>Performance / Jagged Animations</h5>
         </div>
         <div class="panel-body">
-          <p><b>First</b>, make sure you've read the
-          <a href="http://famo.us/guides/pitfalls">Famo.us Pitfalls</a> guide, it covers
-          a lot of useful info including specific CSS properties which can affect
-          performance.</p>
-
-          <p>Beyond that, the most common problem is reactive callbacks.  Since v0.1.33,
-          we make sure that an implicit Tracker Flush cycle don't span over multiple animation frames, and set Meteor.setImmediate to use famous.core.Engine.defer().</p>
-
-          <p>However, we have no control what happens in a single reactive callback,
-          particularly the ones you are writing yourself.  Also, since v0.1.33, we (by default)
-          detect and log this for you.  You'll probably notice that for every break in
-          smooth animation, you have a log entry like this:</p>
-
-          <pre><code>  debug:  [famous-views]  The following computation took 24ms to complete: function viewAutorun(c) wikiRender:materialize</code></pre>
-
-          <p>You can tweak this output with the following options (default values below):</p>
-
-          <pre><code lang="javascript">  Tracker.warnOnLongComputations = true;       // log long-running computations
-  Tracker.showComputationsInWarnings = false;  // Dump the full Computation object too
-  Tracker.showFullFuncsInWarnings = false;     // Dump the actual function in full</code></pre>
-
-          <p>Hopefully, you'll recognize the name of your custom function and can work to
-          make parts of it asynchronous.  <code>showComputationsInWarnings</code> might
-          give you some more details you need.</p>
+          <p>See our <a href="/performance">Performance Page</a>.</p>
         </div><!-- panel-body -->
       </div><!-- panel-default -->
 

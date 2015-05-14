@@ -1,0 +1,124 @@
+<template name="performance">
+  {{#Surface size="[undefined,undefined]"}}
+    <div id="main" role="main">
+      {{#markdown}}
+# Performance
+
+Famous promised you 60fps, but it's a group effort.  It's important to follow all
+the performance guidelines for your app to avoid jitter and lag.
+
+First off, it's *critical* for you to read Famo.us'
+[Pitfalls and Gotchas](http://famo.us/docs/reference/pages/0.3/pitfalls-and-gotchas.html),
+e.g. certain CSS properties will *ruin your animations*, touching the DOM *is a killer*, etc.
+
+Next, familiarize yourself with the guidelines below.
+
+## Using the DOM
+
+You know already to avoid it, but if you have to, do it via Meteor's
+[templateInstance](http://docs.meteor.com/#/full/template_inst)
+functions which are scoped to their template and hence much faster.  e.g.
+
+{{/markdown}}
+
+{{#snippet lang="javascript"}}
+  Template.example.onRendered(function() {
+    var wrong = $('div.class');      // &lt;-- No!!  Bad!!
+    var right = this.$('div.class'); // &lt;-- Yes!  Better!
+  });
+{{/snippet}}
+
+{{#markdown}}
+
+## Timers
+
+Never use `setTimeout`, `setInterval`, etc!  Make sure to either use Famo.us' versions
+(explained in the above doc), or Meteor's versions (`Meteor.setTimeout`, `Meteor.setInterval` etc), which we've wrapped to go via Famous.  We've also adapted `Meteor.defer`, `Meteor.setImmediate`, etc, so these are all safe to use.
+
+Actually, you can quite liberally (but within reason) `defer` (using Meteor or Famous)
+any code that doesn't require synchronosity to avoid single long running functions.
+
+## Reactivity
+
+One of the biggest problems when mixing Famous and Meteor is the latter's reactivity
+blocking animation frames.  But don't worry, we've got you covered!  Famous-views
+adapts Meteor's `Tracker` to work with the Famous animation loop, dividing up long
+implicit flushes over multiple frames.
+
+However, we have no control what happens in a single reactive callback,
+particularly the ones you are writing yourself. But, we will detect and log
+this for you (by default). You'll probably notice that for every break in
+smooth animation, you have a log entry like this:
+
+```
+  debug:  [famous-views]  The following computation took 24ms to complete: function viewAutorun(c) wikiRender:materialize
+```
+
+You can tweak this output with the following options (default values below):
+
+```js
+  Tracker.warnOnLongComputations = true;       // log long-running computations
+  Tracker.showComputationsInWarnings = false;  // Dump the full Computation object too
+  Tracker.showFullFuncsInWarnings = false;     // Dump the actual function in full
+```
+
+Hopefully, you'll recognize the name of your custom function and can work to make parts of it asynchronous. showComputationsInWarnings might give you some more details you need.
+
+## Routing & RenderController
+
+We recommended a very simple way to integrate with iron-router to help people get up and
+running quickly, but it's not the most performant, especially for complicated layouts.
+
+In general, and especially for commonly shown and deeply nested layouts, make sure to
+use `RenderController` in "PreRender Mode" (see [docs][(/views/RenderController), at
+the bottom).
+
+But more than that, ensure route reactivity isn't causing needless reruns of template
+helpers and/or layout.  This means, in iron-router, avoiding dependencies that will
+cause your `data` and other callbacks to run more than once.
+
+MeteorHacks' [flow-router](https://github.com/meteorhacks/flow-router) embraces this
+principle, minimizing reactive reruns and decoupling rendering from the router (which
+is good, since we really want to hand that off to Famous).
+
+You can find an example of using Flow-Router with a RenderController in the
+fview-flex [TabBar Demo](http://fview-flex.meteor.com/TabBar) and
+[source](https://github.com/gadicc/fview-flex/tree/master/demo/client).
+
+# Template Rendering
+
+Complicated layouts are a killer.  So obey these two simple rules:
+
+1. Prerender your templates (see Routing & RenderController, above).
+1. Avoid reactivity that updates templates *during* animations and transitions.
+
+So that means, animate/transition first and then update the template's reactive
+deps, or the other way around.  Don't try get them to happen at the same time.
+
+Moving forward, we'd love for this to be possible.  The problem is that Blaze
+updates the DOM continuously during redraws, and as you know the Pitfalls guide
+above, the DOM is sloooow.  The good news is that the MDG team is currently
+researching on how to best move forward.  We have some ideas of our own too.
+
+React will definitely offer better performance (especially with a few mods to
+it's patch function to work with Famous' animation loop), and there is a lot
+of experimentation going on in the community combining React with Meteor now.
+**But it's premature to jump ship!**  By all means, use React if it meets your
+general needs better, but don't do it because of this section.  Our advice,
+for now, is to *continue building your app as normal*.  There's a good chance
+this will get solved for you with no further effort.  However, if you're
+desparate for performance in production *right now* - and our other guidelines
+haven't helped - do what you need to do.
+
+## Tracking Performance
+
+We'll warn you in the console if any of your reactive functions are blocking Famous frames
+(see "Reactivity", above).  Beyond that, check out
+[fview-lagometer](https://github.com/gadicc/fview-lagometer).  In short,
+`meteor add gadicohen:fview-lagometer`, and then press `Alt-L` in your app to toggle
+a realtime FPS display in the upper right hand corner.  Props to @IjzerenHein for this!
+
+      {{/markdown}}
+    </div>
+  {{/Surface}}
+</template>
