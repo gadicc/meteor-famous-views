@@ -66,22 +66,23 @@ Hopefully, you'll recognize the name of your custom function and can work to mak
 
 ## Routing & RenderController
 
-We recommended a very simple way to integrate with iron-router to help people get up and
-running quickly, but it's not the most performant, especially for complicated layouts.
+We recommended a very simple way to
+[integrate with iron-router](http://famous-views.meteor.com/features/iron-router)
+to help get you up and running quickly; but the truth is, it's not the most performant
+pattern, especially for complicated layouts.
 
 In general, and especially for commonly shown and deeply nested layouts, make sure to
-use `RenderController` in "PreRender Mode" (see [docs][(/views/RenderController), at
+use `RenderController` in "PreRender Mode" (see [docs](/views/RenderController), at
 the bottom).
 
 But more than that, ensure route reactivity isn't causing needless reruns of template
 helpers and/or layout.  This means, in iron-router, avoiding dependencies that will
-cause your `data` and other callbacks to run more than once.
+cause your route's `data()` function and other reactive computations to run more than once.
 
 MeteorHacks' [flow-router](https://github.com/meteorhacks/flow-router) embraces this
 principle, minimizing reactive reruns and decoupling rendering from the router (which
-is good, since we really want to hand that off to Famous).
-
-You can find an example of using Flow-Router with a RenderController in the
+is good, since we really want to hand that off to Famous).  You can find an example
+of using Flow-Router with a RenderController in the
 fview-flex [TabBar Demo](http://fview-flex.meteor.com/TabBar) and
 [source](https://github.com/gadicc/fview-flex/tree/master/demo/client).
 
