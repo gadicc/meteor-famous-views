@@ -1,5 +1,14 @@
 ## vNEXT
 
+## v0.2.1
+
+* When using `famousEvents()`, `this` is now correctly the data context just
+  like regular `Template.x.events()`.
+
+* Internal: store `fview.renderBlazeView`, which is very useful for getting
+  the data context... like `fview.surfaceBlazeView` but present in surfaces
+  and non-surfaces.
+
 ## v0.2.0
 
 * Experimental `_onRender` attribute, to define `onRender` callbacks

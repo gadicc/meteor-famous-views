@@ -106,6 +106,7 @@
       {{#snippet lang="javascript"}}
         Template.ev_surface_click.famousEvents({
           'click': function(event, fview) {
+            // `this` is the data context, like with Template.x.events()
             // event.type == "click"
             animateAndIncrement(fview);
           }
@@ -114,8 +115,9 @@
         {{#if currentLang "coffee"}}
           Template.ev_surface_click.famousEvents
             click: (event, fview) ->
-            # event.type is 'click'
-            animateAndIncrement fview
+              # `this` is the data context, like with Template.x.events()
+              # event.type is 'click'
+              animateAndIncrement fview
         {{/if}}
       {{/snippet}}
 
@@ -131,6 +133,7 @@
           var fview = FView.from(this);
           var target = fview.surface || fview.view;
           target.on('click', function() {
+            var data = Blaze.getData(fview.renderedBlazeView); // if we need it
             animateAndIncrement(fview);
           });
         }
@@ -140,6 +143,7 @@
             fview = FView.from @
             target = fview.surface or fview.view
             target.on 'click', ->
+              data = Blaze.getData(fview.renderedBlazeView); # if we need it
               animateAndIncrement fview
         {{/if}}
       {{/snippet}}
