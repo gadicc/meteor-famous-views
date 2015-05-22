@@ -90,9 +90,11 @@ if (Meteor.isClient) {
   Template.header.helpers({
     menu: function(issues) {
       var out = [];
-      _.each(['Features', 'Views', 'Examples', 'Issues', 'Support', 'More'], function(cat) {
+      _.each(['Features', 'Views', 'Examples', 'Issues', 'Support', 'Forums', 'More'], function(cat) {
         if (cat === 'Support')
           out.push({ cat: 'Support', route: '/support', name: 'Support' });
+        else if (cat === 'Forums')
+          out.push({ cat: 'Forums', route: 'http://forums.famous-views.org/', name: 'Forums' });
         else if (!(cat === 'Issues' && Injected.obj('server').NODE_ENV !== 'development'))
           out.push({ cat: cat, items: Menu.list[cat] });
       });
