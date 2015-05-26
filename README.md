@@ -17,6 +17,16 @@ The v1 series is a rewrite.  A good opportunity for code househeeping.  Code
 from v0 will be copied in and adapted on a per unit bases, after inspection
 and ideally tests.
 
+Quick start:
+
+```bash
+meteor add gadicohen:famous gadicohen:famous-views
+```
+
+[gadicohen:famous](https://atmospherejs.com/gadicohen/famous) is a temporary
+package until our regular options are available again.  The new structure
+looks like this:
+
 ```handlebars
 <body>
   {{#Scene}}
@@ -135,6 +145,20 @@ Template.body.helpers({
   }
 });
 ```
+
+***Special Attributes***:
+
+```jade
+body
+  +Node _onRender="renderFunc" // note, String name
+```
+
+```js
+Template.body.helpers({
+  renderFunc: function() {
+    // this = fview
+  }
+});
 
 ### DOMElement
 

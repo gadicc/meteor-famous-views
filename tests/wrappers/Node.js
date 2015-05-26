@@ -46,3 +46,14 @@ Tinytest.add('famous-views - Wrappers - Node - non-size components', function(te
   test.equal(fview.position.getValue(),
     { component: "Position", x: 1, y: 2, z: 3 });
 });
+
+Tinytest.addAsync('famous-views - Wrappers - Node - _onRender', function(test, complete) {
+  Template.node2.helpers({
+    onRender: function() {
+      // should we look for anything in particular?
+      complete();
+    }
+  });
+
+  Blaze.render(Template.node2, commonDiv);
+});

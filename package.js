@@ -41,14 +41,18 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use(['random'], client);
+  api.use(['templating', 'random'], client);
   //api.use('gadicohen:famous-views');
   
   common(api);
 
   api.addFiles([
+    'tests/lib/prepare.js',
     'tests/utilities.js',
     'tests/meteorFamousView.js',
-    'tests/wrappers/Node.js'
+    'tests/wrappers/Node.html',
+    'tests/wrappers/Node.js',
+    'tests/wrappers/DOMElement.html',
+    'tests/wrappers/DOMElement.js'
   ], 'client');
 });
