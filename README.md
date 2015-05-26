@@ -108,6 +108,7 @@ Template.body.helpers({
     };
   }
 });
+```
 
 To keep switching between two values, we provide a shortcut to infinity:
 
@@ -133,6 +134,7 @@ Template.body.helpers({
     return '__FVIEW_SKIP__';
   }
 });
+```
 
 ### DOMElement
 
@@ -153,6 +155,7 @@ Template.body.helpers({
     return variableSizedStuff;
   }
 });
+```
 
 Currently, no attributes are supported.  But in the future, you can pass a non-reactive
 `tagName` like with Famous.  The `{{>Surface template="x"}}` format is gone, just put
