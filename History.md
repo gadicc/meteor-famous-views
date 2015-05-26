@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v0.2.2
+
+* Fix `ContainerSurface`'s reactive `properties`, thanks @adamwong246 (#255)
+
 ## v0.2.1
 
 * When using `famousEvents()`, `this` is now correctly the data context just
