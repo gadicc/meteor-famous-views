@@ -1,5 +1,9 @@
 ## famous-views for Meteor [![Build Status](https://api.travis-ci.org/gadicc/meteor-famous-views.svg?branch=v0)](https://travis-ci.org/gadicc/meteor-famous-views)
 
+**Deprecation Notice**: This v0.x branch of famous-views (for famous <= 0.3.5) has been
+deprecated, please see the [full announcement](http://forums.famous-views.org/t/deprecation-notice-famous-views-0-x/38).  Development continues on the v0.1x branch in
+[master](https://github.com/gadicc/meteor-famous-views/tree/master).
+
 [![Join the chat at https://gitter.im/gadicc/meteor-famous-views](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gadicc/meteor-famous-views?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![famous-views-logo](https://raw.githubusercontent.com/gadicc/meteor-famous-views/master/assets/meteor_famous_view_logo.png)
