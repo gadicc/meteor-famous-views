@@ -1,6 +1,15 @@
-# famous-views v1.x series
+# famous-views v1.x series [![Build Status](https://api.travis-ci.org/gadicc/meteor-famous-views.svg?branch=master)](https://travis-ci.org/gadicc/meteor-famous-views)
 
 Oh look, it's a new major number.  That means I can break the API :)
+
+You're on the **master** branch, where work is in development for the totally
+unstable famous-views v1.x series, which works with famous v0.5 (mixed mode).
+
+For the stable (but deprecated) famous-views v0.x, which works with famous v0.3.5,
+please see the [v0](https://github.com/gadicc/meteor-famous-views/tree/v0) branch.
+
+[Forums.Famous-Views.Org](http://forums.famous-views.org/) and 
+[![Join the chat at https://gitter.im/gadicc/meteor-famous-views](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gadicc/meteor-famous-views?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## API
 
