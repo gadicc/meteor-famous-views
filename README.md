@@ -17,6 +17,12 @@ The v1 series is a rewrite.  A good opportunity for code househeeping.  Code
 from v0 will be copied in and adapted on a per unit bases, after inspection
 and ideally tests.
 
+Please read this README in it's entirety to understand what's going on :)  Also,
+the `v1.0.0` -- it's semver, we're bumping the major version to indicate an API
+change.  Please don't draw any conclusions about being "production ready".  We'll
+also have `v1.0.0-pre.1`, `-pre.2` up to some very big number before a "stable"
+version is released.
+
 Quick start:
 
 ```bash
@@ -52,7 +58,6 @@ body
         +DOMElement
           p Shalom!
 ```
-
 
 ### Scene
 
@@ -205,6 +210,42 @@ Levels are: trace, debug, info, warn, error
 
 In a later release I'll enable to change this before load, for those who hate anything
 on console :)
+
+## Events
+
+Might add something to do this in a Meteor way again.  For now, either set these
+up famous-style `_onRender` or do something like this:
+
+```handlebars
+<template name="outer">
+  {{#DOMElement}}
+    {{>inner}}
+  {{/DOMElement}}
+</template>
+
+<template name="inner">
+  <!-- NB: Critical to have one element in here to receive the event -->
+  <!-- depending on your needs, maybe style="width: 100%; height: 100%" -->
+  <div>Blah blah blah</div>
+</template>
+```
+
+```js
+Template.inner.events({
+  'click': function(event, templateInstance) {
+    var fview = FView.current();
+    // `this` is data context; regular Meteor event, etc.
+  }
+});
+```
+
+## What's missing / TODO / Roadmap
+
+* [ ] Defer/tracker override
+* [ ] Ability to remove/destroy templates :)
+* [ ] famousEach, famousIf, etc
+* [ ] Events in a Meteor way again?
+* [ ] Loads of other stuff from v0... request them and I'll prioritize
 
 ## Differences from v0
 
