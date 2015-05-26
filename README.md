@@ -205,3 +205,15 @@ Levels are: trace, debug, info, warn, error
 
 In a later release I'll enable to change this before load, for those who hate anything
 on console :)
+
+## Differences from v0
+
+Besides the underlying Famous API and how we deal with it:
+
+* In v0 we could use famous-views stuff **inline** `{{#Surface}}...{{/Surface}}`
+  and via **inclusion** `{{>Surface template="mySurface"}}`.  The latter enabled
+  us to use life cycle callbacks and events, but was a big source of confusion
+  amongst users, and stifled fast development but requiring a lot of extraneous
+  subtemplating.  In the new version we just use `_onRender` and `_eventMap`
+  attributes, provided from the enclosing Templates single helper.  Feedback
+  welcome.  You can still use regular inclusion `{{>template}}` like usual.
