@@ -23,6 +23,9 @@ change.  Please don't draw any conclusions about being "production ready".  We'l
 also have `v1.0.0-pre.1`, `-pre.2` up to some very big number before a "stable"
 version is released.
 
+To learn the basics through an interactive tutorial with editable code, check out
+https://fview-lab2.meteor.com/gadicc.
+
 Quick start:
 
 ```bash
