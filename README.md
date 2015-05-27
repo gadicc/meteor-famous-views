@@ -59,12 +59,12 @@ Or a "full" example: (in Jade...  use Jade!)
 
 ```jade
 body
-  +Scene // No reactive vars yet, coming soon
-    +Node id="myNode"
-      +Node size="[A:100,A:100]" rotation=getRotation2
-        +DOMElement
+  +Scene
+    +Node id="baseNode"
+      +Node size="absolute: 100; renderSize" rotation="[1,1]"
+        +DOMElement style="background: red" class="domEl" dir="rtl"
           p Howzit!
-      +Node size="[P:1,renderSize]" rotation=getRotation1
+      +Node size="A:100; RS" rotation=reactiveRotationHelper
         +DOMElement
           p Shalom!
 ```
@@ -74,39 +74,37 @@ body
 * The only attribute supported is `id`
 
 * The scene attaches itself to the containing DOM element ('body' in the above example).
-* This element is given a 'fview-scene' class (which has appropriate CSS rules),
-  and in the case of an element other than `body`, with no pre-existing `id` attribute,
-  is given the specified id (or `fview0`, etc, if no id was specified).
+* This element is given a 'fview-scene' class (which has appropriate CSS rules).
 * If attached to 'body', the relevant CSS is added for `html` and `body` to give you
-  full control over the browser window.  For *any other element*, you should set the
-  appropriate `width`, `height`, `margin` and `padding` as appropriate.
-
-  Otherwise, you should specify
-the appropriate CSS and sizing yourself.
+  full control over the browser window.
+* For *any other element* (e.g. 'div'), you should set the
+  appropriate `width`, `height`, `margin` and `padding` as appropriate.  If the
+  element has no `id`, famous-Views will map it to the node's id.
 
 ## Node
+
+Supported non-reactive attributes:
+
+* `id` - retrievable via FView.byId(x)
+* `_onRender` shortcut -- see below
 
 Supported reactive attributes:
 
 * `size` - adds `fview.size` instance and sets size (see below for the format)
 * `position` / `align` / `mountPoint` / `origin` / `rotation` / `scale` - see below
 
-Supported non-reactive attributes:
-
-* `id`
-
 **Sizing**
 
 See http://famous.org/learn/sizing.html for the sizing types.  We believe in minimal
 typing, so we have a proprietary string format that looks as follows (spaces are
-optional, names may be shortened anjd case is insensitive, so the following two
+optional, names may be shortened and case is insensitive, so the following two
 snippets are equivalent):
 
     size="proportional: 0.5; differential: -10"
     size="P:0.5; D:-10"
 
-    size="absoluteSize: 150; renderSize; relative: 0.5,-10;"
-    size="A:150; RS; R:0.5,-10; P:0.5; D:-10"
+    size="absolute: 150; renderSize; relative: 0.5,-10"
+    size="A:150; RS; R:0.5,-10"
 
 The second group would do the following in famous:
 
@@ -118,7 +116,7 @@ size.setProportional(undefined, undefined, 0.5);
 size.setDifferential(undefined, undefined, -10);
 ```
 
-**Everything else**
+**Everything else** (including position, rotation, etc)
 
 String decoding similar to famous-views 0.x, e.g. position="[100,100]",
 JSON and some other stuff.  You should return an exact value (e.g. an
@@ -128,7 +126,8 @@ Notes:
 
 * *Numbers are passed as is*.  In v0 we took degrees from helpers and
 converted them to radians to pass to Famous.  This may or may not happen
-in v1 (i.e. API is still unstable)
+in v1 (i.e. API is still unstable).  Probably we'll have a rotationDeg
+shortcut, etc.
 
 * We only instantiate a new component as `fview.position` etc if a
 transition is specified.
@@ -176,6 +175,11 @@ Template.body.helpers({
 
 ***Special Attributes***:
 
+**_onRender**:
+
+Specify the name (by string) of a helper function that we should run after
+adding the node to the Scene Graph.
+
 ```jade
 body
   +Node _onRender="renderFunc" // note, String name
@@ -187,6 +191,7 @@ Template.body.helpers({
     // this = fview
   }
 });
+```
 
 ### DOMElement
 
@@ -243,7 +248,8 @@ on console :)
 ## Events
 
 Might add something to do this in a Meteor way again.  For now, either set these
-up famous-style `_onRender` or do something like this:
+up famous-style `_onRender` (in famous style, see their docs) or do something like
+this:
 
 ```handlebars
 <template name="outer">
