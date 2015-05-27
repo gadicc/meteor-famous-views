@@ -26,7 +26,8 @@ version is released.
 Quick start:
 
 ```bash
-meteor add gadicohen:famous gadicohen:famous-views
+# you'll have to watch out for new versions by hand, unfortunately :(
+meteor add gadicohen:famous gadicohen:famous-views@1.0.0-pre.2
 ```
 
 [gadicohen:famous](https://atmospherejs.com/gadicohen/famous) is a temporary
