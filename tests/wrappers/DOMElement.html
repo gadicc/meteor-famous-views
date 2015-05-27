@@ -9,3 +9,30 @@
 </template>
 
 <template name="domEl1_inner">domEl1_inner</template>
+
+<template name="domEl_classes">
+  {{#Scene}}
+    {{#Node id="domEl_classes"}}
+      {{#DOMElement class=getClasses}}
+      {{/DOMElement}}
+    {{/Node}}
+  {{/Scene}}
+</template>
+
+<template name="domEl_style">
+  {{#Scene}}
+    {{#Node id="domEl_style"}}
+      {{#DOMElement style=reactiveStyle}}
+      {{/DOMElement}}
+    {{/Node}}
+  {{/Scene}}
+</template>
+
+<template name="domEl_attributes">
+  {{#Scene}}
+    {{#Node id="domEl_attributes"}}
+      {{#DOMElement dir=getDir lang=getLang}}
+      {{/DOMElement}}
+    {{/Node}}
+  {{/Scene}}
+</template>

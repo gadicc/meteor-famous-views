@@ -30,8 +30,13 @@ meteor add gadicohen:famous gadicohen:famous-views
 ```
 
 [gadicohen:famous](https://atmospherejs.com/gadicohen/famous) is a temporary
-package until our regular options are available again.  The new structure
-looks like this:
+package until our regular options are available again.  It exports everything
+to a global `famous` var, e.g. `famous.core.FamousEngine`, etc.  When we reach
+stable, we'll have a recommended pattern that works with all packages, which
+may involve wrapping famous-requiring-code with `FView.ready()` like last time,
+we'll see.  But for now just use the globals.
+
+The new markup structure looks like this:
 
 ```handlebars
 <body>
@@ -175,7 +180,19 @@ that node's `fview` with:
 * `fview.updateSize()` - forces an update for RENDER_SIZE'd nodes
 * `fview.updateSizeDeferred()` - as above, but deferred (useful for reactive helpers)
 
-e.g.
+Template attributes:
+
+* style="background: red; color: white" (reactive)
+* class="class1 class2 etc" (reactive)
+* dir="rtl" and any other attribute (reactive)
+* tagName like in famous -- NOT IMPLEMENTED YET (TODO)
+* watchSize like in v0 -- NOT IMPLEMENTED YET (TODO)
+
+The `{{>Surface template="x"}}` format is gone, just put `{{>x}}` inside.
+
+If using RENDER_SIZE, you have to let us know if you do anything that could
+change the size of the rendered content, using one of the Methods above.
+Here's an example for a reactive helper:
 
 ```js
 Template.body.helpers({
@@ -185,12 +202,6 @@ Template.body.helpers({
   }
 });
 ```
-
-Currently, no attributes are supported.  But in the future, you can pass a non-reactive
-`tagName` like with Famous.  The `{{>Surface template="x"}}` format is gone, just put
-a `{{>x}}` inside.
-
-XXX todo watchSzie
 
 ## FView (global)
 
