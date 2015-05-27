@@ -1,6 +1,6 @@
 Package.describe({
   name: 'gadicohen:famous-views',
-  version: '1.0.0-pre.2',
+  version: '1.0.0-pre.3',
   summary: 'Famous, the Meteor Way (with Reactive Blaze Templates/Views)',
   git: 'https://github.com/gadicc/meteor-famous-views.git'
 });
@@ -15,7 +15,10 @@ function common(api) {
   api.use(['underscore'], client);
 
   // Atmosphere
-  api.use(['jag:pince@0.0.6'], client)
+  api.use([
+    'jag:pince@0.0.6',
+    'pierreeric:cssc@1.0.4'
+  ], client)
 
   // Famous
   api.use('gadicohen:famous@0.5.0', client);
@@ -51,6 +54,8 @@ Package.onTest(function(api) {
     'tests/lib/prepare.js',
     'tests/utilities.js',
     'tests/meteorFamousView.js',
+    'tests/wrappers/Scene.html',
+    'tests/wrappers/Scene.js',
     'tests/wrappers/Node.html',
     'tests/wrappers/Node.js',
     'tests/wrappers/DOMElement.html',

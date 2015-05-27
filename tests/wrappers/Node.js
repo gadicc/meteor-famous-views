@@ -10,7 +10,7 @@ var Node = famous.core.Node;
 Tinytest.add('famous-views - Wrappers - Node - size component', function(test) {
   var fview = fviewWithNode('wrappers/node/sizeComponent');
 
-  fview._attrUpdate('size', "A:100,renderSize,R:2:10");
+  fview._attrUpdate('size', "A:100; renderSize; relative: 2,10");
   var result = fview.size.getValue();
   // ok i'm doing something wrong or this is a bug :)
   if (!result.sizeMode)
@@ -20,12 +20,23 @@ Tinytest.add('famous-views - Wrappers - Node - size component', function(test) {
   test.equal(result.proportional.z, 2, 'setProportional via R');
   test.equal(result.differential.z, 10, 'setDifferential via R');
 
-  fview._attrUpdate('size', "P:5,D:-10");
+  fview._attrUpdate('size', "P:5; D:-10");
   var result = fview.size.getValue();
   // ok i'm doing something wrong or this is a bug :)
   if (!result.sizeMode)
     result.sizeMode = fview.node.getSizeMode();
   test.equal(result.sizeMode, { 0:Node.RELATIVE_SIZE, 1:Node.RELATIVE_SIZE, 2:Node.DEFAULT_SIZE });
+  test.equal(result.proportional.x, 5);
+  test.equal(result.differential.x, 0);
+  test.equal(result.proportional.y, 1);
+  test.equal(result.differential.y, -10);
+
+  fview._attrUpdate('size', "Prop:5; Diff:-10; RenderSize");
+  var result = fview.size.getValue();
+  // ok i'm doing something wrong or this is a bug :)
+  if (!result.sizeMode)
+    result.sizeMode = fview.node.getSizeMode();
+  test.equal(result.sizeMode, { 0:Node.RELATIVE_SIZE, 1:Node.RELATIVE_SIZE, 2:Node.RENDER_SIZE });
   test.equal(result.proportional.x, 5);
   test.equal(result.differential.x, 0);
   test.equal(result.proportional.y, 1);

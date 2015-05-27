@@ -27,7 +27,8 @@ Quick start:
 
 ```bash
 # you'll have to watch out for new versions by hand, unfortunately :(
-meteor add gadicohen:famous gadicohen:famous-views@1.0.0-pre.2
+# but that's good, so you know to check History.md on every update!
+meteor add gadicohen:famous gadicohen:famous-views@1.0.0-pre.3
 ```
 
 [gadicohen:famous](https://atmospherejs.com/gadicohen/famous) is a temporary
@@ -67,8 +68,18 @@ body
 
 ### Scene
 
-* No attributes supported (yet).
-* It attaches to the containing DOM element (body in the above example).
+* The only attribute supported is `id`
+
+* The scene attaches itself to the containing DOM element ('body' in the above example).
+* This element is given a 'fview-scene' class (which has appropriate CSS rules),
+  and in the case of an element other than `body`, with no pre-existing `id` attribute,
+  is given the specified id (or `fview0`, etc, if no id was specified).
+* If attached to 'body', the relevant CSS is added for `html` and `body` to give you
+  full control over the browser window.  For *any other element*, you should set the
+  appropriate `width`, `height`, `margin` and `padding` as appropriate.
+
+  Otherwise, you should specify
+the appropriate CSS and sizing yourself.
 
 ## Node
 
@@ -84,11 +95,17 @@ Supported non-reactive attributes:
 **Sizing**
 
 See http://famous.org/learn/sizing.html for the sizing types.  We believe in minimal
-typing, so we have a proprietary string format that looks like this (spaces optional):
+typing, so we have a proprietary string format that looks as follows (spaces are
+optional, names may be shortened anjd case is insensitive, so the following two
+snippets are equivalent):
 
-    size="A:150, renderSize, R:0.5:-10, P:0.5, D:-10"
+    size="proportional: 0.5; differential: -10"
+    size="P:0.5; D:-10"
 
-This will do the following in famous:
+    size="absoluteSize: 150; renderSize; relative: 0.5,-10;"
+    size="A:150; RS; R:0.5,-10; P:0.5; D:-10"
+
+The second group would do the following in famous:
 
 ```js
 var size = fview.size = new Size(node);
@@ -97,9 +114,6 @@ size.setAbsolute(150);
 size.setProportional(undefined, undefined, 0.5);
 size.setDifferential(undefined, undefined, -10);
 ```
-
-Famous doesn't yet support the 4th and 5th dimensions, so the above is just to
-illustrate all the formats :)
 
 **Everything else**
 
