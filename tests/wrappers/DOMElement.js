@@ -1,14 +1,38 @@
 Tinytest.addAsync('famous-views - Wrappers - DOMElement - content', function(test, complete) {
   Template.domEl1_inner.rendered = function() {
     var fview = FView.current();
-    var domRenderer = fview._loadedDomRenderer();
-    var el = domRenderer._target.content;
-    test.ok(el.textContent.trim(), 'domEl1_inner');
-    _.defer(complete);
-  };
-
+    getElementFromDOMElement(fview.node, function(el) {
+      test.equal(el.textContent.trim(), 'domEl1_inner');
+      complete();
+    });
+  }
   Blaze.render(Template.domEl1, commonDiv);
 });
+
+Tinytest.addAsync('famous-views - Wrappers - DOMElement - content on repurposed el', function(test, complete) {
+  var x = new ReactiveVar(true);
+  Template.domEl1_inner.rendered = function() {
+    var fview = FView.byId('domEl1');
+    getElementFromDOMElement(fview.node, function(el) {
+      console.log(1, fview.id, fview.node.getLocation(), fview.node);
+      test.equal(el.textContent.trim(), 'domEl1_inner');
+      x.set(false);
+    });
+  };
+  Template.domEl2_inner.rendered = function() {
+    var fview = FView.byId('domEl2');
+    getElementFromDOMElement(fview.node, function(el) {
+      console.log(2, fview.id, fview.node.getLocation(), fview.node);
+      test.equal(el.textContent.trim(), 'domEl2_inner');
+      complete();
+    });
+  };
+  Template.domEl2.helpers({
+    x: function() { return x.get(); }
+  });
+  Blaze.render(Template.domEl2, commonDiv);
+});
+
 
 Tinytest.add('famous-views - Wrappers - DOMElement - attributes - classes', function(test) {
   var classes = new ReactiveVar("x y"); // classes as string

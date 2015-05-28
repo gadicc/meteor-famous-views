@@ -1,6 +1,6 @@
 <template name="domEl1">
   {{#Scene}}
-    {{#Node}}
+    {{#Node id="domEl1"}}
       {{#DOMElement}}
         {{> domEl1_inner}}
       {{/DOMElement}}
@@ -9,6 +9,22 @@
 </template>
 
 <template name="domEl1_inner">domEl1_inner</template>
+
+<template name="domEl2">
+  {{#if x}}
+    {{> domEl1}}
+  {{else}}
+    {{#Scene}}
+      {{#Node id="domEl2"}}
+        {{#DOMElement}}
+          {{> domEl2_inner}}
+        {{/DOMElement}}
+      {{/Node}}
+    {{/Scene}}
+  {{/if}}
+</template>
+
+<template name="domEl2_inner">domEl2_inner</template>
 
 <template name="domEl_classes">
   {{#Scene}}

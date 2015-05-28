@@ -1,3 +1,8 @@
+## v1.0.0-pre.4
+
+- Fix DOMElement not always rendering properly
+- Some early cleanup code, but no handling of children yet.
+
 ## v1.0.0-pre.3
 
 - Fix Scene attach behaviour, add appropriate CSS as relevant (see README)

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'gadicohen:famous-views',
-  version: '1.0.0-pre.3',
+  version: '1.0.0-pre.4',
   summary: 'Famous, the Meteor Way (with Reactive Blaze Templates/Views)',
   git: 'https://github.com/gadicc/meteor-famous-views.git'
 });
