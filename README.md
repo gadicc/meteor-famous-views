@@ -244,6 +244,30 @@ expect.  See the live demos for some examples.
 * `FView.current()` - great new shortcut for inside helpers, Meteor events,
   template/view autoruns and some callbacks.  Uses `Blaze.currentView` internally.
 
+## Wrap your Own
+
+Just as with v0, famous-views is primarily a low-level wrapper around Famous,
+to make it fit in naturally with Meteor.  We don't aim to provide a comprehensive
+library of community components, instead, we realy on other developers to
+provide fview-* plugin packages.  It's not so hard to do, and we'll have some
+example patterns for v1 available soon.
+
+But what about stuff you don't want to publish, or isn't already published?
+How can you wrap simple things?  Well, like this:
+
+```js
+FView.wrap('Node', famous.core.Node);  // silly example, already included
+FView.wrapComponent('Mesh', famous.webglRenderables.Mesh);
+```
+
+This will give you `{{#Node}}` and `{{#Mesh}}` helpers to use in your
+templates.  Adding children / attaching components all work as you'd expect.
+Admittedly it's not always this simple, but a 3rd parameter, `options` can
+provide a dictionary of overrides to adapt as necessary.  You may find some
+more useful examples here:
+
+https://github.com/gadicc/meteor-famous-views/tree/master/lib/wrappers
+
 ## Logging
 
 Package['jag:pince'].Logger.setLevel('famous-views', 'info');
