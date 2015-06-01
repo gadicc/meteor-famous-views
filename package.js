@@ -1,6 +1,6 @@
 Package.describe({
   name: 'gadicohen:famous-views',
-  version: '1.0.0-pre.4',
+  version: '1.0.0-pre.5',
   summary: 'Famous, the Meteor Way (with Reactive Blaze Templates/Views)',
   git: 'https://github.com/gadicc/meteor-famous-views.git'
 });
@@ -21,17 +21,20 @@ function common(api) {
   ], client)
 
   // Famous
-  api.use('gadicohen:famous@0.5.0', client);
-
+  api.use('gadicohen:famous@0.5.0_4', client);
 
   api.addFiles([
-    'lib/globals.js',
+    'lib/famous-views.js',
     'lib/utilities.js',
     'lib/meteorFamousView.js',
-    'lib/wrappers/_common.js',
+    'lib/wrap.js',
     'lib/wrappers/Scene.js',
     'lib/wrappers/Node.js',
-    'lib/wrappers/DOMElement.js'
+    'lib/wrappers/DOMElement.js',
+    'lib/wrappers/Camera.js',
+    'lib/wrappers/Mesh.js',
+    'lib/wrappers/PointLight.js',
+    'lib/init.js'
   ], client);
 };
 

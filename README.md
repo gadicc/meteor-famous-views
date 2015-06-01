@@ -11,6 +11,9 @@ please see the [v0](https://github.com/gadicc/meteor-famous-views/tree/v0) branc
 [Forums.Famous-Views.Org](http://forums.famous-views.org/) and 
 [![Join the chat at https://gitter.im/gadicc/meteor-famous-views](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gadicc/meteor-famous-views?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+To learn the basics through an interactive tutorial with live, editable code,
+check out https://fview-lab2.meteor.com/gadicc.
+
 ## API
 
 The v1 series is a rewrite.  A good opportunity for code househeeping.  Code
@@ -23,8 +26,8 @@ change.  Please don't draw any conclusions about being "production ready".  We'l
 also have `v1.0.0-pre.1`, `-pre.2` up to some very big number before a "stable"
 version is released.
 
-To learn the basics through an interactive tutorial with editable code, check out
-https://fview-lab2.meteor.com/gadicc.
+To learn the basics through an interactive tutorial with live editable code,
+check out https://fview-lab2.meteor.com/gadicc.
 
 Quick start:
 
@@ -225,6 +228,11 @@ Template.body.helpers({
   }
 });
 ```
+
+### Others
+
+`Mesh`, `Camera``, `PointLight` are all very simple wrappers and work how you'd
+expect.  See the live demos for some examples.
 
 ## FView (global)
 

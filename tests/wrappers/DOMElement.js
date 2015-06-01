@@ -22,7 +22,7 @@ Tinytest.addAsync('famous-views - Wrappers - DOMElement - content on repurposed 
   Template.domEl2_inner.rendered = function() {
     var fview = FView.byId('domEl2');
     getElementFromDOMElement(fview.node, function(el) {
-      console.log(2, fview.id, fview.node.getLocation(), fview.node);
+      // console.log(2, fview.id, fview.node.getLocation(), fview.node);
       test.equal(el.textContent.trim(), 'domEl2_inner');
       complete();
     });

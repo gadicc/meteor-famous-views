@@ -1,3 +1,11 @@
+## v1.0.0-pre.5
+
+* `FView.wrap()`, `FView.wrapComponent()`, existing wrappers modularized
+* Scene now handles data context correctly and has _onRender
+* Added delayed init with FView.ready(), detect famous global
+* Added basic wrappers for Camera, PointLight, Mesh
+* Fixed argument mutation in Node attrUpdate / argsFromVecTransitionCB
+
 ## v1.0.0-pre.4
 
 - Fix DOMElement not always rendering properly
