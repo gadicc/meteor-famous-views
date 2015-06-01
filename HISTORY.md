@@ -1,3 +1,7 @@
+## v1.0.0-pre.6
+
+* Data context fix inside of DOMElement
+
 ## v1.0.0-pre.5
 
 * `FView.wrap()`, `FView.wrapComponent()`, existing wrappers modularized
