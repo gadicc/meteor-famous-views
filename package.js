@@ -27,13 +27,15 @@ function common(api) {
     'lib/famous-views.js',
     'lib/utilities.js',
     'lib/meteorFamousView.js',
-    'lib/wrap.js',
-    'lib/wrappers/Scene.js',
-    'lib/wrappers/Node.js',
-    'lib/wrappers/DOMElement.js',
-    'lib/wrappers/Camera.js',
-    'lib/wrappers/Mesh.js',
-    'lib/wrappers/PointLight.js',
+    'lib/wrappers/wrap.js',
+    'lib/wrappers/Nodes.js',
+    'lib/wrappers/Components.js',
+    'lib/wrappers/Nodes/Scene.js',
+    'lib/wrappers/Nodes/Node.js',
+    'lib/wrappers/Components/DOMElement.js',
+    'lib/wrappers/Components/Camera.js',
+    'lib/wrappers/Components/Mesh.js',
+    'lib/wrappers/Components/PointLight.js',
     'lib/init.js'
   ], client);
 };
