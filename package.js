@@ -65,6 +65,8 @@ Package.onTest(function(api) {
     'tests/lib/prepare.js',
     'tests/utilities.js',
     'tests/meteorFamousView.js',
+    'tests/wrappers/wrap.html',
+    'tests/wrappers/wrap.js',
     'tests/wrappers/Scene.html',
     'tests/wrappers/Scene.js',
     'tests/wrappers/Node.html',
