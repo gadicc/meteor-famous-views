@@ -9,7 +9,7 @@ var client = 'client';
 
 function common(api) {
   // Meteor core packages
-  api.use(['blaze', 'htmljs', 'ejson'], client);
+  api.use(['blaze', 'htmljs', 'ejson', 'tracker'], client);
 
   // 3rd-party included in core
   api.use(['underscore'], client);
@@ -27,6 +27,7 @@ function common(api) {
     'lib/famous-views.js',
     'lib/utilities.js',
     'lib/meteorFamousView.js',
+
     'lib/wrappers/wrap.js',
     'lib/wrappers/Nodes.js',
     'lib/wrappers/Components.js',
@@ -36,6 +37,11 @@ function common(api) {
     'lib/wrappers/Components/Camera.js',
     'lib/wrappers/Components/Mesh.js',
     'lib/wrappers/Components/PointLight.js',
+
+    'lib/meteor/setimmediate.js',
+    'lib/meteor/timers.js',
+    'lib/meteor/tracker.js',
+
     'lib/init.js'
   ], client);
 };

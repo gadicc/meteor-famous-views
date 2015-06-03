@@ -1,3 +1,7 @@
+## vNEXT
+
+* Override Meteor timers/setimmediate/tracker to work with Famous event loop
+
 ## v1.0.0-pre.6
 
 * Data context fix inside of DOMElement
