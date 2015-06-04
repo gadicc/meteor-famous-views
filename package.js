@@ -27,6 +27,7 @@ function common(api) {
     'lib/famous-views.js',
     'lib/utilities.js',
     'lib/meteorFamousView.js',
+    'lib/defer.js',
 
     'lib/wrappers/wrap.js',
     'lib/wrappers/Nodes.js',
