@@ -1,5 +1,15 @@
 ## vNEXT
 
+## v1.0.0
+
+PLEASE NOTE, this is not a "1.0.0 production quality release".  Meteor packages
+use SEMANTIC VERSIONING (see http://semver.org/).  The new major version (v1)
+indicates a breaking change in API from the previous version, and does not
+imply anything about build quality.  This is still an early release (but still
+quite useable and fun to play with).
+
+See http://forums.famous-views.org/t/update-on-mixed-mode-famous-v0-5/28/13.
+
 * Override Meteor timers/setimmediate/tracker to work with Famous event loop
 
 ## v1.0.0-pre.6
