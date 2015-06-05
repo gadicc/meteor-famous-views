@@ -9,7 +9,7 @@ var client = 'client';
 
 function common(api) {
   // Meteor core packages
-  api.use(['blaze', 'htmljs', 'ejson', 'tracker'], client);
+  api.use(['blaze', 'htmljs', 'ejson', 'tracker', 'observe-sequence'], client);
 
   // 3rd-party included in core
   api.use(['underscore'], client);
@@ -28,6 +28,7 @@ function common(api) {
     'lib/utilities.js',
     'lib/meteorFamousView.js',
     'lib/defer.js',
+    'lib/famousEach.js',
 
     'lib/wrappers/wrap.js',
     'lib/wrappers/Nodes.js',
@@ -57,7 +58,7 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use(['templating', 'random', 'reactive-var'], client);
+  api.use(['templating', 'random', 'reactive-var', 'mongo'], client);
   //api.use('gadicohen:famous-views');
   
   common(api);
@@ -73,6 +74,8 @@ Package.onTest(function(api) {
     'tests/wrappers/Node.html',
     'tests/wrappers/Node.js',
     'tests/wrappers/DOMElement.html',
-    'tests/wrappers/DOMElement.js'
+    'tests/wrappers/DOMElement.js',
+    'tests/famousEach.html',
+    'tests/famousEach.js',
   ], 'client');
 });

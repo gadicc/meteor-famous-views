@@ -4,3 +4,5 @@ Meteor.startup(function() {
   commonDiv.style.display = 'none';
   document.body.appendChild(commonDiv);
 });
+
+noop = function() {};

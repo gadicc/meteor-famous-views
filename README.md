@@ -325,3 +325,7 @@ Besides the underlying Famous API and how we deal with it:
   subtemplating.  In the new version we just use `_onRender` and `_eventMap`
   attributes, provided from the enclosing Templates single helper.  Feedback
   welcome.  You can still use regular inclusion `{{>template}}` like usual.
+
+* In v0 a MeteorFamousView was (usually) a kind of renderNode too.  In v1
+  we maintain a separatation, we maintain our own tree (like we had to
+  in v0 too) but add famous nodes directly to the scene graph.

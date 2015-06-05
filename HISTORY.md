@@ -1,5 +1,9 @@
 ## vNEXT
 
+* Fix wrapper with no args' renderFunc using `with` data as args
+* famousEach, in a totally new and extensible way
+* Some internal changes in how nodes are dismounted
+
 ## v1.0.0
 
 PLEASE NOTE, this is not a "1.0.0 production quality release".  Meteor packages

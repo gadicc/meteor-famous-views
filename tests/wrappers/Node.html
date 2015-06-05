@@ -11,3 +11,19 @@
     {{/Node}}
   {{/Scene}}
 </template>
+
+<template name="node3">
+  {{#Scene id="node3_scene"}}
+    {{#Node id="node3_node"}}
+    {{/Node}}
+  {{/Scene}}
+</template>
+
+<template name="node4">
+  {{#Scene id="node4_scene"}}
+    {{#if x}}
+      {{#Node id="node4_node"}}
+      {{/Node}}
+    {{/if}}
+  {{/Scene}}
+</template>

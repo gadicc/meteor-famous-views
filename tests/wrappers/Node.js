@@ -68,3 +68,37 @@ Tinytest.addAsync('famous-views - Wrappers - Node - _onRender', function(test, c
 
   Blaze.render(Template.node2, commonDiv);
 });
+
+// also tests: addToParent, addChild
+Tinytest.addAsync('famous-views - Wrappers - Node - template create', function(test, complete) {
+  Template.node3.rendered = function() {
+    var scene = FView.byId('node3_scene');
+    var node = FView.byId('node3_node');
+
+    test.equal(scene.children.indexOf(node), 0);
+    test.equal(scene.node._children.indexOf(node.node), 0);
+    complete();
+  };
+  Blaze.render(Template.node3, commonDiv);
+});
+
+// also tests: dismount
+Tinytest.addAsync('famous-views - Wrappers - Node - template destroy', function(test, complete) {
+  var x = new ReactiveVar(true);
+  Template.node4.helpers({
+    x: function() { return x.get(); }
+  });
+
+  Template.node4.rendered = function() {
+    var scene = FView.byId('node4_scene');
+    var node = FView.byId('node4_node');
+
+    Tracker.afterFlush(function() {
+      test.equal(scene.children.indexOf(node), -1);
+      test.equal(scene.node._children.indexOf(node.node), -1);
+      complete();
+    });
+    x.set(false);
+  };
+  Blaze.render(Template.node4, commonDiv);
+});
