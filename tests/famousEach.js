@@ -20,7 +20,7 @@ Template.famousEachTest.helpers({
 
 Tinytest.add('famous-views - famousEach - setup', function(test) {
   // maintain order
-  Blaze.render(Template.famousEachTest, commonDiv);
+  Blaze.render(Template.famousEachTest, testDiv());
 });
 
 Tinytest.addAsync('famous-views - famousEach - addedAt append', function(test, complete) {

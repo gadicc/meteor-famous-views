@@ -66,7 +66,7 @@ Tinytest.addAsync('famous-views - Wrappers - Node - _onRender', function(test, c
     }
   });
 
-  Blaze.render(Template.node2, commonDiv);
+  Blaze.render(Template.node2, testDiv());
 });
 
 // also tests: addToParent, addChild
@@ -79,7 +79,7 @@ Tinytest.addAsync('famous-views - Wrappers - Node - template create', function(t
     test.equal(scene.node._children.indexOf(node.node), 0);
     complete();
   };
-  Blaze.render(Template.node3, commonDiv);
+  Blaze.render(Template.node3, testDiv());
 });
 
 // also tests: dismount
@@ -100,5 +100,5 @@ Tinytest.addAsync('famous-views - Wrappers - Node - template destroy', function(
     });
     x.set(false);
   };
-  Blaze.render(Template.node4, commonDiv);
+  Blaze.render(Template.node4, testDiv());
 });

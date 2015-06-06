@@ -1,5 +1,9 @@
 ## vNEXT
 
+* Fix for Famous 0.5.2 (and further work on DOMElement handling)
+* Initial child cleanup handling
+* Support components that don't add themselves to the node + set `_id`
+
 * Fix wrapper with no args' renderFunc using `with` data as args
 * famousEach, in a totally new and extensible way
 * Some internal changes in how nodes are dismounted

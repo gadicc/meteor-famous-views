@@ -21,7 +21,7 @@ function common(api) {
   ], client)
 
   // Famous
-  api.use('gadicohen:famous@0.5.0_4', client);
+  api.use('gadicohen:famous@0.5.2', client);
 
   api.addFiles([
     'lib/famous-views.js',

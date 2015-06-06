@@ -6,7 +6,7 @@ Tinytest.addAsync('famous-views - Wrappers - DOMElement - content', function(tes
       complete();
     });
   }
-  Blaze.render(Template.domEl1, commonDiv);
+  Blaze.render(Template.domEl1, testDiv());
 });
 
 Tinytest.addAsync('famous-views - Wrappers - DOMElement - content on repurposed el', function(test, complete) {
@@ -30,7 +30,7 @@ Tinytest.addAsync('famous-views - Wrappers - DOMElement - content on repurposed 
   Template.domEl2.helpers({
     x: function() { return x.get(); }
   });
-  Blaze.render(Template.domEl2, commonDiv);
+  Blaze.render(Template.domEl2, testDiv());
 });
 
 
@@ -41,7 +41,7 @@ Tinytest.add('famous-views - Wrappers - DOMElement - attributes - classes', func
     getClasses: function() { return classes.get(); }
   });
 
-  Blaze.render(Template.domEl_classes, commonDiv);
+  Blaze.render(Template.domEl_classes, testDiv());
   Tracker.flush();
 
   var fview = FView.byId("domEl_classes");
@@ -64,7 +64,7 @@ Tinytest.add('famous-views - Wrappers - DOMElement - attributes - style', functi
     reactiveStyle: function() { return style.get(); }
   });
 
-  Blaze.render(Template.domEl_style, commonDiv);
+  Blaze.render(Template.domEl_style, testDiv());
   Tracker.flush();
 
   var DE = FView.byId("domEl_style").domElement;
@@ -88,7 +88,7 @@ Tinytest.add('famous-views - Wrappers - DOMElement - attributes - other', functi
     getLang: function() { return lang.get(); }
   });
 
-  Blaze.render(Template.domEl_attributes, commonDiv);
+  Blaze.render(Template.domEl_attributes, testDiv());
   Tracker.flush();
 
   var DE = FView.byId("domEl_attributes").domElement;
