@@ -244,6 +244,22 @@ expect.  See the live demos for some examples.
 * `FView.current()` - great new shortcut for inside helpers, Meteor events,
   template/view autoruns and some callbacks.  Uses `Blaze.currentView` internally.
 
+## fview (node/etc instance)
+
+**Properties**
+
+* `fview.id`
+* `fview.node` - the node instance
+* `fview.components` - dictionary of data for added components
+* `fview.fvClass` - class data
+* `fview.*` - misc other stuff depending on the node type/class
+
+**Methods**
+
+* `fview.autorun(func)` -- just like `tplOrView.autorun` in Meteor/Blaze except
+`this` in the callback will be the `fview`; automatically removed when node
+is destroyed.
+
 ## Wrap your Own
 
 Just as with v0, famous-views is primarily a low-level wrapper around Famous,

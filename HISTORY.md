@@ -3,6 +3,7 @@
 * Fix for Famous 0.5.2 (and further work on DOMElement handling)
 * Initial child cleanup handling
 * Support components that don't add themselves to the node + set `_id`
+* `fview.autorun()` like tplOrView.autorun() in Meteor/Blaze; this = fview
 
 * Fix wrapper with no args' renderFunc using `with` data as args
 * famousEach, in a totally new and extensible way
