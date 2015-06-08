@@ -84,3 +84,16 @@ Tinytest.addAsync('famous-views - famousEach - removedAt', function(test, comple
     complete();
   };
 });
+
+/*
+
+this "works" but no good way to test for exceptions in descendent callbacks
+
+Tinytest.addAsync('famous-views - famousEach - multiple nodes', function(test, complete) {
+  Template.famousEachTest2.helpers({
+    items: [ { _id: 'X' } ]
+  });
+  Blaze.render(Template.famousEachTest2, testDiv());
+});
+
+*/
