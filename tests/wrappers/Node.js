@@ -1,7 +1,7 @@
 function fviewWithNode(source) {
   var fview = new MeteorFamousView(null, null, 'testNode', source);
   fview.node = new famous.core.Node();
-  fview._attrUpdate = FView._NodeClass.attrUpdate;
+  fview._attrUpdate = FView._classes._Node.attrUpdate;
   return fview;
 }
 

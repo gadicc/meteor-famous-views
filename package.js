@@ -73,6 +73,7 @@ Package.onTest(function(api) {
     'tests/wrappers/Scene.js',
     'tests/wrappers/Node.html',
     'tests/wrappers/Node.js',
+    'tests/wrappers/Components.js',
     'tests/wrappers/DOMElement.html',
     'tests/wrappers/DOMElement.js',
     'tests/famousEach.html',
