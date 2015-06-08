@@ -25,6 +25,7 @@ function common(api) {
 
   api.addFiles([
     'lib/famous-views.js',
+    'lib/famous-globals.js',
     'lib/utilities.js',
     'lib/meteorFamousView.js',
     'lib/defer.js',
@@ -69,13 +70,14 @@ Package.onTest(function(api) {
     'tests/meteorFamousView.js',
     'tests/wrappers/wrap.html',
     'tests/wrappers/wrap.js',
-    'tests/wrappers/Scene.html',
-    'tests/wrappers/Scene.js',
-    'tests/wrappers/Node.html',
-    'tests/wrappers/Node.js',
+    'tests/wrappers/Nodes/Node.html',
+    'tests/wrappers/Nodes/Node.js',
+    'tests/wrappers/Nodes/Scene.html',
+    'tests/wrappers/Nodes/Scene.js',
     'tests/wrappers/Components.js',
-    'tests/wrappers/DOMElement.html',
-    'tests/wrappers/DOMElement.js',
+    'tests/wrappers/Components/Mesh.js',
+    'tests/wrappers/Components/DOMElement.html',
+    'tests/wrappers/Components/DOMElement.js',
     'tests/famousEach.html',
     'tests/famousEach.js',
   ], 'client');

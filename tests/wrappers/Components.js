@@ -3,7 +3,7 @@ Tinytest.add('famous-views - Wrappers - Components - [Cc]olor', function(test) {
 
   var cdata = {
     instance: {
-      setBaseColor: function(c) {
+      setBaseColor: function(c, strength) {
         test.instanceOf(c, famous.utilities.Color);
         test.equal(c.getColor(), expectedColor);
         test.equal(c.getOpacity(), expectedOpacity);

@@ -231,8 +231,14 @@ Template.body.helpers({
 
 ### Others
 
-`Mesh`, `Camera``, `PointLight` are all very simple wrappers and work how you'd
+`Mesh`, `Camera`, `PointLight` are all very simple wrappers and work how you'd
 expect.  See the live demos for some examples.
+
+* Mesh geometry='Torus' baseColor='white, 0.5' glossiness='white; 500'
+
+Components in general with attributes ending with **[cC]olor**, i.e.
+`color`, `baseColor`, can parse values like `"white"`, `"white, 0.2"` (for
+**opacity** 0.2), "#ffffff".
 
 ## FView (global)
 
