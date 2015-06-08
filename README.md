@@ -251,7 +251,7 @@ expect.  See the live demos for some examples.
 * `fview.id`
 * `fview.node` - the node instance
 * `fview.components` - dictionary of data for added components
-* `fview.fvClass` - class data
+* `fview._class` - class data
 * `fview.*` - misc other stuff depending on the node type/class
 
 **Methods**
