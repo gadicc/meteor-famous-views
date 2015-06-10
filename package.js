@@ -75,6 +75,7 @@ Package.onTest(function(api) {
     'tests/wrappers/Nodes/Scene.html',
     'tests/wrappers/Nodes/Scene.js',
     'tests/wrappers/Components.js',
+    'tests/wrappers/Components/Camera.js',
     'tests/wrappers/Components/Mesh.js',
     'tests/wrappers/Components/DOMElement.html',
     'tests/wrappers/Components/DOMElement.js',

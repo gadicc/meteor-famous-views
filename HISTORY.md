@@ -1,5 +1,12 @@
 ## vNEXT
 
+## v1.2.0
+
+* Components [Cc]olor attributes
+* Mesh glossiness attribute
+* Internal "fvClass" -> "_class"; store classes in FView._classes
+* Warn if dev puts more than 1 node inside of famousEach
+
 ## v1.1.0
 
 * Fix for Famous 0.5.2 (and further work on DOMElement handling)
