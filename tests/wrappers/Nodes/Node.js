@@ -1,7 +1,6 @@
 function fviewWithNode(source) {
-  var fview = new MeteorFamousView(null, null, 'testNode', source);
+  var fview = new FView._classes._Node(null, null, source);
   fview.node = new famous.core.Node();
-  fview._attrUpdate = FView._classes._Node.attrUpdate;
   return fview;
 }
 
@@ -10,7 +9,7 @@ var Node = famous.core.Node;
 Tinytest.add('famous-views - Wrappers - Node - size component', function(test) {
   var fview = fviewWithNode('wrappers/node/sizeComponent');
 
-  fview._attrUpdate('size', "A:100; renderSize; relative: 2,10");
+  fview.attrUpdate('size', "A:100; renderSize; relative: 2,10");
   var result = fview.size.getValue();
   // ok i'm doing something wrong or this is a bug :)
   if (!result.sizeMode)
@@ -20,7 +19,7 @@ Tinytest.add('famous-views - Wrappers - Node - size component', function(test) {
   test.equal(result.proportional.z, 2, 'setProportional via R');
   test.equal(result.differential.z, 10, 'setDifferential via R');
 
-  fview._attrUpdate('size', "P:5; D:-10");
+  fview.attrUpdate('size', "P:5; D:-10");
   var result = fview.size.getValue();
   // ok i'm doing something wrong or this is a bug :)
   if (!result.sizeMode)
@@ -31,7 +30,7 @@ Tinytest.add('famous-views - Wrappers - Node - size component', function(test) {
   test.equal(result.proportional.y, 1);
   test.equal(result.differential.y, -10);
 
-  fview._attrUpdate('size', "Prop:5; Diff:-10; RenderSize");
+  fview.attrUpdate('size', "Prop:5; Diff:-10; RenderSize");
   var result = fview.size.getValue();
   // ok i'm doing something wrong or this is a bug :)
   if (!result.sizeMode)
@@ -45,7 +44,7 @@ Tinytest.add('famous-views - Wrappers - Node - size component', function(test) {
 
 Tinytest.add('famous-views - Wrappers - Node - non-size builtins', function(test) {
   var fview = fviewWithNode('wrappers/node/nonSizeBuiltins');
-  fview._attrUpdate('position', "[1,2,3]");
+  fview.attrUpdate('position', "[1,2,3]");
   test.equal(fview.node.getPosition(), {0:1, 1:2, 2:3});
 });
 
@@ -53,7 +52,7 @@ Tinytest.add('famous-views - Wrappers - Node - non-size components', function(te
   var fview = fviewWithNode('wrappers/node/nonSizeComponents');
   fview.position = new famous.components.Position(fview.node);
 
-  fview._attrUpdate('position', { value: [1,2,3] });
+  fview.attrUpdate('position', { value: [1,2,3] });
   test.equal(fview.position.getValue(),
     { component: "Position", x: 1, y: 2, z: 3 });
 });

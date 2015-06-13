@@ -1,5 +1,17 @@
 ## vNEXT
 
+BREAKING.  Mostly stuff that I doubt anyone else is using yet, so not bumping
+major version... it's too early in dev there might be a few of these, apologies
+if it affects you.
+
+* `_class`
+  * `addChild(famousChild)` -> `addChild(fviewChild)`
+  * `newInstance()` -> `newFamousInstance()`
+  * `addToParent()` -> `addNodeToParent()`
+
+Major refactor of how wrapper classes work, using proper inheritance now, much
+cleaner.
+
 ## v1.2.0
 
 * Components [Cc]olor attributes

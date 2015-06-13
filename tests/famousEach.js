@@ -4,14 +4,16 @@ var runCallback = function() {
   callback.apply(this, arguments);
 }
 
-var overrides = { newInstance: noop, addToParent: noop };
+var overrides = { newFamousInstance: noop, addNodeToParent: noop };
 _.each(['addedAt', 'removedAt', 'changedAt', 'movedTo'], function(what) {
   overrides[what] = function() {
     this.lastCmd = what;
     callback.apply(this, arguments);
   }
 });
-FView.wrap('famousEachContainer', null, overrides);
+FView.ready(function() {
+  FView.wrap('famousEachContainer', null, overrides);
+});
 
 var Items = new Mongo.Collection(null);
 Template.famousEachTest.helpers({

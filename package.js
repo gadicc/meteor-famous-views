@@ -17,7 +17,8 @@ function common(api) {
   // Atmosphere
   api.use([
     'jag:pince@0.0.6',
-    'pierreeric:cssc@1.0.4'
+    'pierreeric:cssc@1.0.4',
+    'raix:eventemitter@0.1.2'
   ], client)
 
   // Famous
@@ -29,17 +30,18 @@ function common(api) {
     'lib/utilities.js',
     'lib/meteorFamousView.js',
     'lib/defer.js',
-    'lib/famousEach.js',
 
     'lib/wrappers/wrap.js',
     'lib/wrappers/Nodes.js',
     'lib/wrappers/Components.js',
     'lib/wrappers/Nodes/Scene.js',
     'lib/wrappers/Nodes/Node.js',
+    'lib/wrappers/Nodes/RenderController.js',
     'lib/wrappers/Components/DOMElement.js',
     'lib/wrappers/Components/Camera.js',
     'lib/wrappers/Components/Mesh.js',
     'lib/wrappers/Components/PointLight.js',
+    'lib/famousEach.js',
 
     'lib/meteor/setimmediate.js',
     'lib/meteor/timers.js',
