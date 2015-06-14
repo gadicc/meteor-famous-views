@@ -30,8 +30,7 @@ check out https://fview-lab2.meteor.com/gadicc.
 Quick start:
 
 ```bash
-# you'll have to watch out for new versions by hand, unfortunately :(
-# but that's good, so you know to check History.md on every update!
+# Please check History.md on updates
 meteor add gadicohen:famous gadicohen:famous-views
 ```
 
