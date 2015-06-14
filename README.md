@@ -22,9 +22,7 @@ and ideally tests.
 
 Please read this README in it's entirety to understand what's going on :)  Also,
 the `v1.0.0` -- it's semver, we're bumping the major version to indicate an API
-change.  Please don't draw any conclusions about being "production ready".  We'll
-also have `v1.0.0-pre.1`, `-pre.2` up to some very big number before a "stable"
-version is released.
+change.  Please don't draw any conclusions about being "production ready".
 
 To learn the basics through an interactive tutorial with live editable code,
 check out https://fview-lab2.meteor.com/gadicc.
@@ -34,7 +32,7 @@ Quick start:
 ```bash
 # you'll have to watch out for new versions by hand, unfortunately :(
 # but that's good, so you know to check History.md on every update!
-meteor add gadicohen:famous gadicohen:famous-views@1.0.0-pre.3
+meteor add gadicohen:famous gadicohen:famous-views
 ```
 
 [gadicohen:famous](https://atmospherejs.com/gadicohen/famous) is a temporary
