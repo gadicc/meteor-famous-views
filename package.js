@@ -1,6 +1,6 @@
 Package.describe({
   name: 'gadicohen:famous-views',
-  version: '1.2.1',
+  version: '1.2.2',
   summary: 'Famous, the Meteor Way (with Reactive Blaze Templates/Views)',
   git: 'https://github.com/gadicc/meteor-famous-views.git'
 });
@@ -22,7 +22,7 @@ function common(api) {
   ], client)
 
   // Famous
-  api.use('gadicohen:famous@=0.5.2', client);
+  api.use('gadicohen:famous@0.5.2', client);
 
   api.addFiles([
     'lib/famous-views.js',
