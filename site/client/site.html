@@ -1,0 +1,83 @@
+<head>
+  <!-- <script src="http://code.famo.us/famous/0.5/famous.min.js"></script> -->
+</head>
+
+<body>
+  {{#if x}}
+    {{#Scene}}
+      {{#Node size="A:150; A:150"}}
+        {{#DOMElement class="x y z" style="background: red; color: white"}}
+          {{>tplX}}
+        {{/DOMElement}}
+      {{/Node}}
+    {{/Scene}}
+  {{else}}
+    {{#Scene}}
+      {{#Node size="A:150; A:150"}}
+        {{#DOMElement class="x y z" style="background: red; color: white"}}
+          Hello my friend
+        {{/DOMElement}}
+      {{/Node}}
+    {{/Scene}}
+  {{/if}}
+</body>
+
+
+<!--
+
+  {{#Scene id="X"}}
+    {{#RenderController}}
+      {{#if x}}
+        {{#Node size="A:150; A:150"}}
+          {{#DOMElement class="x y" style="background: red; color: white"}}
+            {{>tplX}}
+          {{/DOMElement}}
+        {{/Node}}
+      {{else}}
+        {{#Node size="A:150; A:150"}}
+          {{#DOMElement class="y z" style="background: red; color: white"}}
+            Hello my friend
+          {{/DOMElement}}
+        {{/Node}}
+      {{/if}}
+    {{/RenderController}}
+  {{/Scene}}
+
+  {{#Scene}}
+    {{#famousEach items}}
+      {{#Node size="A:150; A:150"}}
+        {{#DOMElement class="x y z" style="background: red; color: white"}}
+          -{{name}}-
+        {{/DOMElement}}
+      {{/Node}}
+    {{/famousEach}}
+    {{#if x}}
+      {{#Node size="A:100; A:100"}}
+        {{#DOMElement style="background: blue; color: white"}}
+          -X-
+        {{/DOMElement}}        
+      {{/Node}}
+    {{/if}}
+  {{/Scene}}
+
+  {{#Scene}}
+
+    {{>Camera depth=1000}}
+
+    {{#Node align="[.5,.5,.5]" align="[.5,.5,.5]" position="[0,0,250]"}}
+      {{>PointLight color='white'}}
+    {{/Node}}
+
+    {{#Node _onRender="onRender" size="A:200; A:200; A:200" origin="[.5,.5,.5]" align="[.5,.5,.5]" mountPoint="[.5,.5,.5]"}}
+      {{>Mesh geometry="Torus"}}
+      {{#DOMElement class="x y z" style="background: red; color: white"}}
+        {{>tplX}}
+      {{/DOMElement}}
+    {{/Node}}
+  {{/Scene}}
+
+-->
+
+<template name="tplX">
+  <div>Once upon a time {{yo}}</div>
+</template>
