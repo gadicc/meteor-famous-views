@@ -2,6 +2,14 @@
 
 ## v1.3.0
 
+* More natural sizing: "x, y, z" where these can be (spaces optional):
+
+  * `renderSize or rs` (case insensitive) --> RENDER_SIZE
+  * `100` (a number) --> ABSOLUTE_SIZE
+  * `50%` (a number + percent sign) --> proportional (via RENDER_SIZE)
+  * `+10` (+/- a number) --> differtial (via RENDER_SIZE)
+  * `20% - 10` --> RENDER_SIZE
+
 * Values like { value1: .., value2: ..., transition: ... } can now have a
   property, `_loopFromBeginning` (better names welcome), which, when true,
   will reset the loop to value1 on each cycle, for a continuous animation
