@@ -140,7 +140,7 @@ Template.body.helpers({
     return {
       value: [0, 1],
       transition: { duration: 1000, curve: 'inBounce' }
-      halt: true,                   // optional
+      halt: true,                   // optional (TODO)
       callback: function() { ... }  // optional
     };
   }
@@ -152,6 +152,9 @@ To keep switching between two values, we provide a shortcut to infinity:
 ```jade
 +Node rotation='{ "value1": [0,-3.14], "value2": [0,3.14], "transition": { "duration": 1000 } }'
 ```
+
+To reset the loop on each iteration (for a continuous animation "in the
+same direction", given appropriate values) add: `_loopFromBeginning: true`.
 
 You can also simply manipulate the `fview` directly and
 `return '__FVIEW_SKIP__'`, e.g.:
@@ -236,6 +239,12 @@ expect.  See the live demos for some examples.
 Components in general with attributes ending with **[cC]olor**, i.e.
 `color`, `baseColor`, can parse values like `"white"`, `"white, 0.2"` (for
 **opacity** 0.2), "#ffffff".
+
+## famousEach
+
+Use this instead of Meteor's built-in `#each` inside the Scene graph.  This
+is required to maintain ordering and allows wrapped code to capitalize on
+ordered insertions/removals/reorders.
 
 ## FView (global)
 
@@ -327,9 +336,9 @@ Template.inner.events({
 
 ## What's missing / TODO / Roadmap
 
-* [ ] Defer/tracker override
-* [ ] Ability to remove/destroy templates :)
-* [ ] famousEach, famousIf, etc
+* [X] ~~Defer/tracker override~~
+* [X] ~~Ability to remove/destroy templates :)~~
+* [ ] ~~famousEach~~, famousIf, etc
 * [ ] Events in a Meteor way again?
 * [ ] Loads of other stuff from v0... request them and I'll prioritize
 
