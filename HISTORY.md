@@ -1,5 +1,7 @@
 ## vNEXT
 
+## v1.3.0
+
 * Nodes now support a class="class1 class2" type tag.
 
 * New FV(), like jQuery's $()
@@ -9,6 +11,10 @@
     siblings(), eq(), each()
   * Chainable (but not so many methods yet), jQuery like (so use FV(something)[0]
     to get the real fview and not an FV-wrapped array), etc
+
+## v1.2.1 / v1.2.1
+
+* Warn about using with famous > 0.5.2
 
 BREAKING.  Mostly stuff that I doubt anyone else is using yet, so not bumping
 major version... it's too early in dev there might be a few of these, apologies
