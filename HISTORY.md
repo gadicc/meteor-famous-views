@@ -2,6 +2,12 @@
 
 ## v1.3.0
 
+* Values like { value1: .., value2: ..., transition: ... } can now have a
+  property, `_loopFromBeginning` (better names welcome), which, when true,
+  will reset the loop to value1 on each cycle, for a continuous animation
+  in the same direction (when given appropriate values), vs default behaviour
+  to cycle back and forth between two values.
+
 * Nodes now support a class="class1 class2" type tag.
 
 * New FV(), like jQuery's $()
