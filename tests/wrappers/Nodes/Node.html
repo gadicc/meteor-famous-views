@@ -27,3 +27,17 @@
     {{/if}}
   {{/Scene}}
 </template>
+
+<template name="node5_static">
+  {{#Scene}}
+    {{#Node id="node5_static" class="class1 class2"}}
+    {{/Node}}
+  {{/Scene}}
+</template>
+
+<template name="node5_reactive">
+  {{#Scene}}
+    {{#Node id="node5_reactive" class=getClasses}}
+    {{/Node}}
+  {{/Scene}}
+</template>

@@ -101,3 +101,22 @@ Tinytest.addAsync('famous-views - Wrappers - Node - template destroy', function(
   };
   Blaze.render(Template.node4, testDiv());
 });
+
+Tinytest.addAsync('famous-views - Wrappers - Node - classes (static)', function(test, complete) {
+  Template.node5_static.rendered = function() {
+    var fview = FView.byId("node5_static");
+    test.equal(fview._classes, ['class1', 'class2']);
+
+    test.isTrue(fview.hasClass('class1'));
+    test.isFalse(fview.hasClass('class3'));
+
+    fview.addClass('class3');
+    test.isTrue(fview.hasClass('class3'));
+
+    fview.removeClass('class2');
+    test.isFalse(fview.hasClass('class2'));
+
+    complete();
+  }
+  Blaze.render(Template.node5_static, testDiv());
+});
