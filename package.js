@@ -30,6 +30,7 @@ function common(api) {
     'lib/utilities.js',
     'lib/meteorFamousView.js',
     'lib/defer.js',
+    'lib/FV.js',
 
     'lib/wrappers/wrap.js',
     'lib/wrappers/Nodes.js',
@@ -49,14 +50,15 @@ function common(api) {
 
     'lib/init.js'
   ], client);
+
+  api.export('FView', client);
+  api.export('FV', client);
 };
 
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
 
   common(api);
-
-  api.export('FView', client);
 });
 
 Package.onTest(function(api) {
