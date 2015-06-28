@@ -1,5 +1,15 @@
 ## vNEXT
 
+* Nodes now support a class="class1 class2" type tag.
+
+* New FV(), like jQuery's $()
+
+  * FV(fview), FV('#id'), FV('.class'), FV('Node') -- multiple selectors soon
+  * FV(fview).children(selector), closest(), parents(), parent(), find(),
+    siblings(), eq(), each()
+  * Chainable (but not so many methods yet), jQuery like (so use FV(something)[0]
+    to get the real fview and not an FV-wrapped array), etc
+
 BREAKING.  Mostly stuff that I doubt anyone else is using yet, so not bumping
 major version... it's too early in dev there might be a few of these, apologies
 if it affects you.
