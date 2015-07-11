@@ -1,19 +1,29 @@
+var sceneIds = {};
 function fviewWithNode(source) {
+  // new sizesystem etc relies on a node being mounted (and accessible via
+  // getLocation,)
+  var id = 'n_' +SHA256(source);
+  if (sceneIds[id])
+    throw new Error(source + " is not unique");
+  sceneIds[id] = true;
+
+  var div = testDiv(id);
+  var scene = famous.core.FamousEngine.createScene('#' + id);
+
   var fview = new FView._classes._Node(null, null, source);
   fview.node = new famous.core.Node();
+  scene.addChild(fview.node);
+
   return fview;
 }
 
 var Node = famous.core.Node;
 
 Tinytest.add('famous-views - Wrappers - Node - size component (method 1)', function(test) {
-  var fview = fviewWithNode('wrappers/node/sizeComponent');
+  var fview = fviewWithNode('wrappers/node/sizeComponent1');
 
   fview.attrUpdate('size', "A:100; renderSize; relative: 2,10");
   var result = fview.size.getValue();
-  // ok i'm doing something wrong or this is a bug :)
-  if (!result.sizeMode)
-    result.sizeMode = fview.node.getSizeMode();
   test.equal(result.sizeMode, { 0:Node.ABSOLUTE_SIZE, 1:Node.RENDER_SIZE, 2:Node.RELATIVE_SIZE }, 'modes from A:,renderSize,R:');
   test.equal(result.absolute.x, 100, 'setAbsolute');
   test.equal(result.proportional.z, 2, 'setProportional via R');
@@ -21,9 +31,6 @@ Tinytest.add('famous-views - Wrappers - Node - size component (method 1)', funct
 
   fview.attrUpdate('size', "P:5; D:-10");
   var result = fview.size.getValue();
-  // ok i'm doing something wrong or this is a bug :)
-  if (!result.sizeMode)
-    result.sizeMode = fview.node.getSizeMode();
   test.equal(result.sizeMode, { 0:Node.RELATIVE_SIZE, 1:Node.RELATIVE_SIZE, 2:Node.DEFAULT_SIZE });
   test.equal(result.proportional.x, 5);
   test.equal(result.differential.x, 0);
@@ -32,9 +39,6 @@ Tinytest.add('famous-views - Wrappers - Node - size component (method 1)', funct
 
   fview.attrUpdate('size', "Prop:5; Diff:-10; RenderSize");
   var result = fview.size.getValue();
-  // ok i'm doing something wrong or this is a bug :)
-  if (!result.sizeMode)
-    result.sizeMode = fview.node.getSizeMode();
   test.equal(result.sizeMode, { 0:Node.RELATIVE_SIZE, 1:Node.RELATIVE_SIZE, 2:Node.RENDER_SIZE });
   test.equal(result.proportional.x, 5);
   test.equal(result.differential.x, 0);
@@ -43,13 +47,10 @@ Tinytest.add('famous-views - Wrappers - Node - size component (method 1)', funct
 });
 
 Tinytest.add('famous-views - Wrappers - Node - size component (method 2)', function(test) {
-  var fview = fviewWithNode('wrappers/node/sizeComponent');
+  var fview = fviewWithNode('wrappers/node/sizeComponent2');
 
   fview.attrUpdate('size', "100, renderSize, 200% + 10");
   var result = fview.size.getValue();
-  // ok i'm doing something wrong or this is a bug :)
-  if (!result.sizeMode)
-    result.sizeMode = fview.node.getSizeMode();
   test.equal(result.sizeMode, { 0:Node.ABSOLUTE_SIZE, 1:Node.RENDER_SIZE, 2:Node.RELATIVE_SIZE }, 'sizeMode from 100, renderSize, 200% + 10');
   test.equal(result.absolute.x, 100, 'absolute from 100');
   test.equal(result.proportional.z, 2, 'proportional from 200% + 10');
@@ -57,9 +58,6 @@ Tinytest.add('famous-views - Wrappers - Node - size component (method 2)', funct
 
   fview.attrUpdate('size', "500%, -10");
   var result = fview.size.getValue();
-  // ok i'm doing something wrong or this is a bug :)
-  if (!result.sizeMode)
-    result.sizeMode = fview.node.getSizeMode();
   test.equal(result.sizeMode, { 0:Node.RELATIVE_SIZE, 1:Node.RELATIVE_SIZE, 2:Node.DEFAULT_SIZE }, 'sizeMode from "500%, -10"');
   test.equal(result.proportional.x, 5, 'proportional from 500%');
   test.equal(result.differential.x, 0, 'differential from 500%');
@@ -68,9 +66,6 @@ Tinytest.add('famous-views - Wrappers - Node - size component (method 2)', funct
 
   fview.attrUpdate('size', "500%, -10, RS");
   var result = fview.size.getValue();
-  // ok i'm doing something wrong or this is a bug :)
-  if (!result.sizeMode)
-    result.sizeMode = fview.node.getSizeMode();
   test.equal(result.sizeMode, { 0:Node.RELATIVE_SIZE, 1:Node.RELATIVE_SIZE, 2:Node.RENDER_SIZE });
   test.equal(result.proportional.x, 5);
   test.equal(result.differential.x, 0);

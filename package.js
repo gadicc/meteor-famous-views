@@ -22,7 +22,7 @@ function common(api) {
   ], client)
 
   // Famous
-  api.use('gadicohen:famous@0.5.2', client);
+  api.use('gadicohen:famous@=0.7.0-rc.0', client);
 
   api.addFiles([
     'lib/famous-views.js',
@@ -63,7 +63,7 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use(['templating', 'random', 'reactive-var', 'mongo'], client);
+  api.use(['templating', 'random', 'reactive-var', 'mongo', 'sha'], client);
   //api.use('gadicohen:famous-views');
   
   common(api);
@@ -72,12 +72,12 @@ Package.onTest(function(api) {
     'tests/lib/prepare.js',
     'tests/utilities.js',
     'tests/meteorFamousView.js',
+    'tests/wrappers/Nodes/Scene.html',
+    'tests/wrappers/Nodes/Scene.js',
     'tests/wrappers/wrap.html',
     'tests/wrappers/wrap.js',
     'tests/wrappers/Nodes/Node.html',
     'tests/wrappers/Nodes/Node.js',
-    'tests/wrappers/Nodes/Scene.html',
-    'tests/wrappers/Nodes/Scene.js',
     'tests/wrappers/Components.js',
     'tests/wrappers/Components/Camera.js',
     'tests/wrappers/Components/Mesh.js',
