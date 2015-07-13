@@ -98,11 +98,13 @@ Supported reactive attributes:
 See http://famous.org/learn/sizing.html for the sizing types.  We believe in minimal
 typing, so we have a proprietary string format that looks as follows (spaces are
 optional, names may be shortened and case is insensitive, so the following two
-snippets are equivalent):
+groups are equivalent):
 
+    size="50%, -10"
     size="proportional: 0.5; differential: -10"
     size="P:0.5; D:-10"
 
+    size="150, RS, 50% - 10"
     size="absolute: 150; renderSize; relative: 0.5,-10"
     size="A:150; RS; R:0.5,-10"
 
@@ -115,6 +117,15 @@ size.setAbsolute(150);
 size.setProportional(undefined, undefined, 0.5);
 size.setDifferential(undefined, undefined, -10);
 ```
+
+The "natural" sizing works like this:  `"x, y, z"` where these can be
+(spaces optional):
+
+  * `renderSize or rs` (case insensitive) --> RENDER_SIZE
+  * `100` (a number) --> ABSOLUTE_SIZE
+  * `50%` (a number + percent sign) --> proportional (via RENDER_SIZE)
+  * `+10` (+/- a number) --> differtial (via RENDER_SIZE)
+  * `20% - 10` --> RENDER_SIZE
 
 **Everything else** (including position, rotation, etc)
 
@@ -255,6 +266,16 @@ ordered insertions/removals/reorders.
   DOM element (of the regular, non-famous variety)
 * `FView.current()` - great new shortcut for inside helpers, Meteor events,
   template/view autoruns and some callbacks.  Uses `Blaze.currentView` internally.
+
+## FV (global)
+
+jQuery inspired short-cut to get the fview, e.g.
+
+* `FV(fview)`, `FV('#id')`, `FV('.class')`, `FV('Node')` -- multiple selectors soon
+* `FV(fview).children(selector)`, `closest()`, `parents()`, `parent()`, `find()`,
+  `siblings()`, `eq()`, `each()`
+* Chainable (but not so many methods yet), jQuery like (so use FV(something)[0]
+  to get the real fview and not an FV-wrapped array), etc
 
 ## fview (node/etc instance)
 
