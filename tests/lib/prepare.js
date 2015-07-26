@@ -7,3 +7,8 @@ testDiv = function(id) {
   document.body.appendChild(div);  
   return div;
 }
+
+// Make sure scene stuff doesn't interfere with scrolling
+Meteor.startup(function() {
+  $('.container-fluid').css('height', '100%').css('overflow', 'auto');
+});

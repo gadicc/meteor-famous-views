@@ -2,6 +2,10 @@
 
 ## v1.3.0
 
+* Support Engine 0.5.2 *and* later versions, to make development easier.
+  Note: we strongly advise to only use 0.5.2, later versions have serious
+  regressions.  You'll get a warning if you're using a later version.
+
 * More natural sizing: "x, y, z" where these can be (spaces optional):
 
   * `renderSize or rs` (case insensitive) --> RENDER_SIZE

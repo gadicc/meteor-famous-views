@@ -16,13 +16,13 @@ function common(api) {
 
   // Atmosphere
   api.use([
-    'jag:pince@0.0.6',
+    'jag:pince@0.0.8',
     'pierreeric:cssc@1.0.4',
     'raix:eventemitter@0.1.2'
   ], client)
 
   // Famous
-  api.use('gadicohen:famous@=0.7.0-rc.0', client);
+  api.use('gadicohen:famous@0.5.2', client);
 
   api.addFiles([
     'lib/famous-views.js',
@@ -31,6 +31,8 @@ function common(api) {
     'lib/meteorFamousView.js',
     'lib/defer.js',
     'lib/FV.js',
+
+    'lib/dom/dom.js',
 
     'lib/wrappers/wrap.js',
     'lib/wrappers/Nodes.js',
