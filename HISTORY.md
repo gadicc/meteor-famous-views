@@ -6,6 +6,27 @@
 * Default attrUpdate func now uses Func.call if not given an array value
 * Internally, Node is now famous.core.Node and DOMNode is the original Node
 
+* Classes can now be defined with methods, e.g. already included by default:
+
+```js
+FView.defineClass('center', {
+  onRender: function() {
+    this.node.setMountPoint(0.5, 0.5, 0.5);
+    this.node.setAlign(0.5, 0.5, 0.5);
+    this.node.setOrigin(0.5, 0.5, 0.5);
+  }
+});
+```
+
+Which means you can:
+
+```jade
++Node class="center"
+  +Node class="center"
+```
+
+etc.
+
 ## v1.3.0 (pre-releases)
 
 * Support Engine 0.5.2 *and* later versions, to make development easier.

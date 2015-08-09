@@ -152,3 +152,27 @@ Tinytest.addAsync('famous-views - Wrappers - Node - classes (static)', function(
   }
   Blaze.render(Template.node5_static, testDiv());
 });
+
+// TODO, dynamic classes?
+
+Tinytest.addAsync('famous-views - Wrappers - Node - class onRender method (& before Node onRender)', function(test, complete) {
+  FView.defineClass('node6', {
+    onRender: function() {
+      this.classOnRenderRan = true;
+    }
+  });
+
+  Template.node6.helpers({
+    onRender: function() {
+      test.isTrue(this.classOnRenderRan);
+      complete();
+    }
+  });
+
+  Template.node6.rendered = function() {
+    var fview = FView.byId("node6");
+
+    complete();
+  }
+  Blaze.render(Template.node6, testDiv());
+});

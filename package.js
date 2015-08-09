@@ -31,6 +31,7 @@ function common(api) {
     'lib/meteorFamousView.js',
     'lib/defer.js',
     'lib/FV.js',
+    'lib/classes.js',
 
     'lib/dom/dom.js',
 
