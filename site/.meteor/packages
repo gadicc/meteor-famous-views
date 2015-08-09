@@ -8,5 +8,5 @@ meteor-platform
 autopublish
 insecure
 
-gadicohen:famous
+gadicohen:famous@=0.5.2
 gadicohen:famous-views

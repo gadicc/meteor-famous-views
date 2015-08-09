@@ -277,6 +277,28 @@ jQuery inspired short-cut to get the fview, e.g.
 * Chainable (but not so many methods yet), jQuery like (so use FV(something)[0]
   to get the real fview and not an FV-wrapped array), etc
 
+You can also set up onRender events for nodes in a class, e.g. (included by
+default):
+
+```js
+FView.defineClass('center', {
+  onRender: function() {
+    this.node.setMountPoint(0.5, 0.5, 0.5);
+    this.node.setAlign(0.5, 0.5, 0.5);
+    this.node.setOrigin(0.5, 0.5, 0.5);
+  }
+});
+```
+
+Which means you can:
+
+```jade
++Node class="center"
+  +Node class="center"
+```
+
+etc.
+
 ## fview (node/etc instance)
 
 **Properties**

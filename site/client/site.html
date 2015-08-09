@@ -3,10 +3,34 @@
 </head>
 
 <body>
+  {{#Scene}}
+    {{#SequentialLayout spacing=x}}
+
+      {{#Node size="300,300" class="center"}}
+        {{#DOMElement style="background: red"}}
+          outer
+        {{/DOMElement}}
+
+        {{#Node size="100,100" class="center"}}
+          {{#DOMElement style="background: blue"}}
+            inner
+          {{/DOMElement}}
+        {{/Node}}
+
+
+      {{/Node}}
+
+    {{/SequentialLayout}}
+  {{/Scene}}
+</body>
+
+
+<!--
+
   {{#if x}}
     {{#Scene}}
-      {{#Node size="A:150; A:150"}}
-        {{#DOMElement class="x y z" style="background: red; color: white"}}
+      {{#Node size="250, 250"}}
+        {{#DOMElement class="x y" style="background: red; color: white"}}
           {{>tplX}}
         {{/DOMElement}}
       {{/Node}}
@@ -14,16 +38,42 @@
   {{else}}
     {{#Scene}}
       {{#Node size="A:150; A:150"}}
-        {{#DOMElement class="x y z" style="background: red; color: white"}}
+        {{#DOMElement class="y z" style="background: blue; color: white"}}
           Hello my friend
         {{/DOMElement}}
       {{/Node}}
     {{/Scene}}
   {{/if}}
-</body>
 
 
-<!--
+  {{#Scene}}
+    {{>Camera depth=500}}
+
+    {{#Node size="A:200; A:200" align="[.5,.5]" mountPoint="[.5,.5]" origin="[.5,.5]" rotation=staticRotation}}
+      {{#DOMElement style="background: red"}}
+        Hello
+      {{/DOMElement}}
+    {{/Node}}
+  {{/Scene}}
+
+
+
+  {{#Scene}}
+    {{#each items}}
+      {{#Node size="A:150; A:150"}}
+        {{#DOMElement class="x y z" style="background: red; color: white"}}
+          -{{name}}-
+        {{/DOMElement}}
+      {{/Node}}
+    {{/each}}
+    {{#if x}}
+      {{#Node size="A:100; A:100"}}
+        {{#DOMElement style="background: blue; color: white"}}
+          -X-
+        {{/DOMElement}}        
+      {{/Node}}
+    {{/if}}
+  {{/Scene}}
 
   {{#Scene id="X"}}
     {{#RenderController}}
@@ -43,22 +93,6 @@
     {{/RenderController}}
   {{/Scene}}
 
-  {{#Scene}}
-    {{#famousEach items}}
-      {{#Node size="A:150; A:150"}}
-        {{#DOMElement class="x y z" style="background: red; color: white"}}
-          -{{name}}-
-        {{/DOMElement}}
-      {{/Node}}
-    {{/famousEach}}
-    {{#if x}}
-      {{#Node size="A:100; A:100"}}
-        {{#DOMElement style="background: blue; color: white"}}
-          -X-
-        {{/DOMElement}}        
-      {{/Node}}
-    {{/if}}
-  {{/Scene}}
 
   {{#Scene}}
 

@@ -9,11 +9,23 @@ Items.insert({name: 'b'});
 Items.insert({name: 'c'});
 
 Template.body.helpers({
+  poo: function() {
+    console.log(this);
+    console.log(FView.current());
+    console.log(FV(Blaze.currentView));
+    return '__FVIEW_SKIP__';
+  },
   x: function() {
     return Session.get('x');
   },
   items: function() {
     return Items.find();
+  },
+  staticRotation: {
+    value1: [ 0, 0 ],
+    value2: [ 0, Math.PI*2 ],
+    transition: { duration: 2000 },
+    _loopFromBeginning: true
   },
   /*
   name: function() {
