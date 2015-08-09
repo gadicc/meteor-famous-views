@@ -16,7 +16,7 @@ function common(api) {
 
   // Atmosphere
   api.use([
-    'jag:pince@0.0.8',
+    'jag:pince@0.0.9',
     'pierreeric:cssc@1.0.4',
     'raix:eventemitter@0.1.2'
   ], client)
@@ -45,6 +45,9 @@ function common(api) {
     'lib/wrappers/Components/Mesh.js',
     'lib/wrappers/Components/PointLight.js',
     'lib/famousEach.js',
+
+    'lib/layouts/OrderedLayout.js',
+    'lib/layouts/SequentialLayout.js',
 
     'lib/meteor/setimmediate.js',
     'lib/meteor/timers.js',

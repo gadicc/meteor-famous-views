@@ -1,5 +1,11 @@
 ## vNEXT
 
+## v1.3.0
+
+* Added a simple SequentialLayout that takes direction=1, spacing=10 args
+* Default attrUpdate func now uses Func.call if not given an array value
+* Internally, Node is now famous.core.Node and DOMNode is the original Node
+
 ## v1.3.0 (pre-releases)
 
 * Support Engine 0.5.2 *and* later versions, to make development easier.
