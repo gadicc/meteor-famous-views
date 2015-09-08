@@ -1,6 +1,6 @@
 Package.describe({
   name: 'gadicohen:famous-views',
-  version: '1.3.0',
+  version: '1.3.1',
   summary: 'Famous, the Meteor Way (with Reactive Blaze Templates/Views)',
   git: 'https://github.com/gadicc/meteor-famous-views.git'
 });
@@ -9,7 +9,7 @@ var client = 'client';
 
 function common(api) {
   // Meteor core packages
-  api.use(['blaze', 'htmljs', 'ejson', 'tracker', 'observe-sequence'], client);
+  api.use(['blaze', 'htmljs', 'ejson', 'tracker', 'observe-sequence', 'templating'], client);
 
   // 3rd-party included in core
   api.use(['underscore'], client);
@@ -69,7 +69,7 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use(['templating', 'random', 'reactive-var', 'mongo', 'sha'], client);
+  api.use(['random', 'reactive-var', 'mongo', 'sha'], client);
   //api.use('gadicohen:famous-views');
   
   common(api);

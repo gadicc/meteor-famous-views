@@ -1,5 +1,9 @@
 ## vNEXT
 
+## v1.3.1
+
+* Use Templating (Uncaught ReferenceError: Template is not defined)
+
 ## v1.3.0
 
 * Added a simple SequentialLayout that takes direction=1, spacing=10 args
