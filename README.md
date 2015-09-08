@@ -1,5 +1,12 @@
 # famous-views v1.x series [![Build Status](https://api.travis-ci.org/gadicc/meteor-famous-views.svg?branch=master)](https://travis-ci.org/gadicc/meteor-famous-views)
 
+**PROJECT STATUS:  Please see http://forums.famous-views.org/t/with-much-regret-the-final-update/102/.**  Note that a few posts down, you'll see that some really awesome stuff
+is happening in the community (that I'm involved in too), so this project isn't dead yet.
+But I'll no longer be using official Famous and it might be a while until there is some
+news.  Follow there for updates.
+
+---
+
 Oh look, it's a new major number.  That means I can break the API :)
 
 You're on the **master** branch, where work is in development for the totally
