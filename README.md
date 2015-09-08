@@ -179,7 +179,7 @@ Template.body.helpers({
   reactiveRotate2: function() {
     var fview = FView.current();
     if (!fview.rotate)
-      fview.rotate = new famous.components.Rotate(fview.node);
+      fview.rotate = new famous.components.Rotation(fview.node);
     fview.rotate.set(1,2,3, transition, callback);
     fview.rotate.setX(1, transition, callback);
     return '__FVIEW_SKIP__';
