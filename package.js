@@ -9,7 +9,7 @@ var client = 'client';
 
 function common(api) {
   // Meteor core packages
-  api.use(['blaze', 'htmljs', 'ejson', 'tracker', 'observe-sequence', 'templating'], client);
+  api.use(['blaze', 'check', 'htmljs', 'ejson', 'tracker', 'observe-sequence', 'templating', 'spacebars'], client);
 
   // 3rd-party included in core
   api.use(['underscore'], client);
@@ -33,7 +33,7 @@ function common(api) {
     'lib/FV.js',
     'lib/classes.js',
 
-    'lib/dom/dom.js',
+   // 'lib/dom/dom.js',
 
     'lib/wrappers/wrap.js',
     'lib/wrappers/Nodes.js',
